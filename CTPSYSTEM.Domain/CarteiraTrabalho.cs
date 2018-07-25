@@ -47,6 +47,16 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual Funcionario funcionario { get; set; }
 
+        /// <summary>
+        /// Endereço do local de nascimento do funcionário
+        /// </summary>
+        public virtual LocalNascimento localNascimento { get; set; }
+
+        /// <summary>
+        /// Registro de estrangeiro portador de uma carteira de trabalho
+        /// </summary>
+        public virtual Estrangeiro Estrangeiro { get; set; }
+
         #endregion
     }
 }
