@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CTPSYSTEM.Domain
 {
@@ -56,6 +57,21 @@ namespace CTPSYSTEM.Domain
         /// Registro de estrangeiro portador de uma carteira de trabalho
         /// </summary>
         public virtual Estrangeiro Estrangeiro { get; set; }
+
+        /// <summary>
+        /// Registros de alterações de identidade
+        /// </summary>
+        public virtual ICollection<AlteracaoIdentidade> AlteracaoIdentidade { get; set; }
+
+        /// <summary>
+        /// Registros de profissão regulamentada
+        /// </summary>
+        public virtual ICollection<ProfissaoRegulamentada> ProfissaoRegulamentada { get; set; }
+
+        /// <summary>
+        /// Registros dos dependentes
+        /// </summary>
+        public virtual ICollection<Dependente> Dependente { get; set; }
 
         #endregion
     }

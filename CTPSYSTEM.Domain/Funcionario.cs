@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CTPSYSTEM.Domain
 {
@@ -29,7 +30,7 @@ namespace CTPSYSTEM.Domain
         /// <summary>
         /// Carteira de trabalho deste funcionário
         /// </summary>
-        public virtual CarteiraTrabalho CarteiraTrabalho { get; set; }
+        public virtual ICollection<CarteiraTrabalho> CarteiraTrabalho { get; set; }
 
         #endregion
     }
