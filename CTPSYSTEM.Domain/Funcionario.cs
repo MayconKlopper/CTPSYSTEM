@@ -13,6 +13,10 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public int Id { get; set; }
         /// <summary>
+        /// Identificador único da empresa ao qual o funcionário está vinculado
+        /// </summary>
+        public int IdEmpresa { get; set; }
+        /// <summary>
         /// Identificador único da carteira de trabalho vinculada a este funcionário
         /// </summary>
         public int IdCarteiraTrabalho { get; set; }
@@ -31,6 +35,11 @@ namespace CTPSYSTEM.Domain
         /// Carteira de trabalho deste funcionário
         /// </summary>
         public virtual ICollection<CarteiraTrabalho> CarteiraTrabalho { get; set; }
+
+        /// <summary>
+        /// Empresa ao qual o funcionário está vinculado no momento
+        /// </summary>
+        public virtual Empresa Empresa { get; set; }
 
         #endregion
     }

@@ -44,7 +44,7 @@ namespace CTPSYSTEM.Domain
         #region Relacionamentos
 
         /// <summary>
-        /// Entidade funcionário possuidor desta carteira de trabalho
+        /// Entidade funcionário portador desta carteira de trabalho
         /// </summary>
         public virtual Funcionario funcionario { get; set; }
 
@@ -59,19 +59,15 @@ namespace CTPSYSTEM.Domain
         public virtual Estrangeiro Estrangeiro { get; set; }
 
         /// <summary>
-        /// Registros de alterações de identidade
+        /// Registros de licenças do funcionário
         /// </summary>
-        public virtual ICollection<AlteracaoIdentidade> AlteracaoIdentidade { get; set; }
+        public virtual ICollection<Licenca> Licenca { get; set; }
 
         /// <summary>
-        /// Registros de profissão regulamentada
+        /// Registros de internações do funcionário que estão vinculadas
+        /// a esta carteira de trabalho
         /// </summary>
-        public virtual ICollection<ProfissaoRegulamentada> ProfissaoRegulamentada { get; set; }
-
-        /// <summary>
-        /// Registros dos dependentes
-        /// </summary>
-        public virtual ICollection<Dependente> Dependente { get; set; }
+        public virtual ICollection<Internacao> Internacao { get; set; }
 
         #endregion
     }
