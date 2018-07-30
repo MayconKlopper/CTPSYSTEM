@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Service\" />
+    <ProjectReference Include="..\CTPSYSTEM.Application\CTPSYSTEM.Application.csproj" />
+    <ProjectReference Include="..\CTPSYSTEM.Domain\CTPSYSTEM.Domain.csproj" />
   </ItemGroup>
 
 </Project>

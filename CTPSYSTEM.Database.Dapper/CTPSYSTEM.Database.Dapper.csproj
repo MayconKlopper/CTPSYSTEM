@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Service\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CTPSYSTEM.Domain\CTPSYSTEM.Domain.csproj" />
   </ItemGroup>
 
 </Project>

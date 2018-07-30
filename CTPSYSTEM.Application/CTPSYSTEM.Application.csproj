@@ -4,4 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CTPSYSTEM.Database.Dapper\CTPSYSTEM.Database.Dapper.csproj" />
+    <ProjectReference Include="..\CTPSYSTEM.Database.EntityFramework\CTPSYSTEM.Database.EntityFramework.csproj" />
+    <ProjectReference Include="..\CTPSYSTEM.Domain\CTPSYSTEM.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

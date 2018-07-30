@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CTPSYSTEM.Domain
 {
@@ -11,6 +12,10 @@ namespace CTPSYSTEM.Domain
         /// Identificador único do funcionário
         /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// Identificador único da empresa ao qual o funcionário está vinculado
+        /// </summary>
+        public int IdEmpresa { get; set; }
         /// <summary>
         /// Identificador único da carteira de trabalho vinculada a este funcionário
         /// </summary>
@@ -29,7 +34,12 @@ namespace CTPSYSTEM.Domain
         /// <summary>
         /// Carteira de trabalho deste funcionário
         /// </summary>
-        public virtual CarteiraTrabalho CarteiraTrabalho { get; set; }
+        public virtual ICollection<CarteiraTrabalho> CarteiraTrabalho { get; set; }
+
+        /// <summary>
+        /// Empresa ao qual o funcionário está vinculado no momento
+        /// </summary>
+        public virtual Empresa Empresa { get; set; }
 
         #endregion
     }
