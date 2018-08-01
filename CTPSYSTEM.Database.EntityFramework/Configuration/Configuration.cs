@@ -44,14 +44,14 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(carteiraTrabalho => carteiraTrabalho.funcionario)
                    .WithMany(funcionario => funcionario.CarteiraTrabalho)
                    .HasForeignKey(carteiraTrabalho => carteiraTrabalho.IdFuncionario)
-                   .HasConstraintName("FK_Funcionario_Id")
+                   .HasConstraintName("FK_Funcionario_CarteiraTrabalho")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(carteiraTrabalho => carteiraTrabalho.localNascimento)
                    .WithOne(localNascimento => localNascimento.CarteiraTrabalho)
                    .HasForeignKey<CarteiraTrabalho>(carteiraTrabalho => carteiraTrabalho.IdLocalNascimento)
-                   .HasConstraintName("FK_LocalNascimento_Id")
+                   .HasConstraintName("FK_LocalNascimento_CarteiraTrabalho")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Cascade);
 
@@ -84,14 +84,14 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(contratoTrabalho => contratoTrabalho.CarteiraTrabalho)
                    .WithMany(carteiraTrabalho => carteiraTrabalho.ContratoTrabalho)
                    .HasForeignKey(contratoTrabalho => contratoTrabalho.IdCarteiraTrabalho)
-                   .HasConstraintName("PK_CarteiraTrabalho_Id")
+                   .HasConstraintName("FK_CarteiraTrabalho_ContratoTrabalho")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(contratoTrabalho => contratoTrabalho.Empresa)
                    .WithMany(empresa => empresa.ContratoTrabalho)
                    .HasForeignKey(contratoTrabalho => contratoTrabalho.IdEmpresa)
-                   .HasConstraintName("FK_Empresa_Id")
+                   .HasConstraintName("FK_Empresa_ContratoTrabalho")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
@@ -132,7 +132,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(funcionario => funcionario.Empresa)
                    .WithMany(empresa => empresa.Funcionario)
                    .HasForeignKey(funcionario => funcionario.IdEmpresa)
-                   .HasConstraintName("FK_Empresa_Id")
+                   .HasConstraintName("FK_Empresa_Funcionario")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
@@ -157,7 +157,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(alteracaoSalarial => alteracaoSalarial.ContratoTrabalho)
                    .WithMany(contratoTrabalho => contratoTrabalho.AlteracaoSalarial)
                    .HasForeignKey(alteracaoSalarial => alteracaoSalarial.IdContratoTrabalho)
-                   .HasConstraintName("FK_ContratoTrabalho_Id")
+                   .HasConstraintName("FK_ContratoTrabalho_AlteracaoSalarial")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
@@ -178,7 +178,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(anotacaoGeral => anotacaoGeral.ContratoTrabalho)
                    .WithMany(contratoTrabalho => contratoTrabalho.AnotacaoGeral)
                    .HasForeignKey(anotacaoGeral => anotacaoGeral.IdContratoTrabalho)
-                   .HasConstraintName("FK_ContratoTrabalho_Id")
+                   .HasConstraintName("FK_ContratoTrabalho_AnotacaoGeral")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
@@ -201,7 +201,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(contribuicaoSindical => contribuicaoSindical.ContratoTrabalho)
                    .WithMany(contratoTrabalho => contratoTrabalho.ContribuicaoSindical)
                    .HasForeignKey(contribuicaoSindical => contribuicaoSindical.IdContratoTrabalho)
-                   .HasConstraintName("FK_ContratoTrabalho_Id")
+                   .HasConstraintName("FK_ContratoTrabalho_ContribuicaoSindical")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
@@ -225,7 +225,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(ferias => ferias.ContratoTrabalho)
                    .WithMany(contratoTrabalho => contratoTrabalho.Ferias)
                    .HasForeignKey(ferias => ferias.IdContratoTrabalho)
-                   .HasConstraintName("FK_ContratoTrabalho_Id")
+                   .HasConstraintName("FK_ContratoTrabalho_Ferias")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
@@ -249,7 +249,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(endereco => endereco.Estado)
                    .WithMany(estado => estado.Endereco)
                    .HasForeignKey(endereco => endereco.IdEstado)
-                   .HasConstraintName("FK_Estado_Id")
+                   .HasConstraintName("FK_Estado_Endereco")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
@@ -291,8 +291,8 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(estrangeiro => estrangeiro.CarteiraTrabalho)
                    .WithOne(carteiraTrabalho => carteiraTrabalho.Estrangeiro)
                    .HasForeignKey<Estrangeiro>(estrangeiro => estrangeiro.IdCarteiraTrabalho)
-                   .HasConstraintName("FK_CarteiraTrabalho_Id")
-                   .IsRequired(true)
+                   .HasConstraintName("FK_CarteiraTrabalho_Estrangeiro")
+                   .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
@@ -316,8 +316,8 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(internacao => internacao.CarteiraTrabalho)
                    .WithMany(carteiraTrabalho => carteiraTrabalho.Internacao)
                    .HasForeignKey(internacao => internacao.IdCarteiraTrabalho)
-                   .HasConstraintName("FK_CarteiraTrabalho_Id")
-                   .IsRequired(true)
+                   .HasConstraintName("FK_CarteiraTrabalho_Internacao")
+                   .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
@@ -341,8 +341,8 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(licenca => licenca.CarteiraTrabalho)
                    .WithMany(carteiraTrabalho => carteiraTrabalho.Licenca)
                    .HasForeignKey(licenca => licenca.IdCarteiraTrabalho)
-                   .HasConstraintName("FK_CarteiraTrabalho_Id")
-                   .IsRequired(true)
+                   .HasConstraintName("FK_CarteiraTrabalho_Licenca")
+                   .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
@@ -384,7 +384,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(empresaHistorico => empresaHistorico.Funcionario)
                    .WithMany(funcionario => funcionario.EmpresaHistorico)
                    .HasForeignKey(empresaHistorico => empresaHistorico.IdFuncionario)
-                   .HasConstraintName("FK_Funcionario_Id")
+                   .HasConstraintName("FK_Funcionario_EmpresaHistorico")
                    .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
 
@@ -408,7 +408,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(funcionarioHistorico => funcionarioHistorico.Empresa)
                    .WithMany(empresa => empresa.FuncionarioHistorico)
                    .HasForeignKey(funcionarioHistorico => funcionarioHistorico.IdEmpresa)
-                   .HasConstraintName("FK_Empresa_Id")
+                   .HasConstraintName("FK_Empresa_FuncionarioHistorico")
                    .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
 

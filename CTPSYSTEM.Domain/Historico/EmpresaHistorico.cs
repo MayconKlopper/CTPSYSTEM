@@ -17,7 +17,7 @@ namespace CTPSYSTEM.Domain.Historico
         /// Identificador único do funcionário
         /// ao qual este registro de histórico está vinculado
         /// </summary>
-        public int IdFuncionario { get; set; }
+        public int? IdFuncionario { get; set; }
 
         /// <summary>
         /// Identificador único da empresa
