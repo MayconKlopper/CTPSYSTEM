@@ -53,7 +53,7 @@ namespace CTPSYSTEM.Domain
         /// <summary>
         /// Código do posto que afastou o funcionário
         /// </summary>
-        public int CódigoPosto { get; set; }
+        public int CodigoPosto { get; set; }
 
         /// <summary>
         /// Motivo do afastamento.

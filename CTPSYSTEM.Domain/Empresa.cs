@@ -1,4 +1,5 @@
-﻿
+﻿using CTPSYSTEM.Domain.Historico;
+
 using System.Collections.Generic;
 
 namespace CTPSYSTEM.Domain
@@ -45,6 +46,11 @@ namespace CTPSYSTEM.Domain
         /// Funcionários que estão vinculados a esta empresa
         /// </summary>
         public virtual ICollection<Funcionario> Funcionario { get; set; }
+
+        /// <summary>
+        /// Histórico de Funcionários que já foram vinculados a esta empresa
+        /// </summary>
+        public virtual ICollection<FuncionarioHistorico> FuncionarioHistorico { get; set; }
 
         #endregion
     }
