@@ -1,4 +1,4 @@
-﻿using CTPSYSTEM.Domain.Enums;
+﻿using CTPSYSTEM.Domain.Enumeradores;
 
 using System.Collections.Generic;
 
@@ -28,6 +28,11 @@ namespace CTPSYSTEM.Domain
         /// Lista de endereços vinculados a este estado
         /// </summary>
         public virtual ICollection<Endereco> Endereco { get; set; }
+
+        /// <summary>
+        /// Local do nascimento do funcionário vinculado a este estado
+        /// </summary>
+        public virtual LocalNascimento LocalNascimento { get; set; }
 
         #endregion
     }

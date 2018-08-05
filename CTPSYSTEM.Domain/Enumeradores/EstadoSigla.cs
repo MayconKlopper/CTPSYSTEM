@@ -1,5 +1,5 @@
 ﻿
-namespace CTPSYSTEM.Domain.Enums
+namespace CTPSYSTEM.Domain.Enumeradores
 {
     /// <summary>
     /// Enumerador com todas as siglas dos estados brasileiros

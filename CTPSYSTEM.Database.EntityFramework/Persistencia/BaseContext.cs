@@ -1,5 +1,5 @@
-﻿using CTPSYSTEM.Database.EntityFramework.DataSource;
-using CTPSYSTEM.Domain.Data;
+﻿using CTPSYSTEM.Database.EntityFramework.FonteDados;
+using CTPSYSTEM.Domain.Dados;
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 
 namespace CTPSYSTEM.Database.EntityFramework.Persistence
 {
-    class BaseContext<Entity> : IBaseStorage<Entity>
+    public class BaseContext<Entity> : IBaseStorage<Entity>
         where Entity : class
     {
         private readonly Conexao conexao;

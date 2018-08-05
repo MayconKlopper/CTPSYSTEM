@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetCarteiraTrabalhoDetalhada" xml:space="preserve">
+  <data name="RecuperaCarteiraTrabalhoDetalhada" xml:space="preserve">
     <value>SELECT
 	funcionario.Nome AS [NomeFuncionario]
    ,funcionario.CPF
@@ -129,10 +129,12 @@
    ,CarteiraTrabalho.FiliacaoMae
    ,CarteiraTrabalho.DataEmissao
    ,LocalNascimento.Cidade AS [CidadeNascimento]
-   ,LocalNascimento.Estado AS [SiglaEstadoNascimento]
+   ,Estado.Nome AS [EstadoNascimento]
+   ,Estado.Sigla AS [SiglaEstadoNascimento]
 FROM Funcionario
 JOIN CarteiraTrabalho ON (Funcionario.Id = CarteiraTrabalho.IdFuncionario)
 JOIN LocalNascimento ON (LocalNascimento.Id = CarteiraTrabalho.IdLocalNascimento)
+JOIN Estado ON (LocalNascimento.IdEstado = estado.Id)
 WHERE
 	Funcionario.Id = @IdFuncionario</value>
     <comment>Recupera os dados da carteira de trabalho para tela de exibição de detalhes da carteira de trabalho</comment>

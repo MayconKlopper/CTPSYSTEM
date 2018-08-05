@@ -357,12 +357,16 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .HasName("PK_LocalNascimento");
 
             builder.Property(localNascimento => localNascimento.Cidade);
-            builder.Property(localNascimento => localNascimento.Estado);
             builder.Property(localNascimento => localNascimento.Data);
 
             #region Relacionamentos
 
-
+            builder.HasOne(localNascimento => localNascimento.Estado)
+                   .WithOne(Estado => Estado.LocalNascimento)
+                   .HasForeignKey<LocalNascimento>(localNascimento => localNascimento.IdEstado)
+                   .HasConstraintName("FK_Estado_localNascimento")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
         }

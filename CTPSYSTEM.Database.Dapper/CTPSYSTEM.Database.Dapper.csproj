@@ -12,6 +12,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\CTPSYSTEM.Domain\CTPSYSTEM.Domain.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$(VisualStudioVersion) == '15.0'">
@@ -29,14 +33,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Resources\Queries.Designer.cs">
+    <Compile Update="ArquivosRecurso\Queries.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Queries.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Queries.resx">
+    <EmbeddedResource Update="ArquivosRecurso\Queries.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Queries.Designer.cs</LastGenOutput>
     </EmbeddedResource>

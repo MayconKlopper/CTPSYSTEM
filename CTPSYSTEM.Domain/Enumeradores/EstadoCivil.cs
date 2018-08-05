@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CTPSYSTEM.Domain.Enums
+namespace CTPSYSTEM.Domain.Enumeradores
 {
     /// <summary>
     /// Enumerador com todos os possíveis estados civis

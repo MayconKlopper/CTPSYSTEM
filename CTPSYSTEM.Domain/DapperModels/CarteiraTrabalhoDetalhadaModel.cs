@@ -1,4 +1,4 @@
-﻿using CTPSYSTEM.Domain.Enums;
+﻿using CTPSYSTEM.Domain.Enumeradores;
 
 using System;
 
@@ -26,6 +26,8 @@ namespace CTPSYSTEM.Domain.DapperModels
         public DateTime DataEmissao { get; set; }
 
         public string CidadeNascimento { get; set; }
+
+        public string EstadoNascimento { get; set; }
 
         public string SiglaEstadoNascimento { get; set; }
     }

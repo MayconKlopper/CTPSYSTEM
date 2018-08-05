@@ -6,12 +6,11 @@ using System.Text;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 
-using CTPSYSTEM.Domain.AppSettings;
 using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Historico;
-using CTPSYSTEM.Domain.Enums;
+using CTPSYSTEM.Domain.Enumeradores;
 
-namespace CTPSYSTEM.Database.EntityFramework.DataSource
+namespace CTPSYSTEM.Database.EntityFramework.FonteDados
 {
     public class Conexao : DbContext
     {

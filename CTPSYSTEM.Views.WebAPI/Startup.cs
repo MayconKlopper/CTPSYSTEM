@@ -9,8 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-using CTPSYSTEM.Domain.AppSettings;
-using CTPSYSTEM.Database.EntityFramework.DataSource;
+using CTPSYSTEM.Database.EntityFramework.FonteDados;
 
 namespace CTPSYSTEM.Views.WebAPI
 {

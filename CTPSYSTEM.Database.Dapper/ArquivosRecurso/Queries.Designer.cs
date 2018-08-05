@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CTPSYSTEM.Database.Dapper.Resources {
+namespace CTPSYSTEM.Database.Dapper.ArquivosRecurso {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CTPSYSTEM.Database.Dapper.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CTPSYSTEM.Database.Dapper.Resources.Queries", typeof(Queries).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CTPSYSTEM.Database.Dapper.ArquivosRecurso.Queries", typeof(Queries).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -72,14 +72,14 @@ namespace CTPSYSTEM.Database.Dapper.Resources {
         ///   ,CarteiraTrabalho.FiliacaoMae
         ///   ,CarteiraTrabalho.DataEmissao
         ///   ,LocalNascimento.Cidade AS [CidadeNascimento]
-        ///   ,LocalNascimento.Estado AS [SiglaEstadoNascimento]
+        ///   ,Estado.Nome AS [EstadoNascimento]
+        ///   ,Estado.Sigla AS [SiglaEstadoNascimento]
         ///FROM Funcionario
-        ///JOIN CarteiraTrabalho ON (Funcionario.Id = CarteiraTrabalho.IdFuncionario)
-        ///JOIN LocalNascimento [rest of string was truncated]&quot;;.
+        ///JOIN CarteiraTrabalho ON (Funcionario.Id = CarteiraTrabalho.IdFunci [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string GetCarteiraTrabalhoDetalhada {
+        internal static string RecuperaCarteiraTrabalhoDetalhada {
             get {
-                return ResourceManager.GetString("GetCarteiraTrabalhoDetalhada", resourceCulture);
+                return ResourceManager.GetString("RecuperaCarteiraTrabalhoDetalhada", resourceCulture);
             }
         }
     }
