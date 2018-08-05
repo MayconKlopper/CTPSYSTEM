@@ -11,14 +11,17 @@ namespace CTPSYSTEM.Domain
         /// Identificador único do local de nascimento
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// Nome da cidade
         /// </summary>
         public string Cidade { get; set; }
+
         /// <summary>
         /// Sigla do estado
         /// </summary>
         public string Estado { get; set; }
+
         /// <summary>
         /// Data de nascimento
         /// </summary>

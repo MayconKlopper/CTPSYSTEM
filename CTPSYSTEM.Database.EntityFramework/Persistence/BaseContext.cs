@@ -7,7 +7,7 @@ using System.Text;
 
 namespace CTPSYSTEM.Database.EntityFramework.Persistence
 {
-    class BaseContext<Entity> : BaseStorage<Entity>
+    class BaseContext<Entity> : IBaseStorage<Entity>
         where Entity : class
     {
         private readonly Conexao conexao;

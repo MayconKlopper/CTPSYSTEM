@@ -38,6 +38,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired(false);
             builder.Property(carteiraTrabalho => carteiraTrabalho.Numero);
             builder.Property(carteiraTrabalho => carteiraTrabalho.Serie);
+            builder.Property(carteiraTrabalho => carteiraTrabalho.NumeroDocumento);
 
             #region Relacionamentos
 

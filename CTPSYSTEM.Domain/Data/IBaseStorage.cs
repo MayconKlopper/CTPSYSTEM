@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CTPSYSTEM.Domain.Data
 {
-    public interface BaseStorage<Entity> where Entity : class
+    public interface IBaseStorage<Entity> where Entity : class
     {
         void Insert(Entity obj);
 

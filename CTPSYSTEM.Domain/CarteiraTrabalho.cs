@@ -30,6 +30,11 @@ namespace CTPSYSTEM.Domain
         public int Numero { get; set; }
 
         /// <summary>
+        /// Número do documento da carteira de trabalho
+        /// </summary>
+        public string NumeroDocumento { get; set; }
+
+        /// <summary>
         /// Série da carteira de trabalho
         /// </summary>
         public string Serie { get; set; }
