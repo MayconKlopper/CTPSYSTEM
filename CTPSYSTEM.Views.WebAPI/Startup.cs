@@ -9,8 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-using CTPSYSTEM.Domain.AppSettings;
-using CTPSYSTEM.Database.EntityFramework.DataSource;
+using CTPSYSTEM.Database.EntityFramework.FonteDados;
 
 namespace CTPSYSTEM.Views.WebAPI
 {
@@ -18,7 +17,7 @@ namespace CTPSYSTEM.Views.WebAPI
     {
         public Startup(IConfiguration configuration)
         {
-            this.Configuration = configuration;
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -26,10 +25,8 @@ namespace CTPSYSTEM.Views.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //var connectionsStrings = Configuration.GetSection("ConnectionStrings");
-            //services.Configure<ConnectionStrings>(connectionsStrings);
-            services.AddDbContext<Conexao>();
-            services.AddMvc();
+            services.AddDbContext<Conexao>()
+                .AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

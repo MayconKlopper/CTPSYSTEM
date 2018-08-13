@@ -30,6 +30,11 @@ namespace CTPSYSTEM.Domain
         public int Numero { get; set; }
 
         /// <summary>
+        /// Número do documento da carteira de trabalho
+        /// </summary>
+        public string NumeroDocumento { get; set; }
+
+        /// <summary>
         /// Série da carteira de trabalho
         /// </summary>
         public string Serie { get; set; }
@@ -53,6 +58,12 @@ namespace CTPSYSTEM.Domain
         /// Nome da mãe do funcionário
         /// </summary>
         public string FiliacaoMae { get; set; }
+
+        /// <summary>
+        /// Indica se esta carteria de trabalho é a carteira atual
+        /// do funcionário
+        /// </summary>
+        public bool Ativo { get; set; }
 
         #region Relacionamentos
 

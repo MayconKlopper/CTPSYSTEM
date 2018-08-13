@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:59705/",
+      "applicationUrl": "http://localhost:60327/",
       "sslPort": 0
     }
   },
@@ -18,11 +18,12 @@
     },
     "CTPSYSTEM.Views.WebAPI": {
       "commandName": "Project",
+      "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:50000/"
+      "applicationUrl": "http://localhost:60328/"
     }
   }
 }
