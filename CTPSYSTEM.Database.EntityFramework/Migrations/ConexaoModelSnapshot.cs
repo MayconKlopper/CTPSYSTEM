@@ -69,6 +69,10 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Ativo")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
+
                     b.Property<DateTime>("DataEmissao");
 
                     b.Property<string>("FiliacaoMae");
@@ -103,6 +107,8 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo");
 
                     b.Property<int>("CBONumero");
 
@@ -321,6 +327,34 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                     b.HasIndex("IdEmpresa");
 
                     b.ToTable("Funcionario");
+                });
+
+            modelBuilder.Entity("CTPSYSTEM.Domain.Hash", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime>("DataExpiracao");
+
+                    b.Property<DateTime>("DataGeracao");
+
+                    b.Property<string>("HashCode");
+
+                    b.Property<int>("IdCarteiraTrabalho");
+
+                    b.Property<int>("IdEmpresa");
+
+                    b.Property<int>("IdFuncionario");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Hash");
+
+                    b.ToTable("Hash");
                 });
 
             modelBuilder.Entity("CTPSYSTEM.Domain.Historico.EmpresaHistorico", b =>

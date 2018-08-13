@@ -10,11 +10,11 @@ using Dapper;
 
 namespace CTPSYSTEM.Database.Dapper.Persistence
 {
-    public class CarteiraTrabalhoReadOnlyContext : ICarteiraTrabalhoReadOnlyStorage
+    public class FuncionarioContext
     {
         private readonly string sqlServerConnection;
 
-        public CarteiraTrabalhoReadOnlyContext(IConfiguration configuration)
+        public FuncionarioContext(IConfiguration configuration)
         {
             this.sqlServerConnection = configuration.GetConnectionString("SqlServerConnection");
         }

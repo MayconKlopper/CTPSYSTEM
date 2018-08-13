@@ -23,6 +23,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
         , IEntityTypeConfiguration<LocalNascimento>
         , IEntityTypeConfiguration<EmpresaHistorico>
         , IEntityTypeConfiguration<FuncionarioHistorico>
+        , IEntityTypeConfiguration<Hash>
     {
         public void Configure(EntityTypeBuilder<CarteiraTrabalho> builder)
         {
@@ -39,6 +40,8 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.Property(carteiraTrabalho => carteiraTrabalho.Numero);
             builder.Property(carteiraTrabalho => carteiraTrabalho.Serie);
             builder.Property(carteiraTrabalho => carteiraTrabalho.NumeroDocumento);
+            builder.Property(carteiraTrabalho => carteiraTrabalho.Ativo)
+                   .HasDefaultValue(1);
 
             #region Relacionamentos
 
@@ -79,6 +82,8 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.Property(contratoTrabalho => contratoTrabalho.FlsFicha)
                    .IsRequired(false)
                    .HasDefaultValue(0);
+            builder.Property(contratoTrabalho => contratoTrabalho.Ativo)
+                   .HasDefaultValue(1);
 
             #region Relacionamentos
 
@@ -418,6 +423,23 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
+        }
+
+        public void Configure(EntityTypeBuilder<Hash> builder)
+        {
+            builder.ToTable("Hash");
+
+            builder.HasKey(hash => hash.Id)
+                   .HasName("PK_Hash");
+
+            builder.Property(hash => hash.HashCode);
+            builder.Property(hash => hash.IdFuncionario);
+            builder.Property(hash => hash.IdCarteiraTrabalho);
+            builder.Property(hash => hash.IdEmpresa);
+            builder.Property(hash => hash.DataGeracao);
+            builder.Property(hash => hash.DataExpiracao);
+            builder.Property(hash => hash.Ativo)
+                   .HasDefaultValue(1);
         }
     }
 }

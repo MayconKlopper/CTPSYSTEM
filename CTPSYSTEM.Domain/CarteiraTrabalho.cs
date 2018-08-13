@@ -59,6 +59,12 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public string FiliacaoMae { get; set; }
 
+        /// <summary>
+        /// Indica se esta carteria de trabalho é a carteira atual
+        /// do funcionário
+        /// </summary>
+        public bool Ativo { get; set; }
+
         #region Relacionamentos
 
         /// <summary>

@@ -24,6 +24,7 @@ namespace CTPSYSTEM.Database.EntityFramework.FonteDados
         public DbSet<AlteracaoSalarial> AlteracaoSalarial { get; private set; }
         public DbSet<AnotacaoGeral> AnotacaoGeral { get; private set; }
         public DbSet<CarteiraTrabalho> CarteiraTrabalho { get; private set; }
+        public DbSet<ContratoTrabalho> ContratoTrabalho { get; private set; }
         public DbSet<ContribuicaoSindical> ContribuicaoSindical { get; private set; }
         public DbSet<Empresa> Empresa { get; private set; }
         public DbSet<Endereco> Endereco { get; private set; }
@@ -34,6 +35,7 @@ namespace CTPSYSTEM.Database.EntityFramework.FonteDados
         public DbSet<Internacao> Internacao { get; private set; }
         public DbSet<Licenca> Licenca { get; private set; }
         public DbSet<LocalNascimento> LocalNascimento { get; private set; }
+        public DbSet<Hash> Hash { get; private set; }
 
         public DbSet<EmpresaHistorico> EmpresaHistorico { get; private set; }
         public DbSet<FuncionarioHistorico> FuncionarioHistorico { get; private set; }
@@ -60,6 +62,7 @@ namespace CTPSYSTEM.Database.EntityFramework.FonteDados
             modelBuilder.ApplyConfiguration<Internacao>(configuration);
             modelBuilder.ApplyConfiguration<Licenca>(configuration);
             modelBuilder.ApplyConfiguration<LocalNascimento>(configuration);
+            modelBuilder.ApplyConfiguration<Hash>(configuration);
 
             modelBuilder.ApplyConfiguration<EmpresaHistorico>(configuration);
             modelBuilder.ApplyConfiguration<FuncionarioHistorico>(configuration);
