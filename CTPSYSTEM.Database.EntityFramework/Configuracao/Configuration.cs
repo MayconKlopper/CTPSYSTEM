@@ -139,7 +139,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .WithMany(empresa => empresa.Funcionario)
                    .HasForeignKey(funcionario => funcionario.IdEmpresa)
                    .HasConstraintName("FK_Empresa_Funcionario")
-                   .IsRequired()
+                   .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
 
             #endregion

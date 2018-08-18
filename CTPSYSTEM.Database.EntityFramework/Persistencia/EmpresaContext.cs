@@ -2,7 +2,6 @@
 using CTPSYSTEM.Domain.Dados;
 using CTPSYSTEM.Domain.Historico;
 using CTPSYSTEM.Database.EntityFramework.FonteDados;
-using CTPSYSTEM.Database.EntityFramework.Persistence;
 
 using System;
 using System.Collections.Generic;
@@ -68,10 +67,16 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
                           .FirstOrDefault(empresa => empresa.CNPJ == CNPJ);
         }
 
-        public IEnumerable<Funcionario> RecuperaFuncionario(int idEmpresa)
+        public IEnumerable<Funcionario> RecuperaFuncionarios(int idEmpresa)
         {
             return conexao.Funcionario
                           .Where(funcionario => funcionario.IdEmpresa == idEmpresa);
+        }
+
+        public Funcionario RecuperaFuncionario(int idFuncionario)
+        {
+            return conexao.Funcionario
+                          .Find(idFuncionario);
         }
 
         public IEnumerable<FuncionarioHistorico> RecuperaHistoricoFuncionario(int idEmpresa)

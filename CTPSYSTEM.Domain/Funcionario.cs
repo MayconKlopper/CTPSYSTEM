@@ -18,7 +18,7 @@ namespace CTPSYSTEM.Domain
         /// <summary>
         /// Identificador único da empresa ao qual o funcionário está vinculado
         /// </summary>
-        public int IdEmpresa { get; set; }
+        public int? IdEmpresa { get; set; }
 
         /// <summary>
         /// Nome do funcionário

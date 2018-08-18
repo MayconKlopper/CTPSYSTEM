@@ -4,14 +4,16 @@ using CTPSYSTEM.Database.EntityFramework.FonteDados;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CTPSYSTEM.Database.EntityFramework.Migrations
 {
     [DbContext(typeof(Conexao))]
-    partial class ConexaoModelSnapshot : ModelSnapshot
+    [Migration("20180818163443_AlterFuncionarioTable")]
+    partial class AlterFuncionarioTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
