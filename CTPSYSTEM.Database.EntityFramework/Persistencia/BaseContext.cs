@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq.Expressions;
 
-namespace CTPSYSTEM.Database.EntityFramework.Persistence
+namespace CTPSYSTEM.Database.EntityFramework.Persistencia
 {
     public class BaseContext<Entity> : IBaseStorage<Entity>
         where Entity : class

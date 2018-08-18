@@ -10,7 +10,8 @@ namespace CTPSYSTEM.Domain.Dados
     {
         Empresa RecuperaEmpresa(string CNPJ);
 
-        IEnumerable<Funcionario> RecuperaFuncionario(int idEmpresa);
+        IEnumerable<Funcionario> RecuperaFuncionarios(int idEmpresa);
+        Funcionario RecuperaFuncionario(int idFuncionario);
 
         IEnumerable<FuncionarioHistorico> RecuperaHistoricoFuncionario(int idEmpresa);
     }
