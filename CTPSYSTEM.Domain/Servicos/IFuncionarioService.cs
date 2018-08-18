@@ -6,6 +6,6 @@ namespace CTPSYSTEM.Domain.Servicos
 {
     public interface IFuncionarioService
     {
-        void GerarHash(int idFuncionario, int idCarteiraTrabalho, int idEmpresa);
+        
     }
 }

@@ -6,10 +6,10 @@ namespace CTPSYSTEM.Domain.Servicos
 {
     public interface IFuncionarioGovernoService
     {
-        void CadastrarEmpresa(Empresa empresa);
+        void Cadastrar(Empresa empresa);
 
-        void CadastrarFuncionario(Funcionario funcionario);
+        void Cadastrar(Funcionario funcionario);
 
-        void CadastrarCarteiraTrabalho(int idFuncionario);
+        void Cadastrar(CarteiraTrabalho carteiraTrabalho);
     }
 }

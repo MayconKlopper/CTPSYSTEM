@@ -1,27 +1,38 @@
 ﻿using CTPSYSTEM.Domain.Servicos;
+using CTPSYSTEM.Domain;
+using CTPSYSTEM.Domain.Dados;
 
 using System;
 using System.Collections.Generic;
 using System.Text;
-using CTPSYSTEM.Domain;
 
 namespace CTPSYSTEM.Application
 {
     public class FuncionarioGovernoService : IFuncionarioGovernoService
     {
-        public void CadastrarCarteiraTrabalho(int idFuncionario)
+        private readonly IFuncionarioGovernoStorage funcionarioGovernoStorage;
+
+        public FuncionarioGovernoService(IFuncionarioGovernoStorage funcionarioGovernoStorage)
         {
-            throw new NotImplementedException();
+            this.funcionarioGovernoStorage = funcionarioGovernoStorage;
         }
 
-        public void CadastrarEmpresa(Empresa empresa)
+        public void Cadastrar(CarteiraTrabalho carteiraTrabalho)
         {
-            throw new NotImplementedException();
+            this.funcionarioGovernoStorage.Insert(carteiraTrabalho);
+            this.funcionarioGovernoStorage.SaveChanges();
         }
 
-        public void CadastrarFuncionario(Funcionario funcionario)
+        public void Cadastrar(Empresa empresa)
         {
-            throw new NotImplementedException();
+            this.funcionarioGovernoStorage.Insert(empresa);
+            this.funcionarioGovernoStorage.SaveChanges();
+        }
+
+        public void Cadastrar(Funcionario funcionario)
+        {
+            this.funcionarioGovernoStorage.Insert(funcionario);
+            this.funcionarioGovernoStorage.SaveChanges();
         }
     }
 }

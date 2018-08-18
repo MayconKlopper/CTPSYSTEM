@@ -435,7 +435,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.Property(hash => hash.HashCode);
             builder.Property(hash => hash.IdFuncionario);
             builder.Property(hash => hash.IdCarteiraTrabalho);
-            builder.Property(hash => hash.IdEmpresa);
             builder.Property(hash => hash.DataGeracao);
             builder.Property(hash => hash.DataExpiracao);
             builder.Property(hash => hash.Ativo)

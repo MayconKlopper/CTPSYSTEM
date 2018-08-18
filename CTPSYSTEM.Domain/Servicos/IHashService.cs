@@ -6,6 +6,8 @@ namespace CTPSYSTEM.Domain.Servicos
 {
     public interface IHashService
     {
-        void verificarVlidadeHash(string hashCode);
+        void GerarHash(int idFuncionario, int idCarteiraTrabalho);
+
+        string verificaVlidadeHash(string hashCode,int idFuncionario, int idCarteiraTrabalho);
     }
 }

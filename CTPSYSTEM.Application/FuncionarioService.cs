@@ -1,4 +1,5 @@
-﻿using CTPSYSTEM.Domain.Servicos;
+﻿using CTPSYSTEM.Domain.Dados;
+using CTPSYSTEM.Domain.Servicos;
 
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,6 @@ namespace CTPSYSTEM.Application
 {
     public class FuncionarioService : IFuncionarioService
     {
-        public void GerarHash(int idFuncionario, int idCarteiraTrabalho, int idEmpresa)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

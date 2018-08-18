@@ -6,6 +6,21 @@ namespace CTPSYSTEM.Domain
 {
     public class Hash
     {
+        public Hash()
+        {
+
+        }
+
+        public Hash(string hashCode, int idFuncionario, int idCarteiraTrabalho, DateTime DataGeracao, DateTime DataExpiracao)
+        {
+            this.HashCode = hashCode;
+            this.IdFuncionario = idFuncionario;
+            this.IdCarteiraTrabalho = idCarteiraTrabalho;
+            this.DataGeracao = DataGeracao;
+            this.DataExpiracao = DataExpiracao;
+            this.Ativo = true;
+        }
+
         /// <summary>
         /// Identificador único do Hash de 
         /// autenticação de inserção
@@ -28,12 +43,6 @@ namespace CTPSYSTEM.Domain
         /// ao qual este Hash permitirá inserção de novos dados
         /// </summary>
         public int IdCarteiraTrabalho { get; set; }
-
-        /// <summary>
-        /// Identificador único da empresa para o qual
-        /// este Hash foi gerado
-        /// </summary>
-        public int IdEmpresa { get; set; }
 
         /// <summary>
         /// Data em que o funcionário gerou o Hash
