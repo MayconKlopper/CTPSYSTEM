@@ -52,7 +52,7 @@ namespace CTPSYSTEM.Application
 
             if(hash == null)
             {
-                mensagem =  Mensagens.HashInexistente;
+                return Mensagens.HashInexistente;
             }
             else if (hash.IdFuncionario != idFuncionario || hash.IdCarteiraTrabalho != idCarteiraTrabalho)
             {
@@ -60,13 +60,16 @@ namespace CTPSYSTEM.Application
             }
             else if (DateTime.Compare(hash.DataExpiracao, DateTime.Now) < 0)
             {
-
                 mensagem = Mensagens.HashExpirado;
             }
             else
             {
-                mensagem = Mensagens.HashValido;
+                mensagem = Mensagens.HashVálido;
             }
+
+            hash.Ativo = false;
+            this.hashStorage.Update(hash, h => h.Ativo);
+            this.hashStorage.SaveChanges();
 
             return mensagem;
         }
