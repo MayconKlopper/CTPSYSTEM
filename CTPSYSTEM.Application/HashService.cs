@@ -19,16 +19,11 @@ namespace CTPSYSTEM.Application
             this.hashStorage = hashStorage;
         }
 
-        public void GerarHash(int idFuncionario, int idCarteiraTrabalho)
+        public string GerarHash(int idFuncionario, int idCarteiraTrabalho)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            string hashString = Guid.NewGuid().ToString();
 
-            stringBuilder.Append(idFuncionario.ToString());
-            stringBuilder.Append(idCarteiraTrabalho.ToString());
-            stringBuilder.Append(Guid.NewGuid().ToString());
-            stringBuilder.Append(DateTime.Now.Millisecond.ToString());
-
-            var data = Encoding.UTF8.GetBytes(stringBuilder.ToString());
+            var data = Encoding.UTF8.GetBytes(hashString);
 
             string hashCode;
             using (SHA512 shaM = new SHA512Managed())
@@ -42,6 +37,8 @@ namespace CTPSYSTEM.Application
             Hash hash = new Hash(hashCode, idFuncionario, idCarteiraTrabalho, dataGerecao, dataGerecao.AddDays(1));
 
             this.hashStorage.Insert(hash);
+
+            return hashString;
         }
 
         public string verificaVlidadeHash(string hashCode, int idFuncionario, int idCarteiraTrabalho)

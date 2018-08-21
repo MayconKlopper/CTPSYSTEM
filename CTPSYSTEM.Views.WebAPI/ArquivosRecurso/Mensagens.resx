@@ -117,13 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HashExpirado" xml:space="preserve">
-    <value>O código digitado já foi expirado. Entre em contato com o funcionário e peça ao mesmo que gere um novo código. OBS: o código tem validade de 24 horas</value>
-  </data>
-  <data name="HashInexistente" xml:space="preserve">
-    <value>O código digitado não existe, por isso é inválido</value>
-  </data>
-  <data name="HashInválido" xml:space="preserve">
-    <value>O Código digitado não foi gerado para esta empresa e/ou carteira de trabalho. Por favor verifique com o funcionário</value>
+  <data name="ErroGenerico" xml:space="preserve">
+    <value>Ocorreu um erro na requisição</value>
   </data>
 </root>

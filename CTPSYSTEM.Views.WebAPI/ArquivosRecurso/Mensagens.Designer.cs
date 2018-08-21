@@ -61,29 +61,11 @@ namespace CTPSYSTEM.Views.WebAPI.ArquivosRecurso {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to O código digitado já foi expirado. Entre em contato com o funcionário e peça ao mesmo que gere um novo código. OBS: o código tem validade de 24 horas.
+        ///   Looks up a localized string similar to Ocorreu um erro na requisição.
         /// </summary>
-        internal static string HashExpirado {
+        internal static string ErroGenerico {
             get {
-                return ResourceManager.GetString("HashExpirado", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O código digitado não existe, por isso é inválido.
-        /// </summary>
-        internal static string HashInexistente {
-            get {
-                return ResourceManager.GetString("HashInexistente", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O Código digitado não foi gerado para esta empresa e/ou carteira de trabalho. Por favor verifique com o funcionário.
-        /// </summary>
-        internal static string HashInválido {
-            get {
-                return ResourceManager.GetString("HashInválido", resourceCulture);
+                return ResourceManager.GetString("ErroGenerico", resourceCulture);
             }
         }
     }
