@@ -46,6 +46,11 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual ICollection<EmpresaHistorico> EmpresaHistorico { get; set; }
 
+        /// <summary>
+        /// Local de nascimento do funcionário
+        /// </summary>
+        public virtual LocalNascimento LocalNascimento { get; set; }
+
         #endregion Relacionamentos
     }
 }

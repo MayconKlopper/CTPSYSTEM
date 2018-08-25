@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CTPSYSTEM.Domain;
 
-namespace CTPSYSTEM.Domain
+using System;
+
+namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 {
-    /// <summary>
-    /// Entidade que representa uma carteira de trabalho no sistema
-    /// </summary>
-    public class CarteiraTrabalho
+    public class CarteiraTrabalhoDetailsModel
     {
         /// <summary>
         /// Identificador único da carteira de trabalho
@@ -60,34 +58,21 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public bool Ativo { get; set; }
 
-        #region Relacionamentos
+        public static implicit operator CarteiraTrabalhoDetailsModel(CarteiraTrabalho carteiraTrabalho)
+        {
+            CarteiraTrabalhoDetailsModel model = new CarteiraTrabalhoDetailsModel();
 
-        /// <summary>
-        /// Entidade funcionário portador desta carteira de trabalho
-        /// </summary>
-        public virtual Funcionario funcionario { get; set; }
+            model.Id = carteiraTrabalho.Id;
+            model.IdFuncionario = carteiraTrabalho.IdFuncionario;
+            model.Numero = carteiraTrabalho.Numero;
+            model.NumeroDocumento = carteiraTrabalho.NumeroDocumento;
+            model.Serie = carteiraTrabalho.Serie;
+            model.DataEmissao = carteiraTrabalho.DataEmissao;
+            model.Foto = carteiraTrabalho.Foto;
+            model.FiliacaoPai = carteiraTrabalho.FiliacaoPai;
+            model.FiliacaoMae = carteiraTrabalho.FiliacaoMae;
 
-        /// <summary>
-        /// Contratos de trabalho do funcionário
-        /// </summary>
-        public virtual ICollection<ContratoTrabalho> ContratoTrabalho { get; set; }
-
-        /// <summary>
-        /// Registro de estrangeiro portador de uma carteira de trabalho
-        /// </summary>
-        public virtual Estrangeiro Estrangeiro { get; set; }
-
-        /// <summary>
-        /// Registros de licenças do funcionário
-        /// </summary>
-        public virtual ICollection<Licenca> Licenca { get; set; }
-
-        /// <summary>
-        /// Registros de internações do funcionário que estão vinculadas
-        /// a esta carteira de trabalho
-        /// </summary>
-        public virtual ICollection<Internacao> Internacao { get; set; }
-
-        #endregion Relacionamentos
+            return model;
+        }
     }
 }

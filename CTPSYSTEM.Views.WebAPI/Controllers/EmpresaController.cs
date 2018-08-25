@@ -4,6 +4,7 @@ using CTPSYSTEM.Domain.Servicos;
 using CTPSYSTEM.Views.WebAPI.ArquivosRecurso;
 using CTPSYSTEM.Views.WebAPI.Models.RequestModels;
 using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
+
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -29,9 +30,9 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                var empresa = this.empresaReadOnlyStorage.RecuperaEmpresa(CNPJ);
+                EmpresaDetailsModel model = this.empresaReadOnlyStorage.RecuperaEmpresa(CNPJ);
 
-                return Ok(empresa);
+                return Ok(model);
             }
             catch (Exception)
             {

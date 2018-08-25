@@ -4,5 +4,6 @@ namespace CTPSYSTEM.Application
 {
     public class FuncionarioService : IFuncionarioService
     {
+
     }
 }

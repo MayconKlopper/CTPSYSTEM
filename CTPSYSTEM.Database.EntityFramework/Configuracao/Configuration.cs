@@ -51,13 +51,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(carteiraTrabalho => carteiraTrabalho.localNascimento)
-                   .WithOne(localNascimento => localNascimento.CarteiraTrabalho)
-                   .HasForeignKey<CarteiraTrabalho>(carteiraTrabalho => carteiraTrabalho.IdLocalNascimento)
-                   .HasConstraintName("FK_LocalNascimento_CarteiraTrabalho")
-                   .IsRequired()
-                   .OnDelete(DeleteBehavior.Cascade);
-
             #endregion Relacionamentos
         }
 
@@ -240,7 +233,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
 
             builder.Property(endereco => endereco.Rua);
             builder.Property(endereco => endereco.Cidade);
-            builder.Property(endereco => endereco.numero);
+            builder.Property(endereco => endereco.Numero);
             builder.Property(endereco => endereco.Sala);
 
             #region Relacionamentos
@@ -265,6 +258,17 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.Property(estado => estado.Sigla)
                    .HasColumnType("VARCHAR")
                    .HasMaxLength(2);
+
+            #region Relacionamentos
+
+            builder.HasMany(estado => estado.LocalNascimento)
+                   .WithOne(localNascimento => localNascimento.Estado)
+                   .HasForeignKey(localNascimento => localNascimento.IdEstado)
+                   .HasConstraintName("FK_Estado_localNascimento")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            #endregion
         }
 
         public void Configure(EntityTypeBuilder<Estrangeiro> builder)
@@ -353,12 +357,12 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
 
             #region Relacionamentos
 
-            builder.HasOne(localNascimento => localNascimento.Estado)
-                   .WithOne(Estado => Estado.LocalNascimento)
-                   .HasForeignKey<LocalNascimento>(localNascimento => localNascimento.IdEstado)
-                   .HasConstraintName("FK_Estado_localNascimento")
+            builder.HasOne(localNascimento => localNascimento.Funcionario)
+                   .WithOne(funcionario => funcionario.LocalNascimento)
+                   .HasForeignKey<LocalNascimento>(localNascimento => localNascimento.IdFuncionario)
+                   .HasConstraintName("FK_LocalNascimento_Funcionario")
                    .IsRequired()
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
 
             #endregion Relacionamentos
         }

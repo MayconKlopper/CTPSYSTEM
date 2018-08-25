@@ -32,9 +32,9 @@ namespace CTPSYSTEM.Domain
         public virtual ICollection<Endereco> Endereco { get; set; }
 
         /// <summary>
-        /// Local do nascimento do funcionário vinculado a este estado
+        /// Locais de nascimento de funcionários vinculado a este estado
         /// </summary>
-        public virtual LocalNascimento LocalNascimento { get; set; }
+        public virtual IEnumerable<LocalNascimento> LocalNascimento { get; set; }
 
         #endregion Relacionamentos
     }

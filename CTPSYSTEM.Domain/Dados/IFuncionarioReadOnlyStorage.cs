@@ -11,11 +11,11 @@ namespace CTPSYSTEM.Domain.Dados
 
         IEnumerable<Internacao> RecuperaInternacao(int idCarteiraTrabalho);
 
-        IEnumerable<Licenca> RecuperaLicensa(int idCarteiraTrabalho);
+        IEnumerable<Licenca> RecuperaLicenca(int idCarteiraTrabalho);
 
         IEnumerable<ContratoTrabalho> RecuperaContratoTrabalho(int idCarteiraTrabalho);
 
-        IEnumerable<AlteracaoSalarial> AlteracaoSalarial(int idContratoTrabalho);
+        IEnumerable<AlteracaoSalarial> RecuperaAlteracaoSalarial(int idContratoTrabalho);
 
         IEnumerable<Ferias> RecuperaFerias(int idContratoTrabalho);
 

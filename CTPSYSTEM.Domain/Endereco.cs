@@ -29,7 +29,7 @@
         /// <summary>
         /// Número da rua
         /// </summary>
-        public int numero { get; set; }
+        public int Numero { get; set; }
 
         /// <summary>
         /// Sala ou salas do edifício

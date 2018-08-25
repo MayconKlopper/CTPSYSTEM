@@ -2,6 +2,7 @@
 using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Dados;
 using CTPSYSTEM.Domain.Historico;
+
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
         {
             return this.conexao
                        .Funcionario
+                       .Include(funcionario => funcionario.LocalNascimento)
                        .Include(funcionario => funcionario.Empresa)
                        .ThenInclude(empresa => empresa.Endereco)
                        .ThenInclude(endereco => endereco.Estado)
@@ -36,7 +38,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
         public IEnumerable<CarteiraTrabalho> RecuperaCarteiraTrabalho(int idFuncionario)
         {
             return conexao.CarteiraTrabalho
-                          .Include(carteiraTrabalho => carteiraTrabalho.localNascimento)
                           .Where(carteiraTrabalho => carteiraTrabalho.IdFuncionario == idFuncionario);
         }
 
@@ -46,7 +47,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
                           .Where(internacao => internacao.IdCarteiraTrabalho == idCarteiraTrabalho);
         }
 
-        public IEnumerable<Licenca> RecuperaLicensa(int idCarteiraTrabalho)
+        public IEnumerable<Licenca> RecuperaLicenca(int idCarteiraTrabalho)
         {
             return conexao.Licenca
                           .Where(licenca => licenca.IdCarteiraTrabalho == idCarteiraTrabalho);
@@ -58,7 +59,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
                           .Where(contratoTrabalho => contratoTrabalho.IdCarteiraTrabalho == idCarteiraTrabalho);
         }
 
-        public IEnumerable<AlteracaoSalarial> AlteracaoSalarial(int idContratoTrabalho)
+        public IEnumerable<AlteracaoSalarial> RecuperaAlteracaoSalarial(int idContratoTrabalho)
         {
             return conexao.AlteracaoSalarial
                           .Where(alteracaoSalarial => alteracaoSalarial.IdContratoTrabalho == idContratoTrabalho);
