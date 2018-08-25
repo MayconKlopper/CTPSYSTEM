@@ -2,7 +2,6 @@
 using CTPSYSTEM.Domain.Historico;
 
 using Microsoft.EntityFrameworkCore;
-using System;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CTPSYSTEM.Database.EntityFramework.Configuration
@@ -59,7 +58,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Cascade);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<ContratoTrabalho> builder)
@@ -101,7 +100,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Empresa> builder)
@@ -115,12 +114,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.Property(empresa => empresa.NomeFantasia);
             builder.Property(empresa => empresa.RazaoSocial);
             builder.Property(empresa => empresa.Seguimento);
-
-            #region Relacionamentos
-
-
-
-            #endregion
         }
 
         public void Configure(EntityTypeBuilder<Funcionario> builder)
@@ -142,7 +135,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<AlteracaoSalarial> builder)
@@ -167,7 +160,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<AnotacaoGeral> builder)
@@ -188,7 +181,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<ContribuicaoSindical> builder)
@@ -211,7 +204,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Ferias> builder)
@@ -235,7 +228,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Endereco> builder)
@@ -259,7 +252,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Estado> builder)
@@ -272,12 +265,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.Property(estado => estado.Sigla)
                    .HasColumnType("VARCHAR")
                    .HasMaxLength(2);
-
-            #region Relacionamentos
-
-            
-
-            #endregion
         }
 
         public void Configure(EntityTypeBuilder<Estrangeiro> builder)
@@ -301,7 +288,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Internacao> builder)
@@ -326,7 +313,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Licenca> builder)
@@ -351,7 +338,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<LocalNascimento> builder)
@@ -373,7 +360,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<EmpresaHistorico> builder)
@@ -398,7 +385,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<FuncionarioHistorico> builder)
@@ -422,7 +409,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Hash> builder)

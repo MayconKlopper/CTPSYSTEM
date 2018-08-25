@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
+﻿using CTPSYSTEM.Domain;
+using CTPSYSTEM.Domain.Dados;
 using CTPSYSTEM.Domain.Servicos;
-using CTPSYSTEM.Domain;
-
+using CTPSYSTEM.Views.WebAPI.ArquivosRecurso;
 using CTPSYSTEM.Views.WebAPI.Models.RequestModels;
 using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
-using CTPSYSTEM.Views.WebAPI.ArquivosRecurso;
-using CTPSYSTEM.Domain.Dados;
+using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
@@ -37,7 +31,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             {
                 var empresa = this.empresaReadOnlyStorage.RecuperaEmpresa(CNPJ);
 
-                return Ok();
+                return Ok(empresa);
             }
             catch (Exception)
             {

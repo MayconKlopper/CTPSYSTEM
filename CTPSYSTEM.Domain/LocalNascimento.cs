@@ -40,6 +40,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual Estado Estado { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

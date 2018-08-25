@@ -51,6 +51,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual CarteiraTrabalho CarteiraTrabalho { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

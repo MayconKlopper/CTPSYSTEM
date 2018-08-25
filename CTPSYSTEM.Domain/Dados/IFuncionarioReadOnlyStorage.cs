@@ -1,8 +1,5 @@
 ﻿using CTPSYSTEM.Domain.Historico;
-
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CTPSYSTEM.Domain.Dados
 {

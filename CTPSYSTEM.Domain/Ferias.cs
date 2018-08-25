@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CTPSYSTEM.Domain
 {
@@ -36,6 +34,7 @@ namespace CTPSYSTEM.Domain
         public DateTimeOffset DataTermino { get; set; }
 
         private int dias;
+
         /// <summary>
         /// Quantidade de dias que o funcionário gozou de férias
         /// </summary>
@@ -64,6 +63,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual ContratoTrabalho ContratoTrabalho { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

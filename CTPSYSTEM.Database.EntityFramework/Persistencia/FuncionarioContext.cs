@@ -1,12 +1,10 @@
 ﻿using CTPSYSTEM.Database.EntityFramework.FonteDados;
 using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Dados;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using CTPSYSTEM.Domain.Historico;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CTPSYSTEM.Database.EntityFramework.Persistence
 {

@@ -1,14 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using JetBrains.Annotations;
-using Microsoft.Extensions.Configuration;
-
-using CTPSYSTEM.Domain;
-using CTPSYSTEM.Domain.Historico;
+﻿using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Enumeradores;
+using CTPSYSTEM.Domain.Historico;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CTPSYSTEM.Database.EntityFramework.FonteDados
 {

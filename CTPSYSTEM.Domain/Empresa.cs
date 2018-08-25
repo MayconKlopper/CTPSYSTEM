@@ -13,18 +13,22 @@ namespace CTPSYSTEM.Domain
         /// Identificador único da empresa cadastrada no sistema
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// CNPJ da empresa
         /// </summary>
         public string CNPJ { get; set; }
+
         /// <summary>
         /// Nome fantasia da empresa
         /// </summary>
         public string NomeFantasia { get; set; }
+
         /// <summary>
         /// Razão social da empresa
         /// </summary>
         public string RazaoSocial { get; set; }
+
         /// <summary>
         /// Tipo do seguimento da empresa
         /// </summary>
@@ -52,6 +56,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual ICollection<FuncionarioHistorico> FuncionarioHistorico { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

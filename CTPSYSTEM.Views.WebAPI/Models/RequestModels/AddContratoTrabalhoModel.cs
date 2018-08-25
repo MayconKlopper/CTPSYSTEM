@@ -1,9 +1,6 @@
 ﻿using CTPSYSTEM.Domain;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 {
@@ -15,7 +12,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         public int Id { get; set; }
 
         /// <summary>
-        /// Identificador único do registro de carteira trabalho 
+        /// Identificador único do registro de carteira trabalho
         /// ao qual este registro de contrato de trabalho está vinculado
         /// </summary>
         public int IdCarteiraTrabalho { get; set; }

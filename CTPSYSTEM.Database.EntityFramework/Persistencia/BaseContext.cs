@@ -2,8 +2,6 @@
 using CTPSYSTEM.Domain.Dados;
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Linq.Expressions;
 
 namespace CTPSYSTEM.Database.EntityFramework.Persistencia

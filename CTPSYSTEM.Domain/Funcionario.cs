@@ -1,6 +1,4 @@
 ﻿using CTPSYSTEM.Domain.Historico;
-
-using System;
 using System.Collections.Generic;
 
 namespace CTPSYSTEM.Domain
@@ -48,6 +46,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual ICollection<EmpresaHistorico> EmpresaHistorico { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

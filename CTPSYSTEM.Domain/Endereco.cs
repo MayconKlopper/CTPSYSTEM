@@ -1,5 +1,4 @@
-﻿
-namespace CTPSYSTEM.Domain
+﻿namespace CTPSYSTEM.Domain
 {
     /// <summary>
     /// Entidade que representa um endereço de uma empresa no sistema
@@ -44,6 +43,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual Estado Estado { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

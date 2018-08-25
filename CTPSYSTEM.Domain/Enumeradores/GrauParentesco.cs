@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CTPSYSTEM.Domain.Enumeradores
+﻿namespace CTPSYSTEM.Domain.Enumeradores
 {
     /// <summary>
     /// Enumerador com os possíveis graus de parentesco

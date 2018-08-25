@@ -1,23 +1,19 @@
-﻿using CTPSYSTEM.Domain;
+﻿using CTPSYSTEM.Database.EntityFramework.FonteDados;
+using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Dados;
 using CTPSYSTEM.Domain.Historico;
-using CTPSYSTEM.Database.EntityFramework.FonteDados;
-
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace CTPSYSTEM.Database.EntityFramework.Persistencia
 {
     public class EmpresaContext : BaseContext<ContratoTrabalho>, IEmpresaReadOnlyStorage, IEmpresaStorage
     {
-
         public EmpresaContext(Conexao conexao) : base(conexao)
         {
-
         }
 
         public void Insert(AlteracaoSalarial alteracaoSalarial)

@@ -47,6 +47,6 @@ namespace CTPSYSTEM.Domain.Historico
         /// </summary>
         public virtual Empresa Empresa { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

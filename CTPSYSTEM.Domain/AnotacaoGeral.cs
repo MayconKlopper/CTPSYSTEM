@@ -1,5 +1,4 @@
-﻿
-namespace CTPSYSTEM.Domain
+﻿namespace CTPSYSTEM.Domain
 {
     /// <summary>
     /// Entidade que representa uma anotação geral no sistema
@@ -10,11 +9,13 @@ namespace CTPSYSTEM.Domain
         /// Identificador único da anotação geral
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// Identificador único do contrato de trabalho ao qual
         /// esta anotação geral está vinculada
         /// </summary>
         public int IdContratoTrabalho { get; set; }
+
         /// <summary>
         /// Texto da anotação geral
         /// </summary>
@@ -28,6 +29,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual ContratoTrabalho ContratoTrabalho { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

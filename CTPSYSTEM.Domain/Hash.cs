@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CTPSYSTEM.Domain
 {
@@ -8,7 +6,6 @@ namespace CTPSYSTEM.Domain
     {
         public Hash()
         {
-
         }
 
         public Hash(string hashCode, int idFuncionario, int idCarteiraTrabalho, DateTime DataGeracao, DateTime DataExpiracao)
@@ -22,7 +19,7 @@ namespace CTPSYSTEM.Domain
         }
 
         /// <summary>
-        /// Identificador único do Hash de 
+        /// Identificador único do Hash de
         /// autenticação de inserção
         /// </summary>
         public int Id { get; set; }

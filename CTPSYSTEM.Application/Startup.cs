@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CTPSYSTEM.Domain.Servicos;
 using Microsoft.Extensions.DependencyInjection;
-
-using CTPSYSTEM.Domain.Servicos;
 
 namespace CTPSYSTEM.Application
 {

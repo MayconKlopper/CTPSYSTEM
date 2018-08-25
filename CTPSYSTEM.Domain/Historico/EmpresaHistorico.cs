@@ -52,6 +52,6 @@ namespace CTPSYSTEM.Domain.Historico
         /// </summary>
         public virtual Funcionario Funcionario { get; set; }
 
-        #endregion
+        #endregion Relacionamento
     }
 }

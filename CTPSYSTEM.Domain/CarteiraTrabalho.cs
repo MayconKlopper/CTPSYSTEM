@@ -98,6 +98,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual ICollection<Internacao> Internacao { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

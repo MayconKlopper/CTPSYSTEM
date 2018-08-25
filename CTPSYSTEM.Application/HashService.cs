@@ -4,7 +4,6 @@ using CTPSYSTEM.Domain.Dados;
 using CTPSYSTEM.Domain.Servicos;
 
 using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -47,7 +46,7 @@ namespace CTPSYSTEM.Application
 
             string mensagem;
 
-            if(hash == null)
+            if (hash == null)
             {
                 return Mensagens.HashInexistente;
             }

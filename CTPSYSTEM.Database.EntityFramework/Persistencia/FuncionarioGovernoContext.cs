@@ -1,13 +1,10 @@
-﻿using CTPSYSTEM.Domain.Dados;
+﻿using CTPSYSTEM.Database.EntityFramework.FonteDados;
 using CTPSYSTEM.Domain;
-using CTPSYSTEM.Database.EntityFramework.Persistence;
-using CTPSYSTEM.Database.EntityFramework.FonteDados;
-
+using CTPSYSTEM.Domain.Dados;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
 
 namespace CTPSYSTEM.Database.EntityFramework.Persistencia
 {
@@ -15,7 +12,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
     {
         public FuncionarioGovernoContext(Conexao conexao) : base(conexao)
         {
-
         }
 
         public void Insert(Funcionario funcionario)

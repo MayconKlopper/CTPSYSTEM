@@ -1,12 +1,7 @@
-﻿using CTPSYSTEM.Domain.Dados;
-using CTPSYSTEM.Domain.DapperModels;
-
-using System;
-using System.Data.SqlClient;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Configuration;
+﻿using CTPSYSTEM.Domain.DapperModels;
 using Dapper;
+using Microsoft.Extensions.Configuration;
+using System.Data.SqlClient;
 
 namespace CTPSYSTEM.Database.Dapper.Persistence
 {
