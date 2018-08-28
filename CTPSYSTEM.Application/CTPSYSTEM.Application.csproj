@@ -9,8 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CTPSYSTEM.Database.Dapper\CTPSYSTEM.Database.Dapper.csproj" />
-    <ProjectReference Include="..\CTPSYSTEM.Database.EntityFramework\CTPSYSTEM.Database.EntityFramework.csproj" />
     <ProjectReference Include="..\CTPSYSTEM.Domain\CTPSYSTEM.Domain.csproj" />
   </ItemGroup>
 

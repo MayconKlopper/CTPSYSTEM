@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CTPSYSTEM.Application\CTPSYSTEM.Application.csproj" />
+    <ProjectReference Include="..\CTPSYSTEM.Database.EntityFramework\CTPSYSTEM.Database.EntityFramework.csproj" />
     <ProjectReference Include="..\CTPSYSTEM.Domain\CTPSYSTEM.Domain.csproj" />
   </ItemGroup>
 

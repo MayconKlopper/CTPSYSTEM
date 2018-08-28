@@ -6,5 +6,6 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
     [Route("api/Hash")]
     public class HashController : Controller
     {
+
     }
 }

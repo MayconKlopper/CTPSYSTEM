@@ -42,7 +42,11 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
 
         public IEnumerable<Funcionario> RecuperaFuncionario()
         {
-            return conexao.Funcionario;
+            return conexao.Funcionario
+                          .Include(funcionario => funcionario.LocalNascimento)
+                          .Include(funcionario => funcionario.Empresa)
+                          .ThenInclude(empresa => empresa.Endereco)
+                          .ThenInclude(endereco => endereco.Estado);
         }
     }
 }
