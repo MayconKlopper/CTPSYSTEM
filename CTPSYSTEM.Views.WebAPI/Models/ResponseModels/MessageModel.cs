@@ -19,5 +19,10 @@
         /// Texto da mensagem
         /// </summary>
         public string Texto { get; set; }
+
+        public static implicit operator MessageModel((int, string) model)
+        {
+            return new MessageModel(model.Item1, model.Item2);
+        }
     }
 }

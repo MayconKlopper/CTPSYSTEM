@@ -1,4 +1,6 @@
-﻿using CTPSYSTEM.Domain.Enumeradores;
+﻿using CTPSYSTEM.Domain;
+using CTPSYSTEM.Domain.Enumeradores;
+
 using System;
 
 namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
@@ -26,13 +28,23 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         public DateTime Data { get; set; }
 
         /// <summary>
-        /// Nome do estado
+        /// Chave Única do estado ao qual o local de nascimento deste funcionário está
+        /// vinculado
         /// </summary>
-        public string Estado { get; set; }
+        public int IdEstado { get; set; }
 
-        /// <summary>
-        /// Sigla do estadozx
-        /// </summary>
-        public EstadoSigla Sigla { get; set; }
+        public static implicit operator Funcionario(AddFuncionarioModel model)
+        {
+            Funcionario funcionario = new Funcionario();
+
+            funcionario.Nome = model.Nome;
+            funcionario.CPF = model.CPF;
+            funcionario.LocalNascimento = new LocalNascimento();
+            funcionario.LocalNascimento.Cidade = model.Cidade;
+            funcionario.LocalNascimento.Data = model.Data;
+            funcionario.LocalNascimento.IdEstado = model.IdEstado;
+
+            return funcionario;
+        }
     }
 }

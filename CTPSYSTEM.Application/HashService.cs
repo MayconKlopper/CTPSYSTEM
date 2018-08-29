@@ -40,27 +40,31 @@ namespace CTPSYSTEM.Application
             return hashString;
         }
 
-        public string verificaVlidadeHash(string hashCode, int idFuncionario, int idCarteiraTrabalho)
+        public (int, string) verificaValidadeHash(string hashCode, int idFuncionario, int idCarteiraTrabalho)
         {
             Hash hash = this.hashStorage.RecuperaHash(hashCode);
 
-            string mensagem;
+            (int, string) mensagem;
 
             if (hash == null)
             {
-                return Mensagens.HashInexistente;
+                mensagem.Item1 = 1;
+                mensagem.Item2 = Mensagens.HashInexistente;
             }
             else if (hash.IdFuncionario != idFuncionario || hash.IdCarteiraTrabalho != idCarteiraTrabalho)
             {
-                return Mensagens.HashInválido;
+                mensagem.Item1 = 1;
+                mensagem.Item2 = Mensagens.HashInválido;
             }
             else if (DateTime.Compare(hash.DataExpiracao, DateTime.Now) < 0)
             {
-                mensagem = Mensagens.HashExpirado;
+                mensagem.Item1 = 1;
+                mensagem.Item2 = Mensagens.HashExpirado;
             }
             else
             {
-                mensagem = Mensagens.HashVálido;
+                mensagem.Item1 = 2;
+                mensagem.Item2 = Mensagens.HashVálido;
             }
 
             hash.Ativo = false;
