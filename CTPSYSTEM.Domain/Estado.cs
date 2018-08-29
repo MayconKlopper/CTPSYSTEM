@@ -13,10 +13,12 @@ namespace CTPSYSTEM.Domain
         /// Identificador único do registro de estado
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// Nome do estado
         /// </summary>
         public string Nome { get; set; }
+
         /// <summary>
         /// Sigla do estado
         /// </summary>
@@ -30,10 +32,10 @@ namespace CTPSYSTEM.Domain
         public virtual ICollection<Endereco> Endereco { get; set; }
 
         /// <summary>
-        /// Local do nascimento do funcionário vinculado a este estado
+        /// Locais de nascimento de funcionários vinculado a este estado
         /// </summary>
-        public virtual LocalNascimento LocalNascimento { get; set; }
+        public virtual IEnumerable<LocalNascimento> LocalNascimento { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

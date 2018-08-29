@@ -1,5 +1,4 @@
-﻿
-namespace CTPSYSTEM.Domain
+﻿namespace CTPSYSTEM.Domain
 {
     /// <summary>
     /// Entidade que representa um endereço de uma empresa no sistema
@@ -30,7 +29,7 @@ namespace CTPSYSTEM.Domain
         /// <summary>
         /// Número da rua
         /// </summary>
-        public int numero { get; set; }
+        public int Numero { get; set; }
 
         /// <summary>
         /// Sala ou salas do edifício
@@ -44,6 +43,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual Estado Estado { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

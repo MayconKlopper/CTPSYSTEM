@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.DependencyInjection;
-
-using CTPSYSTEM.Domain.Dados;
-using CTPSYSTEM.Database.EntityFramework.Persistence;
+﻿using CTPSYSTEM.Database.EntityFramework.Persistence;
 using CTPSYSTEM.Database.EntityFramework.Persistencia;
+using CTPSYSTEM.Domain.Dados;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CTPSYSTEM.Database.EntityFramework
 {

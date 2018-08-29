@@ -83,8 +83,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
                     b.Property<int>("IdFuncionario");
 
-                    b.Property<int>("IdLocalNascimento");
-
                     b.Property<int>("Numero");
 
                     b.Property<string>("NumeroDocumento");
@@ -95,9 +93,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                         .HasName("PK_CarteiraTrabalho");
 
                     b.HasIndex("IdFuncionario");
-
-                    b.HasIndex("IdLocalNascimento")
-                        .IsUnique();
 
                     b.ToTable("CarteiraTrabalho");
                 });
@@ -197,11 +192,11 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
                     b.Property<int>("IdEstado");
 
+                    b.Property<int>("Numero");
+
                     b.Property<string>("Rua");
 
                     b.Property<string>("Sala");
-
-                    b.Property<int>("numero");
 
                     b.HasKey("Id")
                         .HasName("PK_Endereco");
@@ -467,12 +462,18 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
                     b.Property<DateTime>("Data");
 
+                    b.Property<int?>("EstadoId");
+
                     b.Property<int>("IdEstado");
+
+                    b.Property<int>("IdFuncionario");
 
                     b.HasKey("Id")
                         .HasName("PK_LocalNascimento");
 
-                    b.HasIndex("IdEstado")
+                    b.HasIndex("EstadoId");
+
+                    b.HasIndex("IdFuncionario")
                         .IsUnique();
 
                     b.ToTable("LocalNascimento");
@@ -503,12 +504,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                         .HasForeignKey("IdFuncionario")
                         .HasConstraintName("FK_Funcionario_CarteiraTrabalho")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("CTPSYSTEM.Domain.LocalNascimento", "localNascimento")
-                        .WithOne("CarteiraTrabalho")
-                        .HasForeignKey("CTPSYSTEM.Domain.CarteiraTrabalho", "IdLocalNascimento")
-                        .HasConstraintName("FK_LocalNascimento_CarteiraTrabalho")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CTPSYSTEM.Domain.ContratoTrabalho", b =>
@@ -610,10 +605,14 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
             modelBuilder.Entity("CTPSYSTEM.Domain.LocalNascimento", b =>
                 {
                     b.HasOne("CTPSYSTEM.Domain.Estado", "Estado")
+                        .WithMany("LocalNascimento")
+                        .HasForeignKey("EstadoId");
+
+                    b.HasOne("CTPSYSTEM.Domain.Funcionario", "Funcionario")
                         .WithOne("LocalNascimento")
-                        .HasForeignKey("CTPSYSTEM.Domain.LocalNascimento", "IdEstado")
-                        .HasConstraintName("FK_Estado_localNascimento")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("CTPSYSTEM.Domain.LocalNascimento", "IdFuncionario")
+                        .HasConstraintName("FK_LocalNascimento_Funcionario")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -20,11 +20,6 @@ namespace CTPSYSTEM.Domain
         public int IdFuncionario { get; set; }
 
         /// <summary>
-        /// Identificador único do local de nascimento vinculado a esta carteira de trabalho
-        /// </summary>
-        public int IdLocalNascimento { get; set; }
-
-        /// <summary>
         /// Número da carteira de trabalho
         /// </summary>
         public int Numero { get; set; }
@@ -78,11 +73,6 @@ namespace CTPSYSTEM.Domain
         public virtual ICollection<ContratoTrabalho> ContratoTrabalho { get; set; }
 
         /// <summary>
-        /// Endereço do local de nascimento do funcionário
-        /// </summary>
-        public virtual LocalNascimento localNascimento { get; set; }
-
-        /// <summary>
         /// Registro de estrangeiro portador de uma carteira de trabalho
         /// </summary>
         public virtual Estrangeiro Estrangeiro { get; set; }
@@ -98,6 +88,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual ICollection<Internacao> Internacao { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

@@ -51,6 +51,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual ContratoTrabalho ContratoTrabalho { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

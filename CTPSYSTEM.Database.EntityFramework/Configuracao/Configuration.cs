@@ -2,7 +2,6 @@
 using CTPSYSTEM.Domain.Historico;
 
 using Microsoft.EntityFrameworkCore;
-using System;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CTPSYSTEM.Database.EntityFramework.Configuration
@@ -52,14 +51,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(carteiraTrabalho => carteiraTrabalho.localNascimento)
-                   .WithOne(localNascimento => localNascimento.CarteiraTrabalho)
-                   .HasForeignKey<CarteiraTrabalho>(carteiraTrabalho => carteiraTrabalho.IdLocalNascimento)
-                   .HasConstraintName("FK_LocalNascimento_CarteiraTrabalho")
-                   .IsRequired()
-                   .OnDelete(DeleteBehavior.Cascade);
-
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<ContratoTrabalho> builder)
@@ -101,7 +93,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Empresa> builder)
@@ -115,12 +107,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.Property(empresa => empresa.NomeFantasia);
             builder.Property(empresa => empresa.RazaoSocial);
             builder.Property(empresa => empresa.Seguimento);
-
-            #region Relacionamentos
-
-
-
-            #endregion
         }
 
         public void Configure(EntityTypeBuilder<Funcionario> builder)
@@ -142,7 +128,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<AlteracaoSalarial> builder)
@@ -167,7 +153,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<AnotacaoGeral> builder)
@@ -188,7 +174,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<ContribuicaoSindical> builder)
@@ -211,7 +197,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Ferias> builder)
@@ -235,7 +221,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Endereco> builder)
@@ -247,7 +233,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
 
             builder.Property(endereco => endereco.Rua);
             builder.Property(endereco => endereco.Cidade);
-            builder.Property(endereco => endereco.numero);
+            builder.Property(endereco => endereco.Numero);
             builder.Property(endereco => endereco.Sala);
 
             #region Relacionamentos
@@ -259,7 +245,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Estado> builder)
@@ -275,7 +261,12 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
 
             #region Relacionamentos
 
-            
+            builder.HasMany(estado => estado.LocalNascimento)
+                   .WithOne(localNascimento => localNascimento.Estado)
+                   .HasForeignKey(localNascimento => localNascimento.IdEstado)
+                   .HasConstraintName("FK_Estado_localNascimento")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
         }
@@ -301,7 +292,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Internacao> builder)
@@ -326,7 +317,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Licenca> builder)
@@ -351,7 +342,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<LocalNascimento> builder)
@@ -366,14 +357,14 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
 
             #region Relacionamentos
 
-            builder.HasOne(localNascimento => localNascimento.Estado)
-                   .WithOne(Estado => Estado.LocalNascimento)
-                   .HasForeignKey<LocalNascimento>(localNascimento => localNascimento.IdEstado)
-                   .HasConstraintName("FK_Estado_localNascimento")
+            builder.HasOne(localNascimento => localNascimento.Funcionario)
+                   .WithOne(funcionario => funcionario.LocalNascimento)
+                   .HasForeignKey<LocalNascimento>(localNascimento => localNascimento.IdFuncionario)
+                   .HasConstraintName("FK_LocalNascimento_Funcionario")
                    .IsRequired()
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<EmpresaHistorico> builder)
@@ -398,7 +389,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<FuncionarioHistorico> builder)
@@ -422,7 +413,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            #endregion
+            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Hash> builder)

@@ -1,20 +1,20 @@
-﻿using CTPSYSTEM.Domain.Servicos;
+﻿using System.Collections.Generic;
 using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Dados;
-
-using System;
-using System.Collections.Generic;
-using System.Text;
+using CTPSYSTEM.Domain.Servicos;
 
 namespace CTPSYSTEM.Application
 {
     public class FuncionarioGovernoService : IFuncionarioGovernoService
     {
         private readonly IFuncionarioGovernoStorage funcionarioGovernoStorage;
+        private readonly IFuncionarioGovernoReadOnlyStorage funcionarioGovernoReadOnlyStorage;
 
-        public FuncionarioGovernoService(IFuncionarioGovernoStorage funcionarioGovernoStorage)
+        public FuncionarioGovernoService(IFuncionarioGovernoStorage funcionarioGovernoStorage
+            , IFuncionarioGovernoReadOnlyStorage funcionarioGovernoReadOnlyStorage)
         {
             this.funcionarioGovernoStorage = funcionarioGovernoStorage;
+            this.funcionarioGovernoReadOnlyStorage = funcionarioGovernoReadOnlyStorage;
         }
 
         public void Cadastrar(CarteiraTrabalho carteiraTrabalho)
@@ -33,6 +33,16 @@ namespace CTPSYSTEM.Application
         {
             this.funcionarioGovernoStorage.Insert(funcionario);
             this.funcionarioGovernoStorage.SaveChanges();
+        }
+
+        public IEnumerable<Empresa> RecuperaEmpresa()
+        {
+            return this.funcionarioGovernoReadOnlyStorage.RecuperaEmpresa();
+        }
+
+        public IEnumerable<Funcionario> RecuperaFuncionario()
+        {
+            return this.funcionarioGovernoReadOnlyStorage.RecuperaFuncionario();
         }
     }
 }

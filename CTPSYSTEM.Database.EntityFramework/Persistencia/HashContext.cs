@@ -1,21 +1,14 @@
 ﻿using CTPSYSTEM.Database.EntityFramework.FonteDados;
-using CTPSYSTEM.Domain.Dados;
 using CTPSYSTEM.Domain;
-using CTPSYSTEM.Database.EntityFramework.Persistence;
-
-using System;
-using System.Collections.Generic;
-using System.Text;
+using CTPSYSTEM.Domain.Dados;
 using System.Linq;
 
 namespace CTPSYSTEM.Database.EntityFramework.Persistencia
 {
     public class HashContext : BaseContext<Hash>, IHashStorage
     {
-
         public HashContext(Conexao conexao) : base(conexao)
         {
-
         }
 
         public void DesativarHash(string hashCode)

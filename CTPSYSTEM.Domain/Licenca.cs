@@ -31,21 +31,23 @@ namespace CTPSYSTEM.Domain
         public DateTimeOffset DataTermino { get; set; }
 
         private int dias;
+
         /// <summary>
         /// Quantidade de dias que o funcionário ficou de licença
         /// </summary>
         public int Dias
         {
-            get {
-                    if (this.DataInicio == null || this.DataTermino == null)
-                    {
-                        return 0;
-                    }
-
-                    var seconds = (this.DataInicio.ToUnixTimeSeconds() - this.DataTermino.ToUnixTimeSeconds());
-                    var days = Convert.ToInt32( ( ( (seconds / 60) / 60 ) / 24 ) );
-                    return days;
+            get
+            {
+                if (this.DataInicio == null || this.DataTermino == null)
+                {
+                    return 0;
                 }
+
+                var seconds = (this.DataInicio.ToUnixTimeSeconds() - this.DataTermino.ToUnixTimeSeconds());
+                var days = Convert.ToInt32((((seconds / 60) / 60) / 24));
+                return days;
+            }
 
             set { this.dias = value; }
         }
@@ -68,6 +70,6 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual CarteiraTrabalho CarteiraTrabalho { get; set; }
 
-        #endregion
+        #endregion Relacionamentos
     }
 }

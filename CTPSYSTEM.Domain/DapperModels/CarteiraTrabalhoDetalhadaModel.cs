@@ -1,12 +1,9 @@
-﻿using CTPSYSTEM.Domain.Enumeradores;
-
-using System;
+﻿using System;
 
 namespace CTPSYSTEM.Domain.DapperModels
 {
     public class CarteiraTrabalhoDetalhadaModel
     {
-
         public string NomeFuncionario { get; set; }
 
         public string CPF { get; set; }

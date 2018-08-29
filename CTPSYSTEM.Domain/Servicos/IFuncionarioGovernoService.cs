@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CTPSYSTEM.Domain.Servicos
 {
@@ -11,5 +9,9 @@ namespace CTPSYSTEM.Domain.Servicos
         void Cadastrar(Funcionario funcionario);
 
         void Cadastrar(CarteiraTrabalho carteiraTrabalho);
+
+        IEnumerable<Empresa> RecuperaEmpresa();
+
+        IEnumerable<Funcionario> RecuperaFuncionario();
     }
 }
