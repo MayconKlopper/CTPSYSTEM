@@ -59,7 +59,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         public int FlsFicha { get; set; }
 
         /// <summary>
-        /// Númeor de registro da empresa. OBS: a maioria vem com o valor 0 que é o valor default
+        /// Número de registro da empresa. OBS: a maioria vem com o valor 0 que é o valor default
         /// </summary>
         public int RegistroNumero { get; set; }
 
