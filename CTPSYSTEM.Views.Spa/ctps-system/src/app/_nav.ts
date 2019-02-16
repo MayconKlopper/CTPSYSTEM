@@ -23,7 +23,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Gerar Chave',
-    url: '/gerarChave',
+    url: '/gerar-chave',
     icon: 'icon-key'
   },
   {

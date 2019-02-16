@@ -29,8 +29,12 @@ import {
   AppBreadcrumbModule,
   AppHeaderModule,
   AppFooterModule,
-  AppSidebarModule,
+  AppSidebarModule
 } from '@coreui/angular';
+
+// Imports da aplicação
+import { HomeComponent } from './views/Home/home.component';
+import { GerarChaveComponent } from './views/GerarChave/gerar-chave.component';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
@@ -39,6 +43,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
   imports: [
@@ -52,7 +57,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    CollapseModule
   ],
   declarations: [
     AppComponent,
@@ -60,7 +66,9 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    GerarChaveComponent,
+    HomeComponent
   ],
   providers: [{
     provide: LocationStrategy,

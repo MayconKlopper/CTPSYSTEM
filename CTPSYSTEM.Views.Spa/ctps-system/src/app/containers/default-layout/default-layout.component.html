@@ -55,16 +55,14 @@
   </app-sidebar>
   <!-- Main content -->
   <main class="main">
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Home</li>
-        <li class="breadcrumb-item"><a href="#">Profile</a></li>
-      </ol>
-    </nav>
+    <!-- BreadCrumb -->
+    <ol class="breadcrumb">
+      <app-breadcrumb></app-breadcrumb>
+    </ol>
+    <!-- Container Fluid -->
     <div class="container-fluid">
-      
-    </div><!-- /.container-fluid -->
+      <router-outlet></router-outlet>
+    </div>
   </main>
   <app-aside [fixed]="true" [display]="false">
     <tabset>
