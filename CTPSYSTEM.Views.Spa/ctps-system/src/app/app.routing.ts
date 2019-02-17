@@ -12,6 +12,7 @@ import { RegisterComponent } from './views/register/register.component';
 // Componentes da aplicação
 import { GerarChaveComponent } from './views/GerarChave/gerar-chave.component';
 import { HomeComponent } from './views/Home/home.component';
+import { LicencaComponent } from './views/licenca/licenca.component';
 
 export const routes: Routes = [
   {
@@ -63,6 +64,13 @@ export const routes: Routes = [
         component: GerarChaveComponent,
         data: {
           title: 'Gerar Chave de Acesso'
+        }
+      },
+      {
+        path: 'licenca',
+        component: LicencaComponent,
+        data: {
+          title: 'Licenças'
         }
       }
     ]

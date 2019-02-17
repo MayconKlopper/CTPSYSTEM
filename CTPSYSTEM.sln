@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28606.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Applications", "2-Applications", "{B0E744B1-FF9C-498C-97C3-C2EC3B51FF1C}"
 EndProject
@@ -26,6 +26,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTPSYSTEM.Views.WebAPI", "CTPSYSTEM.Views.WebAPI\CTPSYSTEM.Views.WebAPI.csproj", "{8B2894E4-6EC7-49DF-8F33-E3D107CBAA80}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTPSYSTEM.Views.Identity", "CTPSYSTEM.Views.Identity\CTPSYSTEM.Views.Identity.csproj", "{2B74F104-3470-4AFD-892A-D467C5E40D76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Domains", "1-Domains", "{8017AC63-03D4-41E9-8FB3-885589D1F3A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTPSYSTEM.Domain", "CTPSYSTEM.Domain\CTPSYSTEM.Domain.csproj", "{42116882-5BA6-4310-BCE5-2EE683A89D59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +67,10 @@ Global
 		{2B74F104-3470-4AFD-892A-D467C5E40D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B74F104-3470-4AFD-892A-D467C5E40D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B74F104-3470-4AFD-892A-D467C5E40D76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42116882-5BA6-4310-BCE5-2EE683A89D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42116882-5BA6-4310-BCE5-2EE683A89D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42116882-5BA6-4310-BCE5-2EE683A89D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42116882-5BA6-4310-BCE5-2EE683A89D59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +84,7 @@ Global
 		{D78B8DB1-D2C3-4E97-9F34-64D102FAC4F1} = {76BFEAC4-702B-4273-8A83-01A5C6BD7874}
 		{8B2894E4-6EC7-49DF-8F33-E3D107CBAA80} = {23856A00-71B7-42FF-B3FB-0FF81F0B999C}
 		{2B74F104-3470-4AFD-892A-D467C5E40D76} = {23856A00-71B7-42FF-B3FB-0FF81F0B999C}
+		{42116882-5BA6-4310-BCE5-2EE683A89D59} = {8017AC63-03D4-41E9-8FB3-885589D1F3A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C22B1322-FCA2-4EAE-B779-9BB8E13865C8}

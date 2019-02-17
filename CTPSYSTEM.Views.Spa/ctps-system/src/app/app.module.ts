@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -35,6 +35,7 @@ import {
 // Imports da aplicação
 import { HomeComponent } from './views/Home/home.component';
 import { GerarChaveComponent } from './views/GerarChave/gerar-chave.component';
+import { LicencaComponent } from './views/licenca/licenca.component';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
@@ -58,7 +59,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    CollapseModule
+    CollapseModule,
+    CommonModule
   ],
   declarations: [
     AppComponent,
@@ -68,7 +70,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     LoginComponent,
     RegisterComponent,
     GerarChaveComponent,
-    HomeComponent
+    HomeComponent,
+    LicencaComponent
   ],
   providers: [{
     provide: LocationStrategy,

@@ -1,0 +1,39 @@
+<div class="d-flex p-2">
+    <div class="card col-12">
+        <div class="card-header">
+            <h4 class="text-center text-uppercase text-muted"> Licenças </h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="row">
+                        <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">Data início</th>
+                        <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">Data Final</th>
+                        <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">Quantidade (Dias)</th>
+                        <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">Código do Posto</th>
+                        <th class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">Motivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row" *ngFor='let $licenca of licencaList'>
+                        <td class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6"> {{ $licenca.dataInicio | date: 'dd/MM/yyyy' }} </td>
+                        <td class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6"> {{ $licenca.dataTermino | date: 'dd/MM/yyyy' }} </td>
+                        <td class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6"> {{ $licenca.dias }} Dias </td>
+                        <td class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6"> {{ $licenca.codigoPosto }} </td>
+                        <td class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12"> {{ $licenca.motivo }} </td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -27,9 +27,9 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                this.hashService.GerarHash(model.IdFuncionario, model.IdCarteiraTrabalho);
+                var chave = this.hashService.GerarHash(model.IdFuncionario, model.IdCarteiraTrabalho);
 
-                return Ok();
+                return Ok(chave);
             }
             catch (Exception)
             {
