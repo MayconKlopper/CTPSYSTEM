@@ -1,0 +1,34 @@
+<h2 class="text-center text-muted"> Internações </h2>
+<hr>
+<table class="table table-striped table-bordered table-dark">
+    <thead class="bg-gray-900">
+        <tr class="row no-gutters" style="margin: 0px;">
+            <th class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">Hospital</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">Data Internação</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">Data Alta</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">Registro</th>
+            <th class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">Matrícula</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="row" style="margin: 0px;" *ngFor='let $internacao of internacaoList'>
+            <td class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12"> {{ $internacao.hospital }} </td>
+            <td class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">
+                {{ $internacao.dataInternacao | date: 'dd/MM/yyyy' }} </td>
+            <td class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6">
+                {{ $internacao.dataAlta | date: 'dd/MM/yyyy' }} </td>
+            <td class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6"> {{ $internacao.matricula }} Dias </td>
+            <td class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6"> {{ $internacao.registro }} </td>
+        </tr>
+    </tbody>
+</table>
+<ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+    <li class="page-item active">
+        <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">4</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+</ul>

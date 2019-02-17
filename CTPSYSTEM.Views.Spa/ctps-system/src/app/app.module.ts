@@ -36,6 +36,8 @@ import {
 import { HomeComponent } from './views/Home/home.component';
 import { GerarChaveComponent } from './views/GerarChave/gerar-chave.component';
 import { LicencaComponent } from './views/licenca/licenca.component';
+import { InternacaoComponent } from './views/Internacao/internacao.component';
+import { ContratoTrabalhoComponent } from './views/ContratoTrabalho/contrato-trabalho.component';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
@@ -71,7 +73,9 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     RegisterComponent,
     GerarChaveComponent,
     HomeComponent,
-    LicencaComponent
+    LicencaComponent,
+    InternacaoComponent,
+    ContratoTrabalhoComponent
   ],
   providers: [{
     provide: LocationStrategy,

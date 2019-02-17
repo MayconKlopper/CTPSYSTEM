@@ -28,7 +28,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Licenças',
-    url: '/licenca',
+    url: '/licencas',
     icon: 'fa fa-calendar-times-o'
   },
   {
@@ -38,7 +38,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Contratos de Trabalho',
-    url: '/contratoTrabalho',
+    url: '/contrato-trabalho',
     icon: 'icon-book-open'
   },
   {

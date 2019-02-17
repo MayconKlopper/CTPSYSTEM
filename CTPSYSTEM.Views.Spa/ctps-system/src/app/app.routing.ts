@@ -13,6 +13,8 @@ import { RegisterComponent } from './views/register/register.component';
 import { GerarChaveComponent } from './views/GerarChave/gerar-chave.component';
 import { HomeComponent } from './views/Home/home.component';
 import { LicencaComponent } from './views/licenca/licenca.component';
+import { InternacaoComponent } from './views/Internacao/internacao.component';
+import { ContratoTrabalhoComponent } from './views/ContratoTrabalho/contrato-trabalho.component';
 
 export const routes: Routes = [
   {
@@ -67,11 +69,28 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'licenca',
+        path: 'licencas',
         component: LicencaComponent,
         data: {
           title: 'Licenças'
         }
+      },
+      {
+        path: 'internacoes',
+        component: InternacaoComponent,
+        data: {
+          title: 'Internações'
+        }
+      },
+      {
+        path: 'contrato-trabalho',
+        component: ContratoTrabalhoComponent,
+        data: {
+          title: 'Contratos de Trabalho'
+        },
+        children: [
+
+        ]
       }
     ]
   },

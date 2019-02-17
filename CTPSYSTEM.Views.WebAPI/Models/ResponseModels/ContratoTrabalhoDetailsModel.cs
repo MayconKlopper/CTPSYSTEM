@@ -12,12 +12,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         public int Id { get; set; }
 
         /// <summary>
-        /// Identificador único do registro de carteira trabalho
-        /// ao qual este registro de contrato de trabalho está vinculado
-        /// </summary>
-        public int IdCarteiraTrabalho { get; set; }
-
-        /// <summary>
         /// Identificador único da empresa ao qual este registro de
         /// contrato de trabalho está vinculado
         /// </summary>
@@ -74,7 +68,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             ContratoTrabalhoDetailsModel model = new ContratoTrabalhoDetailsModel();
 
             model.Id = contratoTrabalho.Id;
-            model.IdCarteiraTrabalho = contratoTrabalho.IdCarteiraTrabalho;
             model.IdEmpresa = contratoTrabalho.IdEmpresa;
             model.Cargo = contratoTrabalho.Cargo;
             model.CBONumero = contratoTrabalho.CBONumero;
