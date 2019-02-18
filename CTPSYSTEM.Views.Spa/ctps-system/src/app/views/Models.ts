@@ -1,3 +1,14 @@
+export class CarteiraTrabalho {
+    public nomeFuncionario: string;
+    public numero: number;
+    public numeroDocumento: string;
+    public serie: string;
+    public dataEmissao: Date;
+    public foto: string;
+    public filiacaoPai: string;
+    public filiacaoMae: string;
+    public ativo: boolean;
+}
 export class Licenca {
     public dataInicio: Date;
     public dataTermino: Date;
@@ -14,11 +25,11 @@ export class Internacao {
 }
 export class ContratoTrabalho {
     public id: number;
-    public idEmpresa: number;
+    public nomeEmpresa: string;
     public cargo: string;
     public CBONumero: number;
     public dataAdmissao: Date;
-    public dataSaida: Date;
+    public dataSaida?: Date;
     public remuneracao: number;
     public remuneracaoExtenso: string;
     public flsFicha: number;

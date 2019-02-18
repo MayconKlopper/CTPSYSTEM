@@ -12,10 +12,10 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         public int Id { get; set; }
 
         /// <summary>
-        /// Identificador único da empresa ao qual este registro de
+        /// Nome da empresa ao qual este registro de
         /// contrato de trabalho está vinculado
         /// </summary>
-        public int IdEmpresa { get; set; }
+        public string NomeEmpresa { get; set; }
 
         /// <summary>
         /// Nome do cargo
@@ -68,7 +68,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             ContratoTrabalhoDetailsModel model = new ContratoTrabalhoDetailsModel();
 
             model.Id = contratoTrabalho.Id;
-            model.IdEmpresa = contratoTrabalho.IdEmpresa;
+            model.NomeEmpresa = contratoTrabalho.Empresa.NomeFantasia;
             model.Cargo = contratoTrabalho.Cargo;
             model.CBONumero = contratoTrabalho.CBONumero;
             model.DataAdmissao = contratoTrabalho.DataAdmissao;

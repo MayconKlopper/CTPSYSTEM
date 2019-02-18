@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <label class="text-muted"> Funcionário </label>
+                <p title="Funcionário"> {{ carteiraTrabalho.nomeFuncionario }} </p>
+                <label class="text-muted"> Filiação Pai </label>
+                <p title="Filiação Pai"> {{ carteiraTrabalho.filiacaoPai }} </p>
+                <label class="text-muted"> Filiação Mãe </label>
+                <p title="Filiação Mãe"> {{ carteiraTrabalho.filiacaoMae }} </p>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <label class="text-muted"> Número - Série </label>
+                <p title="Número - Série"> {{ carteiraTrabalho.numero }} - {{ carteiraTrabalho.serie }} </p>
+                <label class="text-muted"> Número do Documento </label>
+                <p title="Número do Documento"> {{ carteiraTrabalho.numeroDocumento }} </p>
+                <label class="text-muted"> Data Emissão </label>
+                <p title="Data Emissão"> {{ carteiraTrabalho.dataEmissao | date: 'dd/MM/yyyy' }} </p>
+            </div>
+        </div>
+    </div>
+</div>

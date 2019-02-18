@@ -6,16 +6,12 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 {
     public class CarteiraTrabalhoDetailsModel
     {
-        /// <summary>
-        /// Identificador único da carteira de trabalho
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
-        /// Idenificador único do funcionário ao qual
+        /// Nome do funcionário ao qual
         /// esta carteira de trabalho está vinculada
         /// </summary>
-        public int IdFuncionario { get; set; }
+        public string NomeFuncionario { get; set; }
 
         /// <summary>
         /// Número da carteira de trabalho
@@ -62,8 +58,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         {
             CarteiraTrabalhoDetailsModel model = new CarteiraTrabalhoDetailsModel();
 
-            model.Id = carteiraTrabalho.Id;
-            model.IdFuncionario = carteiraTrabalho.IdFuncionario;
+            model.NomeFuncionario = carteiraTrabalho.funcionario.Nome;
             model.Numero = carteiraTrabalho.Numero;
             model.NumeroDocumento = carteiraTrabalho.NumeroDocumento;
             model.Serie = carteiraTrabalho.Serie;

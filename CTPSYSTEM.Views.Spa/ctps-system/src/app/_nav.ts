@@ -19,7 +19,7 @@ export const navItems: NavData[] = [
   },
   {
     title: true,
-    name: 'Portador da CTPS'
+    name: 'CTPS'
   },
   {
     name: 'Gerar Chave',
@@ -35,6 +35,10 @@ export const navItems: NavData[] = [
     name: 'Internações',
     url: '/internacoes',
     icon: 'fa fa-heartbeat'
+  },
+  {
+    title: true,
+    name: 'Contrato de Trabalho'
   },
   {
     name: 'Contratos de Trabalho',

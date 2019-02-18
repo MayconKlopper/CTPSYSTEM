@@ -14,7 +14,7 @@ import { GerarChaveComponent } from './views/GerarChave/gerar-chave.component';
 import { HomeComponent } from './views/Home/home.component';
 import { LicencaComponent } from './views/licenca/licenca.component';
 import { InternacaoComponent } from './views/Internacao/internacao.component';
-import { ContratoTrabalhoComponent } from './views/ContratoTrabalho/contrato-trabalho.component';
+import { ListContratoTrabalhoComponent } from './views/ContratoTrabalho/ListContratoTrabalho/list-contrato-trabalho.component';
 
 export const routes: Routes = [
   {
@@ -84,7 +84,7 @@ export const routes: Routes = [
       },
       {
         path: 'contrato-trabalho',
-        component: ContratoTrabalhoComponent,
+        component: ListContratoTrabalhoComponent,
         data: {
           title: 'Contratos de Trabalho'
         },
