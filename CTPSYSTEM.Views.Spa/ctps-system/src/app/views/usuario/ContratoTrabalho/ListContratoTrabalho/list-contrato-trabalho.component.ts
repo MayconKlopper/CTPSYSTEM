@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContratoTrabalho } from '../../Models';
+import { ContratoTrabalho } from '../../../Models';
 
 @Component({
     selector: 'app-list-contrato-trabalho',

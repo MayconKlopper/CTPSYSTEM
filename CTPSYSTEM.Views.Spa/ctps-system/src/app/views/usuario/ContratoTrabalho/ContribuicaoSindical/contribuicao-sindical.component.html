@@ -1,0 +1,34 @@
+<h2 class="text-center text-muted"> Contrato de Trabalho Selecionado </h2>
+<hr>
+
+<app-contrato-trabalho [contratoTrabalho]='contratoTrabalho'>
+</app-contrato-trabalho>
+
+<h2 class="text-center text-muted"> Contribuições Sindicais </h2>
+<hr>
+<table class="table table-striped table-bordered table-dark">
+    <thead class="bg-gray-900">
+        <tr class="row" style="margin: 0px;">
+            <th class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">Nome do Sindicato</th>
+            <th class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-6">Valor da Contribuição</th>
+            <th class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-6">Ano</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="row" style="margin: 0px;" *ngFor='let $contribuicaoSindical of contribuicaoSindicalList'>
+            <td class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12"> {{ $contribuicaoSindical.nomeSindicato }} </td>
+            <td class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-6"> {{ $contribuicaoSindical.valorContribuicao | currency }} </td>
+            <td class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-6"> {{ $contribuicaoSindical.ano }} </td>
+        </tr>
+    </tbody>
+</table>
+<ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+    <li class="page-item active">
+        <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">4</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+</ul>

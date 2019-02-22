@@ -47,27 +47,27 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Contribuições Sindicais',
-    url: '/contribuicaoSindical',
+    url: '/contrato-trabalho/contribuicao-sindical',
     icon: 'icon-calculator'
   },
   {
     name: 'Alterações Salariais',
-    url: '/alteracaoSalarial',
+    url: '/contrato-trabalho/alteracao-salarial',
     icon: 'icon-note'
   },
   {
     name: 'Férias',
-    url: '/ferias',
+    url: '/contrato-trabalho/ferias',
     icon: 'fa fa-calendar-check-o'
   },
   {
     name: 'FGTS',
-    url: '/fgts',
+    url: '/contrato-trabalho/fgts',
     icon: 'fa fa-dollar'
   },
   {
     name: 'Observações Gerais',
-    url: '/observacaoGeral',
+    url: '/contrato-trabalho/observacao-geral',
     icon: 'fa fa-sticky-note-o'
   },
   {

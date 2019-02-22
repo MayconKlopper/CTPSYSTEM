@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Licenca } from '../Models';
+import { Licenca } from '../../Models';
 
 @Component({
     selector: 'app-licenca',

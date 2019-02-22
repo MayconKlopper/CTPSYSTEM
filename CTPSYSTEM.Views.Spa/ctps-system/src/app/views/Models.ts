@@ -9,6 +9,7 @@ export class CarteiraTrabalho {
     public filiacaoMae: string;
     public ativo: boolean;
 }
+
 export class Licenca {
     public dataInicio: Date;
     public dataTermino: Date;
@@ -16,6 +17,7 @@ export class Licenca {
     public codigoPosto: number;
     public motivo: string;
 }
+
 export class Internacao {
     public hospital: string;
     public registro: string;
@@ -23,6 +25,7 @@ export class Internacao {
     public dataInternacao: Date;
     public dataAlta: Date;
 }
+
 export class ContratoTrabalho {
     public id: number;
     public nomeEmpresa: string;
@@ -35,4 +38,37 @@ export class ContratoTrabalho {
     public flsFicha: number;
     public registroNumero: number;
     public ativo: boolean;
+}
+
+export class ContribuicaoSindical {
+    public id: number;
+    public idContratoTrabalho: number;
+    public valorContribuicao: number;
+    public nomeSindicato: string;
+    public ano: number;
+}
+
+export class AlteracaoSalarial {
+    public id: number;
+    public idContratoTrabalho: number;
+    public dataAumento: Date;
+    public remuneracao: number;
+    public remuneracaoExtenso: string;
+    public cargo: string;
+    public motivo: string;
+}
+
+export class Ferias {
+    public id: number;
+    public idContratoTrabalho: number;
+    public periodoRelativo: string;
+    public dataInicio: Date;
+    public dataTermino: Date;
+    public dias: number;
+}
+
+export class AnotacaoGeral {
+    public id: number;
+    public idContratoTrabalho: number;
+    public texto: string;
 }

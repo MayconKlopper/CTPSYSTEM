@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Internacao } from '../Models';
+import { Internacao } from '../../Models';
 
 @Component({
     selector: 'app-internacao',

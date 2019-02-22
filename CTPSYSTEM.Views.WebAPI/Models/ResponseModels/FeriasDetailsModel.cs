@@ -19,6 +19,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         /// <summary>
         /// Período que o funcionário trabalhou para ter direito a estas férias
+        /// Formato: dd/MM/yyyy - dd/MM/yyyy
         /// </summary>
         public string PeriodoRelativo { get; set; }
 

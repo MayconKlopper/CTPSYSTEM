@@ -34,12 +34,17 @@ import {
 
 // Imports da aplicação
 import { HomeComponent } from './views/Home/home.component';
-import { GerarChaveComponent } from './views/GerarChave/gerar-chave.component';
-import { LicencaComponent } from './views/licenca/licenca.component';
-import { InternacaoComponent } from './views/Internacao/internacao.component';
-import { ContratoTrabalhoComponent } from './views/ContratoTrabalho/contrato-trabalho.component';
-import { ListContratoTrabalhoComponent } from './views/ContratoTrabalho/ListContratoTrabalho/list-contrato-trabalho.component';
-import { CarteiraTrabalhoComponent } from './views/carteiraTrabalho/carteira-trabalho.component';
+import { GerarChaveComponent } from './views/usuario/GerarChave/gerar-chave.component';
+import { LicencaComponent } from './views/usuario/licenca/licenca.component';
+import { InternacaoComponent } from './views/usuario/Internacao/internacao.component';
+import { ContratoTrabalhoComponent } from './views/usuario/ContratoTrabalho/contrato-trabalho.component';
+import { ListContratoTrabalhoComponent } from './views/usuario/ContratoTrabalho/ListContratoTrabalho/list-contrato-trabalho.component';
+import { CarteiraTrabalhoComponent } from './views/usuario/carteiraTrabalho/carteira-trabalho.component';
+import { ContribuicaoSindicalComponent } from './views/usuario/ContratoTrabalho/ContribuicaoSindical/contribuicao-sindical.component';
+import { AlteracaoSalarialComponent } from './views/usuario/ContratoTrabalho/AlteracaoSalarial/alteracao-salarial.component';
+import { ObservacaoGeralComponent } from './views/usuario/ContratoTrabalho/observacaoGeral/observacao-geral.component';
+import { FeriasComponent } from './views/usuario/ContratoTrabalho/Ferias/ferias.component';
+import { FGTSComponent } from './views/usuario/ContratoTrabalho/FGTS/fgts.component';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
@@ -64,7 +69,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     TabsModule.forRoot(),
     ChartsModule,
     CollapseModule,
-    CommonModule
+    CommonModule,
   ],
   declarations: [
     AppComponent,
@@ -79,12 +84,16 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     InternacaoComponent,
     ContratoTrabalhoComponent,
     ListContratoTrabalhoComponent,
-    CarteiraTrabalhoComponent
+    CarteiraTrabalhoComponent,
+    ContribuicaoSindicalComponent,
+    AlteracaoSalarialComponent,
+    ObservacaoGeralComponent,
+    FeriasComponent,
+    FGTSComponent
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

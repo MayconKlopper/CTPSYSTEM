@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CarteiraTrabalho } from '../Models';
+import { CarteiraTrabalho } from '../../Models';
 
 @Component({
     selector: 'app-carteira-trabalho',
