@@ -45,6 +45,8 @@ import { AlteracaoSalarialComponent } from './views/usuario/ContratoTrabalho/Alt
 import { ObservacaoGeralComponent } from './views/usuario/ContratoTrabalho/observacaoGeral/observacao-geral.component';
 import { FeriasComponent } from './views/usuario/ContratoTrabalho/Ferias/ferias.component';
 import { FGTSComponent } from './views/usuario/ContratoTrabalho/FGTS/fgts.component';
+import { HistoricoCarteiraTraballhoComponent } from './views/usuario/histórico/carteiraTrabalho/historico-carteira-trabalho.component';
+import { HistoricoEmpresaComponent } from './views/usuario/histórico/empresa/historico-empresa.component';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
@@ -89,7 +91,9 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     AlteracaoSalarialComponent,
     ObservacaoGeralComponent,
     FeriasComponent,
-    FGTSComponent
+    FGTSComponent,
+    HistoricoCarteiraTraballhoComponent,
+    HistoricoEmpresaComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }

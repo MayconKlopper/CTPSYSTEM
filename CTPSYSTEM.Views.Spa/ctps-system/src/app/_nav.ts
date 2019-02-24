@@ -76,12 +76,12 @@ export const navItems: NavData[] = [
   },
   {
     name: 'CTPS',
-    url: '/historico/ctps',
+    url: '/historico/carteira-trabalho',
     icon: 'fa fa-book'
   },
   {
     name: 'Empresas Vinculadas',
-    url: '/historico/empresaVinculada',
+    url: '/historico/empresa',
     icon: 'fa fa-building'
   }
 ];

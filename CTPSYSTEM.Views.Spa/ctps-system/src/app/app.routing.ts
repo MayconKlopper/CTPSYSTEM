@@ -20,6 +20,8 @@ import { AlteracaoSalarialComponent } from './views/usuario/ContratoTrabalho/Alt
 import { FeriasComponent } from './views/usuario/ContratoTrabalho/Ferias/ferias.component';
 import { FGTSComponent } from './views/usuario/ContratoTrabalho/FGTS/fgts.component';
 import { ObservacaoGeralComponent } from './views/usuario/ContratoTrabalho/observacaoGeral/observacao-geral.component';
+import { HistoricoCarteiraTraballhoComponent } from './views/usuario/histórico/carteiraTrabalho/historico-carteira-trabalho.component';
+import { HistoricoEmpresaComponent } from './views/usuario/histórico/empresa/historico-empresa.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', },
@@ -33,9 +35,25 @@ export const routes: Routes = [
       { path: 'gerar-chave', component: GerarChaveComponent, data: { title: 'Gerar Chave de Acesso' } },
       { path: 'licencas', component: LicencaComponent, data: { title: 'Licenças' } },
       { path: 'internacoes', component: InternacaoComponent, data: { title: 'Internações' } },
-      { path: 'contrato-trabalho', data: { title: 'Contratos de Trabalho' },
+      {
+        path: 'historico', data: { title: 'Histórico' },
         children: [
-          { path: '',
+          {
+            path: '',
+            children: [
+              { path: '', component: HistoricoCarteiraTraballhoComponent },
+              // tslint:disable-next-line:max-line-length
+              { path: 'carteira-trabalho', component: HistoricoCarteiraTraballhoComponent, data: { title: 'Histórico de Carteiras de Trabalho' } },
+              { path: 'empresa', component: HistoricoEmpresaComponent, data: { title: 'Histórico de Empresas' } }
+            ]
+          }
+        ]
+      },
+      {
+        path: 'contrato-trabalho', data: { title: 'Contratos de Trabalho' },
+        children: [
+          {
+            path: '',
             children: [
               { path: '', component: ListContratoTrabalhoComponent },
               { path: 'contribuicao-sindical', component: ContribuicaoSindicalComponent, data: { title: 'Contribuições Sindicais' } },
