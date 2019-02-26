@@ -21,12 +21,12 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
         public Funcionario RecuperaFuncionario(string CPF)
         {
             return this.conexao
-                       .Funcionario
-                       .Include(funcionario => funcionario.LocalNascimento)
-                       .Include(funcionario => funcionario.Empresa)
-                       .ThenInclude(empresa => empresa.Endereco)
-                       .ThenInclude(endereco => endereco.Estado)
-                .FirstOrDefault(funcionario => funcionario.CPF == CPF);
+                   .Funcionario
+                   .Include(funcionario => funcionario.LocalNascimento)
+                   .Include(funcionario => funcionario.Empresa)
+                   .ThenInclude(empresa => empresa.Endereco)
+                   .ThenInclude(endereco => endereco.Estado)
+            .FirstOrDefault(funcionario => funcionario.CPF == CPF);
         }
 
         public IEnumerable<EmpresaHistorico> RecuperaHistoricoEmpresa(int idFuncionario)

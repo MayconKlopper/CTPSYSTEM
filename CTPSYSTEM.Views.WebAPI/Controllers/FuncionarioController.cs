@@ -28,10 +28,11 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             try
             {
                 FuncionarioDetailsModel funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(CPF);
+                //var funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(CPF);
 
                 return Ok(funcionario);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
