@@ -2,6 +2,7 @@
 using CTPSYSTEM.Views.WebAPI.ArquivosRecurso;
 using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
+    [Authorize(Roles = "usuario")]
     [Produces("application/json")]
     [Route("api/Funcionario")]
     public class FuncionarioController : Controller

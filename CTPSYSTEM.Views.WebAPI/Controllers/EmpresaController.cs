@@ -5,11 +5,13 @@ using CTPSYSTEM.Views.WebAPI.ArquivosRecurso;
 using CTPSYSTEM.Views.WebAPI.Models.RequestModels;
 using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
+    [Authorize(Roles = "empresa")]
     [Produces("application/json")]
     [Route("api/Empresa")]
     public class EmpresaController : Controller

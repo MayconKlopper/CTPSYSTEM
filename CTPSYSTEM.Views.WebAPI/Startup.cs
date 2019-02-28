@@ -24,10 +24,22 @@ namespace CTPSYSTEM.Views.WebAPI
         }
 
         public IConfiguration Configuration { get; }
+        readonly string configuracaoOrigens = "configuracaoOrigens";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(configuracaoOrigens,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3001")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
+            });
+
             services.AddDbContext<Conexao>()
                 .AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
@@ -64,6 +76,7 @@ namespace CTPSYSTEM.Views.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(configuracaoOrigens);
             app.UseMvc();
         }
     }

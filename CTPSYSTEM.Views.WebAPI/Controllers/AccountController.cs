@@ -19,6 +19,7 @@ using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
     [Authorize]
+    [Produces("application/json")]
     [Route("api/Account")]
     public class AccountController : Controller
     {
@@ -42,51 +43,40 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
 
-        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(string returnUrl = null)
-        {
+        [HttpPost("LogIn")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public async Task<IActionResult> Login([FromBody] LoginViewModel model, string returnUrl = null)
+        { 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            var user = _userManager.FindByNameAsync(model.UserName);
+            //var user = _userManager.FindByEmailAsync(model.Email);
+            var role = _userManager.GetRolesAsync(user.Result);
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+            if (result.Succeeded)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToAction(nameof(Lockout));
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
-                }
+                _logger.LogInformation("User logged in.");
+                UserDetailsModel userModel = new UserDetailsModel(user.Result.UserName, user.Result.Email, role.Result.ToList());
+                return Ok(userModel);
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+            }
+            if (result.IsLockedOut)
+            {
+                _logger.LogWarning("User account locked out.");
+                return RedirectToAction(nameof(Lockout));
+            }
+            else
+            {
+                MessageModel message = new MessageModel(1, "Invalid login attempt.");
+                return BadRequest(message);
+            }
         }
 
         [HttpGet]
@@ -220,37 +210,39 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [ProducesResponseType(typeof(MessageModel), 400)]
         public async Task<IActionResult> Register([FromBody] RegisterViewModel model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var resultUser = await _userManager.CreateAsync(user, model.Password);
+            var resultRole = await _userManager.AddToRoleAsync(user, model.Role);
+            if (resultUser.Succeeded && resultRole.Succeeded)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User created a new account with password.");
+                _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
-                    //return RedirectToLocal(returnUrl);
-                }
-                AddErrors(result);
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                _logger.LogInformation("User created a new account with password.");
+                //return RedirectToLocal(returnUrl);
+            }
+            else
+            {
+                
+                MessageModel message = new MessageModel(1, resultRole.Errors.ToString());
+                return BadRequest(message);
             }
 
             // If we got this far, something failed, redisplay form
             return Ok(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet("LogOut")]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return Ok();
         }
 
         [HttpPost]
@@ -338,7 +330,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             if (userId == null || code == null)
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                //return RedirectToAction(nameof(HomeController.Index), "Home");
             }
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
@@ -347,13 +339,6 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ForgotPassword()
-        {
-            return View();
         }
 
         [HttpPost]
@@ -390,54 +375,25 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View();
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ResetPassword(string code = null)
-        {
-            if (code == null)
-            {
-                throw new ApplicationException("A code must be supplied for password reset.");
-            }
-            var model = new ResetPasswordViewModel { Code = code };
-            return View(model);
-        }
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
             var user = await _userManager.FindByEmailAsync(model.Email);
+
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
+                return BadRequest();
             }
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
+                return Ok();
             }
-            AddErrors(result);
-            return View();
-        }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
-
-
-        [HttpGet]
-        public IActionResult AccessDenied()
-        {
-            return View();
+            return BadRequest();
         }
 
         #region Helpers
@@ -458,7 +414,8 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                //return RedirectToAction(nameof(HomeController.Index), "Home");
+                return Redirect(returnUrl);
             }
         }
 

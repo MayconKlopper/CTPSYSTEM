@@ -18,7 +18,8 @@ using CTPSYSTEM.Views.WebAPI.Models;
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
     [Authorize]
-    [Route("[controller]/[action]")]
+    [Produces("application/json")]
+    [Route("api/AccountManager")]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
