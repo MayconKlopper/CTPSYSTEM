@@ -51,6 +51,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator FuncionarioDetailsModel(Funcionario funcionario)
         {
+            if (funcionario == null)
+            {
+                return null;
+            }
+
             FuncionarioDetailsModel model = new FuncionarioDetailsModel();
 
             model.Id = funcionario.Id;

@@ -18,12 +18,11 @@
     },
     "CTPSYSTEM.Views.WebAPI": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:60328/"
+      "applicationUrl": "http://localhost:5001/"
     }
   }
 }

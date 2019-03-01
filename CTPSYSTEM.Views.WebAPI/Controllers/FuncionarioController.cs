@@ -2,6 +2,7 @@
 using CTPSYSTEM.Views.WebAPI.ArquivosRecurso;
 using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
+    [Authorize("Bearer", Roles = "usuario")]
     [Produces("application/json")]
     [Route("api/Funcionario")]
     public class FuncionarioController : Controller
@@ -28,10 +30,11 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             try
             {
                 FuncionarioDetailsModel funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(CPF);
+                //var funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(CPF);
 
                 return Ok(funcionario);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
