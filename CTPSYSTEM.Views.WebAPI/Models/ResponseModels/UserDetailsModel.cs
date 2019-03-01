@@ -7,12 +7,20 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 {
     public class UserDetailsModel
     {
-        public UserDetailsModel(string userName, string email, List<string> role)
+        public UserDetailsModel()
+        {
+
+        }
+
+        public UserDetailsModel(string userName, string email, List<string> role, string token)
         {
             this.UserName = userName;
             this.Email = email;
             this.Role = role;
+            this.Token = Token;
         }
+
+        public string Token { get; set; }
 
         public string UserName { get; set; }
 

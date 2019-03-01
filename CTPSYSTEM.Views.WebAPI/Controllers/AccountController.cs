@@ -15,10 +15,13 @@ using CTPSYSTEM.Views.Identity.Models.AccountViewModels;
 using CTPSYSTEM.Views.WebAPI.Services;
 using CTPSYSTEM.Views.WebAPI.Models;
 using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
+using System.Security.Principal;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
-    [Authorize]
+    [Authorize("Bearer")]
     [Produces("application/json")]
     [Route("api/Account")]
     public class AccountController : Controller
@@ -47,36 +50,105 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [HttpPost("LogIn")]
         [ProducesResponseType(200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
-        public async Task<IActionResult> Login([FromBody] LoginViewModel model, string returnUrl = null)
-        { 
-            // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-            var user = _userManager.FindByNameAsync(model.UserName);
-            //var user = _userManager.FindByEmailAsync(model.Email);
-            var role = _userManager.GetRolesAsync(user.Result);
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
-            if (result.Succeeded)
+        public async Task<IActionResult> Login([FromBody] LoginViewModel model,
+            [FromServices]SigningConfiguration signingConfigurations,
+            [FromServices]TokenConfiguration tokenConfigurations)
+        {
+            UserDetailsModel user = new UserDetailsModel();
+            bool credenciaisValidas = false;
+            if (model != null && !String.IsNullOrWhiteSpace(model.UserName))
             {
-                _logger.LogInformation("User logged in.");
-                UserDetailsModel userModel = new UserDetailsModel(user.Result.UserName, user.Result.Email, role.Result.ToList());
-                return Ok(userModel);
+                // Verifica a existência do usuário nas tabelas do
+                // ASP.NET Core Identity
+                var userIdentity = _userManager
+                    .FindByNameAsync(model.UserName).Result;
+                var role = _userManager.GetRolesAsync(userIdentity).Result;
+                user.Email = userIdentity.Email;
+                user.UserName = userIdentity.UserName;
+                user.Role = role.ToList();
+                if (userIdentity != null)
+                {
+                    // Efetua o login com base no Id do usuário e sua senha
+                    var resultadoLogin = _signInManager
+                        .CheckPasswordSignInAsync(userIdentity, model.Password, false)
+                        .Result;
+                    if (resultadoLogin.Succeeded)
+                    {
+                        credenciaisValidas = true;
+                        //// Verifica se o usuário em questão possui
+                        //// a role Acesso-APIAlturas
+                        //credenciaisValidas = _userManager.IsInRoleAsync(
+                        //    userIdentity, Roles.ROLE_API_ALTURAS).Result;
+                    }
+                }
             }
-            if (result.RequiresTwoFactor)
+
+            if (credenciaisValidas)
             {
-                return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-            }
-            if (result.IsLockedOut)
-            {
-                _logger.LogWarning("User account locked out.");
-                return RedirectToAction(nameof(Lockout));
+                ClaimsIdentity identity = new ClaimsIdentity(
+                    new GenericIdentity(model.UserName, "Login"),
+                    new[] {
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
+                        new Claim(JwtRegisteredClaimNames.UniqueName, model.UserName)
+                    }
+                );
+
+                DateTime dataCriacao = DateTime.Now;
+                DateTime dataExpiracao = dataCriacao +
+                TimeSpan.FromSeconds(tokenConfigurations.Seconds);
+
+                var handler = new JwtSecurityTokenHandler();
+                var securityToken = handler.CreateToken(new SecurityTokenDescriptor
+                {
+                    Issuer = tokenConfigurations.Issuer,
+                    Audience = tokenConfigurations.Audience,
+                    SigningCredentials = signingConfigurations.SigningCredentials,
+                    Subject = identity,
+                    NotBefore = dataCriacao,
+                    Expires = dataExpiracao
+                });
+                var token = handler.WriteToken(securityToken);
+                user.Token = token;
+
+                return Ok(user);
             }
             else
             {
-                MessageModel message = new MessageModel(1, "Invalid login attempt.");
-                return BadRequest(message);
+                return Ok(
+                    new {
+                            authenticated = false,
+                            message = "Falha ao autenticar"
+                        });
             }
+
+            //// Clear the existing external cookie to ensure a clean login process
+            //await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            //var user = _userManager.FindByNameAsync(model.UserName);
+            ////var user = _userManager.FindByEmailAsync(model.Email);
+            //var role = _userManager.GetRolesAsync(user.Result);
+            //// This doesn't count login failures towards account lockout
+            //// To enable password failures to trigger account lockout, set lockoutOnFailure: true
+            //var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+            //if (result.Succeeded)
+            //{
+            //    _logger.LogInformation("User logged in.");
+            //    UserDetailsModel userModel = new UserDetailsModel(user.Result.UserName, user.Result.Email, role.Result.ToList());
+            //    return Ok(userModel);
+            //}
+            //if (result.RequiresTwoFactor)
+            //{
+            //    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+            //}
+            //if (result.IsLockedOut)
+            //{
+            //    _logger.LogWarning("User account locked out.");
+            //    return RedirectToAction(nameof(Lockout));
+            //}
+            //else
+            //{
+            //    MessageModel message = new MessageModel(1, "Invalid login attempt.");
+            //    return BadRequest(message);
+            //}
         }
 
         [HttpGet]

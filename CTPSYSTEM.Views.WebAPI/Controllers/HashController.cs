@@ -10,7 +10,7 @@ using System;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
-    [Authorize(Roles = "funcionario, usuario")]
+    [Authorize("Bearer", Roles = "funcionario, usuario")]
     [Produces("application/json")]
     [Route("api/Hash")]
     public class HashController : Controller

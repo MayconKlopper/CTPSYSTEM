@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
-    [Authorize(Roles = "usuario")]
+    [Authorize("Bearer", Roles = "usuario")]
     [Produces("application/json")]
     [Route("api/Funcionario")]
     public class FuncionarioController : Controller

@@ -17,7 +17,7 @@ using CTPSYSTEM.Views.WebAPI.Models;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
-    [Authorize]
+    [Authorize("Bearer")]
     [Produces("application/json")]
     [Route("api/AccountManager")]
     public class ManageController : Controller

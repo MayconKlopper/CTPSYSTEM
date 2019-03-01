@@ -11,7 +11,7 @@ using System;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
-    [Authorize(Roles = "empresa")]
+    [Authorize("Bearer", Roles = "empresa")]
     [Produces("application/json")]
     [Route("api/Empresa")]
     public class EmpresaController : Controller
