@@ -30,9 +30,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Template
 
 Template: https://coreui.io/angular/
+
 Demo Template: https://coreui.io/angular/demo/#/dashboard
 
 ## Plugins Externos
 
 ngx-toastr: https://scttcper.github.io/ngx-toastr/
+
 ngx-mask: https://github.com/JsDaddy/ngx-mask
