@@ -1,6 +1,6 @@
 # CTPSYSTEM
 Sistema de automação de carteira de trabalho (CTPS)
 
-Template: https://twanoo67.github.io/ngx-admin-lte/components/AppHeaderComponent.html
+Template: https://coreui.io/angular/
 
-Demo Template: https://adminlte.io/themes/AdminLTE/index.html
+Demo Template: https://coreui.io/angular/demo/#/dashboard
