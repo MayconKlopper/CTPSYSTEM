@@ -2,6 +2,11 @@
 {
     public class MessageModel
     {
+        public MessageModel()
+        {
+
+        }
+
         public MessageModel(int tipo, string texto)
         {
             this.tipo = tipo;
