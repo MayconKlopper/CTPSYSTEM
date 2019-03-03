@@ -245,6 +245,13 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasOne(endereco => endereco.Empresa)
+                   .WithMany(empresa => empresa.Endereco)
+                   .HasForeignKey(endereco => endereco.IdEmpresa)
+                   .HasConstraintName("FK_Empresa_Endereco")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
+
             #endregion Relacionamentos
         }
 
@@ -363,6 +370,13 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .HasConstraintName("FK_LocalNascimento_Funcionario")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(localNascimento => localNascimento.Estado)
+                   .WithMany(estado => estado.LocalNascimento)
+                   .HasForeignKey(LocalNascimento => LocalNascimento.IdEstado)
+                   .HasConstraintName("FK_LocalNascimento_Estado")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
 
             #endregion Relacionamentos
         }

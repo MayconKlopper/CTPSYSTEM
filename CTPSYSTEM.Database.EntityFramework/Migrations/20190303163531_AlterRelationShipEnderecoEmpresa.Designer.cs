@@ -4,14 +4,16 @@ using CTPSYSTEM.Database.EntityFramework.FonteDados;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CTPSYSTEM.Database.EntityFramework.Migrations
 {
     [DbContext(typeof(Conexao))]
-    partial class ConexaoModelSnapshot : ModelSnapshot
+    [Migration("20190303163531_AlterRelationShipEnderecoEmpresa")]
+    partial class AlterRelationShipEnderecoEmpresa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,6 +190,8 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
                     b.Property<string>("Cidade");
 
+                    b.Property<int?>("EmpresaId");
+
                     b.Property<int>("IdEmpresa");
 
                     b.Property<int>("IdEstado");
@@ -201,7 +205,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                     b.HasKey("Id")
                         .HasName("PK_Endereco");
 
-                    b.HasIndex("IdEmpresa");
+                    b.HasIndex("EmpresaId");
 
                     b.HasIndex("IdEstado");
 
@@ -462,6 +466,8 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
                     b.Property<DateTime>("Data");
 
+                    b.Property<int?>("EstadoId");
+
                     b.Property<int>("IdEstado");
 
                     b.Property<int>("IdFuncionario");
@@ -469,7 +475,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                     b.HasKey("Id")
                         .HasName("PK_LocalNascimento");
 
-                    b.HasIndex("IdEstado");
+                    b.HasIndex("EstadoId");
 
                     b.HasIndex("IdFuncionario")
                         .IsUnique();
@@ -528,9 +534,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                 {
                     b.HasOne("CTPSYSTEM.Domain.Empresa", "Empresa")
                         .WithMany("Endereco")
-                        .HasForeignKey("IdEmpresa")
-                        .HasConstraintName("FK_Empresa_Endereco")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("EmpresaId");
 
                     b.HasOne("CTPSYSTEM.Domain.Estado", "Estado")
                         .WithMany("Endereco")
@@ -606,9 +610,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                 {
                     b.HasOne("CTPSYSTEM.Domain.Estado", "Estado")
                         .WithMany("LocalNascimento")
-                        .HasForeignKey("IdEstado")
-                        .HasConstraintName("FK_LocalNascimento_Estado")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("EstadoId");
 
                     b.HasOne("CTPSYSTEM.Domain.Funcionario", "Funcionario")
                         .WithOne("LocalNascimento")

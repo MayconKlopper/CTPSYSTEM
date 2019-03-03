@@ -8,6 +8,8 @@ using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
@@ -23,6 +25,26 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             this.empresaService = empresaService;
             this.empresaReadOnlyStorage = empresaReadOnlyStorage;
+        }
+
+        [HttpGet("RecuperaFuncionarios/{idEmpresa}")]
+        [ProducesResponseType(typeof(List<FuncionarioDetailsModel>), 200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult RecuperaFuncionarios(int idEmpresa)
+        {
+            try
+            {
+                List<FuncionarioDetailsModel> modelList = this.empresaReadOnlyStorage.RecuperaFuncionarios(idEmpresa)
+                    .Cast<FuncionarioDetailsModel>()
+                    .ToList();
+
+                return Ok(modelList);
+            }
+            catch (Exception)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
         }
 
         [HttpGet("RecuperaEmpresa/{CNPJ}")]

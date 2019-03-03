@@ -22,6 +22,8 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             this.funcionarioReadOnlyStorage = funcionarioReadOnlyStorage;
         }
 
+
+
         [HttpGet("RecuperaFuncionario/{CPF}")]
         [ProducesResponseType(typeof(FuncionarioDetailsModel), 200)]
         [ProducesResponseType(typeof(MessageModel), 400)]

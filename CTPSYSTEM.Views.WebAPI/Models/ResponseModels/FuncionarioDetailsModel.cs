@@ -2,6 +2,7 @@
 using CTPSYSTEM.Domain.Enumeradores;
 
 using System;
+using System.Collections.Generic;
 
 namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 {
@@ -45,7 +46,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         /// <summary>
         /// Sigla do estado
         /// </summary>
-        public EstadoSigla SiglaEstado { get; set; }
+        public string SiglaEstado { get; set; }
 
         public EmpresaDetailsModel Empresa { get; set; }
 
@@ -64,7 +65,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             model.Cidade = funcionario.LocalNascimento.Cidade;
             model.Data = funcionario.LocalNascimento.Data;
             model.Estado = funcionario.LocalNascimento.Estado.Nome;
-            model.SiglaEstado = funcionario.LocalNascimento.Estado.Sigla;
+            model.SiglaEstado = funcionario.LocalNascimento.Estado.Sigla.ToString();
             model.Empresa = funcionario.Empresa;
 
             return model;
