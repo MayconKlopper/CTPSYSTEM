@@ -61,11 +61,38 @@ namespace CTPSYSTEM.Views.WebAPI.ArquivosRecurso {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O registro de Carteira de trabalho foi criada com sucesso.
+        /// </summary>
+        internal static string CarteiraTrabalhoCriadaSucesso {
+            get {
+                return ResourceManager.GetString("CarteiraTrabalhoCriadaSucesso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A empresa foi cadastrada com sucesso.
+        /// </summary>
+        internal static string EmpresaCriadaSucesso {
+            get {
+                return ResourceManager.GetString("EmpresaCriadaSucesso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro na requisição.
         /// </summary>
         internal static string ErroGenerico {
             get {
                 return ResourceManager.GetString("ErroGenerico", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O Funcionário foi cadastrado com sucesso.
+        /// </summary>
+        internal static string FuncionarioCriadoSucesso {
+            get {
+                return ResourceManager.GetString("FuncionarioCriadoSucesso", resourceCulture);
             }
         }
         

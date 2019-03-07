@@ -109,7 +109,9 @@ namespace CTPSYSTEM.Views.WebAPI
                            .AddScoped<IEmpresaService, EmpresaService>()
                            .AddScoped<IFuncionarioService, FuncionarioService>()
                            .AddScoped<IFuncionarioGovernoService, FuncionarioGovernoService>()
-                           .AddScoped<IHashService, HashService>();
+                           .AddScoped<IHashService, HashService>()
+
+                           .AddScoped<IUtilsReadOnlyStorage, UtilsContext>();
 
             services.AddMvc();
         }

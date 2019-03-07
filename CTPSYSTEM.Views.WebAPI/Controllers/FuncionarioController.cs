@@ -1,5 +1,8 @@
-﻿using CTPSYSTEM.Domain.Dados;
+﻿using CTPSYSTEM.Domain;
+using CTPSYSTEM.Domain.Dados;
+using CTPSYSTEM.Domain.Servicos;
 using CTPSYSTEM.Views.WebAPI.ArquivosRecurso;
+using CTPSYSTEM.Views.WebAPI.Models.RequestModels;
 using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
 
 using Microsoft.AspNetCore.Authorization;
@@ -16,13 +19,34 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
     public class FuncionarioController : Controller
     {
         private readonly IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage;
+        private readonly IFuncionarioGovernoService funcionarioGovernoService;
 
-        public FuncionarioController(IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage)
+        public FuncionarioController(IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage,
+            IFuncionarioGovernoService funcionarioGovernoService)
         {
             this.funcionarioReadOnlyStorage = funcionarioReadOnlyStorage;
+            this.funcionarioGovernoService = funcionarioGovernoService;
         }
 
-
+        [AllowAnonymous]
+        [HttpPost("CadastrarFuncionario")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult CadastrarFuncionario([FromBody] AddFuncionarioModel model)
+        {
+            try
+            {
+                Funcionario funcionario = model;
+                this.funcionarioGovernoService.Cadastrar(funcionario);
+                MessageModel message = new MessageModel(1, Mensagens.FuncionarioCriadoSucesso);
+                return Ok(message);
+            }
+            catch (Exception ex)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
 
         [HttpGet("RecuperaFuncionario/{CPF}")]
         [ProducesResponseType(typeof(FuncionarioDetailsModel), 200)]

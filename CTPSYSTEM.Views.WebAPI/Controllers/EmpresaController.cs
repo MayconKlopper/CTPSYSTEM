@@ -20,11 +20,35 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
     {
         private readonly IEmpresaService empresaService;
         private readonly IEmpresaReadOnlyStorage empresaReadOnlyStorage;
+        private readonly IFuncionarioGovernoService funcionarioGovernoService;
 
-        public EmpresaController(IEmpresaService empresaService, IEmpresaReadOnlyStorage empresaReadOnlyStorage)
+        public EmpresaController(IEmpresaService empresaService,
+            IEmpresaReadOnlyStorage empresaReadOnlyStorage,
+            IFuncionarioGovernoService funcionarioGovernoService)
         {
             this.empresaService = empresaService;
             this.empresaReadOnlyStorage = empresaReadOnlyStorage;
+            this.funcionarioGovernoService = funcionarioGovernoService;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("CadastarEmpresa")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult CadastarEmpresa([FromBody] AddEmpresaModel model)
+        {
+            try
+            {
+                Empresa empresa = model;
+                this.funcionarioGovernoService.Cadastrar(empresa);
+                MessageModel message = new MessageModel(1, Mensagens.EmpresaCriadaSucesso);
+                return Ok(message);
+            }
+            catch (Exception ex)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
         }
 
         [HttpGet("RecuperaFuncionarios/{idEmpresa}")]

@@ -57,19 +57,29 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         /// </summary>
         public bool Ativo { get; set; }
 
+        public AddEstrangeiroModel Estrangeiro { get; set; }
+
         public static implicit operator CarteiraTrabalho(AddCarteiraTrabalhoModel model)
         {
+            if(ReferenceEquals(model, null))
+            {
+                return null;
+            }
             CarteiraTrabalho carteiraTrabalho = new CarteiraTrabalho();
             carteiraTrabalho.Id = model.Id;
             carteiraTrabalho.IdFuncionario = model.IdFuncionario;
             carteiraTrabalho.Numero = model.Numero;
             carteiraTrabalho.NumeroDocumento = model.NumeroDocumento;
             carteiraTrabalho.Serie = model.Serie;
-            carteiraTrabalho.DataEmissao = model.DataEmissao;
+            carteiraTrabalho.DataEmissao = DateTime.Now;
             carteiraTrabalho.FiliacaoMae = model.FiliacaoMae;
             carteiraTrabalho.FiliacaoPai = model.FiliacaoPai;
             carteiraTrabalho.Foto = model.Foto;
             carteiraTrabalho.Ativo = model.Ativo;
+            if(!ReferenceEquals(model.Estrangeiro, null))
+            {
+                carteiraTrabalho.Estrangeiro = model.Estrangeiro;
+            }
             return carteiraTrabalho;
         }
     }

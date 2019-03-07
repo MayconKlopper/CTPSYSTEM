@@ -132,4 +132,13 @@
   <data name="UsuarioCadastrado" xml:space="preserve">
     <value>Usuário Cadastrado com sucesso!</value>
   </data>
+  <data name="FuncionarioCriadoSucesso" xml:space="preserve">
+    <value>O Funcionário foi cadastrado com sucesso</value>
+  </data>
+  <data name="EmpresaCriadaSucesso" xml:space="preserve">
+    <value>A empresa foi cadastrada com sucesso</value>
+  </data>
+  <data name="CarteiraTrabalhoCriadaSucesso" xml:space="preserve">
+    <value>O registro de Carteira de trabalho foi criada com sucesso</value>
+  </data>
 </root>
