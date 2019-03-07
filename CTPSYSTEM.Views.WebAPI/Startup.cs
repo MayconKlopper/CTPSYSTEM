@@ -90,6 +90,7 @@ namespace CTPSYSTEM.Views.WebAPI
             services.AddAuthorization(auth =>
             {
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .RequireRole(new string[] { "funcionario", "usuario", "empresa" })
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
             });

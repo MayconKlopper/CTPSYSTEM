@@ -105,7 +105,8 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                     new GenericIdentity(model.UserName, "Login"),
                     new[] {
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, model.UserName)
+                        new Claim(JwtRegisteredClaimNames.UniqueName, model.UserName),
+                        new Claim("role", user.Role[0])
                     }
                 );
 
