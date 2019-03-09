@@ -72,7 +72,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             model.Cargo = contratoTrabalho.Cargo;
             model.CBONumero = contratoTrabalho.CBONumero;
             model.DataAdmissao = contratoTrabalho.DataAdmissao;
-            model.DataSaida = contratoTrabalho.DataSaida;
+            model.DataSaida = contratoTrabalho.DataSaida.Value;
             model.Remuneracao = contratoTrabalho.Remuneracao;
             model.RemuneracaoExtenso = contratoTrabalho.RemuneracaoExtenso;
             model.FlsFicha = contratoTrabalho.FlsFicha;

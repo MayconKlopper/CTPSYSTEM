@@ -20,6 +20,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using CTPSYSTEM.Views.WebAPI.ArquivosRecurso;
 using System.Text;
+using CTPSYSTEM.Domain.Dados;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
@@ -32,17 +33,23 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage;
+        private readonly IEmpresaReadOnlyStorage empresaReadOnlyStorage;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage,
+            IEmpresaReadOnlyStorage empresaReadOnlyStorage)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            this.funcionarioReadOnlyStorage = funcionarioReadOnlyStorage;
+            this.empresaReadOnlyStorage = empresaReadOnlyStorage;
         }
 
         [TempData]
@@ -65,12 +72,11 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                 // ASP.NET Core Identity
                 var userIdentity = _userManager
                     .FindByNameAsync(model.UserName).Result;
-                var role = _userManager.GetRolesAsync(userIdentity).Result;
-                user.Email = userIdentity.Email;
-                user.UserName = userIdentity.UserName;
-                user.Role = role.ToList();
                 if (userIdentity != null)
                 {
+                    user.Email = userIdentity.Email;
+                    user.UserName = userIdentity.UserName;
+
                     // Efetua o login com base no Id do usuário e sua senha
                     var resultadoLogin = _signInManager
                         .CheckPasswordSignInAsync(userIdentity, model.Password, false)
@@ -78,6 +84,18 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                     if (resultadoLogin.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");
+
+                        user.Role = _userManager.GetRolesAsync(userIdentity).Result.ToList();
+
+                        if (user.Role[0].Equals("funcionario"))
+                        {
+                            user.Funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(user.UserName);
+                        }
+                        else if (user.Role[0].Equals("empresa"))
+                        {
+                            user.Empresa = this.empresaReadOnlyStorage.RecuperaEmpresa(user.UserName);
+                        }
+
                         credenciaisValidas = true;
                     }
                     if (resultadoLogin.RequiresTwoFactor)

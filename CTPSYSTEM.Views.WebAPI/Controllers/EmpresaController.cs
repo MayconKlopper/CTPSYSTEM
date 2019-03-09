@@ -94,17 +94,20 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [ProducesResponseType(typeof(MessageModel), 400)]
         public ActionResult CadastrarContratoTrabalho([FromBody] AddContratoTrabalhoModel model)
         {
+            MessageModel message = new MessageModel();
+
             try
             {
                 ContratoTrabalho contratoTrabalho = model;
 
                 this.empresaService.Cadastrar(contratoTrabalho);
 
-                return Ok();
+                message = new MessageModel(1, Mensagens.ContratoTrabalhoCriadoSucesso);
+                return Ok(message);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
             }
         }

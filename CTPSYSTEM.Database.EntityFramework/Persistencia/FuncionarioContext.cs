@@ -22,10 +22,8 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
         {
             return this.conexao
                        .Funcionario
+                       .Include(funcionario => funcionario.CarteiraTrabalho)
                        .Include(funcionario => funcionario.LocalNascimento)
-                       .Include(funcionario => funcionario.Empresa)
-                        .ThenInclude(empresa => empresa.Endereco)
-                        .ThenInclude(endereco => endereco.Estado)
                 .FirstOrDefault(funcionario => funcionario.CPF == CPF);
         }
 

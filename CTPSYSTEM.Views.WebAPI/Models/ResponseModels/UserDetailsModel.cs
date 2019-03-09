@@ -27,5 +27,13 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         public string Email { get; set; }
 
         public List<string> Role { get; set; }
+
+        #region Relacionamentos
+
+        public FuncionarioDetailsModel Funcionario { get; set; }
+
+        public EmpresaDetailsModel Empresa { get; set; }
+
+        #endregion
     }
 }

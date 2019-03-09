@@ -141,4 +141,7 @@
   <data name="CarteiraTrabalhoCriadaSucesso" xml:space="preserve">
     <value>O registro de Carteira de trabalho foi criada com sucesso</value>
   </data>
+  <data name="ContratoTrabalhoCriadoSucesso" xml:space="preserve">
+    <value>O Contrato de Trabalho foi criado com Sucesso</value>
+  </data>
 </root>

@@ -43,7 +43,7 @@ namespace CTPSYSTEM.Domain
         /// <summary>
         /// Data de finalização do contrato de trabalho
         /// </summary>
-        public DateTimeOffset DataSaida { get; set; }
+        public DateTimeOffset? DataSaida { get; set; }
 
         /// <summary>
         /// Valor de remuneração em decimal

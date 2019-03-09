@@ -51,12 +51,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         /// </summary>
         public string FiliacaoMae { get; set; }
 
-        /// <summary>
-        /// Indica se esta carteria de trabalho é a carteira atual
-        /// do funcionário
-        /// </summary>
-        public bool Ativo { get; set; }
-
         public AddEstrangeiroModel Estrangeiro { get; set; }
 
         public static implicit operator CarteiraTrabalho(AddCarteiraTrabalhoModel model)
@@ -71,11 +65,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
             carteiraTrabalho.Numero = model.Numero;
             carteiraTrabalho.NumeroDocumento = model.NumeroDocumento;
             carteiraTrabalho.Serie = model.Serie;
-            carteiraTrabalho.DataEmissao = DateTime.Now;
+            carteiraTrabalho.DataEmissao = DateTime.Parse(String.Format("0:d", DateTime.Now));
             carteiraTrabalho.FiliacaoMae = model.FiliacaoMae;
             carteiraTrabalho.FiliacaoPai = model.FiliacaoPai;
             carteiraTrabalho.Foto = model.Foto;
-            carteiraTrabalho.Ativo = model.Ativo;
+            carteiraTrabalho.Ativo = true;
             if(!ReferenceEquals(model.Estrangeiro, null))
             {
                 carteiraTrabalho.Estrangeiro = model.Estrangeiro;

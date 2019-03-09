@@ -34,8 +34,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.Property(carteiraTrabalho => carteiraTrabalho.DataEmissao);
             builder.Property(carteiraTrabalho => carteiraTrabalho.FiliacaoMae);
             builder.Property(carteiraTrabalho => carteiraTrabalho.FiliacaoPai);
-            builder.Property(carteiraTrabalho => carteiraTrabalho.Foto)
-                   .IsRequired(false);
+            builder.Property(carteiraTrabalho => carteiraTrabalho.Foto);
             builder.Property(carteiraTrabalho => carteiraTrabalho.Numero);
             builder.Property(carteiraTrabalho => carteiraTrabalho.Serie);
             builder.Property(carteiraTrabalho => carteiraTrabalho.NumeroDocumento);
@@ -61,18 +60,17 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasKey(contratoTrabalho => contratoTrabalho.Id)
                    .HasName("PK_ContratoTrabalho");
 
-            builder.Property(contratoTrabalho => contratoTrabalho.Cargo);
+            builder.Property(contratoTrabalho => contratoTrabalho.Cargo)
+                .IsRequired();
             builder.Property(contratoTrabalho => contratoTrabalho.CBONumero);
             builder.Property(contratoTrabalho => contratoTrabalho.DataAdmissao);
             builder.Property(contratoTrabalho => contratoTrabalho.Remuneracao);
-            builder.Property(contratoTrabalho => contratoTrabalho.RemuneracaoExtenso);
-            builder.Property(contratoTrabalho => contratoTrabalho.DataSaida)
-                   .IsRequired(false);
+            builder.Property(contratoTrabalho => contratoTrabalho.RemuneracaoExtenso)
+                .IsRequired();
+            builder.Property(contratoTrabalho => contratoTrabalho.DataSaida);
             builder.Property(contratoTrabalho => contratoTrabalho.RegistroNumero)
-                   .IsRequired(false)
                    .HasDefaultValue(0);
             builder.Property(contratoTrabalho => contratoTrabalho.FlsFicha)
-                   .IsRequired(false)
                    .HasDefaultValue(0);
             builder.Property(contratoTrabalho => contratoTrabalho.Ativo)
                    .HasDefaultValue(1);

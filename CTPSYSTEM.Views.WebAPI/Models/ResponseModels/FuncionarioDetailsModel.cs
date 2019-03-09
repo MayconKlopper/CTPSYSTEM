@@ -3,6 +3,7 @@ using CTPSYSTEM.Domain.Enumeradores;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 {
@@ -12,6 +13,12 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         /// Identificador único do funcionário
         /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// Identificador único da carteira de trabalho
+        /// vinculada a este funcionario
+        /// </summary>
+        public int IdCarteiraTrabalho { get; set; }
 
         /// <summary>
         /// Identificador único da empresa ao qual o funcionário está vinculado
@@ -60,6 +67,8 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             FuncionarioDetailsModel model = new FuncionarioDetailsModel();
 
             model.Id = funcionario.Id;
+            model.IdCarteiraTrabalho = funcionario.CarteiraTrabalho
+                                                  .FirstOrDefault(ct => ct.Ativo).Id;
             model.Nome = funcionario.Nome;
             model.CPF = funcionario.CPF;
             model.Cidade = funcionario.LocalNascimento.Cidade;

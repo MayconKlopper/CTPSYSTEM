@@ -70,6 +70,15 @@ namespace CTPSYSTEM.Views.WebAPI.ArquivosRecurso {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O Contrato de Trabalho foi criado com Sucesso.
+        /// </summary>
+        internal static string ContratoTrabalhoCriadoSucesso {
+            get {
+                return ResourceManager.GetString("ContratoTrabalhoCriadoSucesso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a A empresa foi cadastrada com sucesso.
         /// </summary>
         internal static string EmpresaCriadaSucesso {
