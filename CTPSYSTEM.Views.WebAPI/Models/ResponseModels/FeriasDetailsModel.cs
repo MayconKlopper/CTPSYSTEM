@@ -40,6 +40,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator FeriasDetailsModel(Ferias ferias)
         {
+            if (ReferenceEquals(ferias, null))
+            {
+                return null;
+            }
+
             FeriasDetailsModel model = new FeriasDetailsModel();
 
             model.Id = ferias.Id;

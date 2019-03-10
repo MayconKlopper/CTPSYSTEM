@@ -7,6 +7,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190309182526_AlterConfigurations.cs" />
     <Compile Remove="Migrations\20190309182526_AlterConfigurations.Designer.cs" />
+    <Compile Remove="Migrations\20190310130045_teste.cs" />
+    <Compile Remove="Migrations\20190310130045_teste.Designer.cs" />
+    <Compile Remove="Migrations\20190310130931_AlterRealtionshipContratoTrabalho.cs" />
+    <Compile Remove="Migrations\20190310130931_AlterRealtionshipContratoTrabalho.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

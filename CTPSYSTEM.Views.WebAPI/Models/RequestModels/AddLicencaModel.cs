@@ -40,11 +40,16 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
         public static implicit operator Licenca(AddLicencaModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             Licenca licenca = new Licenca();
 
             licenca.CodigoPosto = model.CodigoPosto;
-            licenca.DataInicio = model.DataInicio;
-            licenca.DataTermino = model.DataTermino;
+            licenca.DataInicio = DateTimeOffset.Parse(model.DataInicio.ToString("dd/MM/yyyy"));
+            licenca.DataTermino = DateTimeOffset.Parse(model.DataTermino.ToString("dd/MM/yyyy"));
             licenca.Motivo = model.Motivo;
             licenca.IdCarteiraTrabalho = model.IdCarteiraTrabalho;
 

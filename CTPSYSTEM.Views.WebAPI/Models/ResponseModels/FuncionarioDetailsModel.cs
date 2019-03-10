@@ -21,6 +21,12 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         public int IdCarteiraTrabalho { get; set; }
 
         /// <summary>
+        /// Identificador único do contrato de trabalho
+        /// vinculado a este funcionário
+        /// </summary>
+        public int IdContratoTrabalho { get; set; }
+
+        /// <summary>
         /// Identificador único da empresa ao qual o funcionário está vinculado
         /// </summary>
         public int? IdEmpresa { get; set; }
@@ -67,6 +73,10 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             FuncionarioDetailsModel model = new FuncionarioDetailsModel();
 
             model.Id = funcionario.Id;
+            model.IdContratoTrabalho = funcionario.CarteiraTrabalho
+                                                  .FirstOrDefault(ct => ct.Ativo)
+                                                  .ContratoTrabalho
+                                                  .FirstOrDefault(ct => ct.Ativo).Id;
             model.IdCarteiraTrabalho = funcionario.CarteiraTrabalho
                                                   .FirstOrDefault(ct => ct.Ativo).Id;
             model.Nome = funcionario.Nome;

@@ -33,6 +33,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator InternacaoDetailsModel(Internacao internacao)
         {
+            if (ReferenceEquals(internacao, null))
+            {
+                return null;
+            }
+
             InternacaoDetailsModel model = new InternacaoDetailsModel();
              
             model.Hospital = internacao.Hospital;

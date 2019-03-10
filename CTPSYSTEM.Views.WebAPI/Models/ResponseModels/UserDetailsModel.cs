@@ -17,7 +17,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             this.UserName = userName;
             this.Email = email;
             this.Role = role;
-            this.Token = Token;
+            this.Token = token;
         }
 
         public string Token { get; set; }

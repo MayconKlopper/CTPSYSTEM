@@ -65,6 +65,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator EmpresaDetailsModel(Empresa empresa)
         {
+            if (ReferenceEquals(empresa, null))
+            {
+                return null;
+            }
+
             EmpresaDetailsModel model = new EmpresaDetailsModel();
 
             model.Id = empresa.Id;
@@ -84,6 +89,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator EmpresaDetailsModel(EmpresaHistorico empresa)
         {
+            if (ReferenceEquals(empresa, null))
+            {
+                return null;
+            }
+
             EmpresaDetailsModel model = new EmpresaDetailsModel();
 
             model.Id = empresa.Id;

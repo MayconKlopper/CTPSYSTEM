@@ -65,6 +65,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator ContratoTrabalhoDetailsModel(ContratoTrabalho contratoTrabalho)
         {
+            if (ReferenceEquals(contratoTrabalho, null))
+            {
+                return null;
+            }
+
             ContratoTrabalhoDetailsModel model = new ContratoTrabalhoDetailsModel();
 
             model.Id = contratoTrabalho.Id;

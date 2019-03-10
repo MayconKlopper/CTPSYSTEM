@@ -35,6 +35,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
         public static implicit operator Estrangeiro(AddEstrangeiroModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             Estrangeiro estrangeiro = new Estrangeiro();
             estrangeiro.Chegada = model.Chegada;
             estrangeiro.DocumentoIdentidade = model.DocumentoIdentidade;

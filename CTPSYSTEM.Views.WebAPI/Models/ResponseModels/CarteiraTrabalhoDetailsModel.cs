@@ -56,6 +56,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator CarteiraTrabalhoDetailsModel(CarteiraTrabalho carteiraTrabalho)
         {
+            if (ReferenceEquals(carteiraTrabalho, null))
+            {
+                return null;
+            }
+
             CarteiraTrabalhoDetailsModel model = new CarteiraTrabalhoDetailsModel();
 
             model.NomeFuncionario = carteiraTrabalho.funcionario.Nome;

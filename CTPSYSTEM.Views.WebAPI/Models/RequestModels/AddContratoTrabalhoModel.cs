@@ -60,6 +60,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
         public static implicit operator ContratoTrabalho(AddContratoTrabalhoModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             var contratoTrabalho = new ContratoTrabalho();
             contratoTrabalho.Ativo = true;
             contratoTrabalho.Cargo = model.Cargo;

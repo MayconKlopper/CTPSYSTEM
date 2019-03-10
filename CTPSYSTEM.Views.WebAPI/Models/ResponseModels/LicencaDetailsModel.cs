@@ -34,6 +34,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator LicencaDetailsModel(Licenca licenca)
         {
+            if (ReferenceEquals(licenca, null))
+            {
+                return null;
+            }
+
             LicencaDetailsModel model = new LicencaDetailsModel();
 
             model.DataInicio = licenca.DataInicio;

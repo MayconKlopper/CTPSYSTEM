@@ -23,6 +23,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
             return this.conexao
                        .Funcionario
                        .Include(funcionario => funcionario.CarteiraTrabalho)
+                        .ThenInclude(carteiraTrabalho => carteiraTrabalho.ContratoTrabalho)
                        .Include(funcionario => funcionario.LocalNascimento)
                 .FirstOrDefault(funcionario => funcionario.CPF == CPF);
         }

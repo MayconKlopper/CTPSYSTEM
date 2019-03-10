@@ -22,6 +22,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
         public static implicit operator AnotacaoGeral(AddAnotacaoGeralModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             AnotacaoGeral anotacaoGeral = new AnotacaoGeral();
 
             anotacaoGeral.Texto = model.Texto;

@@ -44,10 +44,15 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
         public static implicit operator Internacao(AddInternacaoModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             Internacao internacao = new Internacao();
 
-            internacao.DataAlta = model.DataAlta;
-            internacao.DataInternacao = model.DataInternacao;
+            internacao.DataAlta = DateTimeOffset.Parse(model.DataAlta.ToString("dd/MM/yyyy"));
+            internacao.DataInternacao = DateTimeOffset.Parse(model.DataInternacao.ToString("dd/MM/yyyy"));
             internacao.Hospital = model.Hospital;
             internacao.Matricula = model.Matricula;
             internacao.Registro = model.Registro;
