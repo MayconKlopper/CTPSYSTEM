@@ -7,11 +7,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
     public class AddInternacaoModel
     {
         /// <summary>
-        /// Identificador único do registro de internação
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Identificador único da carteira de trabalho ao qual
         /// este registro de internação está vinculado
         /// </summary>

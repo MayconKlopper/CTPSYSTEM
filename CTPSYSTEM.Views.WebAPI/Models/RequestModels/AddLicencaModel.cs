@@ -7,11 +7,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
     public class AddLicencaModel
     {
         /// <summary>
-        /// Identificador único do registro de licença
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Identificador único da carteira de trabalho oa qual
         /// este registro de licença está vinculado
         /// </summary>

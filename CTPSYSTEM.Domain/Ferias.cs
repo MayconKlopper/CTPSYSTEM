@@ -47,7 +47,7 @@ namespace CTPSYSTEM.Domain
                     return 0;
                 }
 
-                var seconds = (this.DataInicio.ToUnixTimeSeconds() - this.DataTermino.ToUnixTimeSeconds());
+                var seconds = (this.DataTermino.ToUnixTimeSeconds() - this.DataInicio.ToUnixTimeSeconds());
                 var days = Convert.ToInt32((((seconds / 60) / 60) / 24));
                 return days;
             }
