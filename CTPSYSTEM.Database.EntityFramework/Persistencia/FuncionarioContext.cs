@@ -25,6 +25,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
                        .Include(funcionario => funcionario.CarteiraTrabalho)
                         .ThenInclude(carteiraTrabalho => carteiraTrabalho.ContratoTrabalho)
                        .Include(funcionario => funcionario.LocalNascimento)
+                        .ThenInclude(localNascimento => localNascimento.Estado)
                 .FirstOrDefault(funcionario => funcionario.CPF == CPF);
         }
 
@@ -34,12 +35,18 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
                           .Where(empresaHistorico => empresaHistorico.IdFuncionario == idFuncionario);
         }
 
-        public IEnumerable<CarteiraTrabalho> RecuperaCarteiraTrabalho(int idFuncionario)
+        public IEnumerable<CarteiraTrabalho> RecuperaHistoricoCarteiraTrabalho(int idFuncionario)
         {
             return conexao.CarteiraTrabalho
-                          .Include(carteiraTrabalho => carteiraTrabalho.funcionario)
-                            .ThenInclude(funcionario => funcionario.Nome)
-                          .Where(carteiraTrabalho => carteiraTrabalho.IdFuncionario == idFuncionario);
+                          .Include(carteiraTrabalho => carteiraTrabalho.Funcionario)
+                          .Where(carteiraTrabalho => carteiraTrabalho.IdFuncionario == idFuncionario && !carteiraTrabalho.Ativo);
+        }
+
+        public CarteiraTrabalho RecuperaCarteiraTrabalho(int idFuncionario)
+        {
+            return conexao.CarteiraTrabalho
+                          .Include(carteiraTrabalho => carteiraTrabalho.Funcionario)
+                          .FirstOrDefault(carteiraTrabalho => carteiraTrabalho.IdFuncionario == idFuncionario && carteiraTrabalho.Ativo);
         }
 
         public IEnumerable<Internacao> RecuperaInternacao(int idCarteiraTrabalho)
@@ -58,7 +65,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
         {
             return conexao.ContratoTrabalho
                           .Include(contratoTrabalho => contratoTrabalho.Empresa)
-                            .ThenInclude(empresa => empresa.NomeFantasia)
                           .Where(contratoTrabalho => contratoTrabalho.IdCarteiraTrabalho == idCarteiraTrabalho);
         }
 

@@ -87,7 +87,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
 
                         user.Role = _userManager.GetRolesAsync(userIdentity).Result.ToList();
 
-                        if (user.Role[0].Equals("funcionario"))
+                        if (user.Role[0].Equals("usuario"))
                         {
                             user.Funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(user.UserName);
                         }

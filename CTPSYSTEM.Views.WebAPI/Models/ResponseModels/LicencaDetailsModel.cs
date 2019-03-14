@@ -40,11 +40,13 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             }
 
             LicencaDetailsModel model = new LicencaDetailsModel();
+             
 
             model.DataInicio = licenca.DataInicio;
             model.DataTermino = licenca.DataTermino;
             model.Dias = licenca.Dias;
             model.CodigoPosto = licenca.CodigoPosto;
+            model.Motivo = licenca.Motivo;
 
             return model;
         }

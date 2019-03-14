@@ -63,7 +63,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
             CarteiraTrabalhoDetailsModel model = new CarteiraTrabalhoDetailsModel();
 
-            model.NomeFuncionario = carteiraTrabalho.funcionario.Nome;
+            model.NomeFuncionario = carteiraTrabalho.Funcionario.Nome;
             model.Numero = carteiraTrabalho.Numero;
             model.NumeroDocumento = carteiraTrabalho.NumeroDocumento;
             model.Serie = carteiraTrabalho.Serie;

@@ -5,7 +5,5 @@
         public int IdFuncionario { get; set; }
 
         public int IdCarteiraTrabalho { get; set; }
-
-        public string hashCode { get; set; }
     }
 }

@@ -87,20 +87,39 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
         }
 
-        [HttpGet("RecuperaCarteiraTrabalho/{idFuncionario}")]
+        [HttpGet("RecuperaCarteiraTrabalhoHistorico/{idFuncionario}")]
         [ProducesResponseType(typeof(IEnumerable<CarteiraTrabalhoDetailsModel>), 200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult RecuperaCarteiraTrabalhoHistorico(int idFuncionario)
+        {
+            try
+            {
+                IEnumerable<CarteiraTrabalhoDetailsModel> model = this.funcionarioReadOnlyStorage
+                    .RecuperaHistoricoCarteiraTrabalho(idFuncionario)
+                    .Select(empresaHistorico => (CarteiraTrabalhoDetailsModel)empresaHistorico);
+
+                return Ok(model);
+            }
+            catch (Exception)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
+
+        [HttpGet("RecuperaCarteiraTrabalho/{idFuncionario}")]
+        [ProducesResponseType(typeof(CarteiraTrabalhoDetailsModel), 200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
         public ActionResult RecuperaCarteiraTrabalho(int idFuncionario)
         {
             try
             {
-                IEnumerable<CarteiraTrabalhoDetailsModel> model = this.funcionarioReadOnlyStorage
-                    .RecuperaCarteiraTrabalho(idFuncionario)
-                    .Select(carteiraTrabalho => (CarteiraTrabalhoDetailsModel)carteiraTrabalho);
+                CarteiraTrabalhoDetailsModel model = this.funcionarioReadOnlyStorage
+                    .RecuperaCarteiraTrabalho(idFuncionario);
 
                 return Ok(model);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
@@ -227,7 +246,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
         }
 
-        [HttpGet("RecuperaContribuicaoSindical/{CPF}")]
+        [HttpGet("RecuperaContribuicaoSindical/{idContratoTrabalho}")]
         [ProducesResponseType(typeof(ContribuicaoSindicalDetailsModel), 200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
         public ActionResult RecuperaContribuicaoSindical(int idContratoTrabalho)

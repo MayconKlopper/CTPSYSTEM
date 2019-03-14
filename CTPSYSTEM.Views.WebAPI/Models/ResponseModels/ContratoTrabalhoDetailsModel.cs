@@ -35,7 +35,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         /// <summary>
         /// Data de finalização do contrato de trabalho
         /// </summary>
-        public DateTimeOffset DataSaida { get; set; }
+        public DateTimeOffset? DataSaida { get; set; }
 
         /// <summary>
         /// Valor de remuneração em decimal
@@ -77,9 +77,10 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             model.Cargo = contratoTrabalho.Cargo;
             model.CBONumero = contratoTrabalho.CBONumero;
             model.DataAdmissao = contratoTrabalho.DataAdmissao;
-            model.DataSaida = contratoTrabalho.DataSaida.Value;
+            model.DataSaida = contratoTrabalho.DataSaida;
             model.Remuneracao = contratoTrabalho.Remuneracao;
             model.RemuneracaoExtenso = contratoTrabalho.RemuneracaoExtenso;
+            model.CBONumero = contratoTrabalho.CBONumero;
             model.FlsFicha = contratoTrabalho.FlsFicha;
             model.RegistroNumero = contratoTrabalho.RegistroNumero;
             model.Ativo = contratoTrabalho.Ativo;

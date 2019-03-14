@@ -43,11 +43,11 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [HttpPost("VerificarValidadeHash")]
         [ProducesResponseType(typeof(MessageModel), 200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
-        public ActionResult VerificarValidadeHash([FromBody] AddHashModel model)
+        public ActionResult VerificarValidadeHash([FromBody] HashDetailsModel model)
         {
             try
             {
-                MessageModel mensagem = this.hashService.verificaValidadeHash(model.hashCode, model.IdFuncionario, model.IdCarteiraTrabalho);
+                MessageModel mensagem = this.hashService.verificaValidadeHash(model.HasCode, model.IdFuncionario, model.IdCarteiraTrabalho);
 
                 if (mensagem.tipo == 1)
                 {

@@ -28,7 +28,7 @@ namespace CTPSYSTEM.Application
             using (SHA512 shaM = new SHA512Managed())
             {
                 var byteHash = shaM.ComputeHash(data);
-                hashCode = byteHash.ToString();
+                hashCode = this.GetStringFromHash(byteHash);
             }
 
             DateTime dataGerecao = DateTime.Now;
@@ -36,8 +36,9 @@ namespace CTPSYSTEM.Application
             Hash hash = new Hash(hashCode, idFuncionario, idCarteiraTrabalho, dataGerecao, dataGerecao.AddDays(1));
 
             this.hashStorage.Insert(hash);
+            this.hashStorage.SaveChanges();
 
-            return hashString;
+            return hashCode;
         }
 
         public (int, string) verificaValidadeHash(string hashCode, int idFuncionario, int idCarteiraTrabalho)
@@ -72,6 +73,16 @@ namespace CTPSYSTEM.Application
             this.hashStorage.SaveChanges();
 
             return mensagem;
+        }
+
+        private string GetStringFromHash(byte[] hash)
+        {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                result.Append(hash[i].ToString("X2"));
+            }
+            return result.ToString();
         }
     }
 }

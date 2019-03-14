@@ -65,7 +65,7 @@ namespace CTPSYSTEM.Domain
         /// <summary>
         /// Entidade funcionário portador desta carteira de trabalho
         /// </summary>
-        public virtual Funcionario funcionario { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
 
         /// <summary>
         /// Contratos de trabalho do funcionário

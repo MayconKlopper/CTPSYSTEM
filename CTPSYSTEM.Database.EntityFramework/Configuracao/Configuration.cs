@@ -43,7 +43,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
 
             #region Relacionamentos
 
-            builder.HasOne(carteiraTrabalho => carteiraTrabalho.funcionario)
+            builder.HasOne(carteiraTrabalho => carteiraTrabalho.Funcionario)
                    .WithMany(funcionario => funcionario.CarteiraTrabalho)
                    .HasForeignKey(carteiraTrabalho => carteiraTrabalho.IdFuncionario)
                    .HasConstraintName("FK_Funcionario_CarteiraTrabalho")
