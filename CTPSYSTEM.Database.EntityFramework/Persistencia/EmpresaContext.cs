@@ -66,6 +66,10 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
         public IEnumerable<Funcionario> RecuperaFuncionarios(int idEmpresa)
         {
             return conexao.Funcionario
+                          .Include(funcionario => funcionario.CarteiraTrabalho)
+                           .ThenInclude(carteiraTrabalho => carteiraTrabalho.ContratoTrabalho)
+                          .Include(funcionario => funcionario.LocalNascimento)
+                           .ThenInclude(localNascimento => localNascimento.Estado)
                           .Where(funcionario => funcionario.IdEmpresa == idEmpresa);
         }
 

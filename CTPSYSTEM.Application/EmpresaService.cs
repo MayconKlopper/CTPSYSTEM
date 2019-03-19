@@ -9,7 +9,8 @@ namespace CTPSYSTEM.Application
         private readonly IEmpresaStorage empresaContext;
         private readonly IEmpresaReadOnlyStorage empresaReadOnlyContext;
 
-        public EmpresaService(IEmpresaStorage empresaContext, IEmpresaReadOnlyStorage empresaReadOnlyContext)
+        public EmpresaService(IEmpresaStorage empresaContext,
+            IEmpresaReadOnlyStorage empresaReadOnlyContext)
         {
             this.empresaContext = empresaContext;
             this.empresaReadOnlyContext = empresaReadOnlyContext;
@@ -65,9 +66,8 @@ namespace CTPSYSTEM.Application
             this.empresaContext.SaveChanges();
         }
 
-        public void VincularFuncionario(int idFuncionario, int idEmpresa)
+        public void VincularFuncionario(Funcionario funcionario, int idEmpresa)
         {
-            var funcionario = this.empresaReadOnlyContext.RecuperaFuncionario(idFuncionario);
             funcionario.IdEmpresa = idEmpresa;
 
             this.empresaContext.SaveChanges();

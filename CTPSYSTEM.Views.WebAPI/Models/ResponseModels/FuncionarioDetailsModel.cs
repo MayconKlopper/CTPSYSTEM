@@ -61,7 +61,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         /// </summary>
         public string SiglaEstado { get; set; }
 
-        public EmpresaDetailsModel Empresa { get; set; }
+        public CarteiraTrabalhoDetailsModel CarteiraTrabalho { get; set; }
 
         public static implicit operator FuncionarioDetailsModel(Funcionario funcionario)
         {
@@ -85,7 +85,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             model.Data = funcionario.LocalNascimento.Data;
             model.Estado = funcionario.LocalNascimento.Estado.Nome;
             model.SiglaEstado = funcionario.LocalNascimento.Estado.Sigla.ToString();
-            model.Empresa = funcionario.Empresa;
+            model.CarteiraTrabalho = funcionario.CarteiraTrabalho.FirstOrDefault(ct => ct.Ativo);
 
             return model;
         }

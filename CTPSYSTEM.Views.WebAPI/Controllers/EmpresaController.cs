@@ -21,14 +21,17 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         private readonly IEmpresaService empresaService;
         private readonly IEmpresaReadOnlyStorage empresaReadOnlyStorage;
         private readonly IFuncionarioGovernoService funcionarioGovernoService;
+        private readonly IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage;
 
         public EmpresaController(IEmpresaService empresaService,
             IEmpresaReadOnlyStorage empresaReadOnlyStorage,
-            IFuncionarioGovernoService funcionarioGovernoService)
+            IFuncionarioGovernoService funcionarioGovernoService,
+            IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage)
         {
             this.empresaService = empresaService;
             this.empresaReadOnlyStorage = empresaReadOnlyStorage;
             this.funcionarioGovernoService = funcionarioGovernoService;
+            this.funcionarioReadOnlyStorage = funcionarioReadOnlyStorage;
         }
 
         [AllowAnonymous]
@@ -58,13 +61,12 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                List<FuncionarioDetailsModel> modelList = this.empresaReadOnlyStorage.RecuperaFuncionarios(idEmpresa)
-                    .Cast<FuncionarioDetailsModel>()
-                    .ToList();
+                IEnumerable<FuncionarioDetailsModel> modelList = this.empresaReadOnlyStorage.RecuperaFuncionarios(idEmpresa)
+                    .Select(funcionario => (FuncionarioDetailsModel)funcionario);
 
                 return Ok(modelList);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
@@ -239,9 +241,27 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                this.empresaService.VincularFuncionario(model.IdFuncionario, model.IdEmpresa);
+                MessageModel message = new MessageModel();
 
-                return Ok();
+                Funcionario funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(model.CPF);
+
+                if (ReferenceEquals(funcionario, null))
+                {
+                    message = new MessageModel(1, "Funcionário Não encontrado. Por favor verifique o CPF");
+                }
+                else if (!ReferenceEquals(funcionario.IdEmpresa, null))
+                {
+                    message = new MessageModel(1, "O Funcionário já está vinculado a outra empresa.");
+                }
+                else
+                {
+                    this.empresaService.VincularFuncionario(funcionario, model.IdEmpresa);
+
+                    message = new MessageModel(2, "O Funcionário foi vinculado a sua empresa com sucesso. Crie um registro de contrato de trabalho");
+                    return Ok(message);
+                }
+
+                return BadRequest(message);
             }
             catch (Exception)
             {

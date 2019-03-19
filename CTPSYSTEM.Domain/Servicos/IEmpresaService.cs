@@ -16,7 +16,7 @@
 
         void Cadastrar(Internacao internacao);
 
-        void VincularFuncionario(int idFuncionario, int idEmpresa);
+        void VincularFuncionario(Funcionario funcionario, int idEmpresa);
 
         void DesvincularFuncionario(int idFuncionario);
     }

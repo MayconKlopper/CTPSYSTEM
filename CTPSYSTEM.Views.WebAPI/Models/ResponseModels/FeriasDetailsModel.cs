@@ -52,6 +52,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             model.PeriodoRelativo = ferias.PeriodoRelativo;
             model.DataInicio = ferias.DataInicio;
             model.DataTermino = ferias.DataTermino;
+            model.Dias = ferias.Dias;
 
             return model;
         }
