@@ -73,19 +73,36 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             FuncionarioDetailsModel model = new FuncionarioDetailsModel();
 
             model.Id = funcionario.Id;
-            model.IdContratoTrabalho = funcionario.CarteiraTrabalho
-                                                  .FirstOrDefault(ct => ct.Ativo)
-                                                  .ContratoTrabalho
+
+            if (!ReferenceEquals(funcionario.CarteiraTrabalho, null)
+                && funcionario.CarteiraTrabalho?.Count > 0)
+            {
+                model.IdCarteiraTrabalho = funcionario.CarteiraTrabalho
                                                   .FirstOrDefault(ct => ct.Ativo).Id;
-            model.IdCarteiraTrabalho = funcionario.CarteiraTrabalho
-                                                  .FirstOrDefault(ct => ct.Ativo).Id;
+                model.CarteiraTrabalho = funcionario.CarteiraTrabalho.FirstOrDefault(ct => ct.Ativo);
+
+                if (!ReferenceEquals(funcionario.CarteiraTrabalho.FirstOrDefault(ct => ct.Ativo).ContratoTrabalho, null)
+                    && funcionario.CarteiraTrabalho.FirstOrDefault(ct => ct.Ativo).ContratoTrabalho?.Count > 0)
+                {
+                    model.IdContratoTrabalho = funcionario.CarteiraTrabalho
+                                                      .FirstOrDefault(ct => ct.Ativo)
+                                                      .ContratoTrabalho
+                                                      .FirstOrDefault(ct => ct.Ativo).Id;
+                }
+            }
+            
             model.Nome = funcionario.Nome;
             model.CPF = funcionario.CPF;
-            model.Cidade = funcionario.LocalNascimento.Cidade;
-            model.Data = funcionario.LocalNascimento.Data;
-            model.Estado = funcionario.LocalNascimento.Estado.Nome;
-            model.SiglaEstado = funcionario.LocalNascimento.Estado.Sigla.ToString();
-            model.CarteiraTrabalho = funcionario.CarteiraTrabalho.FirstOrDefault(ct => ct.Ativo);
+            if (!ReferenceEquals(funcionario.LocalNascimento, null))
+            {
+                model.Cidade = funcionario.LocalNascimento.Cidade;
+                model.Data = funcionario.LocalNascimento.Data;
+                if (!ReferenceEquals(funcionario.LocalNascimento.Estado, null))
+                {
+                    model.Estado = funcionario.LocalNascimento.Estado.Nome;
+                    model.SiglaEstado = funcionario.LocalNascimento.Estado.Sigla.ToString();
+                }
+            }
 
             return model;
         }

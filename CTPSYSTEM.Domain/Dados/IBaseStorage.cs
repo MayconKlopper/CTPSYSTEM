@@ -14,6 +14,8 @@ namespace CTPSYSTEM.Domain.Dados
         /// <param name="expressions">propriedades do obejtos que serao atualizadas</param>
         void Update(Entity item, params Expression<Func<Entity, object>>[] expressions);
 
+        void Delete(Entity obj);
+
         int SaveChanges();
     }
 }

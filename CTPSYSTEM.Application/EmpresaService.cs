@@ -58,10 +58,13 @@ namespace CTPSYSTEM.Application
             this.empresaContext.SaveChanges();
         }
 
-        public void DesvincularFuncionario(int idFuncionario)
+        public void DesvincularFuncionario(int idFuncionario, int idContratoTrabalho)
         {
             var funcionario = this.empresaReadOnlyContext.RecuperaFuncionario(idFuncionario);
             funcionario.IdEmpresa = null;
+
+            var contratoTrabalho = this.empresaReadOnlyContext.RecuperaContratoTrabalho(idContratoTrabalho);
+            contratoTrabalho.Ativo = false;
 
             this.empresaContext.SaveChanges();
         }

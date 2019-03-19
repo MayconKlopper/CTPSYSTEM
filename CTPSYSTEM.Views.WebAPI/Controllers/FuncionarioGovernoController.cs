@@ -50,8 +50,9 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                IEnumerable<FuncionarioDetailsModel> model = this.funcionarioGovernoService.RecuperaFuncionario()
-                    .Select(funcionario => (FuncionarioDetailsModel)funcionario);
+                List<FuncionarioDetailsModel> model = this.funcionarioGovernoService.RecuperaFuncionario()
+                    .Select(funcionario => (FuncionarioDetailsModel)funcionario)
+                    .ToList();
 
                 return Ok(model);
             }

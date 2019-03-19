@@ -30,6 +30,11 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
             }
         }
 
+        public void Delete(Entity obj)
+        {
+            conexao.Remove(obj);
+        }
+
         public int SaveChanges()
         {
             return conexao.SaveChanges();

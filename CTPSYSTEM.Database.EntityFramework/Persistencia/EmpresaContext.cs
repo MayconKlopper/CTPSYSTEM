@@ -84,5 +84,10 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
             return conexao.FuncionarioHistorico
                           .Where(funcionarioHistorico => funcionarioHistorico.IdEmpresa == idEmpresa);
         }
+
+        public ContratoTrabalho RecuperaContratoTrabalho(int idContratoTrabalho)
+        {
+            return conexao.ContratoTrabalho.Find(idContratoTrabalho);
+        }
     }
 }

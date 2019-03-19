@@ -18,6 +18,6 @@
 
         void VincularFuncionario(Funcionario funcionario, int idEmpresa);
 
-        void DesvincularFuncionario(int idFuncionario);
+        void DesvincularFuncionario(int idFuncionario, int idContratoTrabalho);
     }
 }

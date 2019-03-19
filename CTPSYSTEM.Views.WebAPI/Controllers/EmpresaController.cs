@@ -61,8 +61,9 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                IEnumerable<FuncionarioDetailsModel> modelList = this.empresaReadOnlyStorage.RecuperaFuncionarios(idEmpresa)
-                    .Select(funcionario => (FuncionarioDetailsModel)funcionario);
+                List<FuncionarioDetailsModel> modelList = this.empresaReadOnlyStorage.RecuperaFuncionarios(idEmpresa)
+                    .Select(funcionario => (FuncionarioDetailsModel)funcionario)
+                    .ToList();
 
                 return Ok(modelList);
             }
@@ -273,17 +274,20 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [HttpPost("DesvincularFuncionario")]
         [ProducesResponseType(200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
-        public ActionResult DesvincularFuncionario([FromBody] int idFuncionario)
+        public ActionResult DesvincularFuncionario([FromBody] DesvincularFuncionarioModel model)
         {
+            MessageModel message = new MessageModel();
+
             try
             {
-                this.empresaService.DesvincularFuncionario(idFuncionario);
+                this.empresaService.DesvincularFuncionario(model.IdFuncionario, model.IdContratoTrabalho);
 
-                return Ok();
+                message = new MessageModel(2, "Funcionário teve seu contrato encerrado e foi desvinculado da empresa.");
+                return Ok(message);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
             }
         }

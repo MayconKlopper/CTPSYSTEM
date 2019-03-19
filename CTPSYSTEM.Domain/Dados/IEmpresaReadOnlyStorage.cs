@@ -11,6 +11,8 @@ namespace CTPSYSTEM.Domain.Dados
 
         Funcionario RecuperaFuncionario(int idFuncionario);
 
+        ContratoTrabalho RecuperaContratoTrabalho(int idContratoTrabalho);
+
         IEnumerable<FuncionarioHistorico> RecuperaHistoricoFuncionario(int idEmpresa);
     }
 }
