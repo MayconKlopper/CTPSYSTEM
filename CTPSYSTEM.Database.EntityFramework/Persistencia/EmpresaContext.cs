@@ -46,6 +46,11 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
             conexao.Internacao.Add(internacao);
         }
 
+        public void Insert(FGTS fgts)
+        {
+            conexao.FGTS.Add(fgts);
+        }
+
         public void Update(Funcionario funcionario, params Expression<Func<Funcionario, object>>[] expressions)
         {
             var x = this.conexao.Attach(funcionario);

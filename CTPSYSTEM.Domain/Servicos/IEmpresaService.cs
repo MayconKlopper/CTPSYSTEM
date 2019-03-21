@@ -10,6 +10,8 @@
 
         void Cadastrar(AnotacaoGeral anotacaoGeral);
 
+        void Cadastrar(FGTS fgts);
+
         void Cadastrar(Ferias ferias);
 
         void Cadastrar(Licenca licenca);

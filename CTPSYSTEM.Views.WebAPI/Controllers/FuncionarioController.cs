@@ -56,7 +56,6 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             try
             {
                 FuncionarioDetailsModel funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(CPF);
-                //var funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(CPF);
 
                 return Ok(funcionario);
             }
@@ -256,6 +255,26 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                 IEnumerable<ContribuicaoSindicalDetailsModel> model = this.funcionarioReadOnlyStorage
                     .RecuperaContribuicaoSindical(idContratoTrabalho)
                     .Select(contribuicaoSindical => (ContribuicaoSindicalDetailsModel)contribuicaoSindical);
+
+                return Ok(model);
+            }
+            catch (Exception)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
+
+        [HttpGet("RecuperaFGTS/{idContratoTrabalho}")]
+        [ProducesResponseType(typeof(ContribuicaoSindicalDetailsModel), 200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult RecuperaFGTS(int idContratoTrabalho)
+        {
+            try
+            {
+                IEnumerable<FGTSDetailsModel> model = this.funcionarioReadOnlyStorage
+                    .RecuperaFGTS(idContratoTrabalho)
+                    .Select(fgts => (FGTSDetailsModel)fgts);
 
                 return Ok(model);
             }

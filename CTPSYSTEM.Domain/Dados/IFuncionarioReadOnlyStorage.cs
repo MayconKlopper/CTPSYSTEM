@@ -17,6 +17,8 @@ namespace CTPSYSTEM.Domain.Dados
 
         IEnumerable<AlteracaoSalarial> RecuperaAlteracaoSalarial(int idContratoTrabalho);
 
+        IEnumerable<FGTS> RecuperaFGTS(int idContratoTrabalho);
+
         IEnumerable<Ferias> RecuperaFerias(int idContratoTrabalho);
 
         IEnumerable<AnotacaoGeral> RecuperaAnotacaoGeral(int idContratoTrabalho);

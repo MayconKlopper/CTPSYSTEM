@@ -2,6 +2,8 @@
 using CTPSYSTEM.Domain.Dados;
 using CTPSYSTEM.Domain.Servicos;
 
+using System;
+
 namespace CTPSYSTEM.Application
 {
     public class EmpresaService : IEmpresaService
@@ -58,6 +60,12 @@ namespace CTPSYSTEM.Application
             this.empresaContext.SaveChanges();
         }
 
+        public void Cadastrar(FGTS fgts)
+        {
+            this.empresaContext.Insert(fgts);
+            this.empresaContext.SaveChanges();
+        }
+
         public void DesvincularFuncionario(int idFuncionario, int idContratoTrabalho)
         {
             var funcionario = this.empresaReadOnlyContext.RecuperaFuncionario(idFuncionario);
@@ -65,6 +73,7 @@ namespace CTPSYSTEM.Application
 
             var contratoTrabalho = this.empresaReadOnlyContext.RecuperaContratoTrabalho(idContratoTrabalho);
             contratoTrabalho.Ativo = false;
+            contratoTrabalho.DataSaida = DateTimeOffset.Now;
 
             this.empresaContext.SaveChanges();
         }

@@ -11,6 +11,8 @@ namespace CTPSYSTEM.Domain.Dados
 
         void Insert(AnotacaoGeral anotacaoGeral);
 
+        void Insert(FGTS fgts);
+
         void Insert(Ferias ferias);
 
         void Insert(Licenca licenca);

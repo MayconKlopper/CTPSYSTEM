@@ -64,92 +64,101 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             [FromServices]TokenConfiguration tokenConfigurations)
         {
             MessageModel message = new MessageModel();
-            UserDetailsModel user = new UserDetailsModel();
-            bool credenciaisValidas = false;
-            if (model != null && !String.IsNullOrWhiteSpace(model.UserName))
+
+            try
             {
-                // Verifica a existência do usuário nas tabelas do
-                // ASP.NET Core Identity
-                var userIdentity = _userManager
-                    .FindByNameAsync(model.UserName).Result;
-                if (userIdentity != null)
+                UserDetailsModel user = new UserDetailsModel();
+                bool credenciaisValidas = false;
+                if (model != null && !String.IsNullOrWhiteSpace(model.UserName))
                 {
-                    user.Email = userIdentity.Email;
-                    user.UserName = userIdentity.UserName;
-
-                    // Efetua o login com base no Id do usuário e sua senha
-                    var resultadoLogin = _signInManager
-                        .CheckPasswordSignInAsync(userIdentity, model.Password, false)
-                        .Result;
-                    if (resultadoLogin.Succeeded)
+                    // Verifica a existência do usuário nas tabelas do
+                    // ASP.NET Core Identity
+                    var userIdentity = _userManager
+                        .FindByNameAsync(model.UserName).Result;
+                    if (userIdentity != null)
                     {
-                        _logger.LogInformation("User logged in.");
+                        user.Email = userIdentity.Email;
+                        user.UserName = userIdentity.UserName;
 
-                        user.Role = _userManager.GetRolesAsync(userIdentity).Result.ToList();
-
-                        if (user.Role[0].Equals("usuario"))
+                        // Efetua o login com base no Id do usuário e sua senha
+                        var resultadoLogin = _signInManager
+                            .CheckPasswordSignInAsync(userIdentity, model.Password, false)
+                            .Result;
+                        if (resultadoLogin.Succeeded)
                         {
-                            user.Funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(user.UserName);
-                        }
-                        else if (user.Role[0].Equals("empresa"))
-                        {
-                            user.Empresa = this.empresaReadOnlyStorage.RecuperaEmpresa(user.UserName);
-                        }
+                            _logger.LogInformation("User logged in.");
 
-                        credenciaisValidas = true;
-                    }
-                    if (resultadoLogin.RequiresTwoFactor)
-                    {
-                        return RedirectToAction(nameof(LoginWith2fa));
-                    }
-                    if (resultadoLogin.IsLockedOut)
-                    {
-                        _logger.LogWarning("User account locked out.");
-                        message = new MessageModel(1, Mensagens.UsuarioBloqueado);
-                        return BadRequest();
-                    }
-                    if(resultadoLogin.IsNotAllowed)
-                    {
-                        message = new MessageModel(1, Mensagens.UsuarioDadosIncorretos);
-                        return BadRequest(message);
+                            user.Role = _userManager.GetRolesAsync(userIdentity).Result.ToList();
+
+                            if (user.Role[0].Equals("usuario"))
+                            {
+                                user.Funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(user.UserName);
+                            }
+                            else if (user.Role[0].Equals("empresa"))
+                            {
+                                user.Empresa = this.empresaReadOnlyStorage.RecuperaEmpresa(user.UserName);
+                            }
+
+                            credenciaisValidas = true;
+                        }
+                        if (resultadoLogin.RequiresTwoFactor)
+                        {
+                            return RedirectToAction(nameof(LoginWith2fa));
+                        }
+                        if (resultadoLogin.IsLockedOut)
+                        {
+                            _logger.LogWarning("User account locked out.");
+                            message = new MessageModel(1, Mensagens.UsuarioBloqueado);
+                            return BadRequest();
+                        }
+                        if (resultadoLogin.IsNotAllowed)
+                        {
+                            message = new MessageModel(1, Mensagens.UsuarioDadosIncorretos);
+                            return BadRequest(message);
+                        }
                     }
                 }
-            }
 
-            if (credenciaisValidas)
-            {
+                if (credenciaisValidas)
+                {
 
-                ClaimsIdentity identity = new ClaimsIdentity(
-                    new GenericIdentity(model.UserName, "Login"),
-                    new[] {
+                    ClaimsIdentity identity = new ClaimsIdentity(
+                        new GenericIdentity(model.UserName, "Login"),
+                        new[] {
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
                         new Claim(JwtRegisteredClaimNames.UniqueName, model.UserName),
                         new Claim("role", user.Role[0])
-                    }
-                );
+                        }
+                    );
 
-                DateTime dataCriacao = DateTime.Now;
-                DateTime dataExpiracao = dataCriacao +
-                TimeSpan.FromSeconds(tokenConfigurations.Seconds);
+                    DateTime dataCriacao = DateTime.Now;
+                    DateTime dataExpiracao = dataCriacao +
+                    TimeSpan.FromSeconds(tokenConfigurations.Seconds);
 
-                var handler = new JwtSecurityTokenHandler();
-                var securityToken = handler.CreateToken(new SecurityTokenDescriptor
-                {
-                    Issuer = tokenConfigurations.Issuer,
-                    Audience = tokenConfigurations.Audience,
-                    SigningCredentials = signingConfigurations.SigningCredentials,
-                    Subject = identity,
-                    NotBefore = dataCriacao,
-                    Expires = dataExpiracao
-                });
-                var token = handler.WriteToken(securityToken);
-                user.Token = token;
+                    var handler = new JwtSecurityTokenHandler();
+                    var securityToken = handler.CreateToken(new SecurityTokenDescriptor
+                    {
+                        Issuer = tokenConfigurations.Issuer,
+                        Audience = tokenConfigurations.Audience,
+                        SigningCredentials = signingConfigurations.SigningCredentials,
+                        Subject = identity,
+                        NotBefore = dataCriacao,
+                        Expires = dataExpiracao
+                    });
+                    var token = handler.WriteToken(securityToken);
+                    user.Token = token;
 
-                return Ok(user);
+                    return Ok(user);
+                }
+
+                message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
             }
-
-            message = new MessageModel(1, Mensagens.ErroGenerico);
-            return BadRequest(message);
+            catch (Exception ex)
+            {
+                message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
         }
 
         [HttpGet]

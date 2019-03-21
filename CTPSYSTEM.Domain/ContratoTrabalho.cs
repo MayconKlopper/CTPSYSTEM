@@ -103,6 +103,8 @@ namespace CTPSYSTEM.Domain
         /// </summary>
         public virtual ICollection<AlteracaoSalarial> AlteracaoSalarial { get; set; }
 
+        public virtual ICollection<FGTS> FGTS { get; set; }
+
         #endregion Relacionamentos
     }
 }

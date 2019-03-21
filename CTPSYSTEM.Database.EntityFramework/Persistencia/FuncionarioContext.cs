@@ -23,7 +23,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
             return this.conexao
                        .Funcionario
                        .Include(funcionario => funcionario.CarteiraTrabalho)
-                        .ThenInclude(carteiraTrabalho => carteiraTrabalho.ContratoTrabalho)
                        .Include(funcionario => funcionario.LocalNascimento)
                         .ThenInclude(localNascimento => localNascimento.Estado)
                 .FirstOrDefault(funcionario => funcionario.CPF == CPF);
@@ -90,6 +89,12 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
         {
             return conexao.ContribuicaoSindical
                           .Where(contribuicaoSindical => contribuicaoSindical.IdContratoTrabalho == idContratoTrabalho);
+        }
+
+        public IEnumerable<FGTS> RecuperaFGTS(int idContratoTrabalho)
+        {
+            return conexao.FGTS
+                          .Where(fgts => fgts.IdContratoTrabalho == idContratoTrabalho);
         }
     }
 }

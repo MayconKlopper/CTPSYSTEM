@@ -155,6 +155,26 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
         }
 
+        [HttpPost("CadastrarFGTS")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult CadastrarFGTS([FromBody] AddFGTSModel model)
+        {
+            try
+            {
+                FGTS fgts = model;
+
+                this.empresaService.Cadastrar(fgts);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
+
         [HttpPost("CadastrarAnotacaoGeral")]
         [ProducesResponseType(200)]
         [ProducesResponseType(typeof(MessageModel), 400)]

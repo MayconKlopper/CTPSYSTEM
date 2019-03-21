@@ -13,6 +13,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
         , IEntityTypeConfiguration<AlteracaoSalarial>
         , IEntityTypeConfiguration<AnotacaoGeral>
         , IEntityTypeConfiguration<ContribuicaoSindical>
+        , IEntityTypeConfiguration<FGTS>
         , IEntityTypeConfiguration<Endereco>
         , IEntityTypeConfiguration<Estado>
         , IEntityTypeConfiguration<Estrangeiro>
@@ -192,6 +193,45 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .WithMany(contratoTrabalho => contratoTrabalho.ContribuicaoSindical)
                    .HasForeignKey(contribuicaoSindical => contribuicaoSindical.IdContratoTrabalho)
                    .HasConstraintName("FK_ContratoTrabalho_ContribuicaoSindical")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            #endregion Relacionamentos
+        }
+
+        public void Configure(EntityTypeBuilder<FGTS> builder)
+        {
+            builder.ToTable("FGTS");
+
+            builder.HasKey(fgts => fgts.Id)
+                   .HasName("PK_FGTS");
+
+            builder.Property(fgts => fgts.Opcao)
+                   .IsRequired();
+
+            builder.Property(fgts => fgts.Retratacao)
+                   .IsRequired(false);
+
+            builder.Property(fgts => fgts.BancoDepositario)
+                   .HasMaxLength(50)
+                   .IsRequired();
+
+            builder.Property(fgts => fgts.Agencia)
+                   .IsRequired(false);
+
+            builder.Property(fgts => fgts.Praca)
+                   .HasMaxLength(50)
+                   .IsRequired();
+
+            builder.Property(fgts => fgts.Estado)
+                   .IsRequired();
+
+            #region Relacionamentos
+
+            builder.HasOne(fgts => fgts.ContratoTrabalho)
+                   .WithMany(contratoTrabalho => contratoTrabalho.FGTS)
+                   .HasForeignKey(fgts => fgts.IdContratoTrabalho)
+                   .HasConstraintName("FK_ContratoTrabalho_FGTS")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 

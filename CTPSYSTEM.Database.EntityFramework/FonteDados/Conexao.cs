@@ -20,6 +20,7 @@ namespace CTPSYSTEM.Database.EntityFramework.FonteDados
         public DbSet<CarteiraTrabalho> CarteiraTrabalho { get; private set; }
         public DbSet<ContratoTrabalho> ContratoTrabalho { get; private set; }
         public DbSet<ContribuicaoSindical> ContribuicaoSindical { get; private set; }
+        public DbSet<FGTS> FGTS { get; set; }
         public DbSet<Empresa> Empresa { get; private set; }
         public DbSet<Endereco> Endereco { get; private set; }
         public DbSet<Estado> Estado { get; private set; }
@@ -48,6 +49,7 @@ namespace CTPSYSTEM.Database.EntityFramework.FonteDados
             modelBuilder.ApplyConfiguration<AnotacaoGeral>(configuration);
             modelBuilder.ApplyConfiguration<CarteiraTrabalho>(configuration);
             modelBuilder.ApplyConfiguration<ContribuicaoSindical>(configuration);
+            modelBuilder.ApplyConfiguration<FGTS>(configuration);
             modelBuilder.ApplyConfiguration<Empresa>(configuration);
             modelBuilder.ApplyConfiguration<Endereco>(configuration);
             modelBuilder.ApplyConfiguration<Estrangeiro>(configuration);
