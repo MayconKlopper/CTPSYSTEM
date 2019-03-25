@@ -11,6 +11,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public int IdCarteiraTrabalho { get; set; }
 
-        public string HasCode { get; set; }
+        public string HashCode { get; set; }
     }
 }

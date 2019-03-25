@@ -10,7 +10,7 @@ using System;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
-    [Authorize("Bearer", Roles = "funcionario, usuario")]
+    [Authorize("Bearer", Roles = "empresa, usuario, funcionario")]
     [Produces("application/json")]
     [Route("api/Hash")]
     public class HashController : Controller
@@ -47,7 +47,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                MessageModel mensagem = this.hashService.verificaValidadeHash(model.HasCode, model.IdFuncionario, model.IdCarteiraTrabalho);
+                MessageModel mensagem = this.hashService.verificaValidadeHash(model.HashCode, model.IdFuncionario, model.IdCarteiraTrabalho);
 
                 if (mensagem.tipo == 1)
                 {

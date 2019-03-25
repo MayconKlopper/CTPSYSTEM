@@ -21,17 +21,20 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         private readonly IEmpresaService empresaService;
         private readonly IEmpresaReadOnlyStorage empresaReadOnlyStorage;
         private readonly IFuncionarioGovernoService funcionarioGovernoService;
+        private readonly IHashService hashService;
         private readonly IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage;
 
         public EmpresaController(IEmpresaService empresaService,
             IEmpresaReadOnlyStorage empresaReadOnlyStorage,
             IFuncionarioGovernoService funcionarioGovernoService,
-            IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage)
+            IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage,
+            IHashService hashService)
         {
             this.empresaService = empresaService;
             this.empresaReadOnlyStorage = empresaReadOnlyStorage;
             this.funcionarioGovernoService = funcionarioGovernoService;
             this.funcionarioReadOnlyStorage = funcionarioReadOnlyStorage;
+            this.hashService = hashService;
         }
 
         [AllowAnonymous]
@@ -276,7 +279,11 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                 }
                 else
                 {
+                    int idCarteiraTrabalho = funcionario.CarteiraTrabalho.FirstOrDefault(carteiraTrabalho => carteiraTrabalho.Ativo)
+                                                                         .Id;
                     this.empresaService.VincularFuncionario(funcionario, model.IdEmpresa);
+
+                    this.hashService.verificaValidadeHash(model.HashCode, funcionario.Id, idCarteiraTrabalho);
 
                     message = new MessageModel(2, "O Funcionário foi vinculado a sua empresa com sucesso. Crie um registro de contrato de trabalho");
                     return Ok(message);

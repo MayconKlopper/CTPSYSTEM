@@ -51,11 +51,15 @@ namespace CTPSYSTEM.Application
             {
                 mensagem.Item1 = 1;
                 mensagem.Item2 = Mensagens.HashInexistente;
+
+                return mensagem;
             }
             else if (hash.IdFuncionario != idFuncionario || hash.IdCarteiraTrabalho != idCarteiraTrabalho)
             {
                 mensagem.Item1 = 1;
                 mensagem.Item2 = Mensagens.HashInválido;
+
+                return mensagem;
             }
             else if (DateTime.Compare(hash.DataExpiracao, DateTime.Now) < 0)
             {
