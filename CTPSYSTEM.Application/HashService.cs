@@ -41,42 +41,30 @@ namespace CTPSYSTEM.Application
             return hashCode;
         }
 
-        public (int, string) verificaValidadeHash(string hashCode, int idFuncionario, int idCarteiraTrabalho)
+        public void verificaValidadeHash(string hashCode, int idFuncionario, int idCarteiraTrabalho)
         {
             Hash hash = this.hashStorage.RecuperaHash(hashCode);
 
-            (int, string) mensagem;
-
             if (hash == null)
             {
-                mensagem.Item1 = 1;
-                mensagem.Item2 = Mensagens.HashInexistente;
-
-                return mensagem;
+                throw new Exception(Mensagens.HashInexistente);
+            }
+            else if (!hash.Ativo)
+            {
+                throw new Exception(Mensagens.HashInativo);
             }
             else if (hash.IdFuncionario != idFuncionario || hash.IdCarteiraTrabalho != idCarteiraTrabalho)
             {
-                mensagem.Item1 = 1;
-                mensagem.Item2 = Mensagens.HashInválido;
-
-                return mensagem;
+                throw new Exception(Mensagens.HashInválido);
             }
             else if (DateTime.Compare(hash.DataExpiracao, DateTime.Now) < 0)
             {
-                mensagem.Item1 = 1;
-                mensagem.Item2 = Mensagens.HashExpirado;
-            }
-            else
-            {
-                mensagem.Item1 = 2;
-                mensagem.Item2 = Mensagens.HashVálido;
-            }
+                hash.Ativo = false;
+                this.hashStorage.Update(hash, h => h.Ativo);
+                this.hashStorage.SaveChanges();
 
-            hash.Ativo = false;
-            this.hashStorage.Update(hash, h => h.Ativo);
-            this.hashStorage.SaveChanges();
-
-            return mensagem;
+                throw new Exception(Mensagens.HashExpirado);
+            }
         }
 
         private string GetStringFromHash(byte[] hash)

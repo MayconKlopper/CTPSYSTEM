@@ -6,6 +6,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CTPSYSTEM.Database.EntityFramework.Configuration
 {
+    /*
+     // TermPaper.JobContract.
+
+        //Gerencimento do Registros de FGTS 
+        
+        //Gerencimento dos Registros de Carteria de Trabalho
+         
+        //Gerenciamento de Contratos de Trabalho 
+
+        //Gerenciamento de Internações 
+
+        //Gerenciamento de licenças 
+
+        //Gerenciamento de férias 
+    */
+
     public class Configuration : IEntityTypeConfiguration<CarteiraTrabalho>
         , IEntityTypeConfiguration<ContratoTrabalho>
         , IEntityTypeConfiguration<Empresa>

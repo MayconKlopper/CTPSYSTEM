@@ -5,6 +5,11 @@
     /// </summary>
     public class Endereco
     {
+        public Endereco()
+        {
+            this.Estado = new Estado();
+        }
+
         /// <summary>
         /// Identificador único do endereço
         /// </summary>

@@ -8,6 +8,15 @@ namespace CTPSYSTEM.Domain
     /// </summary>
     public class ContratoTrabalho
     {
+        public ContratoTrabalho()
+        {
+            this.ContribuicaoSindical = new List<ContribuicaoSindical>();
+            this.AnotacaoGeral = new List<AnotacaoGeral>();
+            this.Ferias = new List<Ferias>();
+            this.AlteracaoSalarial = new List<AlteracaoSalarial>();
+            this.FGTS = new List<FGTS>();
+        }
+
         /// <summary>
         /// Identificador único do registro de contrato de trabalho
         /// </summary>

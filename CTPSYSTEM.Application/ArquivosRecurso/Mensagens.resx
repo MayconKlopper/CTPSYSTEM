@@ -120,6 +120,9 @@
   <data name="HashExpirado" xml:space="preserve">
     <value>O código digitado já foi expirado. Entre em contato com o funcionário e peça ao mesmo que gere um novo código. OBS: o código tem validade de 24 horas</value>
   </data>
+  <data name="HashInativo" xml:space="preserve">
+    <value>O Còdigo digitado está inativo.</value>
+  </data>
   <data name="HashInexistente" xml:space="preserve">
     <value>O código digitado não existe, por isso é inválido</value>
   </data>

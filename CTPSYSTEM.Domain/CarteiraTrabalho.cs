@@ -8,6 +8,11 @@ namespace CTPSYSTEM.Domain
     /// </summary>
     public class CarteiraTrabalho
     {
+        public CarteiraTrabalho()
+        {
+            this.ContratoTrabalho = new List<ContratoTrabalho>();
+        }
+
         /// <summary>
         /// Identificador único da carteira de trabalho
         /// </summary>

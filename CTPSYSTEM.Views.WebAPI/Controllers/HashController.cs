@@ -47,21 +47,12 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                MessageModel mensagem = this.hashService.verificaValidadeHash(model.HashCode, model.IdFuncionario, model.IdCarteiraTrabalho);
-
-                if (mensagem.tipo == 1)
-                {
-                    return BadRequest(mensagem);
-                }
-                else
-                {
-                    return Ok(mensagem);
-                }
+                this.hashService.verificaValidadeHash(model.HashCode, model.IdFuncionario, model.IdCarteiraTrabalho);
+                return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
-                return BadRequest(message);
+                return BadRequest(ex.Message);
             }
         }
     }

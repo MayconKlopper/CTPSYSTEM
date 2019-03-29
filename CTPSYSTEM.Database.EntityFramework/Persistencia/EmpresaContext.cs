@@ -51,6 +51,16 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
             conexao.FGTS.Add(fgts);
         }
 
+        public void Insert(EmpresaHistorico empresaHistorico)
+        {
+            conexao.EmpresaHistorico.Add(empresaHistorico);
+        }
+
+        public void Insert(FuncionarioHistorico funcionarioHistorico)
+        {
+            conexao.FuncionarioHistorico.Add(funcionarioHistorico);
+        }
+
         public void Update(Funcionario funcionario, params Expression<Func<Funcionario, object>>[] expressions)
         {
             var x = this.conexao.Attach(funcionario);
@@ -66,6 +76,14 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
                           .Include(empresa => empresa.Endereco)
                           .ThenInclude(endereco => endereco.Estado)
                           .FirstOrDefault(empresa => empresa.CNPJ == CNPJ);
+        }
+
+        public Empresa RecuperaEmpresa(int idEmpresa)
+        {
+            return conexao.Empresa
+                          .Include(empresa => empresa.Endereco)
+                          .ThenInclude(endereco => endereco.Estado)
+                          .FirstOrDefault(empresa => empresa.Id == idEmpresa);
         }
 
         public IEnumerable<Funcionario> RecuperaFuncionarios(int idEmpresa)
@@ -84,7 +102,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
                           .Find(idFuncionario);
         }
 
-        public IEnumerable<FuncionarioHistorico> RecuperaHistoricoFuncionario(int idEmpresa)
+        public IEnumerable<FuncionarioHistorico> RecuperaHistoricoFuncionarios(int idEmpresa)
         {
             return conexao.FuncionarioHistorico
                           .Where(funcionarioHistorico => funcionarioHistorico.IdEmpresa == idEmpresa);

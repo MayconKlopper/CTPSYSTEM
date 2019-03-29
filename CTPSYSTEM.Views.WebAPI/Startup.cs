@@ -1,4 +1,5 @@
 ﻿using CTPSYSTEM.Application;
+using CTPSYSTEM.Database.EntityFramework;
 using CTPSYSTEM.Database.EntityFramework.FonteDados;
 using CTPSYSTEM.Database.EntityFramework.Persistence;
 using CTPSYSTEM.Database.EntityFramework.Persistencia;
@@ -44,7 +45,9 @@ namespace CTPSYSTEM.Views.WebAPI
                 });
             });
 
-            services.AddDbContext<Conexao>()
+            services.AddDbContext<Conexao>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"))
+                       .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll))
                 .AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
 
@@ -96,23 +99,9 @@ namespace CTPSYSTEM.Views.WebAPI
             });
 
             // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>()
-
-                .AddScoped<EmpresaContext>()
-                            .AddScoped<IEmpresaStorage>(provider => provider.GetService<EmpresaContext>())
-                            .AddScoped<IEmpresaReadOnlyStorage>(provider => provider.GetService<EmpresaContext>())
-                           .AddScoped<FuncionarioGovernoContext>()
-                            .AddScoped<IFuncionarioGovernoStorage>(provider => provider.GetService<FuncionarioGovernoContext>())
-                            .AddScoped<IFuncionarioGovernoReadOnlyStorage>(provider => provider.GetService<FuncionarioGovernoContext>())
-                           .AddScoped<IFuncionarioReadOnlyStorage, FuncionarioContext>()
-                           .AddScoped<IHashStorage, HashContext>()
-
-                           .AddScoped<IEmpresaService, EmpresaService>()
-                           .AddScoped<IFuncionarioService, FuncionarioService>()
-                           .AddScoped<IFuncionarioGovernoService, FuncionarioGovernoService>()
-                           .AddScoped<IHashService, HashService>()
-
-                           .AddScoped<IUtilsReadOnlyStorage, UtilsContext>();
+            services.IncludeApplicationServices();
+            services.IncludeDatabaseServices();
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
         }

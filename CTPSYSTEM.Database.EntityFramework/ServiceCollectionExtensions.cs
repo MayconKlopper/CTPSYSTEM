@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CTPSYSTEM.Database.EntityFramework
 {
-    public static class Startup
+    public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AdicionaDependencia(this IServiceCollection services)
+        public static IServiceCollection IncludeDatabaseServices(this IServiceCollection services)
         {
             return services.AddScoped<EmpresaContext>()
                             .AddScoped<IEmpresaStorage>(provider => provider.GetService<EmpresaContext>())

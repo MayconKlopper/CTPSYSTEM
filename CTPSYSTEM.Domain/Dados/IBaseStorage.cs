@@ -3,6 +3,14 @@ using System.Linq.Expressions;
 
 namespace CTPSYSTEM.Domain.Dados
 {
+
+
+
+
+
+
+
+
     public interface IBaseStorage<Entity> where Entity : class
     {
         void Insert(Entity obj);

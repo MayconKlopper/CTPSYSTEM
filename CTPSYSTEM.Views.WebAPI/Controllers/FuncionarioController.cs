@@ -69,7 +69,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [HttpGet("RecuperaEmpresaHistorico/{idFuncionario}")]
         [ProducesResponseType(typeof(EmpresaDetailsModel), 200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
-        public ActionResult RecuperaEmpresa(int idFuncionario)
+        public ActionResult RecuperaEmpresaHistorico(int idFuncionario)
         {
             try
             {

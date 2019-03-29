@@ -1,5 +1,6 @@
 ﻿using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Dados;
+using CTPSYSTEM.Domain.Historico;
 using CTPSYSTEM.Domain.Servicos;
 
 using System;
@@ -69,8 +70,14 @@ namespace CTPSYSTEM.Application
         public void DesvincularFuncionario(int idFuncionario, int idContratoTrabalho)
         {
             var funcionario = this.empresaReadOnlyContext.RecuperaFuncionario(idFuncionario);
-            funcionario.IdEmpresa = null;
+            var empresa = this.empresaReadOnlyContext.RecuperaEmpresa(funcionario.IdEmpresa.Value);
 
+            EmpresaHistorico empresaHistorico = new EmpresaHistorico(empresa.Id, funcionario.Id, empresa.CNPJ, empresa.NomeFantasia, empresa.RazaoSocial, DateTimeOffset.Now);
+            FuncionarioHistorico funcionarioHistorico = new FuncionarioHistorico(empresa.Id, funcionario.Id, funcionario.Nome, funcionario.CPF, DateTimeOffset.Now);
+            this.empresaContext.Insert(empresaHistorico);
+            this.empresaContext.Insert(funcionarioHistorico);
+
+            funcionario.IdEmpresa = null;
             var contratoTrabalho = this.empresaReadOnlyContext.RecuperaContratoTrabalho(idContratoTrabalho);
             contratoTrabalho.Ativo = false;
             contratoTrabalho.DataSaida = DateTimeOffset.Now;

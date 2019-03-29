@@ -77,6 +77,26 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
         }
 
+        [HttpGet("RecuperaHistoricoFuncionarios/{idEmpresa}")]
+        [ProducesResponseType(typeof(List<FuncionarioHistoricoDetailsModel>), 200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult RecuperaHistoricoFuncionarios(int idEmpresa)
+        {
+            try
+            {
+                List<FuncionarioHistoricoDetailsModel> modelList = this.empresaReadOnlyStorage.RecuperaHistoricoFuncionarios(idEmpresa)
+                    .Select(funcionario => (FuncionarioHistoricoDetailsModel)funcionario)
+                    .ToList();
+
+                return Ok(modelList);
+            }
+            catch (Exception ex)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
+
         [HttpGet("RecuperaEmpresa/{CNPJ}")]
         [ProducesResponseType(typeof(EmpresaDetailsModel), 200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
@@ -279,11 +299,11 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                 }
                 else
                 {
-                    int idCarteiraTrabalho = funcionario.CarteiraTrabalho.FirstOrDefault(carteiraTrabalho => carteiraTrabalho.Ativo)
-                                                                         .Id;
-                    this.empresaService.VincularFuncionario(funcionario, model.IdEmpresa);
+                    int idCarteiraTrabalho = funcionario.CarteiraTrabalho.FirstOrDefault(carteiraTrabalho => carteiraTrabalho.Ativo).Id;
 
                     this.hashService.verificaValidadeHash(model.HashCode, funcionario.Id, idCarteiraTrabalho);
+
+                    this.empresaService.VincularFuncionario(funcionario, model.IdEmpresa);
 
                     message = new MessageModel(2, "O Funcionário foi vinculado a sua empresa com sucesso. Crie um registro de contrato de trabalho");
                     return Ok(message);
@@ -291,10 +311,9 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
 
                 return BadRequest(message);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
-                return BadRequest(message);
+                return BadRequest(ex.Message);
             }
         }
 
