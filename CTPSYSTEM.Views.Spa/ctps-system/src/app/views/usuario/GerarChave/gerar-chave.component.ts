@@ -1,18 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from '../usuario.service';
+import { ToastrService } from 'ngx-toastr';
+
+import {
+    CriarHash,
+    MessageModel,
+    User} from '../../Models';
+import { HashService } from '../../hashService.service';
 
 @Component({
     selector: 'app-gerar-chave',
-    templateUrl: './gerar-chave.component.html',
-    styleUrls: ['./gerar-chave.component.scss']
+    templateUrl: './gerar-chave.component.html'
 })
 export class GerarChaveComponent implements OnInit {
-    chave = '';
+    public chave = '';
+    public criarHash: CriarHash = new CriarHash();
+    public usuarioLogado: User;
 
-    constructor() { }
+    constructor(private usuarioService: UsuarioService,
+        private toasterservice: ToastrService,
+        private hashService: HashService) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+    }
 
-    private gerarChave() {
-        this.chave = 'd41d8cd98f00b204e9800998ecf8427e';
+    gerarChave() {
+        this.criarHash.idFuncionario = this.usuarioLogado.funcionario.id;
+        this.criarHash.idCarteiraTrabalho = this.usuarioLogado.funcionario.idCarteiraTrabalho;
+        this.hashService.gerarChave(this.criarHash).subscribe(
+            (sucesso) => {
+                const chave = sucesso as string;
+                this.chave = chave;
+            },
+            (erro) => {
+                const mensagemErro = erro as MessageModel;
+                this.toasterservice.error(mensagemErro.texto, 'Erro');
+            }
+        );
     }
 }

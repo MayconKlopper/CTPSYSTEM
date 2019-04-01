@@ -1,31 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { CarteiraTrabalho } from '../Models';
+
+import { CarteiraTrabalhoDetalhes, User, MessageModel, Roles } from '../Models';
+import { AccountService } from '../account.service';
+import { UsuarioService } from '../usuario/usuario.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
     public collapseOne = true;
     public collapseTwo = true;
     public collapseThree = true;
     public collapseFour = true;
-    public carteiraTrabalho: CarteiraTrabalho;
+    public carteiraTrabalho: CarteiraTrabalhoDetalhes;
+    public usuarioLogado: User;
 
-    constructor() { }
+    constructor(private accountService: AccountService,
+        private usuarioService: UsuarioService,
+        private toasterservice: ToastrService) {
+        this.usuarioLogado = this.accountService.recuperausuarioLogado();
+    }
 
     ngOnInit(): void {
-        this.carteiraTrabalho = {
-            nomeFuncionario: 'Maycon Klopper de Carvalho',
-            numero: 59181,
-            serie: '176RJ',
-            numeroDocumento: 'Ra: 29.313.980-4 19101112 DIC',
-            dataEmissao: new Date('2013-02-22'),
-            foto: '../../../assets/avatars/1.jpg',
-            filiacaoPai: 'Marcio José de Carvalho',
-            filiacaoMae: 'Fernanda Pereira Klopper de Carvalho',
-            ativo: true
-        };
+        if (this.usuarioLogado.role[0] === Roles.Usuario) {
+            this.carteiraTrabalho = this.usuarioLogado.funcionario.carteiraTrabalho;
+        }
      }
 }

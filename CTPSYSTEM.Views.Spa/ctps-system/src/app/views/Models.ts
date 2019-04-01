@@ -1,4 +1,4 @@
-export class CarteiraTrabalho {
+export class CarteiraTrabalhoDetalhes {
     public nomeFuncionario: string;
     public numero: number;
     public numeroDocumento: string;
@@ -10,7 +10,27 @@ export class CarteiraTrabalho {
     public ativo: boolean;
 }
 
-export class Licenca {
+export class CriarCarteiraTrabalho {
+    public idFuncionario: number;
+    public numero: number;
+    public numeroDocumento: string;
+    public serie: string;
+    public dataEmissao: Date;
+    public foto: string;
+    public filiacaoPai: string;
+    public filiacaoMae: string;
+    public estrangeiro?: CriarEstrangeiro;
+}
+
+export class CriarEstrangeiro {
+    public chegada: Date;
+    public documentoIdentidade: string;
+    public expedicao: Date;
+    public estado: string;
+    public observacao: string;
+}
+
+export class LicencaDetalhes {
     public dataInicio: Date;
     public dataTermino: Date;
     public dias: number;
@@ -18,7 +38,15 @@ export class Licenca {
     public motivo: string;
 }
 
-export class Internacao {
+export class CriarLicenca {
+    public idCarteiratrabalho: number;
+    public dataInicio: Date;
+    public dataTermino: Date;
+    public codigoPosto: number;
+    public motivo: string;
+}
+
+export class InternacaoDetalhes {
     public hospital: string;
     public registro: string;
     public matricula: string;
@@ -26,11 +54,20 @@ export class Internacao {
     public dataAlta: Date;
 }
 
-export class ContratoTrabalho {
+export class CriarInternacao {
+    public idCarteiratrabalho: number;
+    public hospital: string;
+    public registro: string;
+    public matricula: string;
+    public dataInternacao: Date;
+    public dataAlta: Date;
+}
+
+export class ContratoTrabalhoDetalhes {
     public id: number;
     public nomeEmpresa: string;
     public cargo: string;
-    public CBONumero: number;
+    public cboNumero: number;
     public dataAdmissao: Date;
     public dataSaida?: Date;
     public remuneracao: number;
@@ -40,7 +77,20 @@ export class ContratoTrabalho {
     public ativo: boolean;
 }
 
-export class ContribuicaoSindical {
+export class CriarContratoTrabalho {
+    public id: number;
+    public idEmpresa: number;
+    public idCarteiraTrabalho: number;
+    public cargo: string;
+    public CBONumero: number;
+    public dataAdmissao: Date;
+    public remuneracao: number;
+    public remuneracaoExtenso: string;
+    public flsFicha: number;
+    public registroNumero: number;
+}
+
+export class ContribuicaoSindicalDetalhes {
     public id: number;
     public idContratoTrabalho: number;
     public valorContribuicao: number;
@@ -48,7 +98,15 @@ export class ContribuicaoSindical {
     public ano: number;
 }
 
-export class AlteracaoSalarial {
+export class CriarContribuicaoSindical {
+    public id: number;
+    public idContratoTrabalho: number;
+    public valorContribuicao: number;
+    public nomeSindicato: string;
+    public ano: number;
+}
+
+export class AlteracaoSalarialDetalhes {
     public id: number;
     public idContratoTrabalho: number;
     public dataAumento: Date;
@@ -58,7 +116,16 @@ export class AlteracaoSalarial {
     public motivo: string;
 }
 
-export class Ferias {
+export class CriarAlteracaoSalarial {
+    public idContratoTrabalho: number;
+    public dataAumento: Date;
+    public remuneracao: number;
+    public remuneracaoExtenso: string;
+    public cargo: string;
+    public motivo: string;
+}
+
+export class FeriasDetalhes {
     public id: number;
     public idContratoTrabalho: number;
     public periodoRelativo: string;
@@ -67,13 +134,59 @@ export class Ferias {
     public dias: number;
 }
 
-export class AnotacaoGeral {
+export class CriarFerias {
+    public idContratoTrabalho: number;
+    public periodoRelativo: string;
+    public dataInicio: Date;
+    public dataTermino: Date;
+}
+
+export class AnotacaoGeralDetalhes {
     public id: number;
     public idContratoTrabalho: number;
     public texto: string;
 }
 
-export class Empresa {
+export class CriarAnotacaoGeral {
+    public idContratoTrabalho: number;
+    public texto: string;
+}
+
+export class CriarFGTS {
+    public idContratoTrabalho: number;
+
+    public opcao: Date;
+
+    public retratacao?: Date;
+
+    public bancoDepositario: string;
+
+    public agencia?: number;
+
+    public praca: string;
+
+    public Estado: string;
+}
+
+export class FGTSDetalhes {
+    public id: number;
+
+    public idContratoTrabalho: number;
+
+    public opcao: Date;
+
+    public retratacao?: Date;
+
+    public bancoDepositario: string;
+
+    public agencia?: number;
+
+    public praca: string;
+
+    public Estado: string;
+}
+
+export class EmpresaDetalhes {
     public id: number;
     public CNPJ: string;
     public nomeFantasia: string;
@@ -81,6 +194,18 @@ export class Empresa {
     public seguimento: string;
     public estado: string;
     public siglaEstado: EstadoSigla;
+    public cidade: string;
+    public rua: string;
+    public numero: number;
+    public sala: string;
+}
+
+export class CriarEmpresa {
+    public CNPJ: string;
+    public nomeFantasia: string;
+    public razaoSocial: string;
+    public seguimento: string;
+    public idEstado: number;
     public cidade: string;
     public rua: string;
     public numero: number;
@@ -88,153 +213,236 @@ export class Empresa {
 }
 
 export class EmpresaHistorico {
-    public CNPJ: string;
+    public cnpj: string;
     public nomeFantasia: string;
     public razaoSocial: string;
-    public seguimento: string;
-    public estado: string;
-    public siglaEstado: EstadoSigla;
-    public cidade: string;
-    public rua: string;
-    public numero: number;
-    public sala: string;
     public data: Date;
+}
+
+export class FuncionarioDetalhes {
+    public id: number;
+    public idCarteiraTrabalho: number;
+    public idContratoTrabalho: number;
+    public nome: string;
+    public cpf: string;
+    public cidade: string;
+    public data: Date;
+    public estado: string;
+    public siglaEstado: string;
+    public carteiraTrabalho: CarteiraTrabalhoDetalhes;
+}
+
+export class CriarFuncionario {
+    public nome: string;
+    public cpf: string;
+    public cidade: string;
+    public data: Date;
+    public idEstado: number;
+}
+
+export class FuncionarioHistorico {
+    public Nome: string;
+    public cpf: string;
+    public data: Date;
+}
+
+export class HashDetalhes {
+    public idFuncionario: number;
+    public idCarteiraTrabalho: number;
+    public hashCode: string;
+}
+
+export class CriarHash {
+    public idFuncionario: number;
+    public idCarteiraTrabalho: number;
+}
+
+export class VincularFuncionario {
+    public cpf: string;
+    public hashCode: string;
+    public idEmpresa: number;
+}
+
+export class DesvincularFuncionario {
+    public idFuncionario: number;
+    public idContratoTrabalho: number;
+}
+
+// Account Settings
+export class Register {
+    public userName: string;
+    public email: string;
+    public celular: string;
+    public password: string;
+    public confirmPassword: string;
+    public role: string;
+}
+
+export class LogIn {
+    public userName: string;
+    public password: string;
+}
+
+export class User {
+    public token: string;
+    public userName: string;
+    public Email: string;
+    public role: Array<string>;
+    public funcionario: FuncionarioDetalhes;
+    public empresa: EmpresaDetalhes;
+}
+
+export class Estado {
+    public id: number;
+    public nome: string;
 }
 
 // ENUMS
 export enum EstadoSigla {
-    /// <summary>
-        /// Acre
-        /// </summary>
+        /**
+        * Acre
+        */
         AC = 1,
 
-        /// <summary>
-        /// Alagoas
-        /// </summary>
+        /**
+        * Alagoas
+        */
         AL = 2,
 
-        /// <summary>
-        /// Amapá
-        /// </summary>
+        /**
+        * Amapá
+        */
         AP = 3,
 
-        /// <summary>
-        /// Amazonas
-        /// </summary>
+        /**
+        * Amazonas
+        */
         AM = 4,
 
-        /// <summary>
-        /// Bahia
-        /// </summary>
+        /**
+        * Bahia
+        */
         BA = 5,
 
-        /// <summary>
-        /// Ceará
-        /// </summary>
+        /**
+        * Ceará
+        */
         CE = 6,
 
-        /// <summary>
-        /// Distrito federal
-        /// </summary>
+        /**
+        * Distrito federal
+        */
         DF = 7,
 
-        /// <summary>
-        /// Espírito Santo
-        /// </summary>
+        /**
+        * Espírito Santo.
+        */
         ES = 8,
 
-        /// <summary>
-        /// Goiás
-        /// </summary>
+        /**
+        * Goiás
+        */
         GO = 9,
 
-        /// <summary>
-        /// Maranhão
-        /// </summary>
+        /**
+        * Maranhão
+        */
         MA = 10,
 
-        /// <summary>
-        /// Mato Grosso
-        /// </summary>
+        /**
+        * Mato Grosso
+        */
         MT = 11,
 
-        /// <summary>
-        /// Mato Grosso do Sul
-        /// </summary>
+        /**
+        * Mato Grosso do Sul
+        */
         MS = 12,
 
-        /// <summary>
-        /// Minas Gerais
-        /// </summary>
+        /**
+        * Minas Gerais
+        */
         MG = 13,
 
-        /// <summary>
-        /// Pará
-        /// </summary>
+        /**
+        * Pará
+        */
         PA = 14,
 
-        /// <summary>
-        /// Paraíba
-        /// </summary>
+        /**
+        * Paraíba
+        */
         PB = 15,
 
-        /// <summary>
-        /// Paraná
-        /// </summary>
+        /**
+        * Paraná
+        */
         PR = 16,
 
-        /// <summary>
-        /// Pernambuco
-        /// </summary>
+        /**
+        * Pernambuco
+        */
         PE = 17,
 
-        /// <summary>
-        /// Piauí
-        /// </summary>
+        /**
+        * Piauí
+        */
         PI = 18,
 
-        /// <summary>
-        /// Roraima
-        /// </summary>
+        /**
+        * Roraima
+        */
         RR = 19,
 
-        /// <summary>
-        /// Rondônia
-        /// </summary>
+        /**
+        * Rondônia
+        */
         RO = 20,
 
-        /// <summary>
-        /// Rio de Janeiro
-        /// </summary>
+        /**
+        * Rio de Janeiro
+        */
         RJ = 21,
 
-        /// <summary>
-        /// Rio Grande do Norte
-        /// </summary>
+        /**
+        * Rio Grande do Norte
+        */
         RN = 22,
 
-        /// <summary>
-        /// Rio Grande do Sul
-        /// </summary>
+        /**
+        * Rio Grande do Sul
+        */
         RS = 23,
 
-        /// <summary>
-        /// Santa Catarina
-        /// </summary>
+        /**
+        * Santa Catarina
+        */
         SC = 24,
 
-        /// <summary>
-        /// São Paulo
-        /// </summary>
+        /**
+        * São Paulo
+        */
         SP = 25,
 
-        /// <summary>
-        /// Sergipe
-        /// </summary>
+        /**
+        * Sergipe
+        */
         SE = 26,
 
-        /// <summary>
-        /// Tocantins
-        /// </summary>
+        /**
+        * Tocantins
+        */
         TO = 27
+}
+
+export enum Roles {
+    Funcionario = 'funcionario',
+    Empresa = 'empresa',
+    Usuario = 'usuario',
+}
+
+// Message template
+export class MessageModel {
+    public tipo: number;
+    public texto: string;
 }

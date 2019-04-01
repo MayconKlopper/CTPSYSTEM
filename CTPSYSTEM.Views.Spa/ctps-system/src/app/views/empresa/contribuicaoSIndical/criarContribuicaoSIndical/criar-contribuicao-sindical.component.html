@@ -1,0 +1,88 @@
+<h2 class="text-center text-muted"> Funcionário </h2>
+<app-funcionario [funcionario]="selectedFuncionario">
+</app-funcionario>
+
+<h2 class="text-center text-muted"> Cadastrar Contribuição Sindical </h2>
+<form [formGroup]="formGroup">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+              <label for="nomeSindicato"> Nome do Sindicato </label>
+              <input class="form-control"
+                      type="text"
+                      id="nomeSindicato"
+                      placeholder="Digite o nome do sindicato"
+                      formControlName="nomeSindicato"
+                      [(ngModel)]="novaContribuicaoSindical.nomeSindicato">
+            </div>
+            <!-- nomeSindicato Validators -->
+            <div *ngIf="nomeSindicato.invalid && (nomeSindicato.dirty || nomeSindicato.touched)"
+              class="alert alert-danger">
+              <div *ngIf="nomeSindicato.errors.required">
+                  O Campo <b>Nome do Sindicato</b> é obrigatório
+              </div>
+            </div>
+            <!-- End nomeSindicato Validators -->
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="valorContribuicao"> Valor da Contribuição </label>
+                <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-dollar"></i> </span>
+                </div>
+                <input class="form-control"
+                        type="text"
+                        id="valorContribuicao"
+                        placeholder="1,260.80"
+                        formControlName="valorContribuicao"
+                        mask="coma_separator.2"
+                        [(ngModel)]="novaContribuicaoSindical.valorContribuicao">
+                </div>
+              </div>
+              <!-- valorContribuicao Validators -->
+              <div *ngIf="valorContribuicao.invalid && (valorContribuicao.dirty || valorContribuicao.touched)"
+                class="alert alert-danger">
+                <div *ngIf="valorContribuicao.errors.required">
+                    O Campo <b>Valor da Contribuição</b> é obrigatório
+                </div>
+              </div>
+              <!-- End valorContribuicao Validators -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="ano"> Ano da Contribuição </label>
+                <input class="form-control"
+                        type="number"
+                        id="ano"
+                        placeholder="Digite o Ano da Contribuição"
+                        formControlName="ano"
+                        [(ngModel)]="novaContribuicaoSindical.ano">
+              </div>
+              <!-- ano Validators -->
+              <div *ngIf="ano.invalid && (ano.dirty || ano.touched)"
+                class="alert alert-danger">
+                <div *ngIf="ano.errors.required">
+                    O Campo <b>Ano da Contribuição</b> é obrigatório
+                </div>
+              </div>
+              <!-- End ano Validators -->
+            </div>
+          </div>
+      </div>
+      <div class="card-footer">
+        <button type="button"
+                class="btn btn-block btn-primary active"
+                [disabled]="!formGroup.valid"
+                (click)="criarContribuicaoSindical()">
+                Cadastrar Contribuição Sindical
+        </button>
+      </div>
+    </div>
+  </form>

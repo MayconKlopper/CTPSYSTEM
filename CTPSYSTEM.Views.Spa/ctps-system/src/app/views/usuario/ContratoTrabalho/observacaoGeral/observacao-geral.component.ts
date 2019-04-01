@@ -1,44 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UsuarioService } from '../../usuario.component.service';
-import { ContratoTrabalho, AnotacaoGeral } from '../../../Models';
+import { UsuarioService } from '../../usuario.service';
+import {
+    ContratoTrabalhoDetalhes,
+    AnotacaoGeralDetalhes,
+    MessageModel } from '../../../Models';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-observacao-geral',
-    templateUrl: './observacao-geral.component.html',
-    styleUrls: ['./observacao-geral.component.scss'],
-    providers: [ UsuarioService ] 
+    templateUrl: './observacao-geral.component.html'
 })
 export class ObservacaoGeralComponent implements OnInit {
-    public contratoTrabalho: ContratoTrabalho;
-    public anotacaoGeralList: Array<AnotacaoGeral>;
+    public contratoTrabalho: ContratoTrabalhoDetalhes;
+    public anotacaoGeralList: Array<AnotacaoGeralDetalhes>;
 
-    constructor(private router: Router, private usuarioService: UsuarioService) { }
+    constructor(private toasterService: ToastrService,
+        private usuarioService: UsuarioService) { }
 
     ngOnInit(): void {
-        if (!localStorage.getItem('selectedContratoTrabalho')) {
-            this.router.navigate(['./contrato-trabalho']);
-        }
-
         this.contratoTrabalho = this.usuarioService.getContratoTrabalho();
+         this.recuperaAnotacaoGeral();
+    }
 
-        this.anotacaoGeralList = [
-            {
-                id: 1,
-                idContratoTrabalho: this.contratoTrabalho.id,
-                texto: 'asdfasdfasdfasdfas'
+    recuperaAnotacaoGeral() {
+        const idContratoTrabalho = this.contratoTrabalho.id;
+        this.usuarioService.recuperarAnotacaoGeral(idContratoTrabalho).subscribe(
+            (sucesso) => {
+                const anotacaoGeralList = sucesso as Array<AnotacaoGeralDetalhes>;
+                this.anotacaoGeralList = anotacaoGeralList;
             },
-            {
-                id: 2,
-                idContratoTrabalho: this.contratoTrabalho.id,
-                texto: 'sdgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgs'
-            },
-            {
-                id: 3,
-                idContratoTrabalho: this.contratoTrabalho.id,
-                texto: 'sdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgfgsfgsfdgsdfgsdfgsfdgsdfgsdfgsdfgsdfgsdf'
+            (erro) => {
+                const mensagemErro = erro as MessageModel;
+                this.toasterService.error(mensagemErro.texto, 'Erro');
             }
-        ]
+        );
     }
 }

@@ -2,40 +2,21 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
                     <label class="text-muted"> Nome Fantasia </label>
                     <p title="Nome Fantasia"> {{ $historicoEmpresa?.nomeFantasia }} </p>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
                     <label class="text-muted"> Razão Social </label>
                     <p title="Razão Social"> {{ $historicoEmpresa?.razaoSocial }} </p>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
                     <label class="text-muted"> CNPJ </label>
-                    <p title="CNPJ"> {{ $historicoEmpresa?.CNPJ }} </p>
+                    <p title="CNPJ"> {{ $historicoEmpresa?.cnpj }} </p>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                    <label class="text-muted"> Seguimento </label>
-                    <p title="Seguimento"> {{ $historicoEmpresa?.seguimento }} </p>
-                    <label class="text-muted"> Estado - Sigla </label>
-                    <p title="Estado - Sigla"> {{ $historicoEmpresa?.estado }} -
-                        {{ $historicoEmpresa?.siglaEstado }} </p>
-                    <label class="text-muted"> Cidade </label>
-                    <p title="Cidade"> {{ $historicoEmpresa?.cidade }} </p>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
-                            <label class="text-muted"> Rua - Número </label>
-                            <p title="Rua - Número"> {{ $historicoEmpresa?.rua }} -
-                                {{ $historicoEmpresa?.numero }}
-                            </p>
-                        </div>
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
-                            <label class="text-muted"> Sala </label>
-                            <p title="Sala"> {{ $historicoEmpresa?.sala }} </p>
-                        </div>
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
-                            <label class="text-muted"> Data de Desvinculação </label>
-                            <p title="Data de Desvinculação"> {{ $historicoEmpresa?.data | date: 'dd/MM/yyyy' }} </p>
-                        </div>
-                    </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                    <label class="text-muted"> Data de Desvinculação </label>
+                    <p title="Data de Desvinculação"> {{ $historicoEmpresa?.data | date: 'dd/MM/yyyy' }} </p>
                 </div>
             </div>
         </div>

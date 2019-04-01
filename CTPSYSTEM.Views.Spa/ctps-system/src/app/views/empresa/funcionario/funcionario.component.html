@@ -1,0 +1,26 @@
+<div class="card">
+        <div class="card-header">
+            <h4 class="text-center text-muted"> {{ funcionario?.nome }} </h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <label class="text-muted"> CPF </label>
+                    <p title="CPF"> {{ funcionario?.cpf }} </p>
+                    <label class="text-muted"> Data de Nascimento </label>
+                    <p title="Data de Nascimento"> {{ funcionario?.data | date: 'dd/MM/yyyy' }} </p>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <label class="text-muted"> Estado - Sigla </label>
+                    <p title="Estado - Sigla"> {{ funcionario?.estado }} - {{ funcionario?.siglaEstado }} </p>
+                    <label class="text-muted"> Cidade </label>
+                    <p title="Cidade"> {{ funcionario?.cidade }} </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer" *ngIf='showSelectButton'>
+            <button class="btn btn-primary active" (click)="selectFuncionario()"> selecionar </button>
+            <button *ngIf="funcionario.idContratoTrabalho > 0" class="btn btn-danger active" (click)="encerrarContratoTrabalho()"> Encerrar Contrato de Trabalho </button>
+            <button *ngIf="funcionario.idCarteiraTrabalho > 0 && funcionario.idContratoTrabalho === 0" class="btn btn-primary active" (click)="criarContratoTrabalho()"> Criar um Contrato de Trabalho </button>
+        </div>
+    </div>

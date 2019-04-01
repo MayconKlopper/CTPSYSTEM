@@ -1,40 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { CarteiraTrabalho } from '../../../Models';
+import { ToastrService } from 'ngx-toastr';
+
+import {
+    CarteiraTrabalhoDetalhes,
+    User,
+    MessageModel} from '../../../Models';
+import { UsuarioService } from '../../usuario.service';
+import { AccountService } from '../../../account.service';
 
 @Component({
     selector: 'app-historico-carteira-trabalho',
-    templateUrl: './historico-carteira-trabalho.component.html',
-    styleUrls: ['./historico-carteira-trabalho.component.scss']
+    templateUrl: './historico-carteira-trabalho.component.html'
 })
 export class HistoricoCarteiraTraballhoComponent implements OnInit {
-    public carteiraTrabalhoList: Array<CarteiraTrabalho>;
+    public carteiraTrabalhoList: Array<CarteiraTrabalhoDetalhes>;
+    public usuarioLogado: User;
 
-    constructor() { }
+    constructor(private usuarioService: UsuarioService,
+        private accountService: AccountService,
+        private toasterservice: ToastrService) {
+            this.usuarioLogado = this.accountService.recuperausuarioLogado();
+     }
 
     ngOnInit(): void {
-        this.carteiraTrabalhoList = [
-            {
-                nomeFuncionario: 'Maycon Klopper de Carvalho',
-                numero: 59181,
-                serie: '176RJ',
-                numeroDocumento: 'Ra: 29.313.980-4 19101112 DIC',
-                dataEmissao: new Date('2013-02-22'),
-                foto: '../../../assets/avatars/1.jpg',
-                filiacaoPai: 'Marcio José de Carvalho',
-                filiacaoMae: 'Fernanda Pereira Klopper de Carvalho',
-                ativo: false
+        this.recuperaCarteiraTrabalhoHistorico();
+    }
+
+    recuperaCarteiraTrabalhoHistorico() {
+        const idFuncionario = this.usuarioLogado.funcionario.id;
+        this.usuarioService.recuperarCarteiraTrabalhoHistorico(idFuncionario).subscribe(
+            (sucesso) => {
+                const carteiraTrabalhoList = sucesso as Array<CarteiraTrabalhoDetalhes>;
+                this.carteiraTrabalhoList = carteiraTrabalhoList;
             },
-            {
-                nomeFuncionario: 'Maycon Klopper de Carvalho',
-                numero: 56987,
-                serie: '169RJ',
-                numeroDocumento: 'Ra: 29.313.980-4 19101112 DIC',
-                dataEmissao: new Date('2018-06-20'),
-                foto: '../../../assets/avatars/1.jpg',
-                filiacaoPai: 'Marcio José de Carvalho',
-                filiacaoMae: 'Fernanda Pereira Klopper de Carvalho',
-                ativo: false
+            (erro) => {
+                const mensagemErro = erro as MessageModel;
+                this.toasterservice.error(mensagemErro.texto, 'Erro');
             }
-        ];
+        );
     }
 }

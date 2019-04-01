@@ -1,3 +1,7 @@
+<h2 class="text-center text-muted"> Carteira de Trabalho e Previdência Social </h2>
+<hr>
+<app-carteira-trabalho [carteiraTrabalho]="carteiraTrabalho" *ngIf="usuarioLogado.role[0] === 'usuario'">
+</app-carteira-trabalho>
 <h2 class="text-center text-muted"> Licenças </h2>
 <hr>
 <table class="table table-striped table-bordered table-dark">

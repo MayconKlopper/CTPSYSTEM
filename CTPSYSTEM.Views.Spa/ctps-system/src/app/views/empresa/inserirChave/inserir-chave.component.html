@@ -1,0 +1,42 @@
+<h2 class="text-center text-muted"> Gerador de Chave de Acesso </h2>
+<hr>
+<div class="alert alert-info">
+    <p> Prezado Portador da CTPS. </p>
+    <p> Esta chave serve para que seja habilitado a funcionalidade de adicionar e alterar registros em sua CTPS. </p>
+    <p> Entregue esta chave apra o RH da empresa qual você deseja que faça tais alterações em sua carteira. </p>
+    <p class="font-weight-bold"> Observações </p>
+    <p> Esta chave tem validade de 24 horas. Passando este período a chave não será mais válida. </p>
+    <p> Caso uma outra empresa da qual você não está vinculado tente utilizar a chave, a mesma não conseguirá utilizar a
+        chave gerada. </p>
+    <p> Esta chave só será válida para <strong> UMA </strong> ação de inserção ou atualização de registros em sua CTPS.
+    </p>
+</div>
+<form [formGroup]="formGroup">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="chave"> Chave </label>
+                <input
+                    class="form-control"
+                    id="chave"
+                    name="chave"
+                    type="text"
+                    formControlName="chave"
+                    [(ngModel)]="hashModel.hashCode" />
+            </div>
+        </div>
+        <!-- chave Validators -->
+        <div *ngIf="chave.invalid && (chave.dirty || chave.touched)" class="alert alert-danger">
+            <div *ngIf="chave.errors.required">
+                O Campo <b>Chave</b> é obrigatório
+            </div>
+        </div>
+        <!-- End chave Validators -->
+        <div class="card-footer">
+            <button class="btn btn-sm btn-primary" (click)="inserirChave()">
+                <i class="fa fa-dot-circle-o"></i>
+                Enviar
+            </button>
+        </div>
+    </div>
+</form>

@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
                         <label class="text-muted"> CBO N° </label>
-                        <p title="CBO N°"> {{ contratoTrabalho?.CBONumero }} </p>
+                        <p title="CBO N°"> {{ contratoTrabalho?.cboNumero }} </p>
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
                         <label class="text-muted"> Fls./Ficha </label>
@@ -43,6 +43,6 @@
         </div>
     </div>
     <div class="card-footer" *ngIf='showSelectButton'>
-        <button class="btn btn-primary active" (click)="selectContratoTrabalho(contratoTrabalho)"> selecionar </button>
+        <button class="btn btn-primary active" (click)="selectContratoTrabalho()"> selecionar </button>
     </div>
 </div>

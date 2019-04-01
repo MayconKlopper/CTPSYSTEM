@@ -1,0 +1,131 @@
+<h2 class="text-center text-muted"> Funcionário </h2>
+<app-funcionario [funcionario]="selectedFuncionario">
+</app-funcionario>
+
+<h2 class="text-center text-muted"> Cadastrar Registro de FGTS </h2>
+<form [formGroup]="formGroup">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="opcao"> Opção </label>
+                <input class="form-control"
+                        type="text"
+                        id="opcao"
+                        autocomplete="off"
+                        formControlName="opcao"
+                        [(ngModel)]="novoFGTS.opcao"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+              <!-- opcao Validators -->
+              <div *ngIf="opcao.invalid && (opcao.dirty || opcao.touched)"
+                class="alert alert-danger">
+                <div *ngIf="opcao.errors.required">
+                    O Campo <b>Opção</b> é obrigatório
+                </div>
+              </div>
+              <!-- End opcao Validators -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="retratacao"> Retratação </label>
+                <input class="form-control"
+                        type="text"
+                        id="retratacao"
+                        autocomplete="off"
+                        [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="novoFGTS.retratacao"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+            </div>
+        </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                    <label for="bancoDepositario"> Banco Depositário </label>
+                    <input class="form-control"
+                        type="text"
+                        id="bancoDepositario"
+                        placeholder="Digite o Nome do Banco Depositário"
+                        formControlName="bancoDepositario"
+                        [(ngModel)]="novoFGTS.bancoDepositario">
+                </div>
+                <!-- bancoDepositario Validators -->
+                <div *ngIf="bancoDepositario.invalid && (bancoDepositario.dirty || bancoDepositario.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="bancoDepositario.errors.required">
+                        O Campo <b>Banco Depositário</b> é obrigatório
+                    </div>
+                </div>
+                <!-- End bancoDepositario Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="agencia"> Agência </label>
+                <input class="form-control"
+                        type="text"
+                        id="agencia"
+                        placeholder="Digite o número da Agência"
+                        [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="novoFGTS.agencia">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="praca"> Praça </label>
+                <input class="form-control"
+                        type="text"
+                        id="praca"
+                        placeholder="Digite a Praça (Cidade)"
+                        formControlName="praca"
+                        [(ngModel)]="novoFGTS.praca">
+              </div>
+              <!-- praca Validators -->
+              <div *ngIf="praca.invalid && (praca.dirty || praca.touched)"
+                class="alert alert-danger">
+                <div *ngIf="praca.errors.required">
+                    O Campo <b>Praça</b> é obrigatório
+                </div>
+              </div>
+              <!-- End praca Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <select class="form-control"
+                id="estado"
+                title="Selecione o estado"
+                ng-init="novoFGTS.estado = novoFGTS.estado || estadoSiglaList[0].value"
+                (change)="selectEstado($event.target.value)">
+                    <option *ngFor="let estadoSigla of estadoSiglaList" [value]="estadoSigla.value" [ngValue]="estadoSigla.value">{{estadoSigla.value}}</option>
+                </select>
+              <!-- estado Validators -->
+              <div *ngIf="estado.invalid && (estado.dirty || estado.touched)"
+                class="alert alert-danger">
+                <div *ngIf="estado.errors.required">
+                    O Campo <b>Estado</b> é obrigatório
+                </div>
+              </div>
+              <!-- End estado Validators -->
+            </div>
+          </div>
+      </div>
+      <div class="card-footer">
+        <button type="button"
+                class="btn btn-block btn-primary active"
+                [disabled]="!formGroup.valid"
+                (click)="criarFGTS()">
+                Cadastrar FGTS
+        </button>
+      </div>
+    </div>
+</form>

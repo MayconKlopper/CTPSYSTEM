@@ -1,7 +1,9 @@
 <h2 class="text-center text-muted"> Carteira de Trabalho e Previdência Social </h2>
 <hr>
-<app-carteira-trabalho [carteiraTrabalho]="carteiraTrabalho">
-</app-carteira-trabalho>
+<div *ngIf="carteiraTrabalho">
+    <app-carteira-trabalho [carteiraTrabalho]="carteiraTrabalho" *ngIf="usuarioLogado.role[0] === 'usuario'">
+    </app-carteira-trabalho>
+</div>
 <div class="accordion" id="accordion">
     <div class="card">
         <div class="card-header" id="headingOne">

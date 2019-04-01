@@ -1,13 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CarteiraTrabalho } from '../../Models';
+import { CarteiraTrabalhoDetalhes } from '../../Models';
 
 @Component({
     selector: 'app-carteira-trabalho',
-    templateUrl: './carteira-trabalho.component.html',
-    styleUrls: ['./carteira-trabalho.component.scss']
+    templateUrl: './carteira-trabalho.component.html'
 })
 export class CarteiraTrabalhoComponent implements OnInit {
-    @Input() public carteiraTrabalho: CarteiraTrabalho;
+    @Input() public carteiraTrabalho: CarteiraTrabalhoDetalhes;
 
     constructor() { }
 

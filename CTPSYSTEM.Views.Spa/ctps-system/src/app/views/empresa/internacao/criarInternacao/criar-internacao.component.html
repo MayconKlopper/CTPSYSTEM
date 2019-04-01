@@ -1,0 +1,128 @@
+<h2 class="text-center text-muted"> Funcionário </h2>
+<app-funcionario [funcionario]="selectedFuncionario">
+</app-funcionario>
+
+<h2 class="text-center text-muted"> Cadastrar Internação </h2>
+<form [formGroup]="formGroup">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="dataInternacao"> Data da Internação </label>
+                <input class="form-control"
+                        type="text"
+                        id="dataInternacao"
+                        autocomplete="off"
+                        formControlName="dataInternacao"
+                        [(ngModel)]="novaInternacao.dataInternacao"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+              <!-- dataInternacao Validators -->
+              <div *ngIf="dataInternacao.invalid && (dataInternacao.dirty || dataInternacao.touched)"
+                class="alert alert-danger">
+                <div *ngIf="dataInternacao.errors.required">
+                    O Campo <b>Data da Internação</b> é obrigatório
+                </div>
+              </div>
+              <!-- End dataInternacao Validators -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="dataAlta"> Data da Alta </label>
+                <input class="form-control"
+                        type="text"
+                        id="dataAlta"
+                        autocomplete="off"
+                        formControlName="dataAlta"
+                        [(ngModel)]="novaInternacao.dataAlta"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+              <!-- dataAlta Validators -->
+              <div *ngIf="dataAlta.invalid && (dataAlta.dirty || dataAlta.touched)"
+                class="alert alert-danger">
+                <div *ngIf="dataAlta.errors.required">
+                    O Campo <b>Data da Alta</b> é obrigatório
+                </div>
+              </div>
+              <!-- End dataAlta Validators -->
+            </div>
+        </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                    <label for="hospital"> Nome do Hospital </label>
+                    <input class="form-control"
+                        type="text"
+                        id="hospital"
+                        placeholder="Digite o Nome do Hospital"
+                        formControlName="hospital"
+                        [(ngModel)]="novaInternacao.hospital">
+                </div>
+                <!-- hospital Validators -->
+                <div *ngIf="hospital.invalid && (hospital.dirty || hospital.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="hospital.errors.required">
+                        O Campo <b>Nome do Hospital</b> é obrigatório
+                    </div>
+                </div>
+                <!-- End hospital Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="registro"> Registro </label>
+                <input class="form-control"
+                        type="text"
+                        id="registro"
+                        placeholder="Digite o Registro do Funcionário no hospital"
+                        formControlName="registro"
+                        [(ngModel)]="novaInternacao.registro">
+              </div>
+              <!-- registro Validators -->
+              <div *ngIf="registro.invalid && (registro.dirty || registro.touched)"
+                class="alert alert-danger">
+                <div *ngIf="registro.errors.required">
+                    O Campo <b>Registro</b> é obrigatório
+                </div>
+              </div>
+              <!-- End registro Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="matricula"> Mátricula </label>
+                <input class="form-control"
+                        type="text"
+                        id="matricula"
+                        placeholder="Digite a matrícula do funcionário no hospital"
+                        formControlName="matricula"
+                        [(ngModel)]="novaInternacao.matricula">
+              </div>
+              <!-- matricula Validators -->
+              <div *ngIf="matricula.invalid && (matricula.dirty || matricula.touched)"
+                class="alert alert-danger">
+                <div *ngIf="matricula.errors.required">
+                    O Campo <b>Mátricula</b> é obrigatório
+                </div>
+              </div>
+              <!-- End matricula Validators -->
+            </div>
+          </div>
+      </div>
+      <div class="card-footer">
+        <button type="button"
+                class="btn btn-block btn-primary active"
+                [disabled]="!formGroup.valid"
+                (click)="criarInternacao()">
+                Cadastrar Licença
+        </button>
+      </div>
+    </div>
+</form>
