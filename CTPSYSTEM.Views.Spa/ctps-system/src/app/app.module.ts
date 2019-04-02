@@ -62,6 +62,7 @@ import { CriarFGTSComponent } from './views/empresa/FGTS/criarFGTS/criar-FGTS.co
 import { CriarLicencaComponent } from './views/empresa/licenca/criarLicenca/criar-licenca.component';
 import { CriarInternacaoComponent } from './views/empresa/internacao/criarInternacao/criar-internacao.component';
 import { VincularFuncionarioComponent } from './views/empresa/funcionario/vincularFuncionario/vincular-funcionario.component';
+import { HistoricoFuncionarioComponent } from './views/empresa/funcionario/historico/historico-funcionario';
 // import serviços aplicação
 import { HttpClient } from '@angular/common/http';
 import { UsuarioService } from './views/usuario/usuario.service';
@@ -148,7 +149,8 @@ import { InserirChaveComponent } from './views/empresa/inserirChave/inserir-chav
     CriarLicencaComponent,
     CriarInternacaoComponent,
     VincularFuncionarioComponent,
-    InserirChaveComponent
+    InserirChaveComponent,
+    HistoricoFuncionarioComponent
   ],
   providers: [
     HttpClient,

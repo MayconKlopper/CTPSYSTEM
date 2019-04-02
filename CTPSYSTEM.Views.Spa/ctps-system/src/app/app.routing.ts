@@ -38,6 +38,7 @@ import { CriarFGTSComponent } from './views/empresa/FGTS/criarFGTS/criar-FGTS.co
 import { GuardService } from './views/guard/guard.service';
 import { HashGuardService } from './views/guard/HashGuard.service';
 import { InserirChaveComponent } from './views/empresa/inserirChave/inserir-chave.component';
+import { HistoricoFuncionarioComponent } from './views/empresa/funcionario/historico/historico-funcionario';
 
 export const routes: Routes = [
   {
@@ -174,6 +175,11 @@ export const routes: Routes = [
         path: 'vincular-funcionario',
         component: VincularFuncionarioComponent,
         data: { title: 'Vincular Funcionário' }
+      },
+      {
+        path: 'historico-funcionario',
+        component: HistoricoFuncionarioComponent,
+        data: { title: 'Histórico de Funcionários' }
       },
       // Rotas do perfil de Funcionario do governo
       {

@@ -160,7 +160,7 @@ export const navEmpresa: NavData[] = [
   },
   {
     name: 'Funcionários',
-    url: '/historico/funcionario',
+    url: '/historico-funcionario',
     icon: 'fa fa-group'
   }
 ];

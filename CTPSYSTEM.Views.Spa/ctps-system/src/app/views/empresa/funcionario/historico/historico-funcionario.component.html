@@ -1,0 +1,22 @@
+<h2> Histórico de Funcionários </h2>
+
+<div *ngFor="let funcionario of funcionarioList">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                    <label class="text-muted"> Nome </label>
+                    <p title="Nome"> {{ funcionario?.nome }} </p>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                    <label class="text-muted"> CPF </label>
+                    <p title="CPF"> {{ funcionario?.cpf }} </p>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                    <label class="text-muted"> Data </label>
+                    <p title="Data"> {{ funcionario?.data | date: 'dd/MM/yyyy' }} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

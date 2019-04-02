@@ -81,4 +81,8 @@ export class EmpresaService {
     public recuperaFuncionarios(idEmpresa: number) {
         return this.httpClient.get(this.API + `RecuperaFuncionarios/${idEmpresa}`);
     }
+
+    public recuperaFuncionarioHistorico(idEmpresa: number) {
+        return this.httpClient.get(this.API + `RecuperaHistoricoFuncionarios/${idEmpresa}`);
+    }
 }
