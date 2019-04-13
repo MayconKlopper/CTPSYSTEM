@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class UtilsService {
-    private API = 'http://localhost:5001/api/Utils/';
+    //private API = 'http://localhost:5001/api/Utils/';
+    private API = 'https://ctpsystem.azurewebsites.net/api/Utils/';
 
     constructor(private http: HttpClient) {
     }

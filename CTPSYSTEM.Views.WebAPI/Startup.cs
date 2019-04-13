@@ -101,7 +101,8 @@ namespace CTPSYSTEM.Views.WebAPI
             // Add application services.
             services.IncludeApplicationServices();
             services.IncludeDatabaseServices();
-            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>()
+                    .AddScoped<IUtilsReadOnlyStorage, UtilsContext>();
 
             services.AddMvc();
         }
