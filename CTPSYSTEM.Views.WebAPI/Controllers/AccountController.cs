@@ -103,7 +103,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                         }
                         if (resultadoLogin.RequiresTwoFactor)
                         {
-                            return RedirectToAction(nameof(LoginWith2fa));
+                            //return RedirectToAction(nameof(LoginWith2fa));
                         }
                         if (resultadoLogin.IsLockedOut)
                         {
@@ -161,7 +161,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("LoginWith2fa")]
         [AllowAnonymous]
         public async Task<IActionResult> LoginWith2fa(bool rememberMe, string returnUrl = null)
         {
@@ -179,7 +179,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("LoginWith2fa")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LoginWith2fa(LoginWith2faViewModel model, bool rememberMe, string returnUrl = null)
@@ -217,7 +217,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("LoginWithRecoveryCode")]
         [AllowAnonymous]
         public async Task<IActionResult> LoginWithRecoveryCode(string returnUrl = null)
         {
@@ -233,7 +233,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("LoginWithRecoveryCode")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LoginWithRecoveryCode(LoginWithRecoveryCodeViewModel model, string returnUrl = null)
@@ -271,14 +271,14 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("Lockout")]
         [AllowAnonymous]
         public IActionResult Lockout()
         {
             return View();
         }
 
-        [HttpGet]
+        [HttpGet("Register")]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
@@ -343,7 +343,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPost("ExternalLogin")]
         [AllowAnonymous]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
@@ -353,7 +353,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return Challenge(properties, provider);
         }
 
-        [HttpGet]
+        [HttpGet("ExternalLoginCallback")]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
@@ -389,7 +389,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("ExternalLoginConfirmation")]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, string returnUrl = null)
         {
@@ -420,7 +420,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View(nameof(ExternalLogin), model);
         }
 
-        [HttpGet]
+        [HttpGet("ConfirmEmail")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
@@ -437,7 +437,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        [HttpPost]
+        [HttpPost("ForgotPassword")]
         [AllowAnonymous]
         [HttpGet("ForgotPassword")]
         [ProducesResponseType(200)]
@@ -460,7 +460,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPost("ResetPassword")]
         [AllowAnonymous]
         [HttpGet("ResetPassword")]
         [ProducesResponseType(200)]

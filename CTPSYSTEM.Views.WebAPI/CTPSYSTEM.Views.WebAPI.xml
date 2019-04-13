@@ -1,0 +1,882 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CTPSYSTEM.Views.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens">
+            <summary>
+              Uma classe de recurso de tipo de alta segurança, para pesquisar cadeias de caracteres localizadas etc.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.ResourceManager">
+            <summary>
+              Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.Culture">
+            <summary>
+              Substitui a propriedade CurrentUICulture do thread atual para todas as
+              pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.CarteiraTrabalhoCriadaSucesso">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a O registro de Carteira de trabalho foi criada com sucesso.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.ContratoTrabalhoCriadoSucesso">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a O Contrato de Trabalho foi criado com Sucesso.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.EmpresaCriadaSucesso">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a A empresa foi cadastrada com sucesso.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.ErroGenerico">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Ocorreu um erro na requisição.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.FuncionarioCriadoSucesso">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a O Funcionário foi cadastrado com sucesso.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.requestModelNullOrEmpty">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a O modelo da requisição está nulo ou vazio.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.UsuarioBloqueado">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Esta conta está bloqueada por excesso de tentativas erradas de LogIn.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.UsuarioCadastrado">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Usuário Cadastrado com sucesso!.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.ArquivosRecurso.Mensagens.UsuarioDadosIncorretos">
+            <summary>
+              Consulta uma cadeia de caracteres localizada semelhante a Senha ou usuário incorretos ou inexistentes.
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddAlteracaoSalarialModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do contrato de trabalho ao qual
+            esta alteração salarial está vinculada
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddAlteracaoSalarialModel.DataAumento">
+            <summary>
+            Data que ocorreu o aumeto salarial
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddAlteracaoSalarialModel.Remuneracao">
+            <summary>
+            Valor de remuneração em decimal
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddAlteracaoSalarialModel.RemuneracaoExtenso">
+            <summary>
+            Valor de remuneração escrita por extenso
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddAlteracaoSalarialModel.Cargo">
+            <summary>
+            Cargo para o qual o funcionário foi promovido
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddAlteracaoSalarialModel.Motivo">
+            <summary>
+            Motivo do aumento salarial
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddAnotacaoGeralModel.Id">
+            <summary>
+            Identificador único da anotação geral
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddAnotacaoGeralModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do contrato de trabalho ao qual
+            esta anotação geral está vinculada
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddAnotacaoGeralModel.Texto">
+            <summary>
+            Texto da anotação geral
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddCarteiraTrabalhoModel.Id">
+            <summary>
+            Identificador único da carteira de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddCarteiraTrabalhoModel.IdFuncionario">
+            <summary>
+            Idenificador único do funcionário ao qual
+            esta carteira de trabalho está vinculada
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddCarteiraTrabalhoModel.Numero">
+            <summary>
+            Número da carteira de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddCarteiraTrabalhoModel.NumeroDocumento">
+            <summary>
+            Número do documento da carteira de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddCarteiraTrabalhoModel.Serie">
+            <summary>
+            Série da carteira de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddCarteiraTrabalhoModel.DataEmissao">
+            <summary>
+            Data de emissão da carteira de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddCarteiraTrabalhoModel.Foto">
+            <summary>
+            Foto do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddCarteiraTrabalhoModel.FiliacaoPai">
+            <summary>
+            Nome do pai do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddCarteiraTrabalhoModel.FiliacaoMae">
+            <summary>
+            Nome da mãe do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContratoTrabalhoModel.Id">
+            <summary>
+            Identificador único do registro de contrato de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContratoTrabalhoModel.IdCarteiraTrabalho">
+            <summary>
+            Identificador único do registro de carteira trabalho
+            ao qual este registro de contrato de trabalho está vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContratoTrabalhoModel.IdEmpresa">
+            <summary>
+            Identificador único da empresa ao qual este registro de
+            contrato de trabalho está vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContratoTrabalhoModel.Cargo">
+            <summary>
+            Nome do cargo
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContratoTrabalhoModel.CBONumero">
+            <summary>
+            Número do CBO da empresa empregadora
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContratoTrabalhoModel.DataAdmissao">
+            <summary>
+            Data de firmação do contrato de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContratoTrabalhoModel.Remuneracao">
+            <summary>
+            Valor de remuneração em decimal
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContratoTrabalhoModel.RemuneracaoExtenso">
+            <summary>
+            Valor de remuneração escrita por extenso
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContratoTrabalhoModel.FlsFicha">
+            <summary>
+            FlsFicha da empresa empregadora. OBS: a maioria vem com o valor 0 que é o valor default
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContratoTrabalhoModel.RegistroNumero">
+            <summary>
+            Número de registro da empresa. OBS: a maioria vem com o valor 0 que é o valor default
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContribuicaoSindicalModel.Id">
+            <summary>
+            Identificador único da contribuição sindical
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContribuicaoSindicalModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do contrato de trabalho ao qual este
+            registro de contribuição sindical está vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContribuicaoSindicalModel.ValorContribuicao">
+            <summary>
+            Valor da contribuição sindical
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContribuicaoSindicalModel.NomeSindicato">
+            <summary>
+            Nome do sindicato ao qual esta contribuição pertence
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddContribuicaoSindicalModel.Ano">
+            <summary>
+            Ano da contribuição
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEmpresaModel.CNPJ">
+            <summary>
+            CNPJ da empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEmpresaModel.NomeFantasia">
+            <summary>
+            Nome fantasia da empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEmpresaModel.RazaoSocial">
+            <summary>
+            Razão social da empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEmpresaModel.Seguimento">
+            <summary>
+            Tipo do seguimento da empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEmpresaModel.Cidade">
+            <summary>
+            Cidade do endereço
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEmpresaModel.Rua">
+            <summary>
+            Rua do endereço
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEmpresaModel.Numero">
+            <summary>
+            Número da rua
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEmpresaModel.Sala">
+            <summary>
+            Sala ou salas do edifício
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEmpresaModel.IdEstado">
+            <summary>
+            Identificador único do estado ao qual
+            este endereço esta vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEstrangeiroModel.Chegada">
+            <summary>
+            Data de chegada do estrangeiro ao Brasil
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEstrangeiroModel.DocumentoIdentidade">
+            <summary>
+            Documento de identificação do estrangeiro
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEstrangeiroModel.Expedicao">
+            <summary>
+            Data de expedição do documento de identificação do estrangeiro
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEstrangeiroModel.Estado">
+            <summary>
+            Estado de expedição do documento de identificação do estrangeiro
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddEstrangeiroModel.Observacao">
+            <summary>
+            Anotações de observação
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFeriasModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do registro de contrato de trabalho ao qual
+            estas férias estão vinculadas
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFeriasModel.PeriodoRelativo">
+            <summary>
+            Período que o funcionário trabalhou para ter direito a estas férias
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFeriasModel.DataInicio">
+            <summary>
+            Data de início das férias
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFeriasModel.DataTermino">
+            <summary>
+            Data de término das férias
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFGTSModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do contrato de trabalho ao qual este
+            registro de contribuição sindical está vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFGTSModel.Opcao">
+            <summary>
+            Data em que optou por iniciar o recolhimento de FGTS
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFGTSModel.Retratacao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFGTSModel.BancoDepositario">
+            <summary>
+            Banco depositário do FGTS
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFGTSModel.Agencia">
+            <summary>
+            Agência do banco depositário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFGTSModel.Praca">
+            <summary>
+            Cidade onde está situada a empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFGTSModel.Estado">
+            <summary>
+            Sigla do estado onde está situada a empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFuncionarioModel.Nome">
+            <summary>
+            Nome do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFuncionarioModel.CPF">
+            <summary>
+            CPF do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFuncionarioModel.Cidade">
+            <summary>
+            Nome da cidade
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFuncionarioModel.Data">
+            <summary>
+            Data de nascimento
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddFuncionarioModel.IdEstado">
+            <summary>
+            Chave Única do estado ao qual o local de nascimento deste funcionário está
+            vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddInternacaoModel.IdCarteiraTrabalho">
+            <summary>
+            Identificador único da carteira de trabalho ao qual
+            este registro de internação está vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddInternacaoModel.Hospital">
+            <summary>
+            Nome do hospital onde o funcionário foi internado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddInternacaoModel.Registro">
+            <summary>
+            Registro do hospital
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddInternacaoModel.Matricula">
+            <summary>
+            Matricula do hospital
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddInternacaoModel.DataInternacao">
+            <summary>
+            Data do início da internação
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddInternacaoModel.DataAlta">
+            <summary>
+            Data da alta do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddLicencaModel.IdCarteiraTrabalho">
+            <summary>
+            Identificador único da carteira de trabalho oa qual
+            este registro de licença está vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddLicencaModel.DataInicio">
+            <summary>
+            Data do inicio da licença
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddLicencaModel.DataTermino">
+            <summary>
+            Data de término da licença
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddLicencaModel.CodigoPosto">
+            <summary>
+            Código do posto que afastou o funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.RequestModels.AddLicencaModel.Motivo">
+            <summary>
+            Motivo do afastamento.
+            OBS: Esse campo é opcional e não existe na carteira de trabalho física
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.AlteracaoSalarialDetailsModel.Id">
+            <summary>
+            Identificador único do registro de alteração salarial
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.AlteracaoSalarialDetailsModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do contrato de trabalho ao qual
+            esta alteração salarial está vinculada
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.AlteracaoSalarialDetailsModel.DataAumento">
+            <summary>
+            Data que ocorreu o aumeto salarial
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.AlteracaoSalarialDetailsModel.Remuneracao">
+            <summary>
+            Valor de remuneração em decimal
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.AlteracaoSalarialDetailsModel.RemuneracaoExtenso">
+            <summary>
+            Valor de remuneração escrita por extenso
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.AlteracaoSalarialDetailsModel.Cargo">
+            <summary>
+            Cargo para o qual o funcionário foi promovido
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.AlteracaoSalarialDetailsModel.Motivo">
+            <summary>
+            Motivo do aumento salarial
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.AnotacaoGeralDetailsModel.Id">
+            <summary>
+            Identificador único da anotação geral
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.AnotacaoGeralDetailsModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do contrato de trabalho ao qual
+            esta anotação geral está vinculada
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.AnotacaoGeralDetailsModel.Texto">
+            <summary>
+            Texto da anotação geral
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.CarteiraTrabalhoDetailsModel.NomeFuncionario">
+            <summary>
+            Nome do funcionário ao qual
+            esta carteira de trabalho está vinculada
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.CarteiraTrabalhoDetailsModel.Numero">
+            <summary>
+            Número da carteira de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.CarteiraTrabalhoDetailsModel.NumeroDocumento">
+            <summary>
+            Número do documento da carteira de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.CarteiraTrabalhoDetailsModel.Serie">
+            <summary>
+            Série da carteira de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.CarteiraTrabalhoDetailsModel.DataEmissao">
+            <summary>
+            Data de emissão da carteira de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.CarteiraTrabalhoDetailsModel.Foto">
+            <summary>
+            Foto do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.CarteiraTrabalhoDetailsModel.FiliacaoPai">
+            <summary>
+            Nome do pai do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.CarteiraTrabalhoDetailsModel.FiliacaoMae">
+            <summary>
+            Nome da mãe do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.CarteiraTrabalhoDetailsModel.Ativo">
+            <summary>
+            Indica se esta carteria de trabalho é a carteira atual
+            do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.Id">
+            <summary>
+            Identificador único do registro de contrato de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.NomeEmpresa">
+            <summary>
+            Nome da empresa ao qual este registro de
+            contrato de trabalho está vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.Cargo">
+            <summary>
+            Nome do cargo
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.CBONumero">
+            <summary>
+            Número do CBO da empresa empregadora
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.DataAdmissao">
+            <summary>
+            Data de firmação do contrato de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.DataSaida">
+            <summary>
+            Data de finalização do contrato de trabalho
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.Remuneracao">
+            <summary>
+            Valor de remuneração em decimal
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.RemuneracaoExtenso">
+            <summary>
+            Valor de remuneração escrita por extenso
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.FlsFicha">
+            <summary>
+            FlsFicha da empresa empregadora. OBS: a maioria vem com o valor 0 que é o valor default
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.RegistroNumero">
+            <summary>
+            Númeor de registro da empresa. OBS: a maioria vem com o valor 0 que é o valor default
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContratoTrabalhoDetailsModel.Ativo">
+            <summary>
+            Indica se o contrato de trabalho
+            está ativo
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContribuicaoSindicalDetailsModel.Id">
+            <summary>
+            Identificador único da contribuição sindical
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContribuicaoSindicalDetailsModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do contrato de trabalho ao qual este
+            registro de contribuição sindical está vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContribuicaoSindicalDetailsModel.ValorContribuicao">
+            <summary>
+            Valor da contribuição sindical
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContribuicaoSindicalDetailsModel.NomeSindicato">
+            <summary>
+            Nome do sindicato ao qual esta contribuição pertence
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.ContribuicaoSindicalDetailsModel.Ano">
+            <summary>
+            Ano da contribuição
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.Id">
+            <summary>
+            Identificador único da empresa cadastrada no sistema
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.CNPJ">
+            <summary>
+            CNPJ da empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.NomeFantasia">
+            <summary>
+            Nome fantasia da empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.RazaoSocial">
+            <summary>
+            Razão social da empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.Seguimento">
+            <summary>
+            Tipo do seguimento da empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.Data">
+            <summary>
+            Data da desvinculação
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.Estado">
+            <summary>
+            Nome do estado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.SiglaEstado">
+            <summary>
+            Sigla do estado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.Cidade">
+            <summary>
+            Cidade do endereço
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.Rua">
+            <summary>
+            Rua do endereço
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.Numero">
+            <summary>
+            Número da rua
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.EmpresaDetailsModel.Sala">
+            <summary>
+            Sala ou salas do edifício
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FeriasDetailsModel.Id">
+            <summary>
+            Identificador único do registro de férias
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FeriasDetailsModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do registro de contrato de trabalho ao qual
+            estas férias estão vinculadas
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FeriasDetailsModel.PeriodoRelativo">
+            <summary>
+            Período que o funcionário trabalhou para ter direito a estas férias
+            Formato: dd/MM/yyyy - dd/MM/yyyy
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FeriasDetailsModel.DataInicio">
+            <summary>
+            Data de início das férias
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FeriasDetailsModel.DataTermino">
+            <summary>
+            Data de término das férias
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FeriasDetailsModel.Dias">
+            <summary>
+            Quantidade de dias que o funcionário gozou de férias
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FGTSDetailsModel.Id">
+            <summary>
+            Identificador único da contribuição sindical
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FGTSDetailsModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do contrato de trabalho ao qual este
+            registro de contribuição sindical está vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FGTSDetailsModel.Opcao">
+            <summary>
+            Data em que optou por iniciar o recolhimento de FGTS
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FGTSDetailsModel.Retratacao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FGTSDetailsModel.BancoDepositario">
+            <summary>
+            Banco depositário do FGTS
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FGTSDetailsModel.Agencia">
+            <summary>
+            Agência do banco depositário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FGTSDetailsModel.Praca">
+            <summary>
+            Cidade onde está situada a empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FGTSDetailsModel.Estado">
+            <summary>
+            Sigla do estado onde está situada a empresa
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FuncionarioDetailsModel.Id">
+            <summary>
+            Identificador único do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FuncionarioDetailsModel.IdCarteiraTrabalho">
+            <summary>
+            Identificador único da carteira de trabalho
+            vinculada a este funcionario
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FuncionarioDetailsModel.IdContratoTrabalho">
+            <summary>
+            Identificador único do contrato de trabalho
+            vinculado a este funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FuncionarioDetailsModel.IdEmpresa">
+            <summary>
+            Identificador único da empresa ao qual o funcionário está vinculado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FuncionarioDetailsModel.Nome">
+            <summary>
+            Nome do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FuncionarioDetailsModel.CPF">
+            <summary>
+            CPF do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FuncionarioDetailsModel.Cidade">
+            <summary>
+            Nome da cidade
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FuncionarioDetailsModel.Data">
+            <summary>
+            Data de nascimento
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FuncionarioDetailsModel.Estado">
+            <summary>
+            Nome do estado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.FuncionarioDetailsModel.SiglaEstado">
+            <summary>
+            Sigla do estado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.InternacaoDetailsModel.Hospital">
+            <summary>
+            Nome do hospital onde o funcionário foi internado
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.InternacaoDetailsModel.Registro">
+            <summary>
+            Registro do hospital
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.InternacaoDetailsModel.Matricula">
+            <summary>
+            Matricula do hospital
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.InternacaoDetailsModel.DataInternacao">
+            <summary>
+            Data do início da internação
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.InternacaoDetailsModel.DataAlta">
+            <summary>
+            Data da alta do funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.LicencaDetailsModel.DataInicio">
+            <summary>
+            Data do inicio da licença
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.LicencaDetailsModel.DataTermino">
+            <summary>
+            Data de término da licença
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.LicencaDetailsModel.Dias">
+            <summary>
+            Quantidade de dias que o funcionário ficou de licença
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.LicencaDetailsModel.CodigoPosto">
+            <summary>
+            Código do posto que afastou o funcionário
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.LicencaDetailsModel.Motivo">
+            <summary>
+            Motivo do afastamento.
+            OBS: Esse campo é opcional e não existe na carteira de trabalho física
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.MessageModel.tipo">
+            <summary>
+            tipo da mensagem onde
+            1 significa que é uma mensagem de erro
+            2 significa que é uma mensagem de sucesso
+            </summary>
+        </member>
+        <member name="P:CTPSYSTEM.Views.WebAPI.Models.ResponseModels.MessageModel.Texto">
+            <summary>
+            Texto da mensagem
+            </summary>
+        </member>
+    </members>
+</doc>

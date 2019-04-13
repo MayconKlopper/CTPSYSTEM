@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 using System;
 
 namespace CTPSYSTEM.Views.WebAPI
@@ -105,6 +106,18 @@ namespace CTPSYSTEM.Views.WebAPI
                     .AddScoped<IUtilsReadOnlyStorage, UtilsContext>();
 
             services.AddMvc();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "CTPSYSTEM API",
+                    Description = "ASP.NET Core Web API About CLT (Brasil Job Contract Model)",
+                    TermsOfService = "None",
+                    Contact = new Contact() { Name = "Maycon Klopper de Carvalho", Email = "mayconklopper@gmail.com", Url = "https://ctpsystem.azurewebsites.net" }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,6 +130,12 @@ namespace CTPSYSTEM.Views.WebAPI
 
             app.UseCors(configuracaoOrigens);
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
         }
     }
 }
