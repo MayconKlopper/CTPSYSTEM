@@ -21,12 +21,12 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
         public Funcionario RecuperaFuncionario(string CPF)
         {
             return this.conexao
-                   .Funcionario
-                   .Include(funcionario => funcionario.LocalNascimento)
-                   .Include(funcionario => funcionario.Empresa)
-                   .ThenInclude(empresa => empresa.Endereco)
-                   .ThenInclude(endereco => endereco.Estado)
-            .FirstOrDefault(funcionario => funcionario.CPF == CPF);
+                       .Funcionario
+                       .Include(funcionario => funcionario.CarteiraTrabalho)
+                        .ThenInclude(carteiraTrabalho => carteiraTrabalho.ContratoTrabalho)
+                       .Include(funcionario => funcionario.LocalNascimento)
+                        .ThenInclude(localNascimento => localNascimento.Estado)
+                .FirstOrDefault(funcionario => funcionario.CPF == CPF);
         }
 
         public IEnumerable<EmpresaHistorico> RecuperaHistoricoEmpresa(int idFuncionario)
@@ -35,10 +35,18 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
                           .Where(empresaHistorico => empresaHistorico.IdFuncionario == idFuncionario);
         }
 
-        public IEnumerable<CarteiraTrabalho> RecuperaCarteiraTrabalho(int idFuncionario)
+        public IEnumerable<CarteiraTrabalho> RecuperaHistoricoCarteiraTrabalho(int idFuncionario)
         {
             return conexao.CarteiraTrabalho
-                          .Where(carteiraTrabalho => carteiraTrabalho.IdFuncionario == idFuncionario);
+                          .Include(carteiraTrabalho => carteiraTrabalho.Funcionario)
+                          .Where(carteiraTrabalho => carteiraTrabalho.IdFuncionario == idFuncionario && !carteiraTrabalho.Ativo);
+        }
+
+        public CarteiraTrabalho RecuperaCarteiraTrabalho(int idFuncionario)
+        {
+            return conexao.CarteiraTrabalho
+                          .Include(carteiraTrabalho => carteiraTrabalho.Funcionario)
+                          .FirstOrDefault(carteiraTrabalho => carteiraTrabalho.IdFuncionario == idFuncionario && carteiraTrabalho.Ativo);
         }
 
         public IEnumerable<Internacao> RecuperaInternacao(int idCarteiraTrabalho)
@@ -56,6 +64,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
         public IEnumerable<ContratoTrabalho> RecuperaContratoTrabalho(int idCarteiraTrabalho)
         {
             return conexao.ContratoTrabalho
+                          .Include(contratoTrabalho => contratoTrabalho.Empresa)
                           .Where(contratoTrabalho => contratoTrabalho.IdCarteiraTrabalho == idCarteiraTrabalho);
         }
 
@@ -81,6 +90,12 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistence
         {
             return conexao.ContribuicaoSindical
                           .Where(contribuicaoSindical => contribuicaoSindical.IdContratoTrabalho == idContratoTrabalho);
+        }
+
+        public IEnumerable<FGTS> RecuperaFGTS(int idContratoTrabalho)
+        {
+            return conexao.FGTS
+                          .Where(fgts => fgts.IdContratoTrabalho == idContratoTrabalho);
         }
     }
 }

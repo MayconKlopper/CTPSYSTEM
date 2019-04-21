@@ -10,7 +10,7 @@ using System;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
-    [Authorize("Bearer", Roles = "funcionario, usuario")]
+    [Authorize("Bearer", Roles = "empresa, usuario, funcionario")]
     [Produces("application/json")]
     [Route("api/Hash")]
     public class HashController : Controller
@@ -29,9 +29,9 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                this.hashService.GerarHash(model.IdFuncionario, model.IdCarteiraTrabalho);
+                var chave = this.hashService.GerarHash(model.IdFuncionario, model.IdCarteiraTrabalho);
 
-                return Ok();
+                return Ok(chave);
             }
             catch (Exception)
             {
@@ -43,25 +43,16 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [HttpPost("VerificarValidadeHash")]
         [ProducesResponseType(typeof(MessageModel), 200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
-        public ActionResult VerificarValidadeHash([FromBody] AddHashModel model)
+        public ActionResult VerificarValidadeHash([FromBody] HashDetailsModel model)
         {
             try
             {
-                MessageModel mensagem = this.hashService.verificaValidadeHash(model.hashCode, model.IdFuncionario, model.IdCarteiraTrabalho);
-
-                if (mensagem.tipo == 1)
-                {
-                    return BadRequest(mensagem);
-                }
-                else
-                {
-                    return Ok(mensagem);
-                }
+                this.hashService.verificaValidadeHash(model.HashCode, model.IdFuncionario, model.IdCarteiraTrabalho);
+                return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
-                return BadRequest(message);
+                return BadRequest(ex.Message);
             }
         }
     }

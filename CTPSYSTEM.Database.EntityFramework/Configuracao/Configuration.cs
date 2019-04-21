@@ -6,6 +6,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CTPSYSTEM.Database.EntityFramework.Configuration
 {
+    /*
+     // TermPaper.JobContract.
+
+        //Gerencimento do Registros de FGTS 
+        
+        //Gerencimento dos Registros de Carteria de Trabalho
+         
+        //Gerenciamento de Contratos de Trabalho 
+
+        //Gerenciamento de Internações 
+
+        //Gerenciamento de licenças 
+
+        //Gerenciamento de férias 
+    */
+
     public class Configuration : IEntityTypeConfiguration<CarteiraTrabalho>
         , IEntityTypeConfiguration<ContratoTrabalho>
         , IEntityTypeConfiguration<Empresa>
@@ -13,6 +29,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
         , IEntityTypeConfiguration<AlteracaoSalarial>
         , IEntityTypeConfiguration<AnotacaoGeral>
         , IEntityTypeConfiguration<ContribuicaoSindical>
+        , IEntityTypeConfiguration<FGTS>
         , IEntityTypeConfiguration<Endereco>
         , IEntityTypeConfiguration<Estado>
         , IEntityTypeConfiguration<Estrangeiro>
@@ -34,8 +51,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.Property(carteiraTrabalho => carteiraTrabalho.DataEmissao);
             builder.Property(carteiraTrabalho => carteiraTrabalho.FiliacaoMae);
             builder.Property(carteiraTrabalho => carteiraTrabalho.FiliacaoPai);
-            builder.Property(carteiraTrabalho => carteiraTrabalho.Foto)
-                   .IsRequired(false);
+            builder.Property(carteiraTrabalho => carteiraTrabalho.Foto);
             builder.Property(carteiraTrabalho => carteiraTrabalho.Numero);
             builder.Property(carteiraTrabalho => carteiraTrabalho.Serie);
             builder.Property(carteiraTrabalho => carteiraTrabalho.NumeroDocumento);
@@ -44,10 +60,17 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
 
             #region Relacionamentos
 
-            builder.HasOne(carteiraTrabalho => carteiraTrabalho.funcionario)
+            builder.HasOne(carteiraTrabalho => carteiraTrabalho.Funcionario)
                    .WithMany(funcionario => funcionario.CarteiraTrabalho)
                    .HasForeignKey(carteiraTrabalho => carteiraTrabalho.IdFuncionario)
                    .HasConstraintName("FK_Funcionario_CarteiraTrabalho")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(carteiraTrabalho => carteiraTrabalho.ContratoTrabalho)
+                   .WithOne(contratoTrabalho => contratoTrabalho.CarteiraTrabalho)
+                   .HasForeignKey(contratoTrabalho => contratoTrabalho.IdCarteiraTrabalho)
+                   .HasConstraintName("FK_ContratoTrabalho_CarteiraTrabalho")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
@@ -61,39 +84,20 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasKey(contratoTrabalho => contratoTrabalho.Id)
                    .HasName("PK_ContratoTrabalho");
 
-            builder.Property(contratoTrabalho => contratoTrabalho.Cargo);
+            builder.Property(contratoTrabalho => contratoTrabalho.Cargo)
+                .IsRequired();
             builder.Property(contratoTrabalho => contratoTrabalho.CBONumero);
             builder.Property(contratoTrabalho => contratoTrabalho.DataAdmissao);
             builder.Property(contratoTrabalho => contratoTrabalho.Remuneracao);
-            builder.Property(contratoTrabalho => contratoTrabalho.RemuneracaoExtenso);
-            builder.Property(contratoTrabalho => contratoTrabalho.DataSaida)
-                   .IsRequired(false);
+            builder.Property(contratoTrabalho => contratoTrabalho.RemuneracaoExtenso)
+                .IsRequired();
+            builder.Property(contratoTrabalho => contratoTrabalho.DataSaida);
             builder.Property(contratoTrabalho => contratoTrabalho.RegistroNumero)
-                   .IsRequired(false)
                    .HasDefaultValue(0);
             builder.Property(contratoTrabalho => contratoTrabalho.FlsFicha)
-                   .IsRequired(false)
                    .HasDefaultValue(0);
             builder.Property(contratoTrabalho => contratoTrabalho.Ativo)
                    .HasDefaultValue(1);
-
-            #region Relacionamentos
-
-            builder.HasOne(contratoTrabalho => contratoTrabalho.CarteiraTrabalho)
-                   .WithMany(carteiraTrabalho => carteiraTrabalho.ContratoTrabalho)
-                   .HasForeignKey(contratoTrabalho => contratoTrabalho.IdCarteiraTrabalho)
-                   .HasConstraintName("FK_CarteiraTrabalho_ContratoTrabalho")
-                   .IsRequired()
-                   .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(contratoTrabalho => contratoTrabalho.Empresa)
-                   .WithMany(empresa => empresa.ContratoTrabalho)
-                   .HasForeignKey(contratoTrabalho => contratoTrabalho.IdEmpresa)
-                   .HasConstraintName("FK_Empresa_ContratoTrabalho")
-                   .IsRequired()
-                   .OnDelete(DeleteBehavior.Restrict);
-
-            #endregion Relacionamentos
         }
 
         public void Configure(EntityTypeBuilder<Empresa> builder)
@@ -107,6 +111,17 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.Property(empresa => empresa.NomeFantasia);
             builder.Property(empresa => empresa.RazaoSocial);
             builder.Property(empresa => empresa.Seguimento);
+
+            #region Relacionamentos
+
+            builder.HasMany(empresa => empresa.ContratoTrabalho)
+                   .WithOne(contratoTrabalho => contratoTrabalho.Empresa)
+                   .HasForeignKey(contratoTrabalho => contratoTrabalho.IdEmpresa)
+                   .HasConstraintName("FK_ContratoTrabalho_Empresa")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            #endregion
         }
 
         public void Configure(EntityTypeBuilder<Funcionario> builder)
@@ -200,6 +215,45 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             #endregion Relacionamentos
         }
 
+        public void Configure(EntityTypeBuilder<FGTS> builder)
+        {
+            builder.ToTable("FGTS");
+
+            builder.HasKey(fgts => fgts.Id)
+                   .HasName("PK_FGTS");
+
+            builder.Property(fgts => fgts.Opcao)
+                   .IsRequired();
+
+            builder.Property(fgts => fgts.Retratacao)
+                   .IsRequired(false);
+
+            builder.Property(fgts => fgts.BancoDepositario)
+                   .HasMaxLength(50)
+                   .IsRequired();
+
+            builder.Property(fgts => fgts.Agencia)
+                   .IsRequired(false);
+
+            builder.Property(fgts => fgts.Praca)
+                   .HasMaxLength(50)
+                   .IsRequired();
+
+            builder.Property(fgts => fgts.Estado)
+                   .IsRequired();
+
+            #region Relacionamentos
+
+            builder.HasOne(fgts => fgts.ContratoTrabalho)
+                   .WithMany(contratoTrabalho => contratoTrabalho.FGTS)
+                   .HasForeignKey(fgts => fgts.IdContratoTrabalho)
+                   .HasConstraintName("FK_ContratoTrabalho_FGTS")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            #endregion Relacionamentos
+        }
+
         public void Configure(EntityTypeBuilder<Ferias> builder)
         {
             builder.ToTable("Ferias");
@@ -245,6 +299,13 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasOne(endereco => endereco.Empresa)
+                   .WithMany(empresa => empresa.Endereco)
+                   .HasForeignKey(endereco => endereco.IdEmpresa)
+                   .HasConstraintName("FK_Empresa_Endereco")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
+
             #endregion Relacionamentos
         }
 
@@ -264,7 +325,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasMany(estado => estado.LocalNascimento)
                    .WithOne(localNascimento => localNascimento.Estado)
                    .HasForeignKey(localNascimento => localNascimento.IdEstado)
-                   .HasConstraintName("FK_Estado_localNascimento")
+                   .HasConstraintName("FK_localNascimento_Estado")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
 
@@ -360,9 +421,16 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
             builder.HasOne(localNascimento => localNascimento.Funcionario)
                    .WithOne(funcionario => funcionario.LocalNascimento)
                    .HasForeignKey<LocalNascimento>(localNascimento => localNascimento.IdFuncionario)
-                   .HasConstraintName("FK_LocalNascimento_Funcionario")
+                   .HasConstraintName("FK_Funcionario_LocalNascimento")
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(localNascimento => localNascimento.Estado)
+                   .WithMany(estado => estado.LocalNascimento)
+                   .HasForeignKey(LocalNascimento => LocalNascimento.IdEstado)
+                   .HasConstraintName("FK_Estado_LocalNascimento")
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Restrict);
 
             #endregion Relacionamentos
         }

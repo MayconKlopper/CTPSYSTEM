@@ -8,6 +8,11 @@ namespace CTPSYSTEM.Domain
     /// </summary>
     public class CarteiraTrabalho
     {
+        public CarteiraTrabalho()
+        {
+            this.ContratoTrabalho = new List<ContratoTrabalho>();
+        }
+
         /// <summary>
         /// Identificador único da carteira de trabalho
         /// </summary>
@@ -65,7 +70,7 @@ namespace CTPSYSTEM.Domain
         /// <summary>
         /// Entidade funcionário portador desta carteira de trabalho
         /// </summary>
-        public virtual Funcionario funcionario { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
 
         /// <summary>
         /// Contratos de trabalho do funcionário

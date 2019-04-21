@@ -1,0 +1,86 @@
+<h2 class="text-center text-muted"> Funcionário </h2>
+<app-funcionario [funcionario]="selectedFuncionario">
+</app-funcionario>
+
+<h2 class="text-center text-muted"> Cadastrar Férias </h2>
+<form [formGroup]="formGroup">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+              <label for="periodoRelativo"> Período Relativo </label>
+              <input class="form-control"
+                      type="text"
+                      id="periodoRelativo"
+                      placeholder="2016/2017"
+                      formControlName="periodoRelativo"
+                      [(ngModel)]="novaFerias.periodoRelativo">
+            </div>
+            <!-- periodoRelativo Validators -->
+            <div *ngIf="periodoRelativo.invalid && (periodoRelativo.dirty || periodoRelativo.touched)"
+              class="alert alert-danger">
+              <div *ngIf="periodoRelativo.errors.required">
+                  O Campo <b>Período Relativo</b> é obrigatório
+              </div>
+            </div>
+            <!-- End periodoRelativo Validators -->
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="dataInicio"> Data de início </label>
+                <input class="form-control"
+                        type="text"
+                        id="dataInicio"
+                        autocomplete="off"
+                        formControlName="dataInicio"
+                        [(ngModel)]="novaFerias.dataInicio"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+              <!-- dataInicio Validators -->
+              <div *ngIf="dataInicio.invalid && (dataInicio.dirty || dataInicio.touched)"
+                class="alert alert-danger">
+                <div *ngIf="dataInicio.errors.required">
+                    O Campo <b>Data de Início</b> é obrigatório
+                </div>
+              </div>
+              <!-- End dataInicio Validators -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="dataTermino"> Data de Término </label>
+                <input class="form-control"
+                        type="text"
+                        id="dataTermino"
+                        autocomplete="off"
+                        formControlName="dataTermino"
+                        [(ngModel)]="novaFerias.dataTermino"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+              <!-- dataTermino Validators -->
+              <div *ngIf="dataTermino.invalid && (dataTermino.dirty || dataTermino.touched)"
+                class="alert alert-danger">
+                <div *ngIf="dataTermino.errors.required">
+                    O Campo <b>Data de Término</b> é obrigatório
+                </div>
+              </div>
+              <!-- End dataTermino Validators -->
+            </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="button"
+                class="btn btn-block btn-primary active"
+                [disabled]="!formGroup.valid"
+                (click)="criarFerias()">
+                Cadastrar Férias
+        </button>
+      </div>
+    </div>
+</form>

@@ -1,0 +1,37 @@
+<h2 class="text-center text-muted"> Funcionário </h2>
+<app-funcionario [funcionario]="selectedFuncionario">
+</app-funcionario>
+
+<h2 class="text-center text-muted"> Cadastrar Anotação Geral </h2>
+<form [formGroup]="formGroup">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label for="texto"> Observação Geral </label>
+                            <textarea class="form-control" rows="6" id="texto"
+                                placeholder="Digite o texto da Observação geral" formControlName="texto"
+                                [(ngModel)]="novaAnotacaoGeral.texto">
+                            </textarea>
+                        </div>
+                        <!-- texto Validators -->
+                        <div *ngIf="texto.invalid && (texto.dirty || texto.touched)" class="alert alert-danger">
+                            <div *ngIf="texto.errors.required">
+                                O Campo <b>Observação Geral</b> é obrigatório
+                            </div>
+                        </div>
+                        <!-- End texto Validators -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-block btn-primary active" [disabled]="!formGroup.valid"
+                (click)="criarAnotacaoGeral()">
+                Cadastrar Anotação Geral
+            </button>
+        </div>
+    </div>
+</form>

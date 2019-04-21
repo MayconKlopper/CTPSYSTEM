@@ -12,16 +12,10 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         public int Id { get; set; }
 
         /// <summary>
-        /// Identificador único do registro de carteira trabalho
-        /// ao qual este registro de contrato de trabalho está vinculado
-        /// </summary>
-        public int IdCarteiraTrabalho { get; set; }
-
-        /// <summary>
-        /// Identificador único da empresa ao qual este registro de
+        /// Nome da empresa ao qual este registro de
         /// contrato de trabalho está vinculado
         /// </summary>
-        public int IdEmpresa { get; set; }
+        public string NomeEmpresa { get; set; }
 
         /// <summary>
         /// Nome do cargo
@@ -41,7 +35,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         /// <summary>
         /// Data de finalização do contrato de trabalho
         /// </summary>
-        public DateTimeOffset DataSaida { get; set; }
+        public DateTimeOffset? DataSaida { get; set; }
 
         /// <summary>
         /// Valor de remuneração em decimal
@@ -71,17 +65,22 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator ContratoTrabalhoDetailsModel(ContratoTrabalho contratoTrabalho)
         {
+            if (ReferenceEquals(contratoTrabalho, null))
+            {
+                return null;
+            }
+
             ContratoTrabalhoDetailsModel model = new ContratoTrabalhoDetailsModel();
 
             model.Id = contratoTrabalho.Id;
-            model.IdCarteiraTrabalho = contratoTrabalho.IdCarteiraTrabalho;
-            model.IdEmpresa = contratoTrabalho.IdEmpresa;
+            model.NomeEmpresa = contratoTrabalho.Empresa.NomeFantasia;
             model.Cargo = contratoTrabalho.Cargo;
             model.CBONumero = contratoTrabalho.CBONumero;
             model.DataAdmissao = contratoTrabalho.DataAdmissao;
             model.DataSaida = contratoTrabalho.DataSaida;
             model.Remuneracao = contratoTrabalho.Remuneracao;
             model.RemuneracaoExtenso = contratoTrabalho.RemuneracaoExtenso;
+            model.CBONumero = contratoTrabalho.CBONumero;
             model.FlsFicha = contratoTrabalho.FlsFicha;
             model.RegistroNumero = contratoTrabalho.RegistroNumero;
             model.Ativo = contratoTrabalho.Ativo;

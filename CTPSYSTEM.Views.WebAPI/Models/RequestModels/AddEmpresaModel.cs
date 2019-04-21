@@ -54,6 +54,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
         public static implicit operator Empresa(AddEmpresaModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             Empresa empresa = new Empresa();
 
             empresa.CNPJ = model.CNPJ;

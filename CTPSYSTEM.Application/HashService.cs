@@ -28,7 +28,7 @@ namespace CTPSYSTEM.Application
             using (SHA512 shaM = new SHA512Managed())
             {
                 var byteHash = shaM.ComputeHash(data);
-                hashCode = byteHash.ToString();
+                hashCode = this.GetStringFromHash(byteHash);
             }
 
             DateTime dataGerecao = DateTime.Now;
@@ -36,42 +36,45 @@ namespace CTPSYSTEM.Application
             Hash hash = new Hash(hashCode, idFuncionario, idCarteiraTrabalho, dataGerecao, dataGerecao.AddDays(1));
 
             this.hashStorage.Insert(hash);
+            this.hashStorage.SaveChanges();
 
-            return hashString;
+            return hashCode;
         }
 
-        public (int, string) verificaValidadeHash(string hashCode, int idFuncionario, int idCarteiraTrabalho)
+        public void verificaValidadeHash(string hashCode, int idFuncionario, int idCarteiraTrabalho)
         {
             Hash hash = this.hashStorage.RecuperaHash(hashCode);
 
-            (int, string) mensagem;
-
             if (hash == null)
             {
-                mensagem.Item1 = 1;
-                mensagem.Item2 = Mensagens.HashInexistente;
+                throw new Exception(Mensagens.HashInexistente);
+            }
+            else if (!hash.Ativo)
+            {
+                throw new Exception(Mensagens.HashInativo);
             }
             else if (hash.IdFuncionario != idFuncionario || hash.IdCarteiraTrabalho != idCarteiraTrabalho)
             {
-                mensagem.Item1 = 1;
-                mensagem.Item2 = Mensagens.HashInválido;
+                throw new Exception(Mensagens.HashInválido);
             }
             else if (DateTime.Compare(hash.DataExpiracao, DateTime.Now) < 0)
             {
-                mensagem.Item1 = 1;
-                mensagem.Item2 = Mensagens.HashExpirado;
+                hash.Ativo = false;
+                this.hashStorage.Update(hash, h => h.Ativo);
+                this.hashStorage.SaveChanges();
+
+                throw new Exception(Mensagens.HashExpirado);
             }
-            else
+        }
+
+        private string GetStringFromHash(byte[] hash)
+        {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
             {
-                mensagem.Item1 = 2;
-                mensagem.Item2 = Mensagens.HashVálido;
+                result.Append(hash[i].ToString("X2"));
             }
-
-            hash.Ativo = false;
-            this.hashStorage.Update(hash, h => h.Ativo);
-            this.hashStorage.SaveChanges();
-
-            return mensagem;
+            return result.ToString();
         }
     }
 }

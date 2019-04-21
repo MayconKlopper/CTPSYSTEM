@@ -27,7 +27,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
                     b.Property<string>("Cargo");
 
-                    b.Property<DateTime>("DataAumento");
+                    b.Property<DateTimeOffset>("DataAumento");
 
                     b.Property<int>("IdContratoTrabalho");
 
@@ -109,13 +109,9 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
                     b.Property<string>("Cargo");
 
-                    b.Property<int?>("CarteiraTrabalhoId");
-
                     b.Property<DateTimeOffset>("DataAdmissao");
 
-                    b.Property<DateTimeOffset>("DataSaida");
-
-                    b.Property<int?>("EmpresaId");
+                    b.Property<DateTimeOffset?>("DataSaida");
 
                     b.Property<int>("FlsFicha");
 
@@ -131,9 +127,9 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarteiraTrabalhoId");
+                    b.HasIndex("IdCarteiraTrabalho");
 
-                    b.HasIndex("EmpresaId");
+                    b.HasIndex("IdEmpresa");
 
                     b.ToTable("ContratoTrabalho");
                 });
@@ -188,7 +184,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
                     b.Property<string>("Cidade");
 
-                    b.Property<int?>("EmpresaId");
+                    b.Property<int>("IdEmpresa");
 
                     b.Property<int>("IdEstado");
 
@@ -201,7 +197,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                     b.HasKey("Id")
                         .HasName("PK_Endereco");
 
-                    b.HasIndex("EmpresaId");
+                    b.HasIndex("IdEmpresa");
 
                     b.HasIndex("IdEstado");
 
@@ -302,6 +298,35 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                     b.HasIndex("IdContratoTrabalho");
 
                     b.ToTable("Ferias");
+                });
+
+            modelBuilder.Entity("CTPSYSTEM.Domain.FGTS", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Agencia");
+
+                    b.Property<string>("BancoDepositario");
+
+                    b.Property<int?>("ContratoTrabalhoId");
+
+                    b.Property<int>("Estado");
+
+                    b.Property<int>("IdContratoTrabalho");
+
+                    b.Property<DateTime>("Opcao");
+
+                    b.Property<string>("Praca");
+
+                    b.Property<DateTime?>("Retratacao");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContratoTrabalhoId");
+
+                    b.ToTable("FGTS");
                 });
 
             modelBuilder.Entity("CTPSYSTEM.Domain.Funcionario", b =>
@@ -462,8 +487,6 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
                     b.Property<DateTime>("Data");
 
-                    b.Property<int?>("EstadoId");
-
                     b.Property<int>("IdEstado");
 
                     b.Property<int>("IdFuncionario");
@@ -471,7 +494,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                     b.HasKey("Id")
                         .HasName("PK_LocalNascimento");
 
-                    b.HasIndex("EstadoId");
+                    b.HasIndex("IdEstado");
 
                     b.HasIndex("IdFuncionario")
                         .IsUnique();
@@ -499,7 +522,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
             modelBuilder.Entity("CTPSYSTEM.Domain.CarteiraTrabalho", b =>
                 {
-                    b.HasOne("CTPSYSTEM.Domain.Funcionario", "funcionario")
+                    b.HasOne("CTPSYSTEM.Domain.Funcionario", "Funcionario")
                         .WithMany("CarteiraTrabalho")
                         .HasForeignKey("IdFuncionario")
                         .HasConstraintName("FK_Funcionario_CarteiraTrabalho")
@@ -510,11 +533,15 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                 {
                     b.HasOne("CTPSYSTEM.Domain.CarteiraTrabalho", "CarteiraTrabalho")
                         .WithMany("ContratoTrabalho")
-                        .HasForeignKey("CarteiraTrabalhoId");
+                        .HasForeignKey("IdCarteiraTrabalho")
+                        .HasConstraintName("FK_ContratoTrabalho_CarteiraTrabalho")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CTPSYSTEM.Domain.Empresa", "Empresa")
                         .WithMany("ContratoTrabalho")
-                        .HasForeignKey("EmpresaId");
+                        .HasForeignKey("IdEmpresa")
+                        .HasConstraintName("FK_ContratoTrabalho_Empresa")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("CTPSYSTEM.Domain.ContribuicaoSindical", b =>
@@ -528,9 +555,11 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
 
             modelBuilder.Entity("CTPSYSTEM.Domain.Endereco", b =>
                 {
-                    b.HasOne("CTPSYSTEM.Domain.Empresa")
+                    b.HasOne("CTPSYSTEM.Domain.Empresa", "Empresa")
                         .WithMany("Endereco")
-                        .HasForeignKey("EmpresaId");
+                        .HasForeignKey("IdEmpresa")
+                        .HasConstraintName("FK_Empresa_Endereco")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CTPSYSTEM.Domain.Estado", "Estado")
                         .WithMany("Endereco")
@@ -555,6 +584,13 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                         .HasForeignKey("IdContratoTrabalho")
                         .HasConstraintName("FK_ContratoTrabalho_Ferias")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("CTPSYSTEM.Domain.FGTS", b =>
+                {
+                    b.HasOne("CTPSYSTEM.Domain.ContratoTrabalho", "ContratoTrabalho")
+                        .WithMany("FGTS")
+                        .HasForeignKey("ContratoTrabalhoId");
                 });
 
             modelBuilder.Entity("CTPSYSTEM.Domain.Funcionario", b =>
@@ -606,12 +642,14 @@ namespace CTPSYSTEM.Database.EntityFramework.Migrations
                 {
                     b.HasOne("CTPSYSTEM.Domain.Estado", "Estado")
                         .WithMany("LocalNascimento")
-                        .HasForeignKey("EstadoId");
+                        .HasForeignKey("IdEstado")
+                        .HasConstraintName("FK_Estado_LocalNascimento")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CTPSYSTEM.Domain.Funcionario", "Funcionario")
                         .WithOne("LocalNascimento")
                         .HasForeignKey("CTPSYSTEM.Domain.LocalNascimento", "IdFuncionario")
-                        .HasConstraintName("FK_LocalNascimento_Funcionario")
+                        .HasConstraintName("FK_Funcionario_LocalNascimento")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -2,6 +2,11 @@
 {
     public class MessageModel
     {
+        public MessageModel()
+        {
+
+        }
+
         public MessageModel(int tipo, string texto)
         {
             this.tipo = tipo;
@@ -22,6 +27,11 @@
 
         public static implicit operator MessageModel((int, string) model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             return new MessageModel(model.Item1, model.Item2);
         }
     }

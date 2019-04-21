@@ -7,17 +7,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
     public class InternacaoDetailsModel
     {
         /// <summary>
-        /// Identificador único do registro de internação
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// Identificador único da carteira de trabalho ao qual
-        /// este registro de internação está vinculado
-        /// </summary>
-        public int IdCarteiraTrabalho { get; set; }
-
-        /// <summary>
         /// Nome do hospital onde o funcionário foi internado
         /// </summary>
         public string Hospital { get; set; }
@@ -44,10 +33,13 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator InternacaoDetailsModel(Internacao internacao)
         {
-            InternacaoDetailsModel model = new InternacaoDetailsModel();
+            if (ReferenceEquals(internacao, null))
+            {
+                return null;
+            }
 
-            model.Id = internacao.Id;
-            model.IdCarteiraTrabalho = internacao.IdCarteiraTrabalho;
+            InternacaoDetailsModel model = new InternacaoDetailsModel();
+             
             model.Hospital = internacao.Hospital;
             model.Registro = internacao.Registro;
             model.Matricula = internacao.Matricula;

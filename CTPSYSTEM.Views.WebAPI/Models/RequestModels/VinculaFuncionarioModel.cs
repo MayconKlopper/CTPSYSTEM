@@ -2,7 +2,9 @@
 {
     public class VinculaFuncionarioModel
     {
-        public int IdFuncionario { get; set; }
+        public string CPF { get; set; }
+
+        public string HashCode { get; set; }
 
         public int IdEmpresa { get; set; }
     }

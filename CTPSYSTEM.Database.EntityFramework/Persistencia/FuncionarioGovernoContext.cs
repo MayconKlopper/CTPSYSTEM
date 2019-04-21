@@ -44,9 +44,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Persistencia
         {
             return conexao.Funcionario
                           .Include(funcionario => funcionario.LocalNascimento)
-                          .Include(funcionario => funcionario.Empresa)
-                          .ThenInclude(empresa => empresa.Endereco)
-                          .ThenInclude(endereco => endereco.Estado);
+                           .ThenInclude(localNascimento => localNascimento.Estado);
         }
     }
 }

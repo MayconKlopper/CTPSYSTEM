@@ -1,7 +1,7 @@
 ﻿using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Enumeradores;
 using CTPSYSTEM.Domain.Historico;
-
+using System;
 using System.Linq;
 
 namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
@@ -32,6 +32,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         /// Tipo do seguimento da empresa
         /// </summary>
         public string Seguimento { get; set; }
+
+        /// <summary>
+        /// Data da desvinculação
+        /// </summary>
+        public DateTimeOffset Data { get; set; }
 
         /// <summary>
         /// Nome do estado
@@ -65,6 +70,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator EmpresaDetailsModel(Empresa empresa)
         {
+            if (ReferenceEquals(empresa, null))
+            {
+                return null;
+            }
+
             EmpresaDetailsModel model = new EmpresaDetailsModel();
 
             model.Id = empresa.Id;
@@ -84,12 +94,18 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator EmpresaDetailsModel(EmpresaHistorico empresa)
         {
+            if (ReferenceEquals(empresa, null))
+            {
+                return null;
+            }
+
             EmpresaDetailsModel model = new EmpresaDetailsModel();
 
             model.Id = empresa.Id;
             model.CNPJ = empresa.CNPJ;
             model.RazaoSocial = empresa.RazaoSocial;
             model.NomeFantasia = empresa.NomeFantasia;
+            model.Data = empresa.Data;
 
             return model;
         }

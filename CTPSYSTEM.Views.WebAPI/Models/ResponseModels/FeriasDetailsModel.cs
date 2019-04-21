@@ -19,6 +19,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         /// <summary>
         /// Período que o funcionário trabalhou para ter direito a estas férias
+        /// Formato: dd/MM/yyyy - dd/MM/yyyy
         /// </summary>
         public string PeriodoRelativo { get; set; }
 
@@ -39,6 +40,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator FeriasDetailsModel(Ferias ferias)
         {
+            if (ReferenceEquals(ferias, null))
+            {
+                return null;
+            }
+
             FeriasDetailsModel model = new FeriasDetailsModel();
 
             model.Id = ferias.Id;
@@ -46,6 +52,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             model.PeriodoRelativo = ferias.PeriodoRelativo;
             model.DataInicio = ferias.DataInicio;
             model.DataTermino = ferias.DataTermino;
+            model.Dias = ferias.Dias;
 
             return model;
         }

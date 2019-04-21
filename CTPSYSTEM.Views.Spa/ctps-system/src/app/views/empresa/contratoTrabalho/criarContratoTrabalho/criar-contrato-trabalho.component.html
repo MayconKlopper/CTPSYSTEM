@@ -1,0 +1,158 @@
+<h2 class="text-center text-muted"> Funcionário selecionado </h2>
+<app-funcionario [funcionario]="selectedFuncionario">
+</app-funcionario>
+
+<h2 class="text-center text-muted"> Cadastrar Contrato de Trabalho </h2>
+<form [formGroup]="formGroup">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+              <label for="cargo"> Cargo </label>
+              <input class="form-control"
+                      type="text"
+                      id="cargo"
+                      placeholder="Digite o cargo"
+                      formControlName="cargo"
+                      [(ngModel)]="novoContratoTrabalho.cargo">
+            </div>
+            <!-- cargo Validators -->
+            <div *ngIf="cargo.invalid && (cargo.dirty || cargo.touched)"
+              class="alert alert-danger">
+              <div *ngIf="cargo.errors.required">
+                  O Campo <b>Cargo</b> é obrigatório
+              </div>
+            </div>
+            <!-- End cargo Validators -->
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="dataAdmissao"> Data de Admissão </label>
+                <input class="form-control"
+                        type="text"
+                        id="dataAdmissao"
+                        autocomplete="off"
+                        formControlName="dataAdmissao"
+                        [(ngModel)]="novoContratoTrabalho.dataAdmissao"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+              <!-- dataAdmissao Validators -->
+              <div *ngIf="dataAdmissao.invalid && (dataAdmissao.dirty || dataAdmissao.touched)"
+                class="alert alert-danger">
+                <div *ngIf="dataAdmissao.errors.required">
+                    O Campo <b>Data de Admissão</b> é obrigatório
+                </div>
+              </div>
+              <!-- End dataAdmissao Validators -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="CBONumero"> N° CBO </label>
+                <input class="form-control"
+                        type="number"
+                        id="CBONumero"
+                        placeholder="Digite o N° CBO"
+                        formControlName="CBONumero"
+                        [(ngModel)]="novoContratoTrabalho.CBONumero">
+              </div>
+              <!-- CBONumero Validators -->
+              <div *ngIf="CBONumero.invalid && (CBONumero.dirty || CBONumero.touched)"
+                class="alert alert-danger">
+                <div *ngIf="CBONumero.errors.required">
+                    O Campo <b>N° CBO</b> é obrigatório
+                </div>
+              </div>
+              <!-- End CBONumero Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="flsFicha"> Fls Ficha </label>
+                <input class="form-control"
+                        type="number"
+                        id="flsFicha"
+                        placeholder="Digite o Fls Ficha"
+                        [(ngModel)]="novoContratoTrabalho.flsFicha"
+                        [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="registroNumero"> N° Registro </label>
+                <input class="form-control"
+                        type="number"
+                        id="registroNumero"
+                        placeholder="Digite o N° Registro"
+                        [(ngModel)]="novoContratoTrabalho.registroNumero"
+                        [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="remuneracao"> Remuneração </label>
+                <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-dollar"></i> </span>
+                </div>
+                <input class="form-control"
+                        type="text"
+                        id="remuneracao"
+                        placeholder="5,000.00"
+                        formControlName="remuneracao"
+                        mask="coma_separator.2"
+                        [(ngModel)]="novoContratoTrabalho.remuneracao">
+                </div>
+              </div>
+              <!-- remuneracao Validators -->
+              <div *ngIf="remuneracao.invalid && (remuneracao.dirty || remuneracao.touched)"
+                class="alert alert-danger">
+                <div *ngIf="remuneracao.errors.required">
+                    O Campo <b>Remuneração</b> é obrigatório
+                </div>
+              </div>
+              <!-- End remuneracao Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="remuneracaoExtenso"> Remuneração por extenso </label>
+                <input class="form-control"
+                        type="text"
+                        id="remuneracaoExtenso"
+                        placeholder="Cinco Mil reais"
+                        formControlName="remuneracaoExtenso"
+                        [(ngModel)]="novoContratoTrabalho.remuneracaoExtenso">
+              </div>
+              <!-- remuneracaoExtenso Validators -->
+              <div *ngIf="remuneracaoExtenso.invalid && (remuneracaoExtenso.dirty || remuneracaoExtenso.touched)"
+                class="alert alert-danger">
+                <div *ngIf="remuneracaoExtenso.errors.required">
+                    O Campo <b>Remuneração por extenso</b> é obrigatório
+                </div>
+              </div>
+              <!-- End remuneracaoExtenso Validators -->
+            </div>
+          </div>
+      </div>
+      <div class="card-footer">
+        <button type="button"
+                class="btn btn-block btn-primary active"
+                [disabled]="!formGroup.valid"
+                (click)="criarContratoTrabalho()">
+                Cadastrar Contrato de Trabalho
+        </button>
+      </div>
+    </div>
+  </form>

@@ -120,4 +120,28 @@
   <data name="ErroGenerico" xml:space="preserve">
     <value>Ocorreu um erro na requisição</value>
   </data>
+  <data name="requestModelNullOrEmpty" xml:space="preserve">
+    <value>O modelo da requisição está nulo ou vazio</value>
+  </data>
+  <data name="UsuarioBloqueado" xml:space="preserve">
+    <value>Esta conta está bloqueada por excesso de tentativas erradas de LogIn</value>
+  </data>
+  <data name="UsuarioDadosIncorretos" xml:space="preserve">
+    <value>Senha ou usuário incorretos ou inexistentes</value>
+  </data>
+  <data name="UsuarioCadastrado" xml:space="preserve">
+    <value>Usuário Cadastrado com sucesso!</value>
+  </data>
+  <data name="FuncionarioCriadoSucesso" xml:space="preserve">
+    <value>O Funcionário foi cadastrado com sucesso</value>
+  </data>
+  <data name="EmpresaCriadaSucesso" xml:space="preserve">
+    <value>A empresa foi cadastrada com sucesso</value>
+  </data>
+  <data name="CarteiraTrabalhoCriadaSucesso" xml:space="preserve">
+    <value>O registro de Carteira de trabalho foi criada com sucesso</value>
+  </data>
+  <data name="ContratoTrabalhoCriadoSucesso" xml:space="preserve">
+    <value>O Contrato de Trabalho foi criado com Sucesso</value>
+  </data>
 </root>

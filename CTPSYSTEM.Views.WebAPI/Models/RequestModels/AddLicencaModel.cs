@@ -7,11 +7,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
     public class AddLicencaModel
     {
         /// <summary>
-        /// Identificador único do registro de licença
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Identificador único da carteira de trabalho oa qual
         /// este registro de licença está vinculado
         /// </summary>
@@ -40,11 +35,16 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
         public static implicit operator Licenca(AddLicencaModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             Licenca licenca = new Licenca();
 
             licenca.CodigoPosto = model.CodigoPosto;
-            licenca.DataInicio = model.DataInicio;
-            licenca.DataTermino = model.DataTermino;
+            licenca.DataInicio = DateTimeOffset.Parse(model.DataInicio.ToString("dd/MM/yyyy"));
+            licenca.DataTermino = DateTimeOffset.Parse(model.DataTermino.ToString("dd/MM/yyyy"));
             licenca.Motivo = model.Motivo;
             licenca.IdCarteiraTrabalho = model.IdCarteiraTrabalho;
 

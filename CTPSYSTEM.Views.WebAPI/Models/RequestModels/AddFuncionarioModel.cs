@@ -35,13 +35,18 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
         public static implicit operator Funcionario(AddFuncionarioModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             Funcionario funcionario = new Funcionario();
 
             funcionario.Nome = model.Nome;
             funcionario.CPF = model.CPF;
             funcionario.LocalNascimento = new LocalNascimento();
             funcionario.LocalNascimento.Cidade = model.Cidade;
-            funcionario.LocalNascimento.Data = model.Data;
+            funcionario.LocalNascimento.Data = DateTime.Parse(model.Data.ToString("dd/MM/yyyy"));
             funcionario.LocalNascimento.IdEstado = model.IdEstado;
 
             return funcionario;

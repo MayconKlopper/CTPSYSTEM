@@ -7,11 +7,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
     public class AddAlteracaoSalarialModel
     {
         /// <summary>
-        /// Identificador único do registro de alteração salarial
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Identificador único do contrato de trabalho ao qual
         /// esta alteração salarial está vinculada
         /// </summary>
@@ -20,7 +15,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         /// <summary>
         /// Data que ocorreu o aumeto salarial
         /// </summary>
-        public DateTime DataAumento { get; set; }
+        public DateTimeOffset DataAumento { get; set; }
 
         /// <summary>
         /// Valor de remuneração em decimal
@@ -44,10 +39,15 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
         public static implicit operator AlteracaoSalarial(AddAlteracaoSalarialModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             AlteracaoSalarial alteracaoSalarial = new AlteracaoSalarial();
 
             alteracaoSalarial.Cargo = model.Cargo;
-            alteracaoSalarial.DataAumento = model.DataAumento;
+            alteracaoSalarial.DataAumento = DateTimeOffset.Parse(model.DataAumento.ToString("dd/MM/yyyy"));
             alteracaoSalarial.Motivo = model.Motivo;
             alteracaoSalarial.Remuneracao = model.Remuneracao;
             alteracaoSalarial.RemuneracaoExtenso = model.RemuneracaoExtenso;

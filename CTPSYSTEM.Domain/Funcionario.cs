@@ -8,6 +8,12 @@ namespace CTPSYSTEM.Domain
     /// </summary>
     public class Funcionario
     {
+        public Funcionario()
+        {
+            this.CarteiraTrabalho = new List<CarteiraTrabalho>();
+            this.LocalNascimento = new LocalNascimento();
+        }
+
         /// <summary>
         /// Identificador único do funcionário
         /// </summary>

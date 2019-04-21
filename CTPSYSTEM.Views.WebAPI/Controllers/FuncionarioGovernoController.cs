@@ -50,12 +50,32 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                IEnumerable<FuncionarioDetailsModel> model = this.funcionarioGovernoService.RecuperaFuncionario()
-                    .Select(funcionario => (FuncionarioDetailsModel)funcionario);
+                List<FuncionarioDetailsModel> model = this.funcionarioGovernoService.RecuperaFuncionario()
+                    .Select(funcionario => (FuncionarioDetailsModel)funcionario)
+                    .ToList();
 
                 return Ok(model);
             }
             catch (Exception)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
+
+        [HttpPost("CadastarCarteiraTrabalho")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult CadastarCarteiraTrabalho([FromBody] AddCarteiraTrabalhoModel model)
+        {
+            try
+            {
+                CarteiraTrabalho carteiraTrabalho = model;
+                this.funcionarioGovernoService.Cadastrar(carteiraTrabalho);
+                MessageModel message = new MessageModel(1, Mensagens.CarteiraTrabalhoCriadaSucesso);
+                return Ok(message);
+            }
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);

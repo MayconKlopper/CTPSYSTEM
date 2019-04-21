@@ -7,17 +7,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
     public class LicencaDetailsModel
     {
         /// <summary>
-        /// Identificador único do registro de licença
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// Identificador único da carteira de trabalho oa qual
-        /// este registro de licença está vinculado
-        /// </summary>
-        public int IdCarteiraTrabalho { get; set; }
-
-        /// <summary>
         /// Data do inicio da licença
         /// </summary>
         public DateTimeOffset DataInicio { get; set; }
@@ -45,14 +34,19 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator LicencaDetailsModel(Licenca licenca)
         {
-            LicencaDetailsModel model = new LicencaDetailsModel();
+            if (ReferenceEquals(licenca, null))
+            {
+                return null;
+            }
 
-            model.Id = licenca.Id;
-            model.IdCarteiraTrabalho = licenca.IdCarteiraTrabalho;
+            LicencaDetailsModel model = new LicencaDetailsModel();
+             
+
             model.DataInicio = licenca.DataInicio;
             model.DataTermino = licenca.DataTermino;
             model.Dias = licenca.Dias;
             model.CodigoPosto = licenca.CodigoPosto;
+            model.Motivo = licenca.Motivo;
 
             return model;
         }

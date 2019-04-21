@@ -1,7 +1,9 @@
 ﻿using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Enumeradores;
-
+using CTPSYSTEM.Domain.Historico;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 {
@@ -11,6 +13,18 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         /// Identificador único do funcionário
         /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// Identificador único da carteira de trabalho
+        /// vinculada a este funcionario
+        /// </summary>
+        public int IdCarteiraTrabalho { get; set; }
+
+        /// <summary>
+        /// Identificador único do contrato de trabalho
+        /// vinculado a este funcionário
+        /// </summary>
+        public int IdContratoTrabalho { get; set; }
 
         /// <summary>
         /// Identificador único da empresa ao qual o funcionário está vinculado
@@ -45,9 +59,9 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         /// <summary>
         /// Sigla do estado
         /// </summary>
-        public EstadoSigla SiglaEstado { get; set; }
+        public string SiglaEstado { get; set; }
 
-        public EmpresaDetailsModel Empresa { get; set; }
+        public CarteiraTrabalhoDetailsModel CarteiraTrabalho { get; set; }
 
         public static implicit operator FuncionarioDetailsModel(Funcionario funcionario)
         {
@@ -59,13 +73,28 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
             FuncionarioDetailsModel model = new FuncionarioDetailsModel();
 
             model.Id = funcionario.Id;
+
+            if (!ReferenceEquals(funcionario.CarteiraTrabalho.FirstOrDefault(ct => ct.Ativo), null))
+            {
+                model.IdCarteiraTrabalho = funcionario.CarteiraTrabalho
+                                                  .FirstOrDefault(ct => ct.Ativo).Id;
+                model.CarteiraTrabalho = funcionario.CarteiraTrabalho.FirstOrDefault(ct => ct.Ativo);
+
+                if (!ReferenceEquals(funcionario.CarteiraTrabalho.FirstOrDefault(ct => ct.Ativo).ContratoTrabalho.FirstOrDefault(ct => ct.Ativo), null))
+                {
+                    model.IdContratoTrabalho = funcionario.CarteiraTrabalho
+                                                      .FirstOrDefault(ct => ct.Ativo)
+                                                      .ContratoTrabalho
+                                                      .FirstOrDefault(ct => ct.Ativo).Id;
+                }
+            }
+            
             model.Nome = funcionario.Nome;
             model.CPF = funcionario.CPF;
             model.Cidade = funcionario.LocalNascimento.Cidade;
             model.Data = funcionario.LocalNascimento.Data;
             model.Estado = funcionario.LocalNascimento.Estado.Nome;
-            model.SiglaEstado = funcionario.LocalNascimento.Estado.Sigla;
-            model.Empresa = funcionario.Empresa;
+            model.SiglaEstado = funcionario.LocalNascimento.Estado.Sigla.ToString();
 
             return model;
         }

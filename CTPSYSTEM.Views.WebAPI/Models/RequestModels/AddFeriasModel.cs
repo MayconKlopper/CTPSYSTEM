@@ -7,11 +7,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
     public class AddFeriasModel
     {
         /// <summary>
-        /// Identificador único do registro de férias
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Identificador único do registro de contrato de trabalho ao qual
         /// estas férias estão vinculadas
         /// </summary>
@@ -34,6 +29,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
         public static implicit operator Ferias(AddFeriasModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             Ferias ferias = new Ferias();
 
             ferias.DataInicio = model.DataInicio;

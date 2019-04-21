@@ -32,6 +32,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator ContribuicaoSindicalDetailsModel(ContribuicaoSindical contribuicaoSindical)
         {
+            if (ReferenceEquals(contribuicaoSindical, null))
+            {
+                return null;
+            }
+
             ContribuicaoSindicalDetailsModel model = new ContribuicaoSindicalDetailsModel();
 
             model.Id = contribuicaoSindical.Id;

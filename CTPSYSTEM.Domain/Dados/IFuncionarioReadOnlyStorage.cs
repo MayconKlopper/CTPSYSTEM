@@ -7,7 +7,7 @@ namespace CTPSYSTEM.Domain.Dados
     {
         Funcionario RecuperaFuncionario(string CPF);
 
-        IEnumerable<CarteiraTrabalho> RecuperaCarteiraTrabalho(int idFuncionario);
+        CarteiraTrabalho RecuperaCarteiraTrabalho(int idFuncionario);
 
         IEnumerable<Internacao> RecuperaInternacao(int idCarteiraTrabalho);
 
@@ -17,6 +17,8 @@ namespace CTPSYSTEM.Domain.Dados
 
         IEnumerable<AlteracaoSalarial> RecuperaAlteracaoSalarial(int idContratoTrabalho);
 
+        IEnumerable<FGTS> RecuperaFGTS(int idContratoTrabalho);
+
         IEnumerable<Ferias> RecuperaFerias(int idContratoTrabalho);
 
         IEnumerable<AnotacaoGeral> RecuperaAnotacaoGeral(int idContratoTrabalho);
@@ -24,5 +26,7 @@ namespace CTPSYSTEM.Domain.Dados
         IEnumerable<ContribuicaoSindical> RecuperaContribuicaoSindical(int idContratoTrabalho);
 
         IEnumerable<EmpresaHistorico> RecuperaHistoricoEmpresa(int idFuncionario);
+
+        IEnumerable<CarteiraTrabalho> RecuperaHistoricoCarteiraTrabalho(int idFuncionario);
     }
 }

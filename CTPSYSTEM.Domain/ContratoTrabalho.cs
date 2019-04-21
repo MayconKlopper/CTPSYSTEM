@@ -8,6 +8,15 @@ namespace CTPSYSTEM.Domain
     /// </summary>
     public class ContratoTrabalho
     {
+        public ContratoTrabalho()
+        {
+            this.ContribuicaoSindical = new List<ContribuicaoSindical>();
+            this.AnotacaoGeral = new List<AnotacaoGeral>();
+            this.Ferias = new List<Ferias>();
+            this.AlteracaoSalarial = new List<AlteracaoSalarial>();
+            this.FGTS = new List<FGTS>();
+        }
+
         /// <summary>
         /// Identificador único do registro de contrato de trabalho
         /// </summary>
@@ -43,7 +52,7 @@ namespace CTPSYSTEM.Domain
         /// <summary>
         /// Data de finalização do contrato de trabalho
         /// </summary>
-        public DateTimeOffset DataSaida { get; set; }
+        public DateTimeOffset? DataSaida { get; set; }
 
         /// <summary>
         /// Valor de remuneração em decimal
@@ -102,6 +111,8 @@ namespace CTPSYSTEM.Domain
         /// Registros de alterações salariais vinculadas a este contrato de trabalho
         /// </summary>
         public virtual ICollection<AlteracaoSalarial> AlteracaoSalarial { get; set; }
+
+        public virtual ICollection<FGTS> FGTS { get; set; }
 
         #endregion Relacionamentos
     }

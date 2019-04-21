@@ -1,0 +1,329 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <form [formGroup]="cadastroUsuarioFormGroup">
+                <h1>Registrar Empresa</h1>
+                <p class="text-muted">Crie a sua conta</p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-user"></i></span>
+                  </div>
+                  <input type="text"
+                          class="form-control"
+                          id="nomeFantasia"
+                          title="Digite o nome fantasia da sua empresa"
+                          placeholder="Nome Fantasia"
+                          [(ngModel)]="novaEmpresa.nomeFantasia"
+                          formControlName="nomeFantasia"
+                          required
+                          >
+                </div>
+                <!-- nomeFantasia Validators -->
+                <div *ngIf="nomeFantasia.invalid && (nomeFantasia.dirty || nomeFantasia.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="nomeFantasia.errors.required">
+                          O Campo <b>Nome Fantasia</b> é obrigatório
+                      </div>
+                </div>
+                <!-- End nomeFantasia Validators -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-user"></i></span>
+                  </div>
+                  <input type="text"
+                          class="form-control"
+                          id="razaoSocial"
+                          title="Digite a Razão Social da sua empresa"
+                          placeholder="Razão Social"
+                          [(ngModel)]="novaEmpresa.razaoSocial"
+                          formControlName="razaoSocial"
+                          required
+                          >
+                </div>
+                <!-- razaoSocial Validators -->
+                <div *ngIf="razaoSocial.invalid && (razaoSocial.dirty || razaoSocial.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="razaoSocial.errors.required">
+                          O Campo <b>Razão Social</b> é obrigatório
+                      </div>
+                </div>
+                <!-- End razaoSocial Validators -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-institution"></i></span>
+                  </div>
+                  <input type="text"
+                          class="form-control"
+                          id="seguimento"
+                          title="Digite o Seguimento da sua empresa"
+                          placeholder="Seguimento"
+                          [(ngModel)]="novaEmpresa.seguimento"
+                          formControlName="seguimento"
+                          required
+                          >
+                </div>
+                <!-- seguimento Validators -->
+                <div *ngIf="seguimento.invalid && (seguimento.dirty || seguimento.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="seguimento.errors.required">
+                          O Campo <b>Seguimento</b> é obrigatório
+                      </div>
+                </div>
+                <!-- End seguimento Validators -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-id-card"></i></span>
+                  </div>
+                  <input type="text"
+                          class="form-control"
+                          id="userName"
+                          name="userName"
+                          title="Digite seu CNPJ. ELe será usado como logIn"
+                          placeholder="00.000.000/0000-00"
+                          mask="00.000.000/0000-00"
+                          [(ngModel)]="novoUsuario.userName"
+                          formControlName="userName"
+                          required
+                          >
+                </div>
+                <!-- UserName Validators -->
+                <div *ngIf="userName.invalid && (userName.dirty || userName.touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="userName.errors.required">
+                      O Campo <b>CNPJ</b> é obrigatório
+                  </div>
+                  <div *ngIf="userName.errors.minlength">
+                      O Campo <b>CNPJ</b> deve possuir, no mínimo, {{ userName.errors.minlength.requiredLength }} dígitos
+                  </div>
+                </div>
+                <!-- End UserName Validators -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                  </div>
+                  <input type="text"
+                          class="form-control"
+                          id="email"
+                          name="email"
+                          title="Digite seu email para contato"
+                          placeholder="Email"
+                          [(ngModel)]="novoUsuario.email"
+                          formControlName="email"
+                          required
+                          >
+                </div>
+                <!-- Email Validators -->
+                <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="email.errors.required">
+                      O Campo <b>Email</b> é obrigatório
+                  </div>
+                  <div *ngIf="email.errors.email">
+                      O Campo <b>Email</b> não está em um formato válido
+                  </div>
+                </div>
+                <!-- End Email Validators -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-screen-smartphone"></i></span>
+                  </div>
+                  <input type="text"
+                          class="form-control"
+                          id="celular"
+                          name="celular"
+                          title="Digite o número do seu celular para contato"
+                          placeholder="(00) 0 0000-0000"
+                          mask="(00) 0 0000-0000"
+                          [(ngModel)]="novoUsuario.celular"
+                          formControlName="celular"
+                          required
+                          >
+                </div>
+                <!-- Phone Validators -->
+                <div *ngIf="celular.invalid && (celular.dirty || celular.touched)"
+                class="alert alert-danger">
+                  <div *ngIf="celular.errors.required">
+                      O Campo <b>Celular</b> é obrigatório
+                  </div>
+                  <div *ngIf="celular.errors.minlength">
+                      O Campo <b>Celular</b> deve possuir, no mínimo, {{ celular.errors.minlength.requiredLength }} dígitos
+                  </div>
+                </div>
+                <!-- End Phone Validators -->
+                <p class="text-muted">Informações de endereço</p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"></span>
+                  </div>
+                  <select class="form-control"
+                          id="estado"
+                          title="Selecione o estado onde sua empresa se encontra"
+                          ng-init="novaEmpresa.idEstado = novaEmpresa.idEstado || estados[0].id"
+                          (change)="selectEstado($event.target.value)">
+                    <option *ngFor="let estado of estados" [value]="estado.id" [ngValue]="estado.nome">{{estado.nome}}</option>
+                  </select>
+                </div>
+                <!-- estado Validators -->
+                <div *ngIf="estado.invalid && (estado.dirty || estado.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="estado.errors.required">
+                          O Campo <b>Estado</b> é obrigatório
+                      </div>
+                </div>
+                <!-- End estado Validators -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"></span>
+                  </div>
+                  <input type="text"
+                          class="form-control"
+                          id="cidade"
+                          title="Digite a cidade onde sua empresa se encontra"
+                          placeholder="Niterói"
+                          [(ngModel)]="novaEmpresa.cidade"
+                          formControlName="cidade"
+                          required
+                          >
+                </div>
+                <!-- cidade Validators -->
+                <div *ngIf="cidade.invalid && (cidade.dirty || cidade.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="cidade.errors.required">
+                          O Campo <b>Cidade</b> é obrigatório
+                      </div>
+                </div>
+                <!-- End cidade Validators -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-road"></i></span>
+                  </div>
+                  <input type="text"
+                          class="form-control"
+                          id="rua"
+                          title="Digite a rua onde sua empresa se encontra"
+                          placeholder="Rua da Assembléia"
+                          [(ngModel)]="novaEmpresa.rua"
+                          formControlName="rua"
+                          required
+                          >
+                </div>
+                <!-- rua Validators -->
+                <div *ngIf="rua.invalid && (rua.dirty || rua.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="rua.errors.required">
+                          O Campo <b>Rua</b> é obrigatório
+                      </div>
+                </div>
+                <!-- End rua Validators -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"></span>
+                  </div>
+                  <input type="text"
+                          class="form-control"
+                          id="numero"
+                          title="Digite o numero onde sua empresa se encontra"
+                          placeholder="330"
+                          [(ngModel)]="novaEmpresa.numero"
+                          formControlName="numero"
+                          required
+                          >
+                </div>
+                <!-- numero Validators -->
+                <div *ngIf="numero.invalid && (numero.dirty || numero.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="numero.errors.required">
+                          O Campo <b>numero</b> é obrigatório
+                      </div>
+                </div>
+                <!-- End numero Validators -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"></span>
+                  </div>
+                  <input type="text"
+                          class="form-control"
+                          id="sala"
+                          title="Digite a sala ou salas onde sua empresa se encontra"
+                          placeholder="1994-1995"
+                          [(ngModel)]="novaEmpresa.sala"
+                          formControlName="sala"
+                          required
+                          >
+                </div>
+                <!-- sala Validators -->
+                <div *ngIf="sala.invalid && (sala.dirty || sala.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="sala.errors.required">
+                          O Campo <b>Sala</b> é obrigatório
+                      </div>
+                </div>
+                <!-- End sala Validators -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                  </div>
+                  <input type="password"
+                          class="form-control"
+                          id="password"
+                          name="password"
+                          title="Digite sua senha de acesso"
+                          placeholder="Password"
+                          [(ngModel)]="novoUsuario.password"
+                          formControlName="password"
+                          required>
+                </div>
+                <!-- Password Validators -->
+                <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="password.errors.required">
+                          O Campo <b>Password</b> é obrigatório
+                      </div>
+                      <div *ngIf="password.errors.minlength">
+                          O Campo <b>Password</b> deve possuir, no mínimo, {{ password.errors.minlength.requiredLength }} dígitos
+                      </div>
+                </div>
+                <!-- End Password Validators -->
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                  </div>
+                  <input type="password"
+                          class="form-control"
+                          id="confirmPassword"
+                          name="confirmPassword"
+                          title="Confirme a senha digitada no campo acima"
+                          placeholder="Confirm password"
+                          [(ngModel)]="novoUsuario.confirmPassword"
+                          formControlName="confirmPassword"
+                          required>
+                </div>
+                <!-- confirmPassword Validators -->
+                <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="confirmPassword.errors.required">
+                          O Campo <b>Confirm Password</b> é obrigatório
+                      </div>
+                      <div *ngIf="confirmPassword.errors.matchPassword">
+                          O Campo <b>Confirm Password</b> e o campo <b>Password</b> estão divergentes
+                      </div>
+                </div>
+                <!-- End confirmPassword Validators -->
+                <button type="button"
+                        class="btn btn-block btn-primary active"
+                        [disabled]="!cadastroUsuarioFormGroup.valid"
+                        (click)="cadastrarEmpresa()"
+                        >Criar Conta</button>
+                <button type="button" class="btn btn-block btn-primary active"[routerLink]="[ '/login']">Voltar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -5,6 +5,11 @@
     /// </summary>
     public class Endereco
     {
+        public Endereco()
+        {
+            this.Estado = new Estado();
+        }
+
         /// <summary>
         /// Identificador único do endereço
         /// </summary>
@@ -12,9 +17,15 @@
 
         /// <summary>
         /// Identificador único do estado ao qual
-        /// este endereço esta vinculado
+        /// este endereço está vinculado
         /// </summary>
         public int IdEstado { get; set; }
+
+        /// <summary>
+        /// Identidicador único da empresa ao qual
+        /// este endereço está vinculado
+        /// </summary>
+        public int IdEmpresa { get; set; }
 
         /// <summary>
         /// Cidade do endereço
@@ -42,6 +53,11 @@
         /// Estado deste endereço
         /// </summary>
         public virtual Estado Estado { get; set; }
+
+        /// <summary>
+        /// Empresa ao qual este endereço de email pertence
+        /// </summary>
+        public virtual Empresa Empresa { get; set; }
 
         #endregion Relacionamentos
     }

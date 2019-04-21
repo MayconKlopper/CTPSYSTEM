@@ -1,4 +1,5 @@
 ﻿using CTPSYSTEM.Application;
+using CTPSYSTEM.Database.EntityFramework;
 using CTPSYSTEM.Database.EntityFramework.FonteDados;
 using CTPSYSTEM.Database.EntityFramework.Persistence;
 using CTPSYSTEM.Database.EntityFramework.Persistencia;
@@ -16,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 using System;
 
 namespace CTPSYSTEM.Views.WebAPI
@@ -44,7 +46,9 @@ namespace CTPSYSTEM.Views.WebAPI
                 });
             });
 
-            services.AddDbContext<Conexao>()
+            services.AddDbContext<Conexao>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"))
+                       .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll))
                 .AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
 
@@ -90,28 +94,30 @@ namespace CTPSYSTEM.Views.WebAPI
             services.AddAuthorization(auth =>
             {
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .RequireRole(new string[] { "funcionario", "usuario", "empresa" })
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
             });
 
             // Add application services.
+            services.IncludeApplicationServices();
+            services.IncludeDatabaseServices();
             services.AddTransient<IEmailSender, EmailSender>()
-
-                .AddScoped<EmpresaContext>()
-                            .AddScoped<IEmpresaStorage>(provider => provider.GetService<EmpresaContext>())
-                            .AddScoped<IEmpresaReadOnlyStorage>(provider => provider.GetService<EmpresaContext>())
-                           .AddScoped<FuncionarioGovernoContext>()
-                            .AddScoped<IFuncionarioGovernoStorage>(provider => provider.GetService<FuncionarioGovernoContext>())
-                            .AddScoped<IFuncionarioGovernoReadOnlyStorage>(provider => provider.GetService<FuncionarioGovernoContext>())
-                           .AddScoped<IFuncionarioReadOnlyStorage, FuncionarioContext>()
-                           .AddScoped<IHashStorage, HashContext>()
-
-                           .AddScoped<IEmpresaService, EmpresaService>()
-                           .AddScoped<IFuncionarioService, FuncionarioService>()
-                           .AddScoped<IFuncionarioGovernoService, FuncionarioGovernoService>()
-                           .AddScoped<IHashService, HashService>();
+                    .AddScoped<IUtilsReadOnlyStorage, UtilsContext>();
 
             services.AddMvc();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "CTPSYSTEM API",
+                    Description = "ASP.NET Core Web API About CLT (Brasil Job Contract Model)",
+                    TermsOfService = "None",
+                    Contact = new Contact() { Name = "Maycon Klopper de Carvalho", Email = "mayconklopper@gmail.com", Url = "https://ctpsystem.azurewebsites.net" }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -124,6 +130,12 @@ namespace CTPSYSTEM.Views.WebAPI
 
             app.UseCors(configuracaoOrigens);
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
         }
     }
 }

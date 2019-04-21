@@ -7,6 +7,11 @@ namespace CTPSYSTEM.Domain
     /// </summary>
     public class LocalNascimento
     {
+        public LocalNascimento()
+        {
+            this.Estado = new Estado();
+        }
+
         /// <summary>
         /// Identificador único do local de nascimento
         /// </summary>

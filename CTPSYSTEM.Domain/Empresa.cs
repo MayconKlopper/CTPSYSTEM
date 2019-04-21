@@ -4,11 +4,18 @@ using System.Collections.Generic;
 
 namespace CTPSYSTEM.Domain
 {
+    public interface IEntity {  }
+
     /// <summary>
     /// Entidade que representa uma empresa
     /// </summary>
-    public class Empresa
+    public class Empresa : IEntity
     {
+        public Empresa()
+        {
+            this.Endereco = new List<Endereco>();
+        }
+
         /// <summary>
         /// Identificador único da empresa cadastrada no sistema
         /// </summary>

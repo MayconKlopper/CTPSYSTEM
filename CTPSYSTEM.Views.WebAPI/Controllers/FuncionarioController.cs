@@ -1,5 +1,8 @@
-﻿using CTPSYSTEM.Domain.Dados;
+﻿using CTPSYSTEM.Domain;
+using CTPSYSTEM.Domain.Dados;
+using CTPSYSTEM.Domain.Servicos;
 using CTPSYSTEM.Views.WebAPI.ArquivosRecurso;
+using CTPSYSTEM.Views.WebAPI.Models.RequestModels;
 using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
 
 using Microsoft.AspNetCore.Authorization;
@@ -16,10 +19,33 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
     public class FuncionarioController : Controller
     {
         private readonly IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage;
+        private readonly IFuncionarioGovernoService funcionarioGovernoService;
 
-        public FuncionarioController(IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage)
+        public FuncionarioController(IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage,
+            IFuncionarioGovernoService funcionarioGovernoService)
         {
             this.funcionarioReadOnlyStorage = funcionarioReadOnlyStorage;
+            this.funcionarioGovernoService = funcionarioGovernoService;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("CadastrarFuncionario")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult CadastrarFuncionario([FromBody] AddFuncionarioModel model)
+        {
+            try
+            {
+                Funcionario funcionario = model;
+                this.funcionarioGovernoService.Cadastrar(funcionario);
+                MessageModel message = new MessageModel(1, Mensagens.FuncionarioCriadoSucesso);
+                return Ok(message);
+            }
+            catch (Exception ex)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
         }
 
         [HttpGet("RecuperaFuncionario/{CPF}")]
@@ -30,7 +56,6 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             try
             {
                 FuncionarioDetailsModel funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(CPF);
-                //var funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(CPF);
 
                 return Ok(funcionario);
             }
@@ -44,7 +69,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [HttpGet("RecuperaEmpresaHistorico/{idFuncionario}")]
         [ProducesResponseType(typeof(EmpresaDetailsModel), 200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
-        public ActionResult RecuperaEmpresa(int idFuncionario)
+        public ActionResult RecuperaEmpresaHistorico(int idFuncionario)
         {
             try
             {
@@ -61,20 +86,39 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
         }
 
-        [HttpGet("RecuperaCarteiraTrabalho/{idFuncionario}")]
+        [HttpGet("RecuperaCarteiraTrabalhoHistorico/{idFuncionario}")]
         [ProducesResponseType(typeof(IEnumerable<CarteiraTrabalhoDetailsModel>), 200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult RecuperaCarteiraTrabalhoHistorico(int idFuncionario)
+        {
+            try
+            {
+                IEnumerable<CarteiraTrabalhoDetailsModel> model = this.funcionarioReadOnlyStorage
+                    .RecuperaHistoricoCarteiraTrabalho(idFuncionario)
+                    .Select(empresaHistorico => (CarteiraTrabalhoDetailsModel)empresaHistorico);
+
+                return Ok(model);
+            }
+            catch (Exception)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
+
+        [HttpGet("RecuperaCarteiraTrabalho/{idFuncionario}")]
+        [ProducesResponseType(typeof(CarteiraTrabalhoDetailsModel), 200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
         public ActionResult RecuperaCarteiraTrabalho(int idFuncionario)
         {
             try
             {
-                IEnumerable<CarteiraTrabalhoDetailsModel> model = this.funcionarioReadOnlyStorage
-                    .RecuperaCarteiraTrabalho(idFuncionario)
-                    .Select(carteiraTrabalho => (CarteiraTrabalhoDetailsModel)carteiraTrabalho);
+                CarteiraTrabalhoDetailsModel model = this.funcionarioReadOnlyStorage
+                    .RecuperaCarteiraTrabalho(idFuncionario);
 
                 return Ok(model);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
@@ -201,7 +245,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
         }
 
-        [HttpGet("RecuperaContribuicaoSindical/{CPF}")]
+        [HttpGet("RecuperaContribuicaoSindical/{idContratoTrabalho}")]
         [ProducesResponseType(typeof(ContribuicaoSindicalDetailsModel), 200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
         public ActionResult RecuperaContribuicaoSindical(int idContratoTrabalho)
@@ -211,6 +255,26 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                 IEnumerable<ContribuicaoSindicalDetailsModel> model = this.funcionarioReadOnlyStorage
                     .RecuperaContribuicaoSindical(idContratoTrabalho)
                     .Select(contribuicaoSindical => (ContribuicaoSindicalDetailsModel)contribuicaoSindical);
+
+                return Ok(model);
+            }
+            catch (Exception)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
+
+        [HttpGet("RecuperaFGTS/{idContratoTrabalho}")]
+        [ProducesResponseType(typeof(ContribuicaoSindicalDetailsModel), 200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult RecuperaFGTS(int idContratoTrabalho)
+        {
+            try
+            {
+                IEnumerable<FGTSDetailsModel> model = this.funcionarioReadOnlyStorage
+                    .RecuperaFGTS(idContratoTrabalho)
+                    .Select(fgts => (FGTSDetailsModel)fgts);
 
                 return Ok(model);
             }

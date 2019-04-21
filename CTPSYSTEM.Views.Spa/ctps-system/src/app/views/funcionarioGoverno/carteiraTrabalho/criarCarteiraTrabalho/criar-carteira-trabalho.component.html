@@ -1,0 +1,246 @@
+<h2 class="text-center text-muted"> Usuário selecionado </h2>
+<app-funcionario [funcionario]="funcionarioSelecionado">
+</app-funcionario>
+<h2 class="text-center text-muted"> Cadastrar Carteira de trabalho </h2>
+<form [formGroup]="formGroup">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="form-group">
+            <label for="numero"> Número </label>
+            <input class="form-control"
+                    type="text"
+                    id="numero"
+                    placeholder="Digite o número da carteira de trabalho"
+                    formControlName="numero"
+                    [(ngModel)]="novaCarteiraTrabalho.numero">
+          </div>
+          <!-- numero Validators -->
+          <div *ngIf="numero.invalid && (numero.dirty || numero.touched)"
+            class="alert alert-danger">
+            <div *ngIf="numero.errors.required">
+                O Campo <b>Número</b> é obrigatório
+            </div>
+          </div>
+          <!-- End numero Validators -->
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+              <label for="serie"> Série </label>
+              <input class="form-control"
+                      type="text"
+                      id="serie"
+                      placeholder="Digite a série da carteira de trabalho"
+                      formControlName="serie"
+                      [(ngModel)]="novaCarteiraTrabalho.serie">
+            </div>
+            <!-- serie Validators -->
+            <div *ngIf="serie.invalid && (serie.dirty || serie.touched)"
+              class="alert alert-danger">
+              <div *ngIf="serie.errors.required">
+                  O Campo <b>Série</b> é obrigatório
+              </div>
+            </div>
+            <!-- End serie Validators -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+              <label for="numeroDocumento"> Documento N° </label>
+              <input class="form-control"
+                      type="text"
+                      id="numeroDocumento"
+                      placeholder="Digite o número do documento da carteira de trabalho"
+                      formControlName="numeroDocumento"
+                      [(ngModel)]="novaCarteiraTrabalho.numeroDocumento">
+            </div>
+            <!-- numeroDocumento Validators -->
+            <div *ngIf="numeroDocumento.invalid && (numeroDocumento.dirty || numeroDocumento.touched)"
+              class="alert alert-danger">
+              <div *ngIf="numeroDocumento.errors.required">
+                  O Campo <b>Documento N°</b> é obrigatório
+              </div>
+            </div>
+            <!-- End numeroDocumento Validators -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+              <label for="filiacaoMae"> Filiação Mãe </label>
+              <input class="form-control"
+                      type="text"
+                      id="filiacaoMae"
+                      placeholder="Digite o nome completo da mãe do usuário"
+                      formControlName="filiacaoMae"
+                      [(ngModel)]="novaCarteiraTrabalho.filiacaoMae">
+            </div>
+            <!-- filiacaoMae Validators -->
+            <div *ngIf="filiacaoMae.invalid && (filiacaoMae.dirty || filiacaoMae.touched)"
+              class="alert alert-danger">
+              <div *ngIf="filiacaoMae.errors.required">
+                  O Campo <b>Filiação Mâe</b> é obrigatório
+              </div>
+            </div>
+            <!-- End filiacaoMae Validators -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+              <label for="filiacaoPai"> Filiação Pai </label>
+              <input class="form-control"
+                      type="text"
+                      id="filiacaoPai"
+                      placeholder="Digite o nome completo do Pai do usuário"
+                      formControlName="filiacaoPai"
+                      [(ngModel)]="novaCarteiraTrabalho.filiacaoPai">
+            </div>
+            <!-- filiacaoPai Validators -->
+            <div *ngIf="filiacaoPai.invalid && (filiacaoPai.dirty || filiacaoPai.touched)"
+              class="alert alert-danger">
+              <div *ngIf="filiacaoPai.errors.required">
+                  O Campo <b>Filiação Pai</b> é obrigatório
+              </div>
+            </div>
+            <!-- End filiacaoPai Validators -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+              <label class="form-check-label" for="estrangeiro"> Estrangeiro: </label>
+            </div>
+            <div class="form-group">
+              <label class="switch switch-label switch-primary">
+                <input type="checkbox"
+                        class="switch-input"
+                        id="estrangeiro"
+                        [(ngModel)]="estrangeiro"
+                        [ngModelOptions]="{standalone: true}"
+                        (change)="estrangeiroChange()">
+                <span class="switch-slider" data-checked="✓" data-unchecked="✕"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="estrangeiro">
+          <h3 class="text-center text-muted"> Estrangeiro </h3>
+          <hr>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="chegada"> Chegada ao Brasil </label>
+                <input class="form-control"
+                        type="text"
+                        id="chegada"
+                        formControlName="chegada"
+                        [(ngModel)]="novaCarteiraTrabalho.estrangeiro.chegada"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+              <!-- chegada Validators -->
+              <div *ngIf="chegada.invalid && (chegada.dirty || chegada.touched)"
+                class="alert alert-danger">
+                <div *ngIf="chegada.errors.required">
+                    O Campo <b>Chegada</b> é obrigatório
+                </div>
+              </div>
+              <!-- End chegada Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="documentoIdentidade"> Documento Identidade N°: </label>
+                <input class="form-control"
+                        type="text"
+                        id="documentoIdentidade"
+                        placeholder="Digite o número do documento de identidade"
+                        formControlName="documentoIdentidade"
+                        [(ngModel)]="novaCarteiraTrabalho.estrangeiro.documentoIdentidade">
+              </div>
+              <!-- documentoIdentidade Validators -->
+              <div *ngIf="documentoIdentidade.invalid && (documentoIdentidade.dirty || documentoIdentidade.touched)"
+                class="alert alert-danger">
+                <div *ngIf="documentoIdentidade.errors.required">
+                    O Campo <b>Documento Identidade N°</b> é obrigatório
+                </div>
+              </div>
+              <!-- End documentoIdentidade Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="expedicao"> Data de expedição </label>
+                <input class="form-control"
+                        type="text"
+                        id="expedicao"
+                        autocomplete="off"
+                        formControlName="expedicao"
+                        [(ngModel)]="novaCarteiraTrabalho.estrangeiro.expedicao"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+              <!-- expedicao Validators -->
+              <div *ngIf="expedicao.invalid && (expedicao.dirty || expedicao.touched)"
+                class="alert alert-danger">
+                <div *ngIf="expedicao.errors.required">
+                    O Campo <b>Expedição</b> é obrigatório
+                </div>
+              </div>
+              <!-- End expedicao Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="estado"> Estado </label>
+                <input class="form-control"
+                        type="text"
+                        id="estado"
+                        placeholder="Digite o estado de nascimento do usuário"
+                        formControlName="estado"
+                        [(ngModel)]="novaCarteiraTrabalho.estrangeiro.estado">
+              </div>
+              <!-- estado Validators -->
+              <div *ngIf="estado.invalid && (estado.dirty || estado.touched)"
+                class="alert alert-danger">
+                <div *ngIf="estado.errors.required">
+                    O Campo <b>Estado</b> é obrigatório
+                </div>
+              </div>
+              <!-- End estado Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="observacao"> Observação </label>
+                <textarea class="form-control"
+                        rows="3"
+                        id="observacao"
+                        placeholder="Digite uma observação"
+                        [(ngModel)]="novaCarteiraTrabalho.estrangeiro.observacao"
+                        [ngModelOptions]="{standalone: true}">
+                </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="card-footer">
+      <button type="button"
+              class="btn btn-block btn-primary active"
+              [disabled]="!formGroup.valid"
+              (click)="cadastrarCarteiraTrabalho()">
+              Cadastrar CTPS
+      </button>
+    </div>
+  </div>
+</form>

@@ -21,7 +21,7 @@ namespace CTPSYSTEM.Domain
         /// <summary>
         /// Data que ocorreu o aumeto salarial
         /// </summary>
-        public DateTime DataAumento { get; set; }
+        public DateTimeOffset DataAumento { get; set; }
 
         /// <summary>
         /// Valor de remuneração em decimal

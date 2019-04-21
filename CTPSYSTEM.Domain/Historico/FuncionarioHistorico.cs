@@ -8,6 +8,20 @@ namespace CTPSYSTEM.Domain.Historico
     /// </summary>
     public class FuncionarioHistorico
     {
+        public FuncionarioHistorico()
+        {
+
+        }
+
+        public FuncionarioHistorico(int idEmpresa, int idFuncionario, string nome, string cpf, DateTimeOffset data)
+        {
+            this.IdEmpresa = idEmpresa;
+            this.IdFuncionario = idFuncionario;
+            this.Nome = nome;
+            this.CPF = cpf;
+            this.Data = data;
+        }
+
         /// <summary>
         /// Identificador único do registro de histório no sistema
         /// </summary>

@@ -22,6 +22,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator AnotacaoGeralDetailsModel(AnotacaoGeral anotacaoGeral)
         {
+            if (ReferenceEquals(anotacaoGeral, null))
+            {
+                return null;
+            }
+
             AnotacaoGeralDetailsModel model = new AnotacaoGeralDetailsModel();
 
             model.Id = anotacaoGeral.Id;

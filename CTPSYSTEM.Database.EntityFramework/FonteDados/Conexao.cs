@@ -1,4 +1,5 @@
-﻿using CTPSYSTEM.Domain;
+﻿using CTPSYSTEM.Database.EntityFramework.Configuration;
+using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Enumeradores;
 using CTPSYSTEM.Domain.Historico;
 using Microsoft.EntityFrameworkCore;
@@ -10,16 +11,16 @@ namespace CTPSYSTEM.Database.EntityFramework.FonteDados
     {
         private readonly string sqlServerConnection;
 
-        public Conexao(IConfiguration configuration)
-        {
-            this.sqlServerConnection = configuration.GetConnectionString("SqlServerConnection");
-        }
+        public Conexao(DbContextOptions<Conexao> options)
+            : base(options)
+        {}
 
         public DbSet<AlteracaoSalarial> AlteracaoSalarial { get; private set; }
         public DbSet<AnotacaoGeral> AnotacaoGeral { get; private set; }
         public DbSet<CarteiraTrabalho> CarteiraTrabalho { get; private set; }
         public DbSet<ContratoTrabalho> ContratoTrabalho { get; private set; }
         public DbSet<ContribuicaoSindical> ContribuicaoSindical { get; private set; }
+        public DbSet<FGTS> FGTS { get; set; }
         public DbSet<Empresa> Empresa { get; private set; }
         public DbSet<Endereco> Endereco { get; private set; }
         public DbSet<Estado> Estado { get; private set; }
@@ -34,20 +35,15 @@ namespace CTPSYSTEM.Database.EntityFramework.FonteDados
         public DbSet<EmpresaHistorico> EmpresaHistorico { get; private set; }
         public DbSet<FuncionarioHistorico> FuncionarioHistorico { get; private set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
-            optionsBuilder.UseSqlServer(this.sqlServerConnection);
-            base.OnConfiguring(optionsBuilder);
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var configuration = new Configuration.Configuration();
+
             modelBuilder.ApplyConfiguration<AlteracaoSalarial>(configuration);
             modelBuilder.ApplyConfiguration<AnotacaoGeral>(configuration);
             modelBuilder.ApplyConfiguration<CarteiraTrabalho>(configuration);
             modelBuilder.ApplyConfiguration<ContribuicaoSindical>(configuration);
+            modelBuilder.ApplyConfiguration<FGTS>(configuration);
             modelBuilder.ApplyConfiguration<Empresa>(configuration);
             modelBuilder.ApplyConfiguration<Endereco>(configuration);
             modelBuilder.ApplyConfiguration<Estrangeiro>(configuration);

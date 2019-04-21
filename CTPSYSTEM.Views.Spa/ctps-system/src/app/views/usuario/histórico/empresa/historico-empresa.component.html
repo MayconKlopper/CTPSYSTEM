@@ -1,0 +1,35 @@
+<div *ngFor='let $historicoEmpresa of historicoEmpresaList'>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                    <label class="text-muted"> Nome Fantasia </label>
+                    <p title="Nome Fantasia"> {{ $historicoEmpresa?.nomeFantasia }} </p>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                    <label class="text-muted"> Razão Social </label>
+                    <p title="Razão Social"> {{ $historicoEmpresa?.razaoSocial }} </p>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                    <label class="text-muted"> CNPJ </label>
+                    <p title="CNPJ"> {{ $historicoEmpresa?.cnpj }} </p>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                    <label class="text-muted"> Data de Desvinculação </label>
+                    <p title="Data de Desvinculação"> {{ $historicoEmpresa?.data | date: 'dd/MM/yyyy' }} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+    <li class="page-item active">
+        <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">4</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+</ul>

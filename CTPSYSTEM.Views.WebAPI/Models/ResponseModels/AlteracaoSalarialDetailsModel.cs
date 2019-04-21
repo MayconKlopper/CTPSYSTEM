@@ -19,7 +19,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
         /// <summary>
         /// Data que ocorreu o aumeto salarial
         /// </summary>
-        public DateTime DataAumento { get; set; }
+        public DateTimeOffset DataAumento { get; set; }
 
         /// <summary>
         /// Valor de remuneração em decimal
@@ -43,6 +43,11 @@ namespace CTPSYSTEM.Views.WebAPI.Models.ResponseModels
 
         public static implicit operator AlteracaoSalarialDetailsModel(AlteracaoSalarial alteracaoSalarial)
         {
+            if (ReferenceEquals(alteracaoSalarial, null))
+            {
+                return null;
+            }
+
             AlteracaoSalarialDetailsModel model = new AlteracaoSalarialDetailsModel();
 
             model.Id = alteracaoSalarial.Id;

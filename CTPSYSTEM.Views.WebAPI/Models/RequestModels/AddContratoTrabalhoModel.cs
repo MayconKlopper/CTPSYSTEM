@@ -39,11 +39,6 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         public DateTimeOffset DataAdmissao { get; set; }
 
         /// <summary>
-        /// Data de finalização do contrato de trabalho
-        /// </summary>
-        public DateTimeOffset DataSaida { get; set; }
-
-        /// <summary>
         /// Valor de remuneração em decimal
         /// </summary>
         public decimal Remuneracao { get; set; }
@@ -59,18 +54,23 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         public int FlsFicha { get; set; }
 
         /// <summary>
-        /// Númeor de registro da empresa. OBS: a maioria vem com o valor 0 que é o valor default
+        /// Número de registro da empresa. OBS: a maioria vem com o valor 0 que é o valor default
         /// </summary>
         public int RegistroNumero { get; set; }
 
         public static implicit operator ContratoTrabalho(AddContratoTrabalhoModel model)
         {
+            if (ReferenceEquals(model, null))
+            {
+                return null;
+            }
+
             var contratoTrabalho = new ContratoTrabalho();
             contratoTrabalho.Ativo = true;
             contratoTrabalho.Cargo = model.Cargo;
             contratoTrabalho.CBONumero = model.CBONumero;
-            contratoTrabalho.DataAdmissao = model.DataAdmissao;
-            contratoTrabalho.DataSaida = model.DataSaida;
+            contratoTrabalho.DataAdmissao = DateTimeOffset.Parse(model.DataAdmissao.ToString("dd/MM/yyyy"));
+            contratoTrabalho.DataSaida = null;
             contratoTrabalho.FlsFicha = model.FlsFicha;
             contratoTrabalho.IdCarteiraTrabalho = model.IdCarteiraTrabalho;
             contratoTrabalho.IdEmpresa = model.IdEmpresa;

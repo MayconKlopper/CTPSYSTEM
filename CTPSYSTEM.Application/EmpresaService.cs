@@ -1,6 +1,9 @@
 ﻿using CTPSYSTEM.Domain;
 using CTPSYSTEM.Domain.Dados;
+using CTPSYSTEM.Domain.Historico;
 using CTPSYSTEM.Domain.Servicos;
+
+using System;
 
 namespace CTPSYSTEM.Application
 {
@@ -9,7 +12,8 @@ namespace CTPSYSTEM.Application
         private readonly IEmpresaStorage empresaContext;
         private readonly IEmpresaReadOnlyStorage empresaReadOnlyContext;
 
-        public EmpresaService(IEmpresaStorage empresaContext, IEmpresaReadOnlyStorage empresaReadOnlyContext)
+        public EmpresaService(IEmpresaStorage empresaContext,
+            IEmpresaReadOnlyStorage empresaReadOnlyContext)
         {
             this.empresaContext = empresaContext;
             this.empresaReadOnlyContext = empresaReadOnlyContext;
@@ -57,17 +61,32 @@ namespace CTPSYSTEM.Application
             this.empresaContext.SaveChanges();
         }
 
-        public void DesvincularFuncionario(int idFuncionario)
+        public void Cadastrar(FGTS fgts)
+        {
+            this.empresaContext.Insert(fgts);
+            this.empresaContext.SaveChanges();
+        }
+
+        public void DesvincularFuncionario(int idFuncionario, int idContratoTrabalho)
         {
             var funcionario = this.empresaReadOnlyContext.RecuperaFuncionario(idFuncionario);
+            var empresa = this.empresaReadOnlyContext.RecuperaEmpresa(funcionario.IdEmpresa.Value);
+
+            EmpresaHistorico empresaHistorico = new EmpresaHistorico(empresa.Id, funcionario.Id, empresa.CNPJ, empresa.NomeFantasia, empresa.RazaoSocial, DateTimeOffset.Now);
+            FuncionarioHistorico funcionarioHistorico = new FuncionarioHistorico(empresa.Id, funcionario.Id, funcionario.Nome, funcionario.CPF, DateTimeOffset.Now);
+            this.empresaContext.Insert(empresaHistorico);
+            this.empresaContext.Insert(funcionarioHistorico);
+
             funcionario.IdEmpresa = null;
+            var contratoTrabalho = this.empresaReadOnlyContext.RecuperaContratoTrabalho(idContratoTrabalho);
+            contratoTrabalho.Ativo = false;
+            contratoTrabalho.DataSaida = DateTimeOffset.Now;
 
             this.empresaContext.SaveChanges();
         }
 
-        public void VincularFuncionario(int idFuncionario, int idEmpresa)
+        public void VincularFuncionario(Funcionario funcionario, int idEmpresa)
         {
-            var funcionario = this.empresaReadOnlyContext.RecuperaFuncionario(idFuncionario);
             funcionario.IdEmpresa = idEmpresa;
 
             this.empresaContext.SaveChanges();

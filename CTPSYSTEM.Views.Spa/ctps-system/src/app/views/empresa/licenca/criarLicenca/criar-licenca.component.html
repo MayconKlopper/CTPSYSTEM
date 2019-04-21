@@ -1,0 +1,108 @@
+<h2 class="text-center text-muted"> Funcionário </h2>
+<app-funcionario [funcionario]="selectedFuncionario">
+</app-funcionario>
+
+<h2 class="text-center text-muted"> Cadastrar Licença </h2>
+<form [formGroup]="formGroup">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="dataInicio"> Data de Início </label>
+                <input class="form-control"
+                        type="text"
+                        id="dataInicio"
+                        autocomplete="off"
+                        formControlName="dataInicio"
+                        [(ngModel)]="novaLicenca.dataInicio"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+              <!-- dataInicio Validators -->
+              <div *ngIf="dataInicio.invalid && (dataInicio.dirty || dataInicio.touched)"
+                class="alert alert-danger">
+                <div *ngIf="dataInicio.errors.required">
+                    O Campo <b>Data de Início</b> é obrigatório
+                </div>
+              </div>
+              <!-- End dataInicio Validators -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="dataTermino"> Data de Término </label>
+                <input class="form-control"
+                        type="text"
+                        id="dataTermino"
+                        autocomplete="off"
+                        formControlName="dataTermino"
+                        [(ngModel)]="novaLicenca.dataTermino"
+                        bsDatepicker
+                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+              </div>
+              <!-- dataTermino Validators -->
+              <div *ngIf="dataTermino.invalid && (dataTermino.dirty || dataTermino.touched)"
+                class="alert alert-danger">
+                <div *ngIf="dataTermino.errors.required">
+                    O Campo <b>Data de Término</b> é obrigatório
+                </div>
+              </div>
+              <!-- End dataTermino Validators -->
+            </div>
+        </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                    <label for="codigoPosto"> Código do Posto </label>
+                    <input class="form-control"
+                        type="number"
+                        id="codigoPosto"
+                        placeholder="Digite o código do posto de saúde"
+                        formControlName="codigoPosto"
+                        [(ngModel)]="novaLicenca.codigoPosto">
+                </div>
+                <!-- codigoPosto Validators -->
+                <div *ngIf="codigoPosto.invalid && (codigoPosto.dirty || codigoPosto.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="codigoPosto.errors.required">
+                        O Campo <b>Código do Posto</b> é obrigatório
+                    </div>
+                </div>
+                <!-- End codigoPosto Validators -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                <label for="motivo"> Motivo da licença </label>
+                <textarea class="form-control"
+                        cols="4"
+                        id="motivo"
+                        placeholder="Digite o motivo da licença"
+                        formControlName="motivo"
+                        [(ngModel)]="novaLicenca.motivo">
+                </textarea>
+              </div>
+              <!-- motivo Validators -->
+              <div *ngIf="motivo.invalid && (motivo.dirty || motivo.touched)"
+                class="alert alert-danger">
+                <div *ngIf="motivo.errors.required">
+                    O Campo <b>Motivo da licença</b> é obrigatório
+                </div>
+              </div>
+              <!-- End motivo Validators -->
+            </div>
+          </div>
+      </div>
+      <div class="card-footer">
+        <button type="button"
+                class="btn btn-block btn-primary active"
+                [disabled]="!formGroup.valid"
+                (click)="criarLicenca()">
+                Cadastrar Licença
+        </button>
+      </div>
+    </div>
+</form>

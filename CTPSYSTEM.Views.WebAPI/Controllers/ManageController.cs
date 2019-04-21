@@ -47,7 +47,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [TempData]
         public string StatusMessage { get; set; }
 
-        [HttpGet]
+        [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -68,7 +68,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("Index")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
         {
@@ -107,7 +107,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
+        [HttpPost("SendVerificationEmail")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
         {
@@ -131,7 +131,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+        [HttpGet("ChangePassword")]
         public async Task<IActionResult> ChangePassword()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -150,7 +150,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("ChangePassword")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
@@ -179,7 +179,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return RedirectToAction(nameof(ChangePassword));
         }
 
-        [HttpGet]
+        [HttpGet("SetPassword")]
         public async Task<IActionResult> SetPassword()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -199,7 +199,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("SetPassword")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
         {
@@ -227,7 +227,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return RedirectToAction(nameof(SetPassword));
         }
 
-        [HttpGet]
+        [HttpGet("ExternalLogins")]
         public async Task<IActionResult> ExternalLogins()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -246,7 +246,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("LinkLogin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LinkLogin(string provider)
         {
@@ -259,7 +259,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return new ChallengeResult(provider, properties);
         }
 
-        [HttpGet]
+        [HttpGet("LinkLoginCallback")]
         public async Task<IActionResult> LinkLoginCallback()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -287,7 +287,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return RedirectToAction(nameof(ExternalLogins));
         }
 
-        [HttpPost]
+        [HttpPost("RemoveLogin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel model)
         {
@@ -308,7 +308,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return RedirectToAction(nameof(ExternalLogins));
         }
 
-        [HttpGet]
+        [HttpGet("TwoFactorAuthentication")]
         public async Task<IActionResult> TwoFactorAuthentication()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -327,7 +327,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpGet("Disable2faWarning")]
         public async Task<IActionResult> Disable2faWarning()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -344,7 +344,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View(nameof(Disable2fa));
         }
 
-        [HttpPost]
+        [HttpPost("Disable2fa")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Disable2fa()
         {
@@ -364,7 +364,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return RedirectToAction(nameof(TwoFactorAuthentication));
         }
 
-        [HttpGet]
+        [HttpGet("EnableAuthenticator")]
         public async Task<IActionResult> EnableAuthenticator()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -389,7 +389,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("EnableAuthenticator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EnableAuthenticator(EnableAuthenticatorViewModel model)
         {
@@ -421,13 +421,13 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return RedirectToAction(nameof(GenerateRecoveryCodes));
         }
 
-        [HttpGet]
+        [HttpGet("ResetAuthenticatorWarning")]
         public IActionResult ResetAuthenticatorWarning()
         {
             return View(nameof(ResetAuthenticator));
         }
 
-        [HttpPost]
+        [HttpPost("ResetAuthenticator")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetAuthenticator()
         {
@@ -444,7 +444,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             return RedirectToAction(nameof(EnableAuthenticator));
         }
 
-        [HttpGet]
+        [HttpGet("GenerateRecoveryCodes")]
         public async Task<IActionResult> GenerateRecoveryCodes()
         {
             var user = await _userManager.GetUserAsync(User);

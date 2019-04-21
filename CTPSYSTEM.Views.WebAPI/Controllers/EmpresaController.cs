@@ -8,6 +8,8 @@ using CTPSYSTEM.Views.WebAPI.Models.ResponseModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CTPSYSTEM.Views.WebAPI.Controllers
 {
@@ -18,11 +20,81 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
     {
         private readonly IEmpresaService empresaService;
         private readonly IEmpresaReadOnlyStorage empresaReadOnlyStorage;
+        private readonly IFuncionarioGovernoService funcionarioGovernoService;
+        private readonly IHashService hashService;
+        private readonly IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage;
 
-        public EmpresaController(IEmpresaService empresaService, IEmpresaReadOnlyStorage empresaReadOnlyStorage)
+        public EmpresaController(IEmpresaService empresaService,
+            IEmpresaReadOnlyStorage empresaReadOnlyStorage,
+            IFuncionarioGovernoService funcionarioGovernoService,
+            IFuncionarioReadOnlyStorage funcionarioReadOnlyStorage,
+            IHashService hashService)
         {
             this.empresaService = empresaService;
             this.empresaReadOnlyStorage = empresaReadOnlyStorage;
+            this.funcionarioGovernoService = funcionarioGovernoService;
+            this.funcionarioReadOnlyStorage = funcionarioReadOnlyStorage;
+            this.hashService = hashService;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("CadastarEmpresa")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult CadastarEmpresa([FromBody] AddEmpresaModel model)
+        {
+            try
+            {
+                Empresa empresa = model;
+                this.funcionarioGovernoService.Cadastrar(empresa);
+                MessageModel message = new MessageModel(1, Mensagens.EmpresaCriadaSucesso);
+                return Ok(message);
+            }
+            catch (Exception ex)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
+
+        [HttpGet("RecuperaFuncionarios/{idEmpresa}")]
+        [ProducesResponseType(typeof(List<FuncionarioDetailsModel>), 200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult RecuperaFuncionarios(int idEmpresa)
+        {
+            try
+            {
+                List<FuncionarioDetailsModel> modelList = this.empresaReadOnlyStorage.RecuperaFuncionarios(idEmpresa)
+                    .Select(funcionario => (FuncionarioDetailsModel)funcionario)
+                    .ToList();
+
+                return Ok(modelList);
+            }
+            catch (Exception ex)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
+
+        [HttpGet("RecuperaHistoricoFuncionarios/{idEmpresa}")]
+        [ProducesResponseType(typeof(List<FuncionarioHistoricoDetailsModel>), 200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult RecuperaHistoricoFuncionarios(int idEmpresa)
+        {
+            try
+            {
+                List<FuncionarioHistoricoDetailsModel> modelList = this.empresaReadOnlyStorage.RecuperaHistoricoFuncionarios(idEmpresa)
+                    .Select(funcionario => (FuncionarioHistoricoDetailsModel)funcionario)
+                    .ToList();
+
+                return Ok(modelList);
+            }
+            catch (Exception ex)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
         }
 
         [HttpGet("RecuperaEmpresa/{CNPJ}")]
@@ -48,17 +120,20 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [ProducesResponseType(typeof(MessageModel), 400)]
         public ActionResult CadastrarContratoTrabalho([FromBody] AddContratoTrabalhoModel model)
         {
+            MessageModel message = new MessageModel();
+
             try
             {
                 ContratoTrabalho contratoTrabalho = model;
 
                 this.empresaService.Cadastrar(contratoTrabalho);
 
-                return Ok();
+                message = new MessageModel(1, Mensagens.ContratoTrabalhoCriadoSucesso);
+                return Ok(message);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
             }
         }
@@ -93,6 +168,26 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                 ContribuicaoSindical contribuicaoSindical = model;
 
                 this.empresaService.Cadastrar(contribuicaoSindical);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                return BadRequest(message);
+            }
+        }
+
+        [HttpPost("CadastrarFGTS")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(MessageModel), 400)]
+        public ActionResult CadastrarFGTS([FromBody] AddFGTSModel model)
+        {
+            try
+            {
+                FGTS fgts = model;
+
+                this.empresaService.Cadastrar(fgts);
 
                 return Ok();
             }
@@ -190,31 +285,55 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         {
             try
             {
-                this.empresaService.VincularFuncionario(model.IdFuncionario, model.IdEmpresa);
+                MessageModel message = new MessageModel();
 
-                return Ok();
-            }
-            catch (Exception)
-            {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                Funcionario funcionario = this.funcionarioReadOnlyStorage.RecuperaFuncionario(model.CPF);
+
+                if (ReferenceEquals(funcionario, null))
+                {
+                    message = new MessageModel(1, "Funcionário Não encontrado. Por favor verifique o CPF");
+                }
+                else if (!ReferenceEquals(funcionario.IdEmpresa, null))
+                {
+                    message = new MessageModel(1, "O Funcionário já está vinculado a outra empresa.");
+                }
+                else
+                {
+                    int idCarteiraTrabalho = funcionario.CarteiraTrabalho.FirstOrDefault(carteiraTrabalho => carteiraTrabalho.Ativo).Id;
+
+                    this.hashService.verificaValidadeHash(model.HashCode, funcionario.Id, idCarteiraTrabalho);
+
+                    this.empresaService.VincularFuncionario(funcionario, model.IdEmpresa);
+
+                    message = new MessageModel(2, "O Funcionário foi vinculado a sua empresa com sucesso. Crie um registro de contrato de trabalho");
+                    return Ok(message);
+                }
+
                 return BadRequest(message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPost("DesvincularFuncionario")]
         [ProducesResponseType(200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
-        public ActionResult DesvincularFuncionario([FromBody] int idFuncionario)
+        public ActionResult DesvincularFuncionario([FromBody] DesvincularFuncionarioModel model)
         {
+            MessageModel message = new MessageModel();
+
             try
             {
-                this.empresaService.DesvincularFuncionario(idFuncionario);
+                this.empresaService.DesvincularFuncionario(model.IdFuncionario, model.IdContratoTrabalho);
 
-                return Ok();
+                message = new MessageModel(2, "Funcionário teve seu contrato encerrado e foi desvinculado da empresa.");
+                return Ok(message);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
             }
         }

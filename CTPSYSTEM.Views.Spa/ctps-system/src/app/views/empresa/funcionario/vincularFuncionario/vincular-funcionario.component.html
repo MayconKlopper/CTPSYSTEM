@@ -1,0 +1,58 @@
+<h2 class="text-center text-muted"> Vincular Funcionário </h2>
+<form [formGroup]="formGroup">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                    <label for="cpf"> CPF </label>
+                    <input class="form-control"
+                        type="text"
+                        id="cpf"
+                        placeholder="111.111.111-11"
+                        formControlName="cpf"
+                        [(ngModel)]="vincularFuncionarioModel.cpf"
+                        mask="000.000.000-00">
+                </div>
+                <!-- CPF Validators -->
+                <div *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="cpf.errors.required">
+                        O Campo <b>CPF</b> é obrigatório
+                    </div>
+                </div>
+                <!-- End CPF Validators -->
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="form-group">
+                  <label for="hashCode"> Chave </label>
+                  <input class="form-control"
+                      type="text"
+                      id="hashCode"
+                      placeholder="Digite a Chave criptografada"
+                      formControlName="hashCode"
+                      [(ngModel)]="vincularFuncionarioModel.hashCode">
+              </div>
+              <!-- hashCode Validators -->
+              <div *ngIf="hashCode.invalid && (hashCode.dirty || hashCode.touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="hashCode.errors.required">
+                      O Campo <b>Chve</b> é obrigatório
+                  </div>
+              </div>
+              <!-- End hashCode Validators -->
+          </div>
+      </div>
+      </div>
+      <div class="card-footer">
+        <button type="button"
+                class="btn btn-block btn-primary active"
+                [disabled]="!formGroup.valid"
+                (click)="vincularFuncionario()">
+                Vincular Funcionário
+        </button>
+      </div>
+    </div>
+</form>
