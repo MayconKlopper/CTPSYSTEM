@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
 import { CriarHash, HashDetalhes } from './Models';
+import { environment } from '../../environments/environment';
 
 
 
@@ -10,7 +11,7 @@ import { CriarHash, HashDetalhes } from './Models';
     providedIn: 'root'
 })
 export class HashService {
-    private APIHash = 'http://localhost:5001/api/Hash/';
+    private APIHash = environment.api + '/Hash/';
 
     constructor(private httpClient: HttpClient,
         private toasterService: ToastrService) {}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
 
 import {
     ContratoTrabalhoDetalhes,
@@ -10,7 +11,7 @@ import {
 
 @Injectable()
 export class UsuarioService {
-    private API = 'http://localhost:5001/api/Funcionario/';
+    private API = environment.api + 'Funcionario/';
 
     constructor(private httpClient: HttpClient,
         private router: Router,

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
 import {
     CriarContratoTrabalho,
     CriarEmpresa,
     CriarContribuicaoSindical,
     CriarFerias,
-    CriarAlteracaoSalarial, 
+    CriarAlteracaoSalarial,
     CriarAnotacaoGeral,
     CriarLicenca,
     CriarInternacao,
@@ -17,7 +18,7 @@ import {
 
 @Injectable({providedIn: 'root'})
 export class EmpresaService {
-    private API = 'http://localhost:5001/api/Empresa/';
+    private API = environment.api + 'Empresa/';
 
     constructor(private httpClient: HttpClient,
         private router: Router,

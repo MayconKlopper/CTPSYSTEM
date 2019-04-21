@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CriarCarteiraTrabalho } from '../Models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class FuncionarioGovernoService {
-    private API = 'http://localhost:5001/api/FuncionarioGoverno/';
+    private API = environment.api + 'FuncionarioGoverno/';
 
     constructor(private httpClient: HttpClient) {}
 

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class UtilsService {
-    //private API = 'http://localhost:5001/api/Utils/';
-    private API = 'https://ctpsystem.azurewebsites.net/api/Utils/';
+    private API = environment.api + 'Utils/';
 
     constructor(private http: HttpClient) {
     }

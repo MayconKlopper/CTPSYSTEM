@@ -3,10 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { LogIn, Register, User } from './Models';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AccountService {
-    private API = 'http://localhost:5001/api/Account/';
+    private API = environment.api + '/Account/';
 
     constructor(private router: Router, private http: HttpClient) {
     }
