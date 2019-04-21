@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AccountService {
-    private API = environment.api + '/Account/';
+    private API = environment.api + 'Account/';
 
     constructor(private router: Router, private http: HttpClient) {
     }

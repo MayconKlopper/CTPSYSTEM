@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
     providedIn: 'root'
 })
 export class HashService {
-    private APIHash = environment.api + '/Hash/';
+    private APIHash = environment.api + 'Hash/';
 
     constructor(private httpClient: HttpClient,
         private toasterService: ToastrService) {}
