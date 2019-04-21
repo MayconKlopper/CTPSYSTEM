@@ -17,7 +17,7 @@ import { EmpresaService } from '../../empresa.service';
     templateUrl: './criar-alteracao-salarial.component.html'
 })
 export class CriarAlteracaoSalarialComponent implements OnInit {
-    private selectedFuncionario: FuncionarioDetalhes;
+    public selectedFuncionario: FuncionarioDetalhes;
     public novaAlteracaoSalarial: CriarAlteracaoSalarial = new CriarAlteracaoSalarial;
 
     public formGroup = this.formBuilder.group({

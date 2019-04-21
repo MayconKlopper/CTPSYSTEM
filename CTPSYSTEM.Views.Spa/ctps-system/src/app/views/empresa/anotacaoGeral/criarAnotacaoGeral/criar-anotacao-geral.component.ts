@@ -14,7 +14,7 @@ import { EmpresaService } from '../../empresa.service';
     templateUrl: './criar-anotacao-geral.component.html'
 })
 export class CriarAnotacaoGeralComponent implements OnInit {
-    private selectedFuncionario: FuncionarioDetalhes;
+    public selectedFuncionario: FuncionarioDetalhes;
     public novaAnotacaoGeral: CriarAnotacaoGeral = new CriarAnotacaoGeral;
 
     public formGroup = this.formBuilder.group({

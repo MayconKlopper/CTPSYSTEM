@@ -76,23 +76,23 @@
           <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="form-group">
-                <label for="Motivo"> Motivo da licença </label>
+                <label for="motivo"> Motivo da licença </label>
                 <textarea class="form-control"
                         cols="4"
-                        id="Motivo"
+                        id="motivo"
                         placeholder="Digite o motivo da licença"
-                        formControlName="Motivo"
-                        [(ngModel)]="novaLicenca.Motivo">
+                        formControlName="motivo"
+                        [(ngModel)]="novaLicenca.motivo">
                 </textarea>
               </div>
-              <!-- Motivo Validators -->
-              <div *ngIf="Motivo.invalid && (Motivo.dirty || Motivo.touched)"
+              <!-- motivo Validators -->
+              <div *ngIf="motivo.invalid && (motivo.dirty || motivo.touched)"
                 class="alert alert-danger">
-                <div *ngIf="Motivo.errors.required">
+                <div *ngIf="motivo.errors.required">
                     O Campo <b>Motivo da licença</b> é obrigatório
                 </div>
               </div>
-              <!-- End Motivo Validators -->
+              <!-- End motivo Validators -->
             </div>
           </div>
       </div>

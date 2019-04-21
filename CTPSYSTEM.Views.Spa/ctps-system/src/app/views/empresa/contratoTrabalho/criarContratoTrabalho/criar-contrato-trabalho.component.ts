@@ -18,8 +18,8 @@ import { EmpresaService } from '../../empresa.service';
     templateUrl: './criar-contrato-trabalho.component.html'
 })
 export class CriarContratoTrabalhoComponent implements OnInit {
-    private selectedFuncionario: FuncionarioDetalhes;
-    private usuarioLogado: User;
+    public selectedFuncionario: FuncionarioDetalhes;
+    public usuarioLogado: User;
     public novoContratoTrabalho: CriarContratoTrabalho = new CriarContratoTrabalho;
 
     public formGroup = this.formBuilder.group({

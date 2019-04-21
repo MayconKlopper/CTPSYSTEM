@@ -17,20 +17,20 @@ import { EmpresaService } from '../../empresa.service';
     templateUrl: './criar-licenca.component.html'
 })
 export class CriarLicencaComponent implements OnInit {
-    private selectedFuncionario: FuncionarioDetalhes;
+    public selectedFuncionario: FuncionarioDetalhes;
     public novaLicenca: CriarLicenca = new CriarLicenca;
 
     public formGroup = this.formBuilder.group({
         dataInicio: ['dataInicio', Validators.required],
         dataTermino: ['dataTermino', Validators.required],
         codigoPosto: ['codigoPosto', Validators.required],
-        Motivo: ['remuneracao', Validators.required]
+        motivo: ['motivo', Validators.required]
     });
 
     public get dataInicio() { return this.formGroup.get('dataInicio'); }
     public get dataTermino() { return this.formGroup.get('dataTermino'); }
     public get codigoPosto() { return this.formGroup.get('codigoPosto'); }
-    public get Motivo() { return this.formGroup.get('Motivo'); }
+    public get motivo() { return this.formGroup.get('motivo'); }
 
     constructor(private empresaService: EmpresaService,
         private toasterService: ToastrService,

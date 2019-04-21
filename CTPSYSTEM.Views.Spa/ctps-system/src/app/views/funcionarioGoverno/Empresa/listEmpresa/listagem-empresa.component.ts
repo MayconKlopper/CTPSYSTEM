@@ -6,7 +6,7 @@ import { EmpresaDetalhes, EstadoSigla } from '../../../Models';
     templateUrl: './listagem-empresa.component.html'
 })
 export class ListagemEmpresaComponent implements OnInit {
-    private empresaList: Array<EmpresaDetalhes>;
+    public empresaList: Array<EmpresaDetalhes>;
 
     constructor() { }
 

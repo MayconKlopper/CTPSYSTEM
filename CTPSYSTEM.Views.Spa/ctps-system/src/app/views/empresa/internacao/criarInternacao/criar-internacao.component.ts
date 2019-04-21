@@ -17,7 +17,7 @@ import { EmpresaService } from '../../empresa.service';
     templateUrl: './criar-internacao.component.html'
 })
 export class CriarInternacaoComponent implements OnInit {
-    private selectedFuncionario: FuncionarioDetalhes;
+    public selectedFuncionario: FuncionarioDetalhes;
     public novaInternacao: CriarInternacao = new CriarInternacao;
 
     public formGroup = this.formBuilder.group({

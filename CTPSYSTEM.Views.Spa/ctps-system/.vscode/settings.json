@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/a2a88860-ffd5-4f4c-9545-853259eb7bc6/resourceGroups/CTPSYSTEM/providers/Microsoft.Web/sites/CTPSYSTEM-View",
+    "appService.deploySubpath": ""
+}

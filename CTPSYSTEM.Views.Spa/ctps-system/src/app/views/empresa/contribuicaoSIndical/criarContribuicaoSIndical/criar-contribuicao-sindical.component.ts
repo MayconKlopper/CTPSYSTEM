@@ -12,7 +12,7 @@ import { EmpresaService } from '../../empresa.service';
     templateUrl: './criar-contribuicao-sindical.component.html'
 })
 export class CriarContribuicaoSindicalComponent implements OnInit {
-    private selectedFuncionario: FuncionarioDetalhes;
+    public selectedFuncionario: FuncionarioDetalhes;
     public novaContribuicaoSindical: CriarContribuicaoSindical = new CriarContribuicaoSindical;
 
     public formGroup = this.formBuilder.group({

@@ -16,7 +16,7 @@ import { UtilsService } from '../../../../Helpers/utils.service';
     templateUrl: './criar-FGTS.component.html'
 })
 export class CriarFGTSComponent implements OnInit {
-    private selectedFuncionario: FuncionarioDetalhes;
+    public selectedFuncionario: FuncionarioDetalhes;
     public novoFGTS: CriarFGTS = new CriarFGTS;
     public estadoSiglaList;
 

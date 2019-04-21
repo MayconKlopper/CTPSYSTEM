@@ -17,7 +17,7 @@ import { EmpresaService } from '../../empresa.service';
     templateUrl: './criar-ferias.component.html'
 })
 export class CriarFeriasComponent implements OnInit {
-    private selectedFuncionario: FuncionarioDetalhes;
+    public selectedFuncionario: FuncionarioDetalhes;
     public novaFerias: CriarFerias = new CriarFerias;
 
     public formGroup = this.formBuilder.group({
