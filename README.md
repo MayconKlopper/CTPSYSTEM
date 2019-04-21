@@ -1,6 +1,18 @@
 # CTPSYSTEM
 Sistema de automação de carteira de trabalho (CTPS)
 
-Template: https://twanoo67.github.io/ngx-admin-lte/components/AppHeaderComponent.html
+## Tecnologias
 
-Demo Template: https://adminlte.io/themes/AdminLTE/index.html
+### .Net Core 2.1
+
+### WEB API
+
+### Angular 7
+
+### Entity Framework Core
+
+### Identity Core
+
+### JWT (Jason WEB Token)/Bearer Authentication
+
+### Microsoft DependencyInjection
