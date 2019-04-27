@@ -879,4 +879,7 @@
             </summary>
         </member>
     </members>
+    <PropertyGroup>
+      <EnableMSDeployAppOffline>true</EnableMSDeployAppOffline>
+    </PropertyGroup>
 </doc>

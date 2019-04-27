@@ -38,7 +38,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("CadastarEmpresa")]
+        [HttpPost("CadastrarEmpresa")]
         [ProducesResponseType(200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
         public ActionResult CadastarEmpresa([FromBody] AddEmpresaModel model)

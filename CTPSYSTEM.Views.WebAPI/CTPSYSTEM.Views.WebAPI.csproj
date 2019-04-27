@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20190422003545_AddAspnetRolesSeed.cs" />
+    <Compile Remove="Data\Migrations\20190422003545_AddAspnetRolesSeed.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
