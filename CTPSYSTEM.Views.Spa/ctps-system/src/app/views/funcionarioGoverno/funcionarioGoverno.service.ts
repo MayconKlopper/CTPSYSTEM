@@ -13,6 +13,10 @@ export class FuncionarioGovernoService {
         return this.httpClient.get(this.API + 'RecuperaFuncionario');
     }
 
+    public recuperaEmpresas() {
+        return this.httpClient.get(this.API + 'RecuperaEmpresa');
+    }
+
     public cadastrarCarteiraTrabalho(novaCarteiraTrabalho: CriarCarteiraTrabalho) {
         return this.httpClient.post(this.API + 'CadastarCarteiraTrabalho', novaCarteiraTrabalho);
     }

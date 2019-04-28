@@ -133,7 +133,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                message = new MessageModel(1, Mensagens.ErroGenerico);
+                message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
             }
         }
@@ -153,7 +153,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             catch (Exception)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
             }
         }
@@ -173,7 +173,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             catch (Exception)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
             }
         }
@@ -193,7 +193,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             catch (Exception)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
             }
         }
@@ -213,7 +213,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             catch (Exception)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
             }
         }
@@ -233,7 +233,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             catch (Exception)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
             }
         }
@@ -253,7 +253,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             catch (Exception)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
             }
         }
@@ -273,7 +273,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             catch (Exception)
             {
-                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
+                MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
             }
         }
