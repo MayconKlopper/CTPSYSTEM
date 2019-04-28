@@ -69,7 +69,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
             contratoTrabalho.Ativo = true;
             contratoTrabalho.Cargo = model.Cargo;
             contratoTrabalho.CBONumero = model.CBONumero;
-            contratoTrabalho.DataAdmissao = DateTimeOffset.Parse(model.DataAdmissao.ToString("dd/MM/yyyy"));
+            contratoTrabalho.DataAdmissao = model.DataAdmissao;
             contratoTrabalho.DataSaida = null;
             contratoTrabalho.FlsFicha = model.FlsFicha;
             contratoTrabalho.IdCarteiraTrabalho = model.IdCarteiraTrabalho;

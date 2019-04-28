@@ -47,7 +47,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
             AlteracaoSalarial alteracaoSalarial = new AlteracaoSalarial();
 
             alteracaoSalarial.Cargo = model.Cargo;
-            alteracaoSalarial.DataAumento = DateTimeOffset.Parse(model.DataAumento.ToString("dd/MM/yyyy"));
+            alteracaoSalarial.DataAumento = model.DataAumento;
             alteracaoSalarial.Motivo = model.Motivo;
             alteracaoSalarial.Remuneracao = model.Remuneracao;
             alteracaoSalarial.RemuneracaoExtenso = model.RemuneracaoExtenso;

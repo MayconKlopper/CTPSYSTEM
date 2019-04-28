@@ -48,7 +48,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
             FGTS fgts = new FGTS();
 
             fgts.IdContratoTrabalho = model.IdContratoTrabalho;
-            fgts.Opcao = DateTime.Parse(model.Opcao.ToString("dd/MM/yyyy")); ;
+            fgts.Opcao = model.Opcao;
             fgts.Retratacao = model.Retratacao;
             fgts.BancoDepositario = model.BancoDepositario;
             fgts.Agencia = model.Agencia;

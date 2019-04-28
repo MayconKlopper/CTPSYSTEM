@@ -46,7 +46,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
             funcionario.CPF = model.CPF;
             funcionario.LocalNascimento = new LocalNascimento();
             funcionario.LocalNascimento.Cidade = model.Cidade;
-            funcionario.LocalNascimento.Data = DateTime.Parse(model.Data.ToString("dd/MM/yyyy"));
+            funcionario.LocalNascimento.Data = model.Data;
             funcionario.LocalNascimento.IdEstado = model.IdEstado;
 
             return funcionario;

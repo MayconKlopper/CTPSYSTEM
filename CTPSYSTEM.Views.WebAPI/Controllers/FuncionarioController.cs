@@ -43,7 +43,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                MessageModel message = new MessageModel(1, ex.Message);
+                MessageModel message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
             }
         }

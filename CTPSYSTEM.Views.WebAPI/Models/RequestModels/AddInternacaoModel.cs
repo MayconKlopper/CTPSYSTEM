@@ -46,8 +46,8 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
 
             Internacao internacao = new Internacao();
 
-            internacao.DataAlta = DateTimeOffset.Parse(model.DataAlta.ToString("dd/MM/yyyy"));
-            internacao.DataInternacao = DateTimeOffset.Parse(model.DataInternacao.ToString("dd/MM/yyyy"));
+            internacao.DataAlta = model.DataAlta;
+            internacao.DataInternacao = model.DataInternacao;
             internacao.Hospital = model.Hospital;
             internacao.Matricula = model.Matricula;
             internacao.Registro = model.Registro;
