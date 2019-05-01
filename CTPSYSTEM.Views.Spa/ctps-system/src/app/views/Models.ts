@@ -161,7 +161,7 @@ export class CriarFGTS {
 
     public bancoDepositario: string;
 
-    public agencia?: number;
+    public agencia?: string;
 
     public praca: string;
 

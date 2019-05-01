@@ -50,6 +50,7 @@ export class CriarFGTSComponent implements OnInit {
     }
 
     criarFGTS() {
+        debugger
         this.novoFGTS.idContratoTrabalho = this.selectedFuncionario.idContratoTrabalho;
         this.empresaService.cadastrarFGTS(this.novoFGTS).subscribe(
             (sucesso) => {

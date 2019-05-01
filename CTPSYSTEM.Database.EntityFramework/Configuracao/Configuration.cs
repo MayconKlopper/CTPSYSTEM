@@ -233,6 +233,7 @@ namespace CTPSYSTEM.Database.EntityFramework.Configuration
                    .IsRequired();
 
             builder.Property(fgts => fgts.Agencia)
+                   .HasMaxLength(100)
                    .IsRequired(false);
 
             builder.Property(fgts => fgts.Praca)

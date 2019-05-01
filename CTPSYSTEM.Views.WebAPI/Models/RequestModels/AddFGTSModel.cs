@@ -31,7 +31,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         /// <summary>
         /// Agência do banco depositário
         /// </summary>
-        public int? Agencia { get; set; }
+        public string Agencia { get; set; }
 
         /// <summary>
         /// Cidade onde está situada a empresa
