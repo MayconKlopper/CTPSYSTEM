@@ -151,7 +151,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
@@ -171,7 +171,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
@@ -191,7 +191,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
@@ -211,7 +211,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
@@ -231,7 +231,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
@@ -251,7 +251,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
@@ -261,7 +261,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
         [HttpPost("CadastrarInternacao")]
         [ProducesResponseType(200)]
         [ProducesResponseType(typeof(MessageModel), 400)]
-        public ActionResult CadastrarLicenca([FromBody] AddInternacaoModel model)
+        public ActionResult CadastrarInternacao([FromBody] AddInternacaoModel model)
         {
             try
             {
@@ -271,7 +271,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageModel message = new MessageModel(1, ex.Message);
                 return BadRequest(message);

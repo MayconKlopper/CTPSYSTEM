@@ -41,7 +41,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         /// <summary>
         /// Sigla do estado onde está situada a empresa
         /// </summary>
-        public EstadoSigla Estado { get; set; }
+        public string Estado { get; set; }
 
         public static implicit operator FGTS (AddFGTSModel model)
         {
@@ -53,7 +53,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
             fgts.BancoDepositario = model.BancoDepositario;
             fgts.Agencia = model.Agencia;
             fgts.Praca = model.Praca;
-            fgts.Estado = model.Estado;
+            fgts.Estado = Enum.Parse<EstadoSigla>(model.Estado);
 
             return fgts;
         }
