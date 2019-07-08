@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ToastrService } from 'ngx-toastr';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -28,11 +29,6 @@ export class CriarCarteiraTrabalhoComponent implements OnInit {
         numeroDocumento: ['numeroDocumento', Validators.required],
         filiacaoMae: ['filiacaoMae', Validators.required],
         filiacaoPai: ['filiacaoPai', Validators.required],
-        //estrangeiro
-        // chegada: ['chegada', Validators.required],
-        // documentoIdentidade: ['documentoIdentidade', Validators.required],
-        // expedicao: ['expedicao', Validators.required],
-        // estado: ['estado', Validators.required]
     });
 
     public get numero() { return this.formGroup.get('numero'); }
@@ -48,6 +44,7 @@ export class CriarCarteiraTrabalhoComponent implements OnInit {
     public get observacao() { return this.formGroup.get('observacao'); }
 
     constructor(private funcionarioGovernoService: FuncionarioGovernoService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private formBuilder: FormBuilder,
         private localeService: BsLocaleService,
         private toasterService: ToastrService) { }
@@ -76,15 +73,19 @@ export class CriarCarteiraTrabalhoComponent implements OnInit {
     }
 
     cadastrarCarteiraTrabalho() {
+        this.ngxUiLoaderService.start();
         this.novaCarteiraTrabalho.idFuncionario = this.funcionarioSelecionado.id;
         this.funcionarioGovernoService.cadastrarCarteiraTrabalho(this.novaCarteiraTrabalho).subscribe(
             (sucesso) => {
                 this.toasterService.success(`CTPS cadastrada com sucesso para o usuário ${this.funcionarioSelecionado.nome}`, 'Sucesso');
+                this.novaCarteiraTrabalho = new CriarCarteiraTrabalho();
             },
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

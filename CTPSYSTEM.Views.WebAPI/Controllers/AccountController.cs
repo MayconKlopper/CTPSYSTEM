@@ -151,12 +151,11 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                     return Ok(user);
                 }
 
-                message = new MessageModel(1, Mensagens.ErroGenerico);
                 return BadRequest(message);
             }
             catch (Exception ex)
             {
-                message = new MessageModel(1, Mensagens.ErroGenerico);
+                message = new MessageModel(1, ex.Message);
                 return BadRequest(message);
             }
         }

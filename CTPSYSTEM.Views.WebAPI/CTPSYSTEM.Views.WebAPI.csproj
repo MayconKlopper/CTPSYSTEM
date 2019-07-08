@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20190422003545_AddAspnetRolesSeed.cs" />
+    <Compile Remove="Data\Migrations\20190422003545_AddAspnetRolesSeed.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190428005837_AddDefaultAdminUser.cs" />
+    <Compile Remove="Data\Migrations\20190428005837_AddDefaultAdminUser.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

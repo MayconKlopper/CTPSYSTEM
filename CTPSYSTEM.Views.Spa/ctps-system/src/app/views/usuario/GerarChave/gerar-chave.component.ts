@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../usuario.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     CriarHash,
@@ -18,6 +19,7 @@ export class GerarChaveComponent implements OnInit {
     public usuarioLogado: User;
 
     constructor(private usuarioService: UsuarioService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private toasterservice: ToastrService,
         private hashService: HashService) { }
 
@@ -26,6 +28,7 @@ export class GerarChaveComponent implements OnInit {
     }
 
     gerarChave() {
+        this.ngxUiLoaderService.start();
         this.criarHash.idFuncionario = this.usuarioLogado.funcionario.id;
         this.criarHash.idCarteiraTrabalho = this.usuarioLogado.funcionario.idCarteiraTrabalho;
         this.hashService.gerarChave(this.criarHash).subscribe(
@@ -36,7 +39,9 @@ export class GerarChaveComponent implements OnInit {
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterservice.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

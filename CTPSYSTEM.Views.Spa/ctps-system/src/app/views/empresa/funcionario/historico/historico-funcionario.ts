@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import { FuncionarioHistorico, User, MessageModel } from '../../../Models';
 import { EmpresaService } from '../../empresa.service';
@@ -14,6 +15,7 @@ export class HistoricoFuncionarioComponent implements OnInit {
     public usuarioLogado: User;
 
     constructor(private empresaService: EmpresaService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private accountService: AccountService,
         private toasterService: ToastrService) {
             this.usuarioLogado = this.accountService.recuperausuarioLogado();
@@ -25,6 +27,7 @@ export class HistoricoFuncionarioComponent implements OnInit {
         }
 
         public recuperaFuncionarioHistorico(idEmpresa: number) {
+            this.ngxUiLoaderService.start();
             this.empresaService.recuperaFuncionarioHistorico(idEmpresa).subscribe(
                 (sucesso) => {
                     this.funcionarioList = sucesso as Array<FuncionarioHistorico>;
@@ -32,7 +35,9 @@ export class HistoricoFuncionarioComponent implements OnInit {
                 (erro) => {
                     const mensagemErro = erro as MessageModel;
                     this.toasterService.error(mensagemErro.texto, 'Erro');
-                }
+                    this.ngxUiLoaderService.stop();
+                },
+                () => { this.ngxUiLoaderService.stop(); }
             );
         }
 }

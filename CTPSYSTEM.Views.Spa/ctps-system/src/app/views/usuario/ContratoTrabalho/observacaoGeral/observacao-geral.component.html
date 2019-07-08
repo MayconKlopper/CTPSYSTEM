@@ -6,7 +6,8 @@
 
 <h2 class="text-center text-muted"> Anotações Gerais </h2>
 <hr>
-<table class="table table-striped table-bordered table-dark">
+<h1 *ngIf="anotacaoGeralList.length == 0" class="text-center text-muted"> Não há anotações gerais registrados </h1>
+<table *ngIf="anotacaoGeralList.length > 0" class="table table-striped table-bordered table-dark">
     <thead class="bg-gray-900">
         <tr class="row" style="margin: 0px;">
             <th class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">Anotação</th>
@@ -18,13 +19,4 @@
         </tr>
     </tbody>
 </table>
-<ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-    <li class="page-item active">
-        <a class="page-link" href="#">1</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">4</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul>
+<ngx-ui-loader></ngx-ui-loader>

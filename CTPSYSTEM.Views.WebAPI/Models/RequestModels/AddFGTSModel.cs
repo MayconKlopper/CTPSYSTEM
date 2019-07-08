@@ -31,7 +31,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         /// <summary>
         /// Agência do banco depositário
         /// </summary>
-        public int? Agencia { get; set; }
+        public string Agencia { get; set; }
 
         /// <summary>
         /// Cidade onde está situada a empresa
@@ -41,19 +41,19 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
         /// <summary>
         /// Sigla do estado onde está situada a empresa
         /// </summary>
-        public EstadoSigla Estado { get; set; }
+        public string Estado { get; set; }
 
         public static implicit operator FGTS (AddFGTSModel model)
         {
             FGTS fgts = new FGTS();
 
             fgts.IdContratoTrabalho = model.IdContratoTrabalho;
-            fgts.Opcao = DateTime.Parse(model.Opcao.ToString("dd/MM/yyyy")); ;
+            fgts.Opcao = model.Opcao;
             fgts.Retratacao = model.Retratacao;
             fgts.BancoDepositario = model.BancoDepositario;
             fgts.Agencia = model.Agencia;
             fgts.Praca = model.Praca;
-            fgts.Estado = model.Estado;
+            fgts.Estado = Enum.Parse<EstadoSigla>(model.Estado);
 
             return fgts;
         }

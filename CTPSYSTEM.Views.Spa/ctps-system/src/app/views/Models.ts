@@ -161,7 +161,7 @@ export class CriarFGTS {
 
     public bancoDepositario: string;
 
-    public agencia?: number;
+    public agencia?: string;
 
     public praca: string;
 
@@ -188,7 +188,7 @@ export class FGTSDetalhes {
 
 export class EmpresaDetalhes {
     public id: number;
-    public CNPJ: string;
+    public cnpj: string;
     public nomeFantasia: string;
     public razaoSocial: string;
     public seguimento: string;

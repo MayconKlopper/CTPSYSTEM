@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ToastrService } from 'ngx-toastr';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -37,6 +38,7 @@ export class CriarContratoTrabalhoComponent implements OnInit {
     public get remuneracaoExtenso() { return this.formGroup.get('remuneracaoExtenso'); }
 
     constructor(private empresaService: EmpresaService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private toasterService: ToastrService,
         private formBuilder: FormBuilder,
         private localeService: BsLocaleService) { }
@@ -49,17 +51,21 @@ export class CriarContratoTrabalhoComponent implements OnInit {
     }
 
     criarContratoTrabalho() {
+        this.ngxUiLoaderService.start();
         this.novoContratoTrabalho.idEmpresa = this.usuarioLogado.empresa.id;
         this.novoContratoTrabalho.idCarteiraTrabalho = this.selectedFuncionario.idCarteiraTrabalho;
         this.empresaService.cadastrarContratoTrabalho(this.novoContratoTrabalho).subscribe(
             (sucesso) => {
                 const mensagemSucesso = sucesso as MessageModel;
                 this.toasterService.success(`Contrato de trabalho criado com sucesso para o Funcionário ${this.selectedFuncionario.nome}`, 'Sucesso');
+                this.novoContratoTrabalho = new CriarContratoTrabalho();
             },
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

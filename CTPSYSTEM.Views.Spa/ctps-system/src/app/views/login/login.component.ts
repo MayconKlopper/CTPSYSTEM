@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import { LogIn, User, Roles } from '../Models';
 import { AccountService } from '../account.service';
@@ -24,11 +25,13 @@ export class LoginComponent {
   public get password() { return this.logInForm.get('password'); }
 
   constructor(private formBuilder: FormBuilder,
+    private ngxUiLoaderService: NgxUiLoaderService,
     private accountservice: AccountService,
     private router: Router,
     private toasterService: ToastrService) {}
 
   logIn() {
+    this.ngxUiLoaderService.start();
     this.accountservice.logIn(this.usuario).subscribe(
       (resultSuccess) => {
         const usuario = resultSuccess as User;
@@ -36,9 +39,10 @@ export class LoginComponent {
         this.router.navigate(['./home']);
       },
       (resultError) => {
-        this.toasterService.info('Sessão expirada. Faça logIn novamento', 'Informação');
+        this.toasterService.error('LogIn ou senha inválidos', 'Erro');
+        this.ngxUiLoaderService.stop();
       },
-      () => {  }
+      () => { this.ngxUiLoaderService.stop(); }
     );
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ToastrService } from 'ngx-toastr';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -35,6 +36,7 @@ export class CriarInternacaoComponent implements OnInit {
     public get matricula() { return this.formGroup.get('matricula'); }
 
     constructor(private empresaService: EmpresaService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private toasterService: ToastrService,
         private formBuilder: FormBuilder,
         private localeService: BsLocaleService) { }
@@ -47,15 +49,19 @@ export class CriarInternacaoComponent implements OnInit {
     }
 
     criarInternacao() {
+        this.ngxUiLoaderService.start();
         this.novaInternacao.idCarteiratrabalho = this.selectedFuncionario.idCarteiraTrabalho;
         this.empresaService.cadastrarInternacao(this.novaInternacao).subscribe(
             (sucesso) => {
                 this.toasterService.success(`O Registro de Internação foi criado com sucesso para o funcionário ${this.selectedFuncionario.nome}`, 'Sucesso');
+                this.novaInternacao = new CriarInternacao();
             },
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

@@ -4,14 +4,16 @@ using CTPSYSTEM.Views.WebAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CTPSYSTEM.Views.WebAPI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190422004659_AddAspnetRolesSeed")]
+    partial class AddAspnetRolesSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,10 +70,6 @@ namespace CTPSYSTEM.Views.WebAPI.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new { Id = "6b68b57f-c929-4b7f-87f1-226b0f8f8dd1", AccessFailedCount = 0, ConcurrencyStamp = "75127fd5-37c1-4d66-b6db-4c3049eb3467", Email = "mayconklopper@gov.br", EmailConfirmed = false, LockoutEnabled = true, NormalizedEmail = "MAYCONKLOPPER@GOV.BR", NormalizedUserName = "MAYCONKLOPPER", PasswordHash = "AQAAAAEAACcQAAAAEPCL84na88p5ZdF389fAXzO8CNWwwsZ9+DL3Mdb635TYGhjf7imRwL++fd9cBbLZhA==", PhoneNumber = "21970298364", PhoneNumberConfirmed = false, SecurityStamp = "d0823930-e4b2-4212-b141-4636779243d3", TwoFactorEnabled = false, UserName = "mayconklopper" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -98,9 +96,9 @@ namespace CTPSYSTEM.Views.WebAPI.Data.Migrations
                     b.ToTable("AspNetRoles");
 
                     b.HasData(
-                        new { Id = "9247e5be-2f35-44a5-9dca-3d1af8be4bae", ConcurrencyStamp = "42587144-8b53-49c7-ac31-b0292f55a6db", Name = "funcionario", NormalizedName = "FUNCIONARIO" },
-                        new { Id = "1cb0f3ed-5f8e-4a17-8ef6-e38ece9e45e8", ConcurrencyStamp = "db698593-9c36-444e-82c2-5ffd4f0e7f9d", Name = "usuario", NormalizedName = "USUARIO" },
-                        new { Id = "10b63dc2-39e7-40eb-bce9-cedc75b4d444", ConcurrencyStamp = "cc6ba509-fe95-4d85-a57e-f43f0620070c", Name = "empresa", NormalizedName = "EMPRESA" }
+                        new { Id = "0327e850-74fc-4df7-b48f-2ec1ac567f0a", ConcurrencyStamp = "1ed8fe52-beea-4e84-a4d6-bd9d99a7d475", Name = "funcionario", NormalizedName = "FUNCIONARIO" },
+                        new { Id = "a9ae05cd-7e33-4521-8835-7dd109d35909", ConcurrencyStamp = "c0e8d976-385a-4988-9e97-64f1d326ebcb", Name = "usuario", NormalizedName = "USUARIO" },
+                        new { Id = "03cfb915-714e-402a-b59e-4ba329e462b2", ConcurrencyStamp = "d01a7e4b-a796-45e7-962f-b17845c2b307", Name = "empresa", NormalizedName = "EMPRESA" }
                     );
                 });
 
@@ -173,10 +171,6 @@ namespace CTPSYSTEM.Views.WebAPI.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-
-                    b.HasData(
-                        new { UserId = "6b68b57f-c929-4b7f-87f1-226b0f8f8dd1", RoleId = "9247e5be-2f35-44a5-9dca-3d1af8be4bae" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

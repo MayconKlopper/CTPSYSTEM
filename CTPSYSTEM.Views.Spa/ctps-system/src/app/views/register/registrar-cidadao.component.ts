@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 defineLocale('pt-br', ptBrLocale);
 
@@ -66,6 +67,7 @@ export class RegistrarCidadaoComponent implements OnInit {
     public get confirmPassword() { return this.cadastroUsuarioFormGroup.get('confirmPassword'); }
 
     constructor(private accountService: AccountService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private formBuilder: FormBuilder,
         private toasterService: ToastrService,
         private utilsService: UtilsService,
@@ -89,6 +91,7 @@ export class RegistrarCidadaoComponent implements OnInit {
     }
 
     cadastrarUsuario() {
+        this.ngxUiLoaderService.start();
         this.novoUsuario.role = 'usuario';
         this.novoFuncionario.cpf = this.novoUsuario.userName;
         this.accountService.cadastrarUsuario(this.novoUsuario).subscribe(
@@ -102,13 +105,16 @@ export class RegistrarCidadaoComponent implements OnInit {
                     (erroFuncionario) => {
                         const mensagemErroFuncionario = erroFuncionario.error as MessageModel;
                         this.toasterService.error(mensagemErroFuncionario.texto, 'Erro');
+                        this.ngxUiLoaderService.stop();
                     }
                 );
             },
             (erroUsuario) => {
                 const mensagemErroUsuario = erroUsuario.error as MessageModel;
                 this.toasterService.error(mensagemErroUsuario.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

@@ -65,7 +65,7 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
             carteiraTrabalho.Numero = model.Numero;
             carteiraTrabalho.NumeroDocumento = model.NumeroDocumento;
             carteiraTrabalho.Serie = model.Serie;
-            carteiraTrabalho.DataEmissao = DateTime.Parse(String.Format("0:d", DateTime.Now));
+            carteiraTrabalho.DataEmissao = DateTime.Now;
             carteiraTrabalho.FiliacaoMae = model.FiliacaoMae;
             carteiraTrabalho.FiliacaoPai = model.FiliacaoPai;
             carteiraTrabalho.Foto = model.Foto;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     FuncionarioDetalhes,
@@ -17,7 +18,7 @@ import { UtilsService } from '../../../../Helpers/utils.service';
 })
 export class CriarFGTSComponent implements OnInit {
     public selectedFuncionario: FuncionarioDetalhes;
-    public novoFGTS: CriarFGTS = new CriarFGTS;
+    public novoFGTS: CriarFGTS = new CriarFGTS();
     public estadoSiglaList;
 
     public formGroup = this.formBuilder.group({
@@ -33,6 +34,7 @@ export class CriarFGTSComponent implements OnInit {
     public get estado() { return this.formGroup.get('estado'); }
 
     constructor(private empresaService: EmpresaService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private toasterService: ToastrService,
         private utilsService: UtilsService,
         private formBuilder: FormBuilder,
@@ -50,15 +52,19 @@ export class CriarFGTSComponent implements OnInit {
     }
 
     criarFGTS() {
+        this.ngxUiLoaderService.start();
         this.novoFGTS.idContratoTrabalho = this.selectedFuncionario.idContratoTrabalho;
         this.empresaService.cadastrarFGTS(this.novoFGTS).subscribe(
             (sucesso) => {
                 this.toasterService.success(`O Registro de FGTS foi criado com sucesso para o funcionário ${this.selectedFuncionario.nome}`, 'Sucesso');
+                this.novoFGTS = new CriarFGTS();
             },
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

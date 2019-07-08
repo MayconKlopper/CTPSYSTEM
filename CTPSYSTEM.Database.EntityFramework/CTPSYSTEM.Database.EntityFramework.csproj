@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20190310130931_AlterRealtionshipContratoTrabalho.Designer.cs" />
     <Compile Remove="Migrations\20190320192353_AddFGTSTable.cs" />
     <Compile Remove="Migrations\20190320192353_AddFGTSTable.Designer.cs" />
+    <Compile Remove="Migrations\20190428005725_AddDefaultAdminUser.cs" />
+    <Compile Remove="Migrations\20190428005725_AddDefaultAdminUser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

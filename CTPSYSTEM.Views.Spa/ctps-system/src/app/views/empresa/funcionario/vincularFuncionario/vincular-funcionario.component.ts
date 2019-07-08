@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     VincularFuncionario,
@@ -26,6 +27,7 @@ export class VincularFuncionarioComponent implements OnInit {
     public get hashCode() { return this.formGroup.get('hashCode'); }
 
     constructor(private toasterService: ToastrService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private empresaService: EmpresaService,
         private accountService: AccountService,
         private formBuilder: FormBuilder) {
@@ -35,6 +37,7 @@ export class VincularFuncionarioComponent implements OnInit {
     ngOnInit(): void { }
 
     vincularFuncionario() {
+        this.ngxUiLoaderService.start();
         this.vincularFuncionarioModel.idEmpresa = this.usuarioLogado.empresa.id;
         this.empresaService.vincularFuncionario(this.vincularFuncionarioModel).subscribe(
             (sucesso) => {
@@ -44,7 +47,9 @@ export class VincularFuncionarioComponent implements OnInit {
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

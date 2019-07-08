@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ToastrService } from 'ngx-toastr';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -18,7 +19,7 @@ import { EmpresaService } from '../../empresa.service';
 })
 export class CriarAlteracaoSalarialComponent implements OnInit {
     public selectedFuncionario: FuncionarioDetalhes;
-    public novaAlteracaoSalarial: CriarAlteracaoSalarial = new CriarAlteracaoSalarial;
+    public novaAlteracaoSalarial: CriarAlteracaoSalarial = new CriarAlteracaoSalarial();
 
     public formGroup = this.formBuilder.group({
         cargo: ['cargo', Validators.required],
@@ -35,6 +36,7 @@ export class CriarAlteracaoSalarialComponent implements OnInit {
     public get remuneracaoExtenso() { return this.formGroup.get('remuneracaoExtenso'); }
 
     constructor(private empresaService: EmpresaService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private toasterService: ToastrService,
         private formBuilder: FormBuilder,
         private localeService: BsLocaleService) { }
@@ -46,15 +48,19 @@ export class CriarAlteracaoSalarialComponent implements OnInit {
     }
 
     criarAlteracaoSalarial() {
+        this.ngxUiLoaderService.start();
         this.novaAlteracaoSalarial.idContratoTrabalho = this.selectedFuncionario.idContratoTrabalho;
         this.empresaService.cadastrarAlteracaoSalarial(this.novaAlteracaoSalarial).subscribe(
             (sucesso) => {
                 this.toasterService.success(`Alteração Salarial criada com sucesso para o funcionário ${this.selectedFuncionario.nome}`, 'Sucesso');
+                this.novaAlteracaoSalarial = new CriarAlteracaoSalarial();
             },
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

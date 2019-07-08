@@ -1,4 +1,7 @@
+<h2 class="text-center text-muted"> Listagem de empresas </h2>
+<hr>
 <div *ngFor="let $empresa of empresaList">
     <app-empresa [empresa]="$empresa">
     </app-empresa>
 </div>
+<ngx-ui-loader></ngx-ui-loader>

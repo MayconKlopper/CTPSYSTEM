@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     CriarAnotacaoGeral,
@@ -15,7 +16,7 @@ import { EmpresaService } from '../../empresa.service';
 })
 export class CriarAnotacaoGeralComponent implements OnInit {
     public selectedFuncionario: FuncionarioDetalhes;
-    public novaAnotacaoGeral: CriarAnotacaoGeral = new CriarAnotacaoGeral;
+    public novaAnotacaoGeral: CriarAnotacaoGeral = new CriarAnotacaoGeral();
 
     public formGroup = this.formBuilder.group({
         texto: ['texto', Validators.required],
@@ -24,6 +25,7 @@ export class CriarAnotacaoGeralComponent implements OnInit {
     public get texto() { return this.formGroup.get('texto'); }
 
     constructor(private empresaService: EmpresaService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private toasterService: ToastrService,
         private formBuilder: FormBuilder) { }
 
@@ -32,15 +34,19 @@ export class CriarAnotacaoGeralComponent implements OnInit {
     }
 
     criarAnotacaoGeral() {
+        this.ngxUiLoaderService.start();
         this.novaAnotacaoGeral.idContratoTrabalho = this.selectedFuncionario.idContratoTrabalho;
         this.empresaService.cadastrarAnotacaoGeral(this.novaAnotacaoGeral).subscribe(
             (sucesso) => {
                 this.toasterService.success(`Anotação Geral criada com sucesso para o funcionário ${this.selectedFuncionario.nome}`, 'Sucesso');
+                this.novaAnotacaoGeral = new CriarAnotacaoGeral();
             },
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

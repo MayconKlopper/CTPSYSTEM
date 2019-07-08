@@ -1,3 +1,6 @@
+<h2 class="text-center text-muted"> Histórico de empresas </h2>
+<hr>
+<h1 *ngIf="historicoEmpresaList.length === 0" class="text-center text-muted"> Não há registros </h1>
 <div *ngFor='let $historicoEmpresa of historicoEmpresaList'>
     <div class="card">
         <div class="card-body">
@@ -22,14 +25,4 @@
         </div>
     </div>
 </div>
-
-<ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-    <li class="page-item active">
-        <a class="page-link" href="#">1</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">4</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul>
+<ngx-ui-loader></ngx-ui-loader>

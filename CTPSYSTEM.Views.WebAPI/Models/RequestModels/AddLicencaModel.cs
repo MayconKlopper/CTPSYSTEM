@@ -43,8 +43,8 @@ namespace CTPSYSTEM.Views.WebAPI.Models.RequestModels
             Licenca licenca = new Licenca();
 
             licenca.CodigoPosto = model.CodigoPosto;
-            licenca.DataInicio = DateTimeOffset.Parse(model.DataInicio.ToString("dd/MM/yyyy"));
-            licenca.DataTermino = DateTimeOffset.Parse(model.DataTermino.ToString("dd/MM/yyyy"));
+            licenca.DataInicio = model.DataInicio;
+            licenca.DataTermino = model.DataTermino;
             licenca.Motivo = model.Motivo;
             licenca.IdCarteiraTrabalho = model.IdCarteiraTrabalho;
 
