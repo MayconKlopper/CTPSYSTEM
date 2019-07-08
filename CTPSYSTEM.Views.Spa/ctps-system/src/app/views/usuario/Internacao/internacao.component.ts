@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     InternacaoDetalhes,
@@ -14,11 +15,12 @@ import { AccountService } from '../../account.service';
     templateUrl: './internacao.component.html'
 })
 export class InternacaoComponent implements OnInit {
-    public internacaoList: Array<InternacaoDetalhes>;
+    public internacaoList: Array<InternacaoDetalhes> = new Array<InternacaoDetalhes>();
     public carteiraTrabalho: CarteiraTrabalhoDetalhes;
     public usuarioLogado: User;
 
     constructor(private usuarioService: UsuarioService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private accountService: AccountService,
         private toasterservice: ToastrService) {
             this.usuarioLogado = this.accountService.recuperausuarioLogado();
@@ -30,6 +32,7 @@ export class InternacaoComponent implements OnInit {
      }
 
      recuperaInternacao() {
+        this.ngxUiLoaderService.start();
         const idCarteiraTrabalho = this.usuarioLogado.funcionario.idCarteiraTrabalho;
         this.usuarioService.recuperaInternacao(idCarteiraTrabalho).subscribe(
             (sucesso) => {
@@ -39,7 +42,9 @@ export class InternacaoComponent implements OnInit {
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterservice.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
      }
 }

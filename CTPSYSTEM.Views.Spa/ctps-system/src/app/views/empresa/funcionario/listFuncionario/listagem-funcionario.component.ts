@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     User,
@@ -19,6 +20,7 @@ export class ListagemFuncionarioComponent implements OnInit {
     public usuarioLogado: User;
 
     constructor(private empresaService: EmpresaService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private funcionarioGovernoService: FuncionarioGovernoService,
         private accountService: AccountService,
         private toasterService: ToastrService) {
@@ -35,6 +37,7 @@ export class ListagemFuncionarioComponent implements OnInit {
     }
 
     recuperaFuncionariosEmpresa() {
+        this.ngxUiLoaderService.start();
         const idEmpresa = this.usuarioLogado.empresa.id;
         this.empresaService.recuperaFuncionarios(idEmpresa).subscribe(
             (sucesso) => {
@@ -44,11 +47,14 @@ export class ListagemFuncionarioComponent implements OnInit {
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 
     recuperaFuncionariosFuncionarioGoverno() {
+        this.ngxUiLoaderService.start();
         this.funcionarioGovernoService.recuperaFuncionarios().subscribe(
             (sucesso) => {
                 const funcionarioList = sucesso as Array<FuncionarioDetalhes>;
@@ -57,7 +63,9 @@ export class ListagemFuncionarioComponent implements OnInit {
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

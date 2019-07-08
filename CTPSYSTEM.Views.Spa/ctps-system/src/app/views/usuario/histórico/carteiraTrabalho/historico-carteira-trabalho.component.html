@@ -1,7 +1,8 @@
 <h2 class="text-center text-muted"> Histórico de Carteira de Trabalho </h2>
 <hr>
-
+<h1 *ngIf="carteiraTrabalhoList.length === 0" class="text-center text-muted"> Não há histórico de CTPS </h1>
 <div *ngFor='let $carteiraTrabalho of carteiraTrabalhoList'>
     <app-carteira-trabalho [carteiraTrabalho]='$carteiraTrabalho'>
     </app-carteira-trabalho>
 </div>
+<ngx-ui-loader></ngx-ui-loader>

@@ -1,4 +1,5 @@
-<div class="card">
+<h1 *ngIf="!carteiraTrabalho" class="text-center text-muted mb-5"> Usuário não possui CTPS </h1>
+<div class="card" *ngIf="carteiraTrabalho">
     <div class="card-body">
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">

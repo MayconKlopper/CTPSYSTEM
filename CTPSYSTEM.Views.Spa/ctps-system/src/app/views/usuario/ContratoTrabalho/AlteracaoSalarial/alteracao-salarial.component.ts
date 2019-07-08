@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import { UsuarioService } from '../../usuario.service';
 import { ContratoTrabalhoDetalhes,
@@ -12,9 +13,10 @@ import { ContratoTrabalhoDetalhes,
 })
 export class AlteracaoSalarialComponent implements OnInit {
     public contratoTrabalho: ContratoTrabalhoDetalhes;
-    public alteracaoSalarialList: Array<AlteracaoSalarialDetalhes>;
+    public alteracaoSalarialList: Array<AlteracaoSalarialDetalhes> = new Array<AlteracaoSalarialDetalhes>();
 
     constructor(private toasterService: ToastrService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private usuarioService: UsuarioService) { }
 
     ngOnInit(): void {
@@ -23,6 +25,7 @@ export class AlteracaoSalarialComponent implements OnInit {
     }
 
     recuperaAlteracaoSalariall() {
+        this.ngxUiLoaderService.start();
         const idContratoTrabalho = this.contratoTrabalho.id;
         this.usuarioService.recuperarAlteracaoSalarial(idContratoTrabalho).subscribe(
             (sucesso) => {
@@ -32,7 +35,9 @@ export class AlteracaoSalarialComponent implements OnInit {
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     ContratoTrabalhoDetalhes,
@@ -13,9 +14,10 @@ import { UsuarioService } from '../../usuario.service';
 })
 export class FGTSComponent implements OnInit {
     public contratoTrabalho: ContratoTrabalhoDetalhes;
-    public fgtsList: Array<FGTSDetalhes>;
+    public fgtsList: Array<FGTSDetalhes> = new Array<FGTSDetalhes>();
 
     constructor(private toasterService: ToastrService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private usuarioService: UsuarioService) { }
 
     ngOnInit(): void {
@@ -25,6 +27,7 @@ export class FGTSComponent implements OnInit {
      }
 
      recuperaFgts() {
+        this.ngxUiLoaderService.start();
         const idContratoTrabalho = this.contratoTrabalho.id;
         this.usuarioService.recuperarFGTS(idContratoTrabalho).subscribe(
             (sucesso) => {
@@ -34,7 +37,9 @@ export class FGTSComponent implements OnInit {
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
      }
 }

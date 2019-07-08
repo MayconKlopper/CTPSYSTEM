@@ -6,7 +6,8 @@
 
 <h2 class="text-center text-muted"> Contribuições Sindicais </h2>
 <hr>
-<table class="table table-striped table-bordered table-dark">
+<h1 *ngIf="contribuicaoSindicalList.length == 0" class="text-center text-muted"> Não há contribuições sindicais registradas </h1>
+<table *ngIf="contribuicaoSindicalList.length > 0" class="table table-striped table-bordered table-dark">
     <thead class="bg-gray-900">
         <tr class="row" style="margin: 0px;">
             <th class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">Nome do Sindicato</th>
@@ -22,3 +23,4 @@
         </tr>
     </tbody>
 </table>
+<ngx-ui-loader></ngx-ui-loader>

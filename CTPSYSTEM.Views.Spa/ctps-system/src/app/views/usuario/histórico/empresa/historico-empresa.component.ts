@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     EmpresaHistorico,
-    User, 
+    User,
     MessageModel} from '../../../Models';
 import { UsuarioService } from '../../usuario.service';
 import { AccountService } from '../../../account.service';
@@ -13,10 +14,11 @@ import { AccountService } from '../../../account.service';
     templateUrl: './historico-empresa.component.html'
 })
 export class HistoricoEmpresaComponent implements OnInit {
-    public historicoEmpresaList: Array<EmpresaHistorico>;
+    public historicoEmpresaList: Array<EmpresaHistorico> = new Array<EmpresaHistorico>();
     public usuarioLogado: User;
 
     constructor(private usuarioService: UsuarioService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private accountService: AccountService,
         private toasterservice: ToastrService) {
             this.usuarioLogado = this.accountService.recuperausuarioLogado();
@@ -27,6 +29,7 @@ export class HistoricoEmpresaComponent implements OnInit {
     }
 
     recuperaEmpresaHistorico() {
+        this.ngxUiLoaderService.start();
         const idFuncionario = this.usuarioLogado.funcionario.id;
         this.usuarioService.recuperarEmpesaHistorico(idFuncionario).subscribe(
             (sucesso) => {
@@ -36,7 +39,9 @@ export class HistoricoEmpresaComponent implements OnInit {
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterservice.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     ContratoTrabalhoDetalhes,
-    User, 
+    User,
     MessageModel} from '../../../Models';
 import { UsuarioService } from '../../usuario.service';
 import { AccountService } from '../../../account.service';
@@ -13,10 +14,11 @@ import { AccountService } from '../../../account.service';
     templateUrl: './list-contrato-trabalho.component.html'
 })
 export class ListContratoTrabalhoComponent implements OnInit {
-    public contratoTrabalhoList: Array<ContratoTrabalhoDetalhes>;
+    public contratoTrabalhoList: Array<ContratoTrabalhoDetalhes> = new Array<ContratoTrabalhoDetalhes>();
     public usuarioLogado: User;
 
     constructor(private usuarioService: UsuarioService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private accountService: AccountService,
         private toasterservice: ToastrService) {
             this.usuarioLogado = this.accountService.recuperausuarioLogado();
@@ -27,6 +29,7 @@ export class ListContratoTrabalhoComponent implements OnInit {
      }
 
      recuperaContratoTrabalho() {
+        this.ngxUiLoaderService.start();
          const idCarteiraTrabalho = this.usuarioLogado.funcionario.idCarteiraTrabalho;
          this.usuarioService.recuperaContratoTrabaho(idCarteiraTrabalho).subscribe(
              (sucesso) => {
@@ -36,7 +39,9 @@ export class ListContratoTrabalhoComponent implements OnInit {
              (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterservice.error(mensagemErro.texto, 'Erro');
-             }
+                this.ngxUiLoaderService.stop();
+             },
+             () => { this.ngxUiLoaderService.stop(); }
          );
      }
 }

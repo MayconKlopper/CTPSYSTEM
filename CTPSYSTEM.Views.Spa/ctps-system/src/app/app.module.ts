@@ -82,6 +82,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { InserirChaveComponent } from './views/empresa/inserirChave/inserir-chave.component';
@@ -106,6 +107,7 @@ import { InserirChaveComponent } from './views/empresa/inserirChave/inserir-chav
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     BrowserAnimationsModule,
+    NgxUiLoaderModule,
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',

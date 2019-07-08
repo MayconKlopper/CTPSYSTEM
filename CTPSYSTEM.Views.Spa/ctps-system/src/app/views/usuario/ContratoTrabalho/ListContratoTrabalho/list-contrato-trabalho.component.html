@@ -1,7 +1,9 @@
 <h2 class="text-center text-muted"> Contratos de Trabalho </h2>
 <hr>
+<h1 *ngIf="contratoTrabalhoList.length === 0" class="text-center text-muted"> Usuário não possui contratos de trabalho </h1>
 <div *ngFor="let $contratoTrabalho of contratoTrabalhoList">
         <app-contrato-trabalho [contratoTrabalho]='$contratoTrabalho' [showSelectButton]='true'>
-            
+
         </app-contrato-trabalho>
 </div>
+<ngx-ui-loader></ngx-ui-loader>

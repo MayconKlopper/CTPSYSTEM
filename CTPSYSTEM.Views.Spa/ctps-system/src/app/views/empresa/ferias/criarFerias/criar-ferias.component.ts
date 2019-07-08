@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ToastrService } from 'ngx-toastr';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -18,7 +19,7 @@ import { EmpresaService } from '../../empresa.service';
 })
 export class CriarFeriasComponent implements OnInit {
     public selectedFuncionario: FuncionarioDetalhes;
-    public novaFerias: CriarFerias = new CriarFerias;
+    public novaFerias: CriarFerias = new CriarFerias();
 
     public formGroup = this.formBuilder.group({
         periodoRelativo: ['periodoRelativo', Validators.required],
@@ -31,6 +32,7 @@ export class CriarFeriasComponent implements OnInit {
     public get dataTermino() { return this.formGroup.get('dataTermino'); }
 
     constructor(private empresaService: EmpresaService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private toasterService: ToastrService,
         private formBuilder: FormBuilder,
         private localeService: BsLocaleService) { }
@@ -43,15 +45,19 @@ export class CriarFeriasComponent implements OnInit {
     }
 
     criarFerias() {
+        this.ngxUiLoaderService.start();
         this.novaFerias.idContratoTrabalho = this.selectedFuncionario.idContratoTrabalho;
         this.empresaService.cadastrarFerias(this.novaFerias).subscribe(
             (sucesso) => {
                 this.toasterService.success(`Registro de férias criado com sucesso para o funcionário ${this.selectedFuncionario.nome}`, 'Sucesso');
+                this.novaFerias = new CriarFerias();
             },
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

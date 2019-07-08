@@ -1,5 +1,6 @@
 <h2 class="text-center text-muted"> Histórico de Funcionários </h2>
 <hr>
+<h1 *ngIf="funcionarioList.length == 0" class="text-center text-muted"> Não há funcionários descinvulados a esta empresa </h1>
 <div *ngFor="let funcionario of funcionarioList">
     <div class="card">
         <div class="card-body">
@@ -20,3 +21,4 @@
         </div>
     </div>
 </div>
+<ngx-ui-loader></ngx-ui-loader>

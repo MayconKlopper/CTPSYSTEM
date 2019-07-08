@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     ContratoTrabalhoDetalhes,
@@ -14,9 +15,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContribuicaoSindicalComponent implements OnInit {
     public contratoTrabalho: ContratoTrabalhoDetalhes;
-    public contribuicaoSindicalList: Array<ContribuicaoSindicalDetalhes>;
+    public contribuicaoSindicalList: Array<ContribuicaoSindicalDetalhes> = new Array<ContribuicaoSindicalDetalhes>();
 
     constructor(private router: Router,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private usuarioService: UsuarioService,
         private toasterService: ToastrService) {}
 
@@ -26,6 +28,7 @@ export class ContribuicaoSindicalComponent implements OnInit {
      }
 
      recuperaContribuicaoSindical() {
+        this.ngxUiLoaderService.start();
          const idContratoTrabalho = this.contratoTrabalho.id;
          this.usuarioService.recuperarContribuicaoSindical(idContratoTrabalho).subscribe(
              (sucesso) => {
@@ -35,7 +38,9 @@ export class ContribuicaoSindicalComponent implements OnInit {
              (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-             }
+                this.ngxUiLoaderService.stop();
+             },
+             () => { this.ngxUiLoaderService.stop(); }
          );
      }
 }

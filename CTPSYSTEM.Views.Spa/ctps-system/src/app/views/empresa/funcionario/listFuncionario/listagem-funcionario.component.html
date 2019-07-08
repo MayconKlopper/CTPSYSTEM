@@ -1,6 +1,8 @@
 <h2 class="text-center text-muted"> Listagem de Funcionários </h2>
 <hr>
+<h1 *ngIf="funcionarioList.length == 0" class="text-center text-muted"> Não há funcionários vinculados a esta empresa </h1>
 <div *ngFor="let $funcionario of funcionarioList">
     <app-funcionario [funcionario]="$funcionario" [showSelectButton]="true">
     </app-funcionario>
 </div>
+<ngx-ui-loader></ngx-ui-loader>

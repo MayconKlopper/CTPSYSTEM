@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import {
     CarteiraTrabalhoDetalhes,
@@ -13,10 +14,11 @@ import { AccountService } from '../../../account.service';
     templateUrl: './historico-carteira-trabalho.component.html'
 })
 export class HistoricoCarteiraTraballhoComponent implements OnInit {
-    public carteiraTrabalhoList: Array<CarteiraTrabalhoDetalhes>;
+    public carteiraTrabalhoList: Array<CarteiraTrabalhoDetalhes> = Array<CarteiraTrabalhoDetalhes>();
     public usuarioLogado: User;
 
     constructor(private usuarioService: UsuarioService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private accountService: AccountService,
         private toasterservice: ToastrService) {
             this.usuarioLogado = this.accountService.recuperausuarioLogado();
@@ -27,6 +29,7 @@ export class HistoricoCarteiraTraballhoComponent implements OnInit {
     }
 
     recuperaCarteiraTrabalhoHistorico() {
+        this.ngxUiLoaderService.start();
         const idFuncionario = this.usuarioLogado.funcionario.id;
         this.usuarioService.recuperarCarteiraTrabalhoHistorico(idFuncionario).subscribe(
             (sucesso) => {
@@ -36,7 +39,9 @@ export class HistoricoCarteiraTraballhoComponent implements OnInit {
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterservice.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }

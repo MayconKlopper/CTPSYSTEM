@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import { Register, MessageModel, CriarEmpresa, EmpresaDetalhes, Estado } from '../Models';
 import { AccountService } from '../account.service';
@@ -70,6 +71,7 @@ export class RegistrarEmpresarComponent implements OnInit {
   public get confirmPassword() { return this.cadastroUsuarioFormGroup.get('confirmPassword'); }
 
   constructor(private accountService: AccountService,
+    private ngxUiLoaderService: NgxUiLoaderService,
     private formBuilder: FormBuilder,
     private toasterService: ToastrService,
     private utilsService: UtilsService,
@@ -90,6 +92,7 @@ export class RegistrarEmpresarComponent implements OnInit {
   }
 
   cadastrarEmpresa() {
+    this.ngxUiLoaderService.start();
     this.novoUsuario.role = 'empresa';
     this.novaEmpresa.CNPJ = this.novoUsuario.userName;
     this.accountService.cadastrarUsuario(this.novoUsuario).subscribe(
@@ -103,13 +106,16 @@ export class RegistrarEmpresarComponent implements OnInit {
           (erroEmpresa) => {
             const mensagemErroEmpresa = erroEmpresa.error as MessageModel;
             this.toasterService.error(mensagemErroEmpresa.texto, 'Erro');
+            this.ngxUiLoaderService.stop();
           }
         );
       },
       (erroUsuario) => {
         const mensagemErroUsuario = erroUsuario.error as MessageModel;
         this.toasterService.error(mensagemErroUsuario.texto, 'Erro');
-      }
+        this.ngxUiLoaderService.stop();
+      },
+      () => { this.ngxUiLoaderService.stop(); }
     );
   }
 }

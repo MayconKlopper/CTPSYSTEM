@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 import { EmpresaDetalhes, MessageModel } from '../../../Models';
 import { FuncionarioGovernoService } from '../../funcionarioGoverno.service';
@@ -12,6 +13,7 @@ export class ListagemEmpresaComponent implements OnInit {
     public empresaList: Array<EmpresaDetalhes>;
 
     constructor(private funcionarioGovernoService: FuncionarioGovernoService,
+        private ngxUiLoaderService: NgxUiLoaderService,
         private toasterService: ToastrService) { }
 
     ngOnInit(): void {
@@ -19,6 +21,7 @@ export class ListagemEmpresaComponent implements OnInit {
     }
 
     recuperaEmpresas() {
+        this.ngxUiLoaderService.start();
         this.funcionarioGovernoService.recuperaEmpresas().subscribe(
             (sucesso) => {
                 const funcionarioList = sucesso as Array<EmpresaDetalhes>;
@@ -27,7 +30,9 @@ export class ListagemEmpresaComponent implements OnInit {
             (erro) => {
                 const mensagemErro = erro as MessageModel;
                 this.toasterService.error(mensagemErro.texto, 'Erro');
-            }
+                this.ngxUiLoaderService.stop();
+            },
+            () => { this.ngxUiLoaderService.stop(); }
         );
     }
 }
