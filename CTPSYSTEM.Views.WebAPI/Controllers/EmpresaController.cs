@@ -129,7 +129,7 @@ namespace CTPSYSTEM.Views.WebAPI.Controllers
                 this.empresaService.Cadastrar(contratoTrabalho);
 
                 message = new MessageModel(1, Mensagens.ContratoTrabalhoCriadoSucesso);
-                return Ok(message);
+                return Ok(contratoTrabalho.Id);
             }
             catch (Exception ex)
             {

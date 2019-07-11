@@ -56,8 +56,11 @@ export class CriarContratoTrabalhoComponent implements OnInit {
         this.novoContratoTrabalho.idCarteiraTrabalho = this.selectedFuncionario.idCarteiraTrabalho;
         this.empresaService.cadastrarContratoTrabalho(this.novoContratoTrabalho).subscribe(
             (sucesso) => {
-                const mensagemSucesso = sucesso as MessageModel;
+                const idContratoTrabalho = sucesso as number;
                 this.toasterService.success(`Contrato de trabalho criado com sucesso para o Funcionário ${this.selectedFuncionario.nome}`, 'Sucesso');
+
+                this.selectedFuncionario.idContratoTrabalho = idContratoTrabalho;
+                localStorage.setItem('selectedFuncionario', JSON.stringify(this.selectedFuncionario));
                 this.novoContratoTrabalho = new CriarContratoTrabalho();
             },
             (erro) => {
